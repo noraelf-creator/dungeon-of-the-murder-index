@@ -14,24 +14,20 @@
 
 ## 修正案の保存先
 
-- **いまは端末内の下書きのみ**（`data/config.js` の `memoApi` が空）。「すべて」タブから未反映の修正案をMarkdown／JSONで書き出せる
-- 共有保存（Cloudflare D1）を接続すると、編集キーで解除した端末から共有保存され、他の端末でも見られる。下書きは「下書きを共有へ送る」で送れる
-- 編集キーはこのリポジトリに含めない
+- 閲覧は誰でも可。作者用の編集キーで解除すると、Cloudflare D1 に共有保存される（Worker `dungeon-murder-sync`、D1 `dungeon-murder-author-notes`、projectId `dungeon_of_the_murder`。この作品専用で、他作品のWorker・DBとは別）
+- 解除していない間は、端末のブラウザーに下書きとして残る（あとで「下書きを共有へ送る」）
+- 「すべて」タブから未反映の修正案をMarkdown／JSONで書き出せる
+- 編集キーはこのリポジトリに含めない（Worker Secret `AUTHOR_EDIT_KEY`。控えは改訂フォルダの `.private/`）
 
-## 共有保存の接続手順（Cloudflareにログインできるときに1回だけ）
-
-`cloudflare/` に、お母さんは大統領と同じWorkerのコードと設定がある（Worker名 `dungeon-murder-sync`、D1 `dungeon-murder-author-notes`、projectId `dungeon_of_the_murder`）。既存の他作品のWorker・DBには触れない。
+## Workerの更新・確認
 
 ```
 cd cloudflare
-npx wrangler login
-npx wrangler d1 create dungeon-murder-author-notes      # 出たdatabase_idを wrangler.jsonc に書く
-npx wrangler d1 migrations apply dungeon-murder-author-notes --remote
-npx wrangler secret put AUTHOR_EDIT_KEY                   # 作者用の編集キー（長いランダムな文字列）を入力
-npx wrangler deploy                                       # 出たURLを data/config.js の memoApi に書く
+npx wrangler deploy                                       # Workerのコードを直したとき
+npx wrangler secret put AUTHOR_EDIT_KEY                   # 編集キーを変えるとき
 ```
 
-そのあと `data/config.js` を更新してpushすれば、サイトの「編集キー」から解除できる。`https://<Worker URL>/api/health` が `api: ok, d1: ok` になることを確認する。
+`https://dungeon-murder-sync.noraelf-mta-review.workers.dev/api/health` が `api: ok, d1: ok` を返せば正常。
 
 ## 更新のしかた
 
@@ -53,6 +49,6 @@ npm run serve        # http://127.0.0.1:8765/ で確認
 | `data/config.js` | 共有保存の接続先（公開してよい値だけ） |
 | `content/` | 元のMarkdown |
 | `tools/` | 写し・ビルド・ローカル確認・スクリーンショット |
-| `cloudflare/` | 共有保存のWorker（未デプロイ） |
+| `cloudflare/` | 共有保存のWorker（デプロイ済み） |
 
 このサイトは公開されている（URLを知っていれば誰でも読める）。真相・GM情報を含むので、プレイヤーにURLを教えないこと。
