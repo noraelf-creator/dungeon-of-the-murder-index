@@ -13,6 +13,7 @@
 | 仮想プレイの記録 | `04_仮想プレイ/` |
 | 改訂元（読み取り専用） | `C:\00_【創作】一時フォルダ\DUNGEON_OF_THE_MURDER_Ver3.4_REVIEW_CLOUD.zip`（本文は `_作業メモ/原本展開_Ver3.4_REVIEW_CLOUD/` に展開済み） |
 | ゲーム本体（Ver3.4・未改修） | 上のzipの `src/`・`dist/` |
+| **制作INDEXサイト（閲覧・修正案）** | https://noraelf-creator.github.io/dungeon-of-the-murder-index/ （リポジトリ noraelf-creator/dungeon-of-the-murder-index、ローカル `C:\02_claude.projects\dungeon-of-the-murder-index`）。このフォルダを直したら `npm run sync`→`npm run build`→push。修正案は現在「端末内の下書き」のみ（Cloudflare共有保存は未接続、手順はサイトのREADME） |
 
 **正本の優先順位**：総点検指示書 ＞ このPROJECT_MASTER ＞ `01_正本/` ＞ `03_改稿/` ＞ Ver3.4のdata.js。
 
