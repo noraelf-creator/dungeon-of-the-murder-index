@@ -1,0 +1,28 @@
+{
+  "name": "dungeon-of-the-murder-index",
+  "version": "1.0.0",
+  "description": "ダンジョン・オブ・ザ・マーダー 制作INDEX（改訂版）",
+  "scripts": {
+    "sync": "node tools/sync-content.mjs",
+    "build": "node tools/build.mjs",
+    "serve": "node tools/serve.mjs 8765",
+    "shot": "node tools/shot.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noraelf-creator/dungeon-of-the-murder-index.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/noraelf-creator/dungeon-of-the-murder-index/issues"
+  },
+  "homepage": "https://github.com/noraelf-creator/dungeon-of-the-murder-index#readme",
+  "devDependencies": {
+    "marked": "^18.1.0",
+    "puppeteer-core": "^24.43.1"
+  },
+  "private": true
+}

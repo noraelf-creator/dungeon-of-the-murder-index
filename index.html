@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>ダンジョン・オブ・ザ・マーダー｜制作INDEX 改訂版</title>
+<link rel="stylesheet" href="assets/app.css?v=dom1-1">
+</head>
+<body>
+<header class="topbar">
+  <button id="btnNav" class="icon-btn" type="button" aria-label="目次の表示を切り替える" title="目次">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <a class="brand" href="#/about">
+    <span class="brand-mark">DM</span>
+    <span class="brand-text"><span class="brand-title">ダンジョン・オブ・ザ・マーダー</span><span class="brand-sub">制作INDEX・改訂版</span></span>
+  </a>
+  <label class="top-search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+    <input id="q" type="search" placeholder="全文検索（例：断脈剤、封蝋、ディン）" autocomplete="off">
+  </label>
+  <div class="top-actions">
+    <span id="syncState" class="sync" title="共有保存の状態"></span>
+    <button id="btnKey" class="btn ghost" type="button" title="編集キー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="3.5"/><path d="M11.5 12H20M17 12v3M20 12v2"/></svg><span class="lbl" id="keyLabel">編集キー</span></button>
+    <button id="btnPanel" class="btn accent" type="button" title="修正案"><span class="pen">✎</span><span class="lbl">修正案</span><span id="memoCount" class="count">0</span></button>
+  </div>
+</header>
+
+<div id="layout" class="layout">
+  <aside id="nav" class="nav" aria-label="目次">
+    <div id="navGroups" class="nav-groups"></div>
+    <div class="col-resizer" data-resize="groups" title="ドラッグで幅を変更"></div>
+    <div class="nav-pages">
+      <div class="nav-pages-head"><span id="navGroupLabel"></span><button id="navClose" class="mini-btn" type="button" title="目次をたたむ">‹</button></div>
+      <div id="navPages" class="nav-pages-body"></div>
+    </div>
+  </aside>
+  <div class="resizer" data-resize="nav" title="ドラッグで幅を変更"></div>
+
+  <main id="main" class="main" tabindex="-1">
+    <button id="navOpen" class="edge-btn left" type="button" title="目次を開く">›</button>
+    <div id="legacyBanner" class="legacy-banner" hidden></div>
+    <article id="page" class="page"></article>
+    <button id="pencil" class="pencil" type="button" title="この箇所の修正案を書く" hidden>✎</button>
+  </main>
+
+  <div class="resizer" data-resize="panel" title="ドラッグで幅を変更"></div>
+  <aside id="panel" class="panel" aria-label="修正案">
+    <button id="panelStrip" class="panel-strip" type="button" title="修正案を開く">
+      <span class="strip-icon">✎</span><span class="strip-label">修正案</span><span id="stripCount" class="count">0</span>
+    </button>
+    <div class="panel-inner">
+      <div class="panel-head">
+        <div class="tabs" role="tablist">
+          <button class="tab" data-tab="write" type="button">書く</button>
+          <button class="tab" data-tab="page" type="button">このページ</button>
+          <button class="tab" data-tab="all" type="button">すべて</button>
+        </div>
+        <button id="panelClose" class="mini-btn" type="button" title="たたむ">›</button>
+      </div>
+      <div id="panelBody" class="panel-body"></div>
+      <div id="panelFoot" class="panel-foot"></div>
+    </div>
+  </aside>
+  <div id="scrim" class="scrim" hidden></div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<dialog id="keyDialog" class="dialog">
+  <form method="dialog" id="keyForm">
+    <h2>編集キー</h2>
+    <div id="keyBody"></div>
+    <div class="dialog-actions" id="keyActions"></div>
+  </form>
+</dialog>
+
+<script src="data/config.js?v=dom1-1"></script>
+<script src="data/site-data.js?v=dom1-1"></script>
+<script src="assets/app.js?v=dom1-1"></script>
+</body>
+</html>

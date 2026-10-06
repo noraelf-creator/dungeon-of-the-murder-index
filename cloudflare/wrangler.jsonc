@@ -1,0 +1,7 @@
+{
+ "name":"dungeon-murder-sync",
+ "main":"worker/index.mjs",
+ "compatibility_date":"2026-10-06",
+ "vars":{"PROJECT_ID":"dungeon_of_the_murder","ALLOWED_ORIGIN":"https://noraelf-creator.github.io","SESSION_DAYS":"30"},
+ "d1_databases":[{"binding":"DB","database_name":"dungeon-murder-author-notes","database_id":"REPLACE_AFTER_D1_CREATE","migrations_dir":"migrations"}]
+}
