@@ -96,6 +96,8 @@ add('play', '第2回 難しめ', 'play2-rev', '振り返り', PLAY('第2回_振�
 add('play', '第3回 初心者卓', 'play3-log', 'ログ', PLAY('第3回_初心者卓_ログ.md'), 'doc', '制作');
 add('play', '第3回 初心者卓', 'play3-rev', '振り返り', PLAY('第3回_振り返り.md'), 'doc', '制作');
 add('play', '第4回 修正後', 'play4', '修正後の再プレイ', PLAY('第4回_修正後の再プレイ.md'), 'doc', '制作');
+add('play', '第5回 作者修正後（10/07）', 'play5-log', 'ログ', PLAY('第5回_作者修正後の通しプレイ_ログ.md'), 'doc', '制作');
+add('play', '第5回 作者修正後（10/07）', 'play5-rev', '振り返り', PLAY('第5回_振り返り.md'), 'doc', '制作');
 
 add('ref', '改訂元（Ver3.4）', 'ref-handoff', 'Ver3.4 引き継ぎ（現行仕様）', C('参照/Ver3.4_引き継ぎ（CHATGPT_HANDOFF）.md'), 'doc', '参照');
 add('ref', '改訂元（Ver3.4）', 'ref-readme', 'Ver3.4 README', C('参照/Ver3.4_README.md'), 'doc', '参照');
@@ -114,7 +116,8 @@ const NOTE_COL = /^(情報の限界|注意点|注意|備考)$/;
 // 制作タグをバッジにする
 function badgeTags(html) {
   return html
-    .replace(/【修正(F\d+)】/g, '<span class="badge fix">修正$1</span>')
+    .replace(/【作者修正([^】]*)】/g, (_, t) => `<span class="badge order" title="${esc(t.replace(/^[：:]/, ''))}">作者修正${t ? '：' + esc(t.replace(/^[：:]/, '')) : ''}</span>`)
+    .replace(/【修正(F\d+(?:・F\d+)*)】/g, '<span class="badge fix">修正$1</span>')
     .replace(/【作者指示】/g, '<span class="badge order">作者指示</span>')
     .replace(/【作者案】/g, '<span class="badge order">作者案</span>')
     .replace(/【追加設定】/g, '<span class="badge add">追加設定</span>')
@@ -386,9 +389,9 @@ for (const p of P) {
     html = `<div class="ho-hero tone-${tone}"><div class="ho-kicker">${esc(kicker)}</div><div class="ho-name">${esc(name)}</div></div>\n` + html;
     title = name + (hm ? '　' + p.nav : '');
   }
-  if (/【作者指示】|【追加設定】|【修正F/.test(fs.existsSync(p.file || '') ? fs.readFileSync(p.file, 'utf8') : '')) {
-    if (/【修正F/.test(fs.readFileSync(p.file, 'utf8'))) ctx.badges.push('仮想プレイ後に修正');
-  }
+  const rawSrc = p.file && fs.existsSync(p.file) ? fs.readFileSync(p.file, 'utf8') : '';
+  if (/【作者修正/.test(rawSrc)) ctx.badges.push('作者修正（10/07）');
+  if (/【修正F/.test(rawSrc)) ctx.badges.push('仮想プレイ後に修正');
   const text = strip(html).replace(/\s+/g, ' ').trim();
   const rel = p.file ? path.relative(path.join(ROOT, 'content'), p.file).replace(/\\/g, '/') : '';
   pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text });

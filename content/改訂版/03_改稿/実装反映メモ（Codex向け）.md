@@ -50,7 +50,7 @@
 |---|---|
 | F1 | 分断LSで一人だけの組（レオンもいない）は `secretTalk` の代わりに `soloScene`（120秒）：独白表示＋「その場を調べる」1回（R24の表）。新カード INFO-P3-B2・INFO-P9-B2 |
 | F2 | `skill('diagnose'|'analyze')` で INFO-E-DIAGNOSIS／CONTAMINATION を与えたとき、`s.investigation.body<3` なら `s.investigation.body=3` |
-| F3 | 新カード INFO-E-BOTTLE（`{C:'C-B'}`）。U7を maxDepth 3 にし、深度3を `{stat:'dex',need:4,cards:['INFO-E-BOTTLE']}`。`investigations.ledger` を max 2・`['INFO-E-LEDGER','INFO-E-BOTTLE']` に。INFO-E-LEDGER が LOCKED でなければ、ledger 調査の開始深度を1にする（BOTTLEから） |
+| F3 | 新カード INFO-E-BOTTLE（`{C:'C-B'}`）。~~U7を maxDepth 3 にし、深度3を `{stat:'dex',need:4,cards:['INFO-E-BOTTLE']}`。~~（F13で取り消し）`investigations.ledger` を max 2・`['INFO-E-LEDGER','INFO-E-BOTTLE']` に。INFO-E-LEDGER が LOCKED でなければ、ledger 調査の開始深度を1にする（BOTTLEから） |
 | F4 | P6分断の結果に、レオンの行き先と理由を表示 |
 | F5 | P4救出の後、公開ログに入室順と薬棚の位置を記録 |
 | F6 | P9のC：選択肢名に補足。「分からない」（追跡者の名）のダメージをHP−1に |
@@ -58,7 +58,25 @@
 | F8 | `nameCandidates` に「ディン（愛称）」（PC3在籍、または REC-U2／REC-U8／INFO-P3-B のいずれかが取得済み）。3票で選ばれたら1回だけ未確定のまま続行（`s.namePhase.nicknameUsed=true`）、2回目は役職回答と同じ扱い |
 | F9 | 記録片のタイトルに【物語】。公開情報ボードの分類「物語」 |
 | F10 | P10の画面に専門判定の助け舟 |
+| F13 | 【第5回】U7の深度3（INFO-E-BOTTLE）を削除し、U7は maxDepth 2 に戻す。INFO-E-BOTTLE は `investigations.ledger` の深度2でのみ得る。INFO-E-POSSESSIONS の本文に「封蝋の跡が残る空き瓶が一本」。P4の救出イベントに「レオンが空き瓶を荷物にしまう」 |
+| F14 | 【第5回】ガルドHOの文言のみ（実装なし） |
 | F12 | 証拠C-D（素材の出所）は、主偽装の素材をガルド以外のPCも採取していた場合（探索履歴・分断LSの調査）には数えない。現場の追加分析（INFO-E-FORGED）の判定は従来どおり |
+
+## 2-3. 作者修正（2026-10-07）
+
+| 項目 | 変更 |
+|---|---|
+| 共通HO・app.jsの任務文 | トマの報告を差し替え：「隊長がまともに浴びた」「救難所に立てこもった」を削除し、「隊長は囮になって奥へ。居場所は分からない」。「灰嶺の英雄」の公知事項を削除 |
+| 新カード | INFO-W-U10-3《分核の目録》（U10を maxDepth 3、深度3に追加）、INFO-W-L6-B《空の器》（L6深度1に追加。同じ深度で2枚）、INFO-W-L8-3《灰嶺分核の事故》（L8を maxDepth 3）、INFO-P9-A《受け止めた一撃》（P9のA成功時、A組に） |
+| 本文の変更 | INFO-W-L8《隔離規定》に「灰嶺分核の事故以後」、REC-L8に「灰嶺のあとでさえ」、INFO-P3-A《トマの手帳》（隊長は囮に）、INFO-P7-LEON を《鳴る剣》に差し替え |
+| `investigations.belongings` | 順番を `['INFO-E-POSSESSIONS','INFO-E-MOTIVE','INFO-E-SYMPTOMS','INFO-E-NOOTHER']` に（手紙を深度2へ）。INFO-E-MOTIVE の本文に「魔導院が二人に渡した薬を、俺は捨てた」を追加 |
+| `liveSelections.P9.options.A` | 「宝・攻略物資を守る」→「レオンと共に戦う」。成功：HP−2・功績+1・INFO-P9-A。失敗：HP−5。宝の喪失処理は削除 |
+| P6 | 開始時の読み合わせ（門の前）を出さない。U12の固定情報は画面表示のみ。窮地の場面（R08）は短い版に |
+| P7 | `companionGroup` に出す場面を R12《鳴る剣》（短い版）に差し替え |
+| P8 | 開始時の場面を R13《握り直す剣》に差し替え。`publicView.leon.symptom` はP8でも「表面上は回復」のままにする（P9で初めて「明確な悪化」） |
+| 分断LSの結果画面 | 「分断された。ここからの相談は密談で行う（同じ場所の仲間とだけ・5分）」を表示 |
+| `goals.PC2` | 任意目標を「守護核の欠片を持ち帰る」に固定（選択肢ではない） |
+| 人名 | 司祭の名前（アドリアン）を出さない |
 
 ## 3. app.js（表示）
 
