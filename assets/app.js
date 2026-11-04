@@ -526,9 +526,9 @@
         banner.innerHTML = `「#${esc(old)}」は旧版のページです。<a href="${esc((CFG.v2Url || 'v2/') + '#' + old)}" target="_blank" rel="noopener">旧・制作者確認盤（Ver3.4）を開く</a>`;
         banner.hidden = false;
       }
-      m = [null, pageById.has(old) ? old : 'about', null];
+      m = [null, pageById.has(old) ? old : (D.home || 'about'), null];
     }
-    const p = pageById.get(m[1]) || pageById.get('about');
+    const p = pageById.get(m[1]) || pageById.get(D.home || 'about');
     if (p.kind === 'link' && p.id === 'ref-v2') { /* 案内ページとして表示 */ }
     if (S.page && S.page.id === p.id) {
       if (m[2]) { const el = findAnchor(m[2]); if (el) { openParents(el); el.scrollIntoView({ block: 'center' }); if (!/^h/.test(m[2])) selectAnchor(m[2], false); else flashEl(el); } }
