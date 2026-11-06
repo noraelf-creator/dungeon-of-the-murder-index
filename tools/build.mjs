@@ -30,9 +30,10 @@ const add = (group, sub, id, nav, file, kind = 'doc', audience = '', extra = {})
 const must = (f) => { if (!fs.existsSync(f)) throw new Error('ファイルが無い: ' + f); return f; };
 
 // 今の状態
-add('now', '', 'n-now', '今の状態（2026-11-04）', must(C('今の状態_20261104.md')), 'doc', '制作');
+add('now', '', 'n-now', '今の状態（2026-11-07）', must(C('今の状態_20261107.md')), 'doc', '制作');
+add('now', '', 'n-newtext', '新しく書いた文（作者の文でないもの）', must(C('新しく書いた文_20261107.md')), 'doc', '制作');
 add('now', '', 'n-spec', '今の仕様（ゲーム）', must(C('今の仕様（ゲーム）.md')), 'doc', 'GM専用');
-add('now', '', 'about', 'このサイトの使い方', must(C('サイトの使い方.md')), 'doc', '');
+add('now', '', 'about', 'このサイトの使い方（印の見方）', must(C('サイトの使い方.md')), 'doc', '');
 add('now', '資料の案内', 'n-gm-about', 'GM資料の案内', must(GM('00_GM資料の案内.md')), 'doc', 'GM専用');
 add('now', '資料の案内', 'n-dist', '配布物の一覧と配るタイミング', must(GM('00_配布物の一覧と配るタイミング.md')), 'doc', 'GM専用');
 add('now', '資料の案内', 'n-directive', '作者指示の反映表', must(GM('00_作者指示の反映表.md')), 'doc', '制作');
@@ -118,6 +119,7 @@ add('canon', '', 'n-canon-clues', '手がかりマップ', must(GM('正本/手�
 
 // 変更の記録
 add('log', '', 'n-changelog', 'CHANGELOG（今の原稿）', must(NOW('CHANGELOG.md')), 'doc', '制作');
+add('log', '前の「今の状態」', 'n-now-1104', '今の状態（2026-11-04・前の版）', must(C('今の状態_20261104.md')), 'doc', '制作');
 
 // 参照・旧版（2026-10-06 の写し。前と同じページID）
 add('ref', '改訂元（Ver3.4）', 'ref-handoff', 'Ver3.4 引き継ぎ（現行仕様）', must(C('参照/Ver3.4_引き継ぎ（CHATGPT_HANDOFF）.md')), 'doc', '参照');
@@ -155,6 +157,111 @@ add('ref', '旧版 10/06 チェック・仮想プレイ', 'check-inventory', '�
 const PLAY = (f) => OLD('04_仮想プレイ/' + f);
 for (const [id, nav, f] of [['play1-log', '第1回 ログ', '第1回_標準プレイ_ログ.md'], ['play1-rev', '第1回 振り返り', '第1回_振り返り.md'], ['play2-log', '第2回 ログ', '第2回_難しめプレイ_ログ.md'], ['play2-rev', '第2回 振り返り', '第2回_振り返り.md'], ['play3-log', '第3回 ログ', '第3回_初心者卓_ログ.md'], ['play3-rev', '第3回 振り返り', '第3回_振り返り.md'], ['play4', '第4回 修正後の再プレイ', '第4回_修正後の再プレイ.md'], ['play5-log', '第5回 ログ', '第5回_作者修正後の通しプレイ_ログ.md'], ['play5-rev', '第5回 振り返り', '第5回_振り返り.md']]) add('ref', '旧版 10/06 チェック・仮想プレイ', id, nav, PLAY(f), 'doc', '参照');
 for (const p of P) if (p.file) must(p.file);
+
+// ---------- 見せる範囲の印（2026-11-07 作者の指示「PL達に見せる情報とそうではないものはみて分かるように」） ----------
+// k：all＝PL・全員が見る／self＝PL・本人だけ（who）／here＝PL・その場にいた人だけ（cond）／gm＝GMだけ／make＝制作
+// when：after＝推理のあと（真相の読み合わせ・ED）。how：カードの「だれが・いつ・どうやって」
+const PCN = { PC1: 'ミレイユ', PC2: 'ヴィオラ', PC3: 'ミクシィ', PC4: 'エドガー' };
+const PCKEY = { 1: 'ミレイユ', 2: 'ヴィオラ', 3: 'ミクシィ', 4: 'エドガー' };
+const WHO_KEY = { 'ミレイユ': 'mireille', 'ヴィオラ': 'viola', 'ミクシィ': 'mixi', 'エドガー': 'edgar' };
+const V = (k, o = {}) => ({ k, who: o.who || '', cond: o.cond || '', when: o.when || '', how: o.how || '', card: o.card || '' });
+const GROUP_READ = { R04: 'P3 分断で A「地図・物資を守る」を選んだ組', R05: 'P3 分断で B「崩落を支える」を選んだ組', R06: 'P3 分断で「様子を見る」になった組', R06b: 'P3 分断で C「抜け道を探す」を選んだ組',
+  R09: 'P6 分断で A「正面突破」を選んだ組', R10: 'P6 分断で B「水に飛び込む」を選んだ組', R11: 'P6 分断で C「崩れた穴」を選んだ組', R12: 'P7 リックと同行している組',
+  R15: 'P9 分断で A「リックと共に戦う」を選んだ組', R16: 'P9 分断で B「名前を呼ぶ」を選んだ組', R17: 'P9 分断で C「魔力装置の解析」を選んだ組', R17b: 'P9 分断で「様子を見る」になった組',
+  R24: '分断で一人だけの組になった人' };
+const PAGE_VIS = {
+  'n-now': V('make'), 'n-newtext': V('make'), 'n-spec': V('gm'), about: V('make'), 'n-gm-about': V('gm'), 'n-dist': V('gm'), 'n-directive': V('make'), 'n-match': V('make'),
+  'n-ho-common': V('all'),
+  'n-card-rooms': V('all', { cond: '部屋に入ったときに出る文' }), 'n-card-upper': V('here', { cond: 'その部屋を調べた人' }), 'n-card-lower': V('here', { cond: 'その部屋を調べた人' }), 'n-card-secret': V('here', { cond: '秘密区画を開けた人' }),
+  'n-card-rec': V('here', { cond: '部屋LSで報酬を得た人' }), 'n-card-split': V('here', { cond: 'その組・同行していた人' }), 'n-card-skill': V('self', { cond: '技能を使った本人' }), 'n-card-case': V('here', { cond: 'P10〜P11 で調べた人' }),
+  'n-card-items': V('gm'), 'n-card-items-pl': V('all'),
+  'n-rule-intro': V('all'), 'n-rule-phase': V('all'), 'n-rule-ls': V('all'), 'n-rule-skill': V('all'), 'n-rule-p10': V('all', { cond: 'P10 で配る' }),
+  'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
+  'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
+  'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
+  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1104': V('make', { cond: '前の版' }),
+};
+// 資料の頭の「>」の説明（作者承認・書き方・本文はClaude案 など）は制作の注にする
+const INTRO_MAKE = new Set(['n-card-rooms', 'n-card-upper', 'n-card-lower', 'n-card-secret', 'n-card-rec', 'n-card-split', 'n-card-skill', 'n-card-case',
+  'n-explore', 'n-huddle', 'n-small', 'n-guide-viola', 'n-final-calls', 'n-disgord']);
+function pageVis(p) {
+  if (p.group === 'ref') return V('make', { cond: '旧版（10/06）・参照' });
+  const m = p.id.match(/^n-ho-pc(\d)/);
+  if (m) return V('self', { who: PCKEY[m[1]] });
+  if (p.kind === 'read') {
+    const rid = (p.nav.match(/^(R\d+[a-z]?)/) || [])[1];
+    if (GROUP_READ[rid]) return V('here', { cond: GROUP_READ[rid] });
+    if (/^R2[123]$/.test(rid)) return V('all', { when: 'after', cond: '推理のあと（最終戦のあと）に読む' });
+    return V('all', { cond: '読み合わせ（全員で読む）' });
+  }
+  if (PAGE_VIS[p.id]) return PAGE_VIS[p.id];
+  throw new Error('見せる範囲が決まっていないページ: ' + p.id);
+}
+for (const p of P) p.vis = pageVis(p);
+
+// ゲームのカード表（tools/game-cards.mjs が data.js から作る）
+const GAME_CARDS = JSON.parse(fs.readFileSync(C('_ゲームのカード表.json'), 'utf8'));
+const gameById = new Map(GAME_CARDS.cards.map((c) => [c.id, c]));
+const gameByTitle = new Map();
+for (const c of GAME_CARDS.cards) { if (!gameByTitle.has(c.title)) gameByTitle.set(c.title, []); gameByTitle.get(c.title).push(c); }
+const ROOM_NAME = GAME_CARDS.rooms;
+// カードの節（見出し行から次のカード・見出しまで）の原文を先に読み、共有の可否などを拾う
+const CARD_HEAD = /^\*\*([^*\n]{1,60})\*\*([^\n]*)$/;
+function scanCards(md) {
+  const out = new Map(); let h2 = ''; let cur = null;
+  for (const line of md.split('\n')) {
+    const hm = line.match(/^(#{2,3})\s+(.*)$/);
+    if (hm) { cur = null; if (hm[1] === '##') h2 = hm[2].trim(); continue; }
+    if (/^---\s*$/.test(line)) { cur = null; continue; }
+    const cm = line.match(CARD_HEAD);
+    if (cm && /《|^[A-Z]{2,}-|^REC-|^INFO-|^深度/.test(cm[1])) { cur = { title: cm[1].trim(), meta: cm[2].trim(), h2, body: [] }; out.set(cur.title + '|' + cur.meta, cur); continue; }
+    if (cur) cur.body.push(line);
+  }
+  return out;
+}
+const NAMES_RE = /(ミレイユ|ヴィオラ|ミクシィ|エドガー)/;
+function cardVis(title, meta, fact, page) {
+  const plain = strip(title);
+  const idm = (plain.match(/^([A-Z][A-Z0-9-]+)/) || [])[1];
+  const name = (plain.match(/《([^》]+)》/) || [])[1] || plain;
+  const h2 = (fact && fact.h2) || '';
+  const body = fact ? fact.body.join('\n') : '';
+  let g = (idm && gameById.get(idm)) || null;
+  if (!g && gameByTitle.has(name)) { const arr = gameByTitle.get(name); g = arr.length === 1 ? arr[0] : null; }
+  const metaPlain = strip(meta);
+  // だれが
+  let who = g && g.viewer ? PCN[g.viewer] : '';
+  const onlyM = metaPlain.match(/(ミレイユ|ヴィオラ|ミクシィ|エドガー)(?:だけ|にだけ|に）)/) || h2.match(/[（(](ミレイユ|ヴィオラ|ミクシィ|エドガー)(?:だけ)?[）)]|(ミレイユ|ヴィオラ|ミクシィ|エドガー)だけ/);
+  if (!who && onlyM) who = onlyM[1] || onlyM[2];
+  if (!who && page.id === 'n-card-skill') { const w = (metaPlain.match(/^(ミレイユ|ヴィオラ|ミクシィ|エドガー)が/) || h2.match(NAMES_RE) || [])[1]; if (w) who = w; }
+  // 共有
+  const noShare = g ? g.noShare : (/共有できない|共有不可/.test(metaPlain) || /共有できない|共有不可/.test(body) && !/共有可[。、）\s]/.test(body.replace(/共有不可/g, '')));
+  const each = /本人にだけ/.test(metaPlain) && !who;
+  const personal = (g && g.personal) || each;
+  const share = noShare ? '共有できない（専門の見立て・本人の記憶。口で伝えるのは自由）' : personal ? 'カードの共有はしない（本人・組の情報。口で伝えるのは自由）' : '全体共有で全員に見せられる';
+  // どこで・いつ
+  let where = '';
+  if (g && g.where.length) where = [...new Set(g.where.map((w) => `${w.room} ${w.name}・深度${w.depth}`))].join('／');
+  else if (/^深度\d/.test(plain) || /^深度\d/.test(metaPlain)) where = (h2 ? h2 + '・' : '') + (plain.match(/^深度\d/) || metaPlain.match(/^深度\d/))[0];
+  else if (/深度\d/.test(metaPlain) && h2) where = h2.replace(/[（(].*$/, '') + '・' + metaPlain.match(/深度\d/)[0];
+  else if (/^REC-/.test(plain)) where = '部屋LS「' + metaPlain + '」の報酬';
+  else if (h2) where = h2.replace(/【[^】]*】/g, '').trim();
+  const when = /エンディング用/.test(h2) ? 'after' : '';
+  const how = [where && 'どこで：' + where, metaPlain && 'いつ・条件：' + metaPlain, share].filter(Boolean).join('　／　');
+  let k; let cond = '';
+  const isAll = /全員/.test(metaPlain) && !/全員が?…?ではない/.test(metaPlain) || /全員に公開/.test(h2);
+  if (each) { k = 'self'; cond = '各自（見えるものは人によって違う）'; }
+  else if (who && (noShare || personal || (g && g.viewer) || onlyM || page.id === 'n-card-skill')) { k = 'self'; cond = who; }
+  else if (isAll) { k = 'all'; cond = metaPlain || h2; }
+  else if (g && g.category === 'P' || /組/.test(metaPlain)) { k = 'here'; cond = metaPlain || 'その組'; }
+  else if (g && g.where.length) { k = 'here'; cond = `${g.where[0].room} ${g.where[0].name}を調べた人`; }
+  else if (/^REC-/.test(plain)) { k = 'here'; cond = `部屋LS（${metaPlain}）で報酬を得た人`; }
+  else if (page.id === 'n-card-secret') { k = 'here'; cond = h2.replace(/[（(].*$/, '').trim() + 'を開けた人'; }
+  else if (page.id === 'n-card-case') { k = 'here'; cond = 'P10〜P11 で調べた人（' + (h2.replace(/[（(].*$/, '') || '事件調査') + '）'; }
+  else { k = 'here'; cond = metaPlain || where || 'その場にいた人'; }
+  if (page.id === 'n-card-skill' && !who) { k = 'here'; }
+  return V(k, { who: k === 'self' ? (each ? '各自' : who) : '', cond, how, when, card: '1' });
+}
 
 // ---------- 道具 ----------
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -262,18 +369,30 @@ function renderTable(token, ctx) {
 
 // 「> 【GM】…」「- 【GM】…」「【GM】…」の行を、たたまれたGM注記にする。:::note も扱う
 const GM_LINE = /^(?:>\s*)?(?:-\s+)?【GM】\s*(.*)$/;
+// 【GM】の行のすぐ下に続く「> - …」「>   …」の行も GM の注の続き（二重の意味の対応表など）
+const GM_CONT = /^>\s*(?:-\s+|\s{2,}\S)/;
+// 行の途中の【GM】（「画面の文。【GM】注」）は、その先を赤い札にする（プレイヤー表示では隠す）
+const inlineGm = (line) => {
+  if (!/\S【GM】/.test(line) || GM_LINE.test(line)) return line;
+  const span = (_, t) => `<span class="gm-inline"><b>GMだけ</b>${t.replace(/</g, '&lt;')}</span>`;
+  return /^\s*\|/.test(line) ? line.replace(/【GM】([^|]*)/g, span) : line.replace(/【GM】(.*)$/, span);
+};
+const VIS_DIRECTIVE = /^<!--\s*vis:([a-z]+)(?::([^|>]*))?(?:\|([^>]*))?\s*-->$/;
 function splitNotes(md) {
   const out = []; const lines = md.split('\n'); let buf = []; let note = null; let gm = null; let fence = false;
   const flush = () => { if (buf.length) out.push({ type: 'md', text: buf.join('\n') }); buf = []; };
   for (const line of lines) {
     if (!note && /^\s*```/.test(line)) fence = !fence;
+    const vd = !fence && !note && line.trim().match(VIS_DIRECTIVE);
+    if (vd) { if (gm) { out.push(gm); gm = null; } flush(); out.push({ type: 'vis', k: vd[1], who: (vd[2] || '').trim(), cond: (vd[3] || '').trim() }); continue; }
     const g = !fence && !note && line.match(GM_LINE);
-    if (g) { if (!gm) { flush(); gm = { type: 'note', title: 'GM専用｜GM・アプリ向けの指示', body: [] }; } gm.body.push(g[1], ''); continue; }
+    if (g) { if (!gm) { flush(); gm = { type: 'note', title: 'GMだけ｜GM・アプリ向けの指示', body: [] }; } gm.body.push(g[1], ''); continue; }
+    if (gm && GM_CONT.test(line)) { gm.body.push(line.replace(/^>\s?/, '')); continue; }
     if (gm) { out.push(gm); gm = null; }
     const open = !fence && line.match(/^:::note\s*(.*)$/);
     if (!note && open) { flush(); note = { type: 'note', title: open[1].trim(), body: [] }; continue; }
     if (note && line.trim() === ':::') { out.push(note); note = null; continue; }
-    if (note) note.body.push(line); else buf.push(line);
+    if (note) note.body.push(line); else buf.push(fence ? line : inlineGm(line));
   }
   if (gm) out.push(gm);
   if (note) out.push(note);
@@ -295,15 +414,32 @@ function noteChip(title) {
 function renderMd(md, ctx, opts = {}) {
   const mk = makeMarked(ctx);
   let html = '';
+  const top = !ctx.nest;
+  if (top && opts.kind === 'card' && !ctx.cardFacts) ctx.cardFacts = scanCards(md);
   for (const seg of splitNotes(md)) {
+    if (seg.type === 'vis') {
+      if (top) { const v = V(seg.k, { who: seg.k === 'self' ? seg.who : '', cond: seg.k === 'self' ? seg.cond : (seg.cond || seg.who) }); ctx.base = v; html += mark(ctx, v); }
+      continue;
+    }
     if (seg.type === 'note') {
+      ctx.nest = (ctx.nest || 0) + 1;
       const inner = renderMd(seg.body.join('\n'), ctx, opts);
-      html += `<details class="note ${noteKind(seg.title)}" data-a="${ctx.aid('note' + seg.title + seg.body.join(''))}"><summary>${noteChip(seg.title)}</summary><div class="note-body">${inner}</div></details>\n`;
+      ctx.nest--;
+      const nk = noteKind(seg.title);
+      const nv = nk === 'gm' ? V('gm') : nk === 'meta' ? V('make') : null;
+      const box = `<details class="note ${nk}" data-a="${ctx.aid('note' + seg.title + seg.body.join(''))}"><summary>${noteChip(seg.title)}</summary><div class="note-body">${inner}</div></details>\n`;
+      if (top && nv) html += mark(ctx, nv) + box + mark(ctx, ctx.base || ctx.page.vis);
+      else html += box;
       continue;
     }
     html += renderTokens(mk.lexer(seg.text), mk, ctx, opts);
   }
   return html;
+}
+// 見せる範囲の切れ目の印（あとで wrapVis が枠にする）。入れ子の中では出さない
+function mark(ctx, v) {
+  if (ctx.nest) return '';
+  return `<!--V:${[v.k, v.who, v.cond, v.when, v.how, v.card].map((x) => encodeURIComponent(x || '')).join('|')}-->`;
 }
 
 // カード：「**《タイトル》**　入手条件」の段落からカード枠を作る（「**ID《タイトル》**」も可）
@@ -311,15 +447,20 @@ const CARD_START = /^\*\*([^*\n]{1,60})\*\*([^\n]*)$/;
 function renderTokens(tokens, mk, ctx, opts) {
   let html = '';
   let cardOpen = false;
-  const closeCard = () => { if (cardOpen) { html += '</div></section>\n'; cardOpen = false; } };
+  const top = !ctx.nest;
+  const closeCard = () => { if (cardOpen) { html += '</div></section>\n' + mark(ctx, ctx.base || ctx.page.vis); cardOpen = false; } };
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i];
     if (t.type === 'space') continue;
     if (t.type === 'heading' && t.depth === 1 && !ctx.h1Done) { ctx.h1Done = true; ctx.h1 = strip(mk.parseInline(t.text)); continue; }
+    if (top && INTRO_MAKE.has(ctx.page.id) && !ctx.introDone) {
+      if (t.type === 'blockquote') { html += mark(ctx, V('make', { cond: '資料の説明・書き方' })) + mk.parser([t]) + mark(ctx, ctx.base || ctx.page.vis); continue; }
+      ctx.introDone = true;
+    }
     if (opts.kind === 'card') {
       if (t.type === 'heading' || t.type === 'hr') closeCard();
       const m = t.type === 'paragraph' && t.text.match(CARD_START);
-      if (m && /《|^[A-Z]{2,}-|^REC-|^INFO-/.test(m[1])) {
+      if (m && /《|^[A-Z]{2,}-|^REC-|^INFO-|^深度/.test(m[1])) {
         closeCard();
         const title = m[1].trim();
         const meta = m[2].trim();
@@ -327,6 +468,11 @@ function renderTokens(tokens, mk, ctx, opts) {
         ctx.toc.push({ id, text: strip(mk.parseInline(title)), level: 3 });
         const tone = /^REC-|記録片/.test(title) ? ' rec' : /^INFO-P/.test(title) ? ' split' : /^深度|調査|記録《|台帳|出所/.test(title) ? ' case' : '';
         ctx.cards = (ctx.cards || 0) + 1;
+        if (top && ctx.page.group !== 'ref') {
+          const cv = cardVis(title, meta, ctx.cardFacts && ctx.cardFacts.get(title + '|' + meta), ctx.page);
+          ctx.cardVisList = ctx.cardVisList || []; ctx.cardVisList.push({ title: strip(title), ...cv });
+          html += mark(ctx, cv);
+        }
         html += `<section class="cardx${tone}" id="${id}"><header class="cardx-head" data-a="${id}"><span class="cardx-title">${mk.parseInline(title)}</span>${meta ? `<span class="cardx-meta">${mk.parseInline(meta)}</span>` : ''}</header><div class="cardx-body">\n`;
         cardOpen = true;
         continue;
@@ -352,15 +498,17 @@ function renderReading(md, ctx) {
   if (head.length) {
     const plain = head.filter((l) => !GM_LINE.test(l)).map((l) => l.replace(/^>\s?/, ''));
     const gm = head.filter((l) => GM_LINE.test(l));
-    if (plain.length) html += `<div class="callout" data-a="${ctx.aid(plain.join(''))}">${renderMd(plain.join('\n\n'), ctx)}</div>\n`;
+    ctx.nest = (ctx.nest || 0) + 1;
+    const cHtml = plain.length ? renderMd(plain.join('\n\n'), ctx) : '';
+    ctx.nest--;
+    if (plain.length) html += mark(ctx, V('gm', { cond: '読み方の注（配役・場面・目的）' })) + `<div class="callout" data-a="${ctx.aid(plain.join(''))}">${cHtml}</div>\n` + mark(ctx, ctx.page.vis);
     if (gm.length) html += renderMd(gm.join('\n'), ctx);
   }
-  html += '<div class="script">\n';
   let aside = []; let pending = null; let fence = null; let gmBuf = []; let det = 0;
   const flushAside = () => {
-    if (aside.length) { const text = aside.join('\n').trim(); aside = []; if (text) html += `<div class="aside">${renderMd(text, ctx)}</div>\n`; }
+    if (aside.length) { const text = aside.join('\n').trim(); aside = []; ctx.nest = (ctx.nest || 0) + 1; if (text) html += `<div class="aside">${renderMd(text, ctx)}</div>\n`; ctx.nest--; }
   };
-  const flushGm = () => { if (gmBuf.length) { html += renderMd(gmBuf.join('\n'), ctx); gmBuf = []; } };
+  const flushGm = () => { if (gmBuf.length) { if (det > 0) ctx.nest = (ctx.nest || 0) + 1; html += renderMd(gmBuf.join('\n'), ctx); if (det > 0) ctx.nest--; gmBuf = []; } };
   const flushAll = () => { flushGm(); flushAside(); };
   const line = (who, mod, say, extra, cls = '') => {
     const wm = who.match(/^(.+?)【([^】]+)】$/);
@@ -370,13 +518,14 @@ function renderReading(md, ctx) {
     html += `<div class="line sp-${key}${cls}" data-a="${ctx.aid(who + say)}"><span class="who">${esc(who)}${mod ? `<small>${esc(mod)}</small>` : ''}</span><span class="say">「${inlineMd(say)}」${extra ? `<small class="cond-note">${esc(extra)}</small>` : ''}</span></div>\n`;
   };
   for (; i < lines.length; i++) {
-    const raw = lines[i]; const s = raw.trim();
+    const raw = inlineGm(lines[i]); const s = raw.trim();
     if (fence) {
       if (/^```/.test(s)) { html += `<div class="screen" data-a="${ctx.aid(fence.join(''))}">${fence.map((x) => inlineMd(x)).join('<br>')}</div>\n`; fence = null; }
       else fence.push(raw);
       continue;
     }
     if (GM_LINE.test(s)) { flushAside(); gmBuf.push(s.replace(/^-\s+/, '')); continue; }
+    if (gmBuf.length && GM_CONT.test(raw)) { gmBuf.push(raw); continue; }
     if (gmBuf.length && s) flushGm();
     if (/^```/.test(s)) { flushAll(); fence = []; continue; }
     // 原稿の <details>（選ばれた答えへの反応など）は、たたみの枠にする
@@ -395,7 +544,13 @@ function renderReading(md, ctx) {
       continue;
     }
     if (/^■/.test(s)) { flushAll(); pending = null; const id = ctx.aid(s, 'h'); ctx.toc.push({ id, text: s.replace(/^■\s*/, ''), level: 3 }); html += `<div class="scene" id="${id}" data-a="${id}">${esc(s.replace(/^■\s*/, ''))}</div>\n`; continue; }
-    if (/^（[\s\S]*）$/.test(s)) { flushAll(); html += `<div class="stage" data-a="${ctx.aid(s)}">${inlineMd(s)}</div>\n`; continue; }
+    if (/^（[\s\S]*）$/.test(s)) {
+      flushAll();
+      const gmStage = det === 0 && /^（\s*→|^（GM|→\s*R\d\d|【GM】/.test(s);
+      const st = `<div class="stage" data-a="${ctx.aid(s)}">${inlineMd(s)}</div>\n`;
+      html += gmStage ? mark(ctx, V('gm', { cond: '進行の注（次に読むもの）' })) + st + mark(ctx, ctx.page.vis) : st;
+      continue;
+    }
     if (/^\*\*【(画面|カード|公開ログ|画面の助け舟)/.test(s)) { flushAll(); pending = null; html += `<div class="screen" data-a="${ctx.aid(s)}">${inlineMd(s)}</div>\n`; continue; }
     if ((m = s.match(/^\*\*([^*]{1,60})\*\*$/))) {
       flushAll();
@@ -420,11 +575,61 @@ function renderReading(md, ctx) {
   }
   flushAll();
   while (det-- > 0) html += '</div></details>\n';
-  html += '</div>\n';
   return html;
 }
 const inlineMk = new Marked({ gfm: true, breaks: true });
 const inlineMd = (s) => inlineMk.parseInline(s);
+
+// ---------- 見せる範囲の枠 ----------
+// 制作の印（【2026-11-07 …】【作者修正】【r3】【旧王国改訂 …】など）は小さな札にし、プレイヤー表示では隠す
+const MAKE_TAG = /20\d\d-\d|(?:^|[・\s])r\d|作者|修正|改訂|決定|追記|指示|新規|Claude|^T\d|整合|組み直し|旧|廃止|取り消し|仮置|確認待ち|担当/;
+function makeBadges(html) {
+  return html.replace(/(<[^>]*>)|【([^】<>]{1,90})】/g, (m, tag, inner) => {
+    if (tag) return tag;
+    if (/^(GM|物語|あなたは)/.test(inner) || !MAKE_TAG.test(inner)) return m;
+    return `<span class="badge make">${inner}</span>`;
+  });
+}
+const KLABEL = { all: 'PL・全員が見る', self: 'PL・本人だけ', here: 'PL・その場にいた人だけ', gm: 'GMだけ', make: '制作' };
+const KICON = { all: '◎', self: '◆', here: '◇', gm: '■', make: '▲' };
+const visStats = [];
+function visLabel(v, whole) {
+  const who = v.k === 'self' && v.who ? '：' + v.who : '';
+  const cond = v.cond && !(v.k === 'self' && v.cond === v.who) ? `<span class="vis-cond">${esc(v.cond)}</span>` : '';
+  const after = v.when === 'after' ? '<span class="vis-when">推理のあと</span>' : '';
+  const scope = whole ? '<span class="vis-scope">このページ全体</span>' : '';
+  return `<div class="vis-label"><span class="vis-chip"><i>${KICON[v.k]}</i>${KLABEL[v.k]}${esc(who)}</span>${after}${cond}${scope}</div>` + (v.how ? `<div class="vis-how">${esc(v.how)}</div>` : '');
+}
+function wrapVis(html, p) {
+  const parts = html.split(/<!--V:([^>]*?)-->/);
+  const raw = [{ v: p.vis, h: parts[0] }];
+  for (let i = 1; i < parts.length; i += 2) {
+    const f = parts[i].split('|').map((x) => decodeURIComponent(x));
+    raw.push({ v: V(f[0], { who: f[1], cond: f[2], when: f[3], how: f[4], card: f[5] }), h: parts[i + 1] || '' });
+  }
+  const chunks = [];
+  for (const c of raw) {
+    if (!c.h.trim()) continue;
+    if (p.vis.when === 'after' && (c.v.k === 'all' || c.v.k === 'here' || c.v.k === 'self') && !c.v.when) c.v = { ...c.v, when: 'after' };
+    const key = JSON.stringify(c.v);
+    const last = chunks[chunks.length - 1];
+    if (last && !c.v.card && !last.v.card && last.key === key) { last.h += c.h; continue; }
+    chunks.push({ v: c.v, h: c.h, key });
+  }
+  const whole = chunks.length === 1;
+  let out = '';
+  for (const c of chunks) {
+    let h = c.h;
+    const fold = (c.v.k === 'gm' && p.vis.k !== 'gm') || (c.v.k === 'make' && p.vis.k !== 'make');
+    if (fold && !/^\s*<details/.test(h)) {
+      const sum = c.v.k === 'gm' ? 'GMだけの情報（開く）' : '制作の注（開く）';
+      h = `<details class="note ${c.v.k === 'gm' ? 'gm' : 'meta'} vis-fold"><summary><span class="note-chip">${KLABEL[c.v.k]}</span>${esc(c.v.cond || sum)}</summary><div class="note-body">${h}</div></details>\n`;
+    }
+    const who = c.v.k === 'self' ? (c.v.who === '各自' ? 'each' : WHO_KEY[c.v.who] || '') : '';
+    out += `<div class="vis v-${c.v.k}${c.v.card ? ' vis-card' : ''}" data-vis="${c.v.k}" data-who="${who}" data-when="${c.v.when || ''}">${visLabel(c.v, whole && !c.v.card)}<div class="vis-body">${h}</div></div>\n`;
+  }
+  return { html: out, chunks };
+}
 
 // ---------- 組み立て ----------
 const pages = [];
@@ -443,7 +648,7 @@ for (const p of P) {
     if (p.kind === 'read') html = renderReading(src, ctx);
     else html = renderMd(src, ctx, { kind: p.kind });
   }
-  html = badgeTags(html);
+  html = makeBadges(badgeTags(html));
   let title = ctx.h1 || p.nav;
   if (p.kind === 'ho' && ctx.h1) {
     const hm = ctx.h1.match(/^【あなたは\s*(.+?)】\s*(.*)$/);
@@ -454,14 +659,29 @@ for (const p of P) {
     html = `<div class="ho-hero tone-${tone}"><div class="ho-kicker">${esc(kicker)}</div><div class="ho-name">${esc(name)}</div></div>\n` + html;
     title = name + (hm ? '　' + p.nav.replace(/^PC\d\s+\S+\s+/, '') : '');
   }
+  const W = wrapVis(html, p);
+  html = W.html;
   const rawSrc = p.file && fs.existsSync(p.file) ? fs.readFileSync(p.file, 'utf8') : '';
-  if (isNew(p) && /2026-11-0[34]/.test(rawSrc)) ctx.badges.push('11/3〜11/4 改稿');
+  if (isNew(p) && /2026-11-07/.test(rawSrc)) ctx.badges.push('11/7 組み直し');
+  else if (isNew(p) && /2026-11-0[34]/.test(rawSrc)) ctx.badges.push('11/3〜11/4 改稿');
   if (!isNew(p) && /【作者修正/.test(rawSrc)) ctx.badges.push('作者修正（10/07）');
   for (const b of p.extraBadges || []) ctx.badges.push(b);
   if (ctx.speakers && isNew(p)) for (const [w, n] of Object.entries(ctx.speakers)) speakerAll[w] = (speakerAll[w] || 0) + n;
-  const text = strip(html).replace(/\s+/g, ' ').trim();
+  const flat = (h) => strip(h).replace(/\s+/g, ' ').trim();
+  const text = flat(W.chunks.map((c) => c.h).join(' '));
+  // プレイヤー表示のときの検索用：PL の段だけの文（推理のあと・本人だけは分ける）
+  const tp = flat(W.chunks.filter((c) => (c.v.k === 'all' || c.v.k === 'here') && c.v.when !== 'after').map((c) => c.h).join(' '));
+  const ta = flat(W.chunks.filter((c) => (c.v.k === 'all' || c.v.k === 'here' || c.v.k === 'self') && c.v.when === 'after').map((c) => c.h).join(' '));
+  const tw = {};
+  for (const c of W.chunks) if (c.v.k === 'self' && c.v.when !== 'after') { const w = WHO_KEY[c.v.who] || (c.v.who === '各自' ? 'each' : '_'); tw[w] = ((tw[w] || '') + ' ' + flat(c.h)).trim(); }
+  const kinds = {}; for (const c of W.chunks) kinds[c.v.k] = (kinds[c.v.k] || 0) + 1;
+  const selfWho = [...new Set(W.chunks.filter((c) => c.v.k === 'self').map((c) => WHO_KEY[c.v.who] || (c.v.who === '各自' ? 'each' : '_')))];
+  const plOpen = W.chunks.some((c) => (c.v.k === 'all' || c.v.k === 'here') && c.v.when !== 'after');
+  const plAfter = W.chunks.some((c) => ['all', 'here', 'self'].includes(c.v.k) && c.v.when === 'after');
+  visStats.push({ id: p.id, nav: p.nav, group: p.group, chunks: W.chunks.length, kinds, cards: ctx.cardVisList || [] });
   const rel = p.file ? path.relative(path.join(ROOT, 'content'), p.file).replace(/\\/g, '/') : '';
-  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, cards: ctx.cards || 0 });
+  const vis = { k: p.vis.k, who: WHO_KEY[p.vis.who] || '', whoName: p.vis.who, cond: p.vis.cond, when: p.vis.when, kinds, selfWho, plOpen, plAfter };
+  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, vis, title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, tp, ta, tw, cards: ctx.cards || 0 });
 }
 const ids = new Set();
 for (const p of pages) { if (ids.has(p.id)) throw new Error('ページIDの重複: ' + p.id); ids.add(p.id); }
@@ -479,3 +699,11 @@ console.log('話者（今の原稿の読み合わせ）:', Object.entries(speake
 const OLDN = /リュシア|ガルド|レオン/g;
 const withOld = nw.map((x) => [x.nav, (x.text.match(OLDN) || []).length]).filter((x) => x[1]);
 console.log('旧名が残る今のページ:', withOld.length ? withOld.map(([n, c]) => `${n}:${c}`).join(' ') : 0);
+
+// 見せる範囲の数
+const visAll = visStats.reduce((a, x) => { for (const [k, n] of Object.entries(x.kinds)) a[k] = (a[k] || 0) + n; return a; }, {});
+console.log('見せる範囲の枠:', visStats.reduce((a, x) => a + x.chunks, 0), JSON.stringify(visAll));
+const cardRows = visStats.flatMap((x) => x.cards.map((c) => ({ page: x.nav, ...c })));
+const ck = {}; for (const c of cardRows) ck[c.k] = (ck[c.k] || 0) + 1;
+console.log('カードの印:', cardRows.length, JSON.stringify(ck), '本人だけで「だれ」が空:', cardRows.filter((c) => c.k === 'self' && !c.who).length);
+fs.writeFileSync(path.join(ROOT, 'tools', '_card_vis.json'), JSON.stringify(cardRows, null, 1));

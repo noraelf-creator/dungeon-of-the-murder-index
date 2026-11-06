@@ -428,3 +428,55 @@ details.note.gm { border-color: #c9b277; background: #fbf7ea; }
 .cardx.split { border-top-color: var(--leon); }
 .cardx.case { border-top-color: var(--accent); }
 .cardx-body blockquote { margin: 8px 0; border: none; padding: 0; font-size: 15.5px; color: var(--ink); background: none; }
+
+
+/* ---------- 見せる範囲の印（2026-11-07） ---------- */
+:root { --v-all: #1d8a57; --v-self: #2459c9; --v-here: #b86e00; --v-gm: #c42b3a; --v-make: #6b7280; }
+.v-all { --vc: var(--v-all); --vbg: #e5f4ec; }
+.v-self { --vc: var(--v-self); --vbg: #e7eefc; }
+.v-here { --vc: var(--v-here); --vbg: #fdf1dc; }
+.v-gm { --vc: var(--v-gm); --vbg: #fde9eb; }
+.v-make { --vc: var(--v-make); --vbg: #eef0f3; }
+.vis { position: relative; border-left: 5px solid var(--vc); padding: 6px 0 4px 14px; margin: 12px 0 16px; }
+.vis-label { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 4px; font-size: 12px; line-height: 1.5; }
+.vis-chip { background: var(--vc); color: #fff; font-weight: 800; padding: 1px 10px; border-radius: 999px; line-height: 22px; letter-spacing: .02em; }
+.vis-chip i { font-style: normal; margin-right: 4px; }
+.vis-cond { color: var(--vc); font-weight: 700; background: var(--vbg); padding: 1px 8px; border-radius: 6px; }
+.vis-when { background: #4c1d95; color: #fff; font-weight: 700; padding: 1px 8px; border-radius: 6px; }
+.vis-scope { color: var(--muted); }
+.vis-how { font-size: 12.5px; line-height: 1.6; color: #2f3644; background: var(--vbg); border: 1px dashed var(--vc); border-radius: 8px; padding: 4px 10px; margin: 2px 0 6px; }
+.vis.v-gm { border: 2px solid #eab0b6; border-left: 6px solid var(--v-gm); background: #fff6f7; border-radius: 10px; padding: 8px 12px 6px; }
+.vis.v-make { border-left-style: dashed; }
+.vis-card > .vis-body > .cardx { margin-top: 4px; }
+details.note.gm { border-color: #eab0b6 !important; background: #fff6f7 !important; }
+details.note.gm > summary .note-chip { background: var(--v-gm); color: #fff; }
+details.note.meta > summary .note-chip { background: var(--v-make); color: #fff; }
+.badge.make { background: #eef0f3; color: #4b5563; border: 1px dashed #9ca3af; font-size: 11px; padding: 0 6px; border-radius: 6px; font-weight: 600; }
+.vis-legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; margin: 6px 0 8px; }
+.vis-legend .lg-t { font-weight: 800; color: var(--ink-soft); }
+.vis-legend .lg-n { color: var(--muted); display: inline-flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.kc { display: inline-block; padding: 0 8px; border-radius: 999px; font-weight: 700; color: var(--vc); background: var(--vbg); border: 1px solid var(--vc); line-height: 20px; }
+.tagchip.vis-tag { background: var(--vc); color: #fff; }
+.pv { flex: none; font-size: 10.5px; font-weight: 800; color: #fff; background: var(--vc); border-radius: 6px; padding: 0 5px; line-height: 18px; min-width: 30px; text-align: center; }
+.pdots { display: inline-flex; gap: 2px; flex: none; }
+.pdots i { width: 7px; height: 7px; border-radius: 50%; background: var(--vc); display: inline-block; }
+.view-switch { display: flex; align-items: center; gap: 8px; flex: none; }
+.view-switch select { font: inherit; font-size: 13px; padding: 5px 8px; border-radius: 8px; border: 1px solid #50607a; background: #263449; color: #fff; max-width: 270px; }
+.after-wrap { font-size: 12px; color: #dbe3ee; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.after-wrap[hidden] { display: none; }
+body.pl-mode .view-switch select { background: #1d8a57; border-color: #7fd3a8; font-weight: 700; }
+.mode-banner { margin: 10px auto 0; max-width: 980px; background: #e5f4ec; border: 2px solid var(--v-all); color: #0d4f31; border-radius: 10px; padding: 8px 14px; font-size: 13px; }
+.mode-banner .btn { margin-left: 8px; }
+.pl-empty { background: #fff7e6; border: 1px solid #f0c36d; border-radius: 10px; padding: 10px 14px; margin: 10px 0; font-size: 14px; }
+/* プレイヤー表示：GMだけ・制作・制作の札を隠す */
+body.pl-mode .vis.v-gm, body.pl-mode .vis.v-make, body.pl-mode details.note.gm, body.pl-mode details.note.meta, body.pl-mode .badge, body.pl-mode .note-mark { display: none !important; }
+body.pl-mode.hide-after .vis[data-when="after"] { display: none !important; }
+body.as-mireille .vis.v-self:not([data-who="mireille"]):not([data-who="each"]),
+body.as-viola .vis.v-self:not([data-who="viola"]):not([data-who="each"]),
+body.as-mixi .vis.v-self:not([data-who="mixi"]):not([data-who="each"]),
+body.as-edgar .vis.v-self:not([data-who="edgar"]):not([data-who="each"]) { display: none !important; }
+@media (max-width: 1200px) { .view-switch select { max-width: 200px; } .after-wrap { max-width: 120px; white-space: normal; line-height: 1.2; } }
+@media (max-width: 980px) { .view-switch select { max-width: 150px; font-size: 12px; } .after-wrap { display: none; } }
+.gm-inline { background: #fde9eb; color: #8f1d29; border: 1px solid #eab0b6; border-radius: 6px; padding: 0 6px; font-size: 13px; margin-left: 4px; }
+.gm-inline b { background: var(--v-gm); color: #fff; border-radius: 4px; padding: 0 4px; margin-right: 4px; font-size: 11px; }
+body.pl-mode .gm-inline { display: none !important; }

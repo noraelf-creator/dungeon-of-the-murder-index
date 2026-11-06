@@ -1,0 +1,1986 @@
+{
+ "source": "mm7_game_v4 src/data.js",
+ "branch": "fix-20261101",
+ "commit": "69602b9",
+ "made": "2026-11-06T19:30:44.018Z",
+ "pcName": {
+  "PC1": "ミレイユ",
+  "PC2": "ヴィオラ",
+  "PC3": "ミクシィ",
+  "PC4": "エドガー"
+ },
+ "rooms": {
+  "U0": "入口大広間",
+  "U1": "西警備回廊",
+  "U2": "騎士団詰所",
+  "U3": "崩落整備工房",
+  "U4": "水門機関室",
+  "U5": "誓剣武器庫",
+  "U6": "追悼礼拝堂",
+  "U7": "救難所",
+  "U8": "双騎士碑文室",
+  "U9": "王立封印記録庫",
+  "U10": "守護監視室",
+  "U11": "中央封鎖路",
+  "U12": "守護者門",
+  "L0": "守護研究前室",
+  "L1": "殉職者墓廊",
+  "L2": "誓剣騎士墓所",
+  "L3": "命脈断絶工房",
+  "L4": "王家秘蔵庫",
+  "L5": "守護観測室",
+  "L6": "再生実験室",
+  "L7": "冷却水路",
+  "L8": "隔離排水区画",
+  "L9": "追跡環廊",
+  "L10": "記憶封印殿",
+  "L11": "裁定祭壇前",
+  "L12": "裁定祭壇",
+  "L13": "守護核",
+  "L14": "古い宝物庫"
+ },
+ "cards": [
+  {
+   "id": "INFO-A-TRACK",
+   "title": "追尾特性",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U10",
+     "name": "守護監視室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-SUPPLY",
+   "title": "外部からの魔力供給",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-PRIORITY",
+   "title": "攻撃優先順位",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L5",
+     "name": "守護観測室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-RING",
+   "title": "封印環の固定点",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L10",
+     "name": "記憶封印殿",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-PATH",
+   "title": "再生経路制御",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L10",
+     "name": "記憶封印殿",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-THEORY",
+   "title": "守護核停止論",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-BODY1",
+   "title": "致命傷が見当たらない",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-BODY2",
+   "title": "体内性の異常",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-DIAGNOSIS",
+   "title": "魔力の暴走の跡",
+   "category": "E",
+   "viewer": "PC1",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "diagnose",
+   "where": []
+  },
+  {
+   "id": "INFO-E-WAVE1",
+   "title": "一本だけの反応",
+   "category": "E",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "analyze",
+   "where": []
+  },
+  {
+   "id": "INFO-E-CONTAMINATION",
+   "title": "内側からの魔力汚染",
+   "category": "E",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "analyze",
+   "where": []
+  },
+  {
+   "id": "INFO-E-TIMING",
+   "title": "投与時期推定",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-POSSESSIONS",
+   "title": "リックの携行品",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SYMPTOMS",
+   "title": "症状メモ",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-MOTIVE",
+   "title": "未送信の手紙",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-NOOTHER",
+   "title": "救出後の摂取",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-LEDGER",
+   "title": "救難所物資台帳",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U7",
+     "name": "救難所",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-E-BOTTLE",
+   "title": "空き瓶の山",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-DISGORD1",
+   "title": "影写しの記録",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SUPPLY",
+   "title": "支給台帳の写し",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-COMPARE",
+   "title": "所持品の見比べ",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-DISGORD2",
+   "title": "乱れの形",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SOURCE",
+   "title": "工作素材の出所",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-FORGED",
+   "title": "現場と探索履歴の不整合",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SCENE1",
+   "title": "祭壇周辺",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SCENE2",
+   "title": "手元の瓶の中",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-SCENE3",
+   "title": "事故痕の違和感",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-W-U1-2",
+   "title": "西警備用小扉",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U1",
+     "name": "西警備回廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U2",
+   "title": "騎士団長ミクロソフツ",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U2",
+     "name": "騎士団詰所",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U2-2",
+   "title": "団長と副長",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U2",
+     "name": "騎士団詰所",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U3",
+   "title": "地下へ続く整備孔",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U3",
+     "name": "崩落整備工房",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U3-2",
+   "title": "灰色の石粉",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U3",
+     "name": "崩落整備工房",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U4",
+   "title": "水門の操作",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U4",
+     "name": "水門機関室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U4-2",
+   "title": "祭壇へ届かない水",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U4",
+     "name": "水門機関室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U5",
+   "title": "対守護者装備",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U5",
+     "name": "誓剣武器庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U5-2",
+   "title": "空の封印鞘",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U5",
+     "name": "誓剣武器庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U6",
+   "title": "名簿を読む声",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U6",
+     "name": "追悼礼拝堂",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U6-2",
+   "title": "削られた一名",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U6",
+     "name": "追悼礼拝堂",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U7",
+   "title": "救難所の薬品棚",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U7",
+     "name": "救難所",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U8",
+   "title": "二人の英雄",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U8",
+     "name": "双騎士碑文室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U9",
+   "title": "守護者計画",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U9",
+     "name": "王立封印記録庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U9-2",
+   "title": "交換される肉体",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U9",
+     "name": "王立封印記録庫",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U9-3",
+   "title": "人格侵食",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U9",
+     "name": "王立封印記録庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U10-2",
+   "title": "一致する魔力",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U10",
+     "name": "守護監視室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U10-3",
+   "title": "分核の目録",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U10",
+     "name": "守護監視室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U11",
+   "title": "内部封鎖",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U11",
+     "name": "中央封鎖路",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-U12",
+   "title": "二つの施設",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U12",
+     "name": "守護者門",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L0",
+   "title": "祭壇前の装置",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L0",
+     "name": "守護研究前室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L1",
+   "title": "墓廊の死亡日",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L1",
+     "name": "殉職者墓廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L1-2",
+   "title": "最後の命令",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L1",
+     "name": "殉職者墓廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-ELDIN",
+   "title": "消された副長の名",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "lucia",
+   "where": [
+    {
+     "room": "L2",
+     "name": "誓剣騎士墓所",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L2-2",
+   "title": "封印剣",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L2",
+     "name": "誓剣騎士墓所",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-STYLE",
+   "title": "エコー流",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L2",
+     "name": "誓剣騎士墓所",
+     "depth": 3
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L3",
+   "title": "封印損傷痕",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L3",
+     "name": "命脈断絶工房",
+     "depth": 3
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-USED",
+   "title": "一度だけ使われた剣",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L3",
+     "name": "命脈断絶工房",
+     "depth": 3
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L4",
+   "title": "王家秘蔵品",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L4",
+     "name": "王家秘蔵庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L4-2",
+   "title": "黒曜の呪物",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L4",
+     "name": "王家秘蔵庫",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L5-2",
+   "title": "殺害者の波形",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L5",
+     "name": "守護観測室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-E-WOUND",
+   "title": "本物の追跡者傷",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L5",
+     "name": "守護観測室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L6-3",
+   "title": "接続対象の拡張",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L6-B",
+   "title": "空の器",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-SEVER",
+   "title": "接続者の切離し",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-E-MAGIC",
+   "title": "追跡者の攻撃魔力",
+   "category": "E",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L5",
+     "name": "守護観測室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-X-CONNECTION",
+   "title": "黒金色の魔力反応",
+   "category": "X",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "analyze",
+   "where": []
+  },
+  {
+   "id": "INFO-X-DIAGMEMO",
+   "title": "診断メモ",
+   "category": "X",
+   "viewer": "PC1",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "diagnose",
+   "where": []
+  },
+  {
+   "id": "INFO-W-L3-ATK",
+   "title": "工程の記録（攻撃工程）",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-W-L3-DEX",
+   "title": "工程の記録（器用工程）",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-W-L3-INT",
+   "title": "工程の記録（頭脳工程）",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-X-WOUNDS",
+   "title": "致命傷ではない",
+   "category": "X",
+   "viewer": "PC1",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "diagnose",
+   "where": []
+  },
+  {
+   "id": "INFO-X-COREPULSE",
+   "title": "核の脈",
+   "category": "X",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "analyze",
+   "where": []
+  },
+  {
+   "id": "INFO-W-L7",
+   "title": "地下水流",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L7",
+     "name": "冷却水路",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L7-2",
+   "title": "深層水泥",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L7",
+     "name": "冷却水路",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L8",
+   "title": "隔離規定",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L8-2",
+   "title": "祭壇水位記録",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L8-3",
+   "title": "灰嶺分核の事故",
+   "category": "W",
+   "viewer": "",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L9",
+   "title": "終わらない捜索",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L9",
+     "name": "追跡環廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L10",
+   "title": "最後の精神記録",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L10",
+     "name": "記憶封印殿",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L10-2",
+   "title": "完了条件",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L10",
+     "name": "記憶封印殿",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-MARK-PC1",
+   "title": "一瞬見えたもの",
+   "category": "N",
+   "viewer": "PC1",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-N-MARK-PC2",
+   "title": "一瞬見えたもの",
+   "category": "N",
+   "viewer": "PC2",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-N-MARK-PC3",
+   "title": "一瞬見えたもの",
+   "category": "N",
+   "viewer": "PC3",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-N-MARK-PC4",
+   "title": "一瞬見えたもの",
+   "category": "N",
+   "viewer": "PC4",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-W-L12",
+   "title": "自分に向けた跡",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L12",
+     "name": "裁定祭壇",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-ERASE",
+   "title": "移管目録",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P3-A",
+   "title": "トマの手帳",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P3-B",
+   "title": "再生中の呟き",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P3-C",
+   "title": "リックの第一声",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P3-B2",
+   "title": "流れ込む光",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P3-E",
+   "title": "通り過ぎた巨体",
+   "category": "P",
+   "viewer": "PC4",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P6-A",
+   "title": "胸の古傷",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P7-LEON",
+   "title": "鳴る剣",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-A",
+   "title": "受け止めた一撃",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-B",
+   "title": "祭壇脇の隙間",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-B2",
+   "title": "焦げていない外套",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-V1",
+   "title": "同じ根",
+   "category": "K",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-V2",
+   "title": "網のつながり",
+   "category": "K",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-V3",
+   "title": "共鳴",
+   "category": "K",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-NOTE",
+   "title": "研究ノート",
+   "category": "K",
+   "viewer": "PC2",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-X-LEON-PRE",
+   "title": "深い傷と黒い痣",
+   "category": "X",
+   "viewer": "",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "diagnose",
+   "where": []
+  },
+  {
+   "id": "INFO-K-BLACK1",
+   "title": "黒くなる体",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U9",
+     "name": "王立封印記録庫",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-BLACK2",
+   "title": "黒い者たち",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-A-BLACK",
+   "title": "黒を追う",
+   "category": "A",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U10",
+     "name": "守護監視室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-P6-M",
+   "title": "夜の番の小部屋",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-B3",
+   "title": "祭壇の床の回路",
+   "category": "P",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-B4",
+   "title": "外套の留め具",
+   "category": "P",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-C3",
+   "title": "名に止まる足",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-C2",
+   "title": "振り向いた追跡者",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-W",
+   "title": "最初に見た祭壇",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-XV",
+   "title": "殻の薄い所",
+   "category": "P",
+   "viewer": "PC2",
+   "noShare": true,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-X1",
+   "title": "装置に残る登録",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-X2",
+   "title": "再生の拍",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-P9-X3",
+   "title": "断つ線",
+   "category": "P",
+   "viewer": "",
+   "noShare": false,
+   "personal": true,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-E-CAUSE",
+   "title": "死因の診断",
+   "category": "E",
+   "viewer": "PC1",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "diagnose",
+   "where": []
+  },
+  {
+   "id": "REC-U2",
+   "title": "済の欄",
+   "category": "REC",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "REC-U8",
+   "title": "外套",
+   "category": "REC",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "REC-U9",
+   "title": "ズゥーム殿の往診",
+   "category": "REC",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "REC-L1",
+   "title": "伝声管の知らせ",
+   "category": "REC",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "REC-L8",
+   "title": "研究主任の悔恨",
+   "category": "REC",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-M-U1-3",
+   "title": "閉めっぱなしの蓋",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U1",
+     "name": "西警備回廊",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-U1-2",
+   "title": "鈴の夜",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U1",
+     "name": "西警備回廊",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-U2-3",
+   "title": "袖を二回",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U2",
+     "name": "騎士団詰所",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-U5",
+   "title": "いびき",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U5",
+     "name": "誓剣武器庫",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-U8",
+   "title": "オウム返し",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U8",
+     "name": "双騎士碑文室",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-U8-3",
+   "title": "鳴る剣術",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U5",
+     "name": "誓剣武器庫",
+     "depth": 1,
+     "pc": "PC3"
+    }
+   ]
+  },
+  {
+   "id": "INFO-M-PUR1",
+   "title": "見覚えのある構え",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-M-PUR2",
+   "title": "外套の裾",
+   "category": "M",
+   "viewer": "PC3",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-U1-3",
+   "title": "伝声管の頁",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U1",
+     "name": "西警備回廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-U1-2",
+   "title": "夜の縄",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U1",
+     "name": "西警備回廊",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-U5-2",
+   "title": "扉の前で眠る団長",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U5",
+     "name": "誓剣武器庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-J-U6",
+   "title": "団長の最期",
+   "category": "J",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "U6",
+     "name": "追悼礼拝堂",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-J-L2",
+   "title": "誰にも殺されていない",
+   "category": "J",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L2",
+     "name": "誓剣騎士墓所",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-NOTE",
+   "title": "副長の覚え書き",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L2",
+     "name": "誓剣騎士墓所",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L3-2",
+   "title": "工房の控え",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L3",
+     "name": "命脈断絶工房",
+     "depth": 3
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L3-SPARE",
+   "title": "予備のもう一振り",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L3",
+     "name": "命脈断絶工房",
+     "depth": 3
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L4-2",
+   "title": "伝令の控え帳",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L4",
+     "name": "王家秘蔵庫",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L4-3",
+   "title": "会議録",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L4",
+     "name": "王家秘蔵庫",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L5-1",
+   "title": "実験の経過記録",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L5",
+     "name": "守護観測室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-W-L6-OVER",
+   "title": "過充填の記録",
+   "category": "W",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L6-2",
+   "title": "回路の趣意書",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-HAIREI-CARE",
+   "title": "灰嶺から来た者たちの経過",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-KUROZU",
+   "title": "クロヅクメーの記録",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-L10-2",
+   "title": "渡さなかった手紙",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L10",
+     "name": "記憶封印殿",
+     "depth": 2
+    }
+   ]
+  },
+  {
+   "id": "INFO-N-MARK",
+   "title": "一瞬見えたもの",
+   "category": "N",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": []
+  },
+  {
+   "id": "INFO-K-L12-2",
+   "title": "封印剣の注文札",
+   "category": "K",
+   "viewer": "",
+   "noShare": false,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L12",
+     "name": "裁定祭壇",
+     "depth": 1
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-HAIREI-MIR",
+   "title": "同じ所から",
+   "category": "K",
+   "viewer": "PC1",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L6",
+     "name": "再生実験室",
+     "depth": 2,
+     "pc": "PC1"
+    }
+   ]
+  },
+  {
+   "id": "INFO-K-HAIREI-EDG",
+   "title": "埋め戻した坑道",
+   "category": "K",
+   "viewer": "PC4",
+   "noShare": true,
+   "personal": false,
+   "expertBy": "",
+   "where": [
+    {
+     "room": "L8",
+     "name": "隔離排水区画",
+     "depth": 2,
+     "pc": "PC4"
+    }
+   ]
+  }
+ ]
+}

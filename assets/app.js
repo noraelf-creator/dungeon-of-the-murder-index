@@ -42,11 +42,61 @@
     session: null,
     sync: { state: 'idle', last: null, error: '' },
     tab: 'write', filter: 'open', query: '', legacyCount: 0, loaded: false,
+    view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true),
   };
   const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
   const now = () => Date.now();
   const keyOf = (pageId, anchor) => pageId + '|' + anchor;
   const splitKey = (k) => { const i = k.indexOf('|'); return [k.slice(0, i), k.slice(i + 1)]; };
+
+  // ---------- 見せる範囲（プレイヤーが見る情報だけ／この人物として見る） ----------
+  const WHO_NAME = { mireille: 'ミレイユ', viola: 'ヴィオラ', mixi: 'ミクシィ', edgar: 'エドガー' };
+  const VK = { all: ['◎', 'PL・全員が見る', '全員'], self: ['◆', 'PL・本人だけ', '本人'], here: ['◇', 'PL・その場にいた人だけ', 'その場'], gm: ['■', 'GMだけ', 'GM'], make: ['▲', '制作', '制作'] };
+  const plMode = () => S.view !== 'all';
+  const persona = () => (S.view.startsWith('pl:') ? S.view.slice(3) : '');
+  function pageVisible(p) {
+    if (!plMode()) return true;
+    const v = p.vis || {};
+    if (v.plOpen) return true;
+    if (v.plAfter && !S.hideAfter) return true;
+    const who = persona();
+    return (v.selfWho || []).some((w) => !who || w === who || w === 'each');
+  }
+  function searchText(p) {
+    if (!plMode()) return p.text;
+    const who = persona(); const tw = p.tw || {};
+    let t = p.tp || '';
+    for (const [w, x] of Object.entries(tw)) if (!who || w === who || w === 'each') t += ' ' + x;
+    if (!S.hideAfter) t += ' ' + (p.ta || '');
+    return t;
+  }
+  function pageTag(p) {
+    const v = p.vis || {}; const k = VK[v.k] ? v.k : 'make';
+    const label = k === 'self' && v.whoName ? v.whoName : VK[k][2];
+    const others = Object.keys(v.kinds || {}).filter((x) => x !== k && VK[x]);
+    return `<span class="pv v-${k}" title="${esc(VK[k][1])}">${esc(label)}</span>` + (others.length ? `<span class="pdots">${others.map((x) => `<i class="v-${x}" title="${esc(VK[x][1])}もある"></i>`).join('')}</span>` : '');
+  }
+  function applyView() {
+    const b = document.body;
+    b.classList.toggle('pl-mode', plMode());
+    b.classList.toggle('hide-after', plMode() && S.hideAfter);
+    for (const w of Object.keys(WHO_NAME)) b.classList.toggle('as-' + w, persona() === w);
+    const sel = $('#viewMode'); if (sel) sel.value = S.view;
+    const ha = $('#hideAfter'); if (ha) ha.checked = S.hideAfter;
+    const aw = $('#afterWrap'); if (aw) aw.hidden = !plMode();
+    const bn = $('#modeBanner');
+    if (bn) {
+      bn.hidden = !plMode();
+      if (plMode()) bn.innerHTML = `<strong>プレイヤー表示中${persona() ? '（' + esc(WHO_NAME[persona()]) + 'として）' : '（4人分）'}</strong>：■GMだけ・▲制作${persona() ? '・ほかの人の◆本人だけ' : ''}${S.hideAfter ? '・推理のあと（真相・ED）' : ''}を隠しています。◇その場にいた人だけの情報は、その場にいた人だけが知ります。<button type="button" class="btn small" data-view="all">すべて表示に戻す</button>`;
+    }
+  }
+  function checkHiddenPage() {
+    const body = $('#page .page-body'); if (!body) return;
+    const old = $('#page .pl-empty'); if (old) old.remove();
+    if (!plMode()) return;
+    const shown = $$('.page-body > .vis', $('#page')).filter((el) => getComputedStyle(el).display !== 'none');
+    if (!shown.length) body.insertAdjacentHTML('beforebegin', `<div class="pl-empty">このページには、いまの表示（プレイヤーが見る情報${persona() ? '・' + esc(WHO_NAME[persona()]) + 'として' : ''}）で見られる段がありません。<button type="button" class="btn small" data-view="all">すべて表示に戻す</button></div>`);
+  }
 
   // ---------- 編集キー（セッション） ----------
   function loadSession() {
@@ -188,7 +238,7 @@
   }
   function renderGroups() {
     const box = $('#navGroups');
-    box.innerHTML = D.groups.map((g) => {
+    box.innerHTML = D.groups.filter((g) => pages.some((p) => p.group === g.id && pageVisible(p))).map((g) => {
       const has = pages.some((p) => p.group === g.id && memoCountFor(p.id) > 0);
       return `<button type="button" class="group-btn${S.group === g.id ? ' active' : ''}" data-group="${g.id}" title="${esc(g.label)}">${svg(g.icon)}<span class="g-label">${esc(g.label)}</span>${has ? '<span class="g-dot" title="未反映の修正案あり"></span>' : ''}</button>`;
     }).join('');
@@ -200,10 +250,12 @@
       const q = S.query.toLowerCase();
       const hits = [];
       for (const p of pages) {
-        const i = p.text.toLowerCase().indexOf(q);
+        if (!pageVisible(p)) continue;
+        const tx = searchText(p);
+        const i = tx.toLowerCase().indexOf(q);
         const t = p.title.toLowerCase().includes(q) || p.nav.toLowerCase().includes(q);
         if (i < 0 && !t) continue;
-        const start = Math.max(0, i - 30); const snip = i < 0 ? '' : p.text.slice(start, i + q.length + 50);
+        const start = Math.max(0, i - 30); const snip = i < 0 ? '' : tx.slice(start, i + q.length + 50);
         hits.push({ p, snip, q });
       }
       box.innerHTML = hits.length ? hits.map(({ p, snip }) => `<a class="search-hit" href="#/${p.id}" data-search="1"><div class="sh-title">${esc(p.nav)}</div><div class="sh-snip">${highlight(snip, S.query)}</div></a>`).join('') : '<div class="empty">見つかりませんでした。</div>';
@@ -212,11 +264,11 @@
     const g = groupById.get(S.group) || D.groups[0];
     $('#navGroupLabel').textContent = g.label;
     let html = ''; let lastSub = null;
-    for (const p of pages.filter((x) => x.group === g.id)) {
+    for (const p of pages.filter((x) => x.group === g.id && pageVisible(x))) {
       if (p.sub !== lastSub) { if (p.sub) html += `<div class="sub-label">${esc(p.sub)}</div>`; lastSub = p.sub; }
       const n = memoCountFor(p.id);
       const active = S.page && S.page.id === p.id;
-      html += `<a class="page-link${active ? ' active' : ''}" href="#/${p.id}"><span class="p-label">${esc(p.nav)}</span>${n ? `<span class="memo-pill" title="未反映の修正案">${n}</span>` : ''}</a>`;
+      html += `<a class="page-link${active ? ' active' : ''}" href="#/${p.id}">${pageTag(p)}<span class="p-label">${esc(p.nav)}</span>${n ? `<span class="memo-pill" title="未反映の修正案">${n}</span>` : ''}</a>`;
       if (active && p.toc.length) {
         html += '<div class="toc">' + p.toc.slice(0, 80).map((t) => `<a href="#/${p.id}/${t.id}" class="lv${t.level}" data-toc="${t.id}">${esc(t.text)}</a>`).join('') + '</div>';
       }
@@ -236,18 +288,22 @@
     S.page = p; S.group = p.group;
     const g = groupById.get(p.group);
     const chips = [];
-    if (p.audience) chips.push(`<span class="tagchip ${AUD[p.audience] || ''}">${esc(p.audience)}</span>`);
+    const pv = p.vis || {}; const pk = VK[pv.k] ? pv.k : 'make';
+    chips.push(`<span class="tagchip vis-tag v-${pk}">${VK[pk][0]} ${esc(VK[pk][1])}${pk === 'self' && pv.whoName ? '：' + esc(pv.whoName) : ''}${pv.when === 'after' ? '（推理のあと）' : ''}</span>`);
+    const kc = Object.entries(pv.kinds || {}).filter(([k]) => VK[k]).map(([k, n]) => `<span class="kc v-${k}">${VK[k][0]}${esc(VK[k][2])} ${n}</span>`).join('');
     for (const b of p.badges || []) chips.push(`<span class="tagchip new">${esc(b)}</span>`);
     const n = memoCountFor(p.id);
     $('#page').innerHTML = `
       <header class="page-head">
         <div class="crumbs"><span>${esc(g.label)}</span>${p.sub ? `<span>${esc(p.sub)}</span>` : ''}<span>${esc(p.nav)}</span></div>
         <h1 class="page-title">${esc(p.title)}</h1>
+        <div class="vis-legend"><span class="lg-t">印</span><span class="kc v-all">◎PL・全員が見る</span><span class="kc v-self">◆PL・本人だけ</span><span class="kc v-here">◇PL・その場にいた人だけ</span><span class="kc v-gm">■GMだけ（赤枠・たたみ）</span><span class="kc v-make">▲制作</span><a href="#/about">印の見方</a><span class="lg-n">このページの段：${kc}</span></div>
         <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button></div>
       </header>
       <div class="page-body">${p.html}</div>`;
     document.title = p.nav + '｜ダンジョン・オブ・ザ・マーダー 制作INDEX';
     $('#pageMemos').addEventListener('click', () => { openPanel('page'); });
+    checkHiddenPage();
     refreshMarks();
     renderGroups(); renderPagesCol();
     $('#pencil').hidden = true;
@@ -277,6 +333,8 @@
     for (const node of nodes) {
       const i = node.nodeValue.toLowerCase().indexOf(lower);
       if (i < 0) continue;
+      const vb = node.parentElement && node.parentElement.closest('.vis');
+      if (plMode() && vb && getComputedStyle(vb).display === 'none') continue;
       const mark = document.createElement('mark'); mark.className = 'hl';
       const after = node.splitText(i); after.splitText(q.length);
       mark.textContent = after.nodeValue; after.replaceWith(mark);
@@ -672,6 +730,9 @@
       if (act.dataset.act === 'syncdrafts') await syncDrafts();
     });
 
+    $('#viewMode').addEventListener('change', (e) => { S.view = e.target.value; LS.set('view', S.view); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
+    $('#hideAfter').addEventListener('change', (e) => { S.hideAfter = e.target.checked; LS.set('hideAfter', S.hideAfter); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
+    document.addEventListener('click', (e) => { const b = e.target.closest('[data-view]'); if (!b) return; S.view = b.dataset.view; LS.set('view', S.view); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
     window.addEventListener('hashchange', route);
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.activeElement && document.activeElement.id !== 'memoText') { if (S.anchor) selectAnchor(null); } });
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadMemos(true); });
@@ -697,7 +758,9 @@
     applySizes();
     if (LS.get('navCollapsed', false)) document.body.classList.add('nav-collapsed');
     if (LS.get('panelCollapsed', true)) document.body.classList.add('panel-collapsed');
-    initResizers(); bindEvents(); renderAuth();
+    const qv = new URLSearchParams(location.search).get('view');
+    if (qv && /^(all|pl|pl:(mireille|viola|mixi|edgar))$/.test(qv)) S.view = qv;
+    initResizers(); bindEvents(); renderAuth(); applyView();
     route();
     updateCounts();
     loadMemos();
