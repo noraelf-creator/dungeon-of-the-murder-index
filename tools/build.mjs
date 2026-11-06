@@ -373,9 +373,10 @@ const GM_LINE = /^(?:>\s*)?(?:-\s+)?【GM】\s*(.*)$/;
 const GM_CONT = /^>\s*(?:-\s+|\s{2,}\S)/;
 // 行の途中の【GM】（「画面の文。【GM】注」）は、その先を赤い札にする（プレイヤー表示では隠す）
 const inlineGm = (line) => {
-  if (!/\S【GM】/.test(line) || GM_LINE.test(line)) return line;
+  // 文の区切り（。）」！？・空白）のすぐあとの【GM】だけ。「【GM】の注」のように語として書いた所は変えない
+  if (!/[。）)」！？\s]【GM】/.test(line) || GM_LINE.test(line) || /^\s*>?\s*-?\s*【GM】/.test(line)) return line;
   const span = (_, t) => `<span class="gm-inline"><b>GMだけ</b>${t.replace(/</g, '&lt;')}</span>`;
-  return /^\s*\|/.test(line) ? line.replace(/【GM】([^|]*)/g, span) : line.replace(/【GM】(.*)$/, span);
+  return /^\s*\|/.test(line) ? line.replace(/(?<=[。）)」！？\s])【GM】([^|]*)/g, span) : line.replace(/(?<=[。）)」！？\s])【GM】(.*)$/, span);
 };
 const VIS_DIRECTIVE = /^<!--\s*vis:([a-z]+)(?::([^|>]*))?(?:\|([^>]*))?\s*-->$/;
 function splitNotes(md) {
