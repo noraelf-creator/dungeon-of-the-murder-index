@@ -1,6 +1,7 @@
 # 実装反映メモ（Codex／ChatGPT向け）
 
 > 今回はゲームのソースを書き換えていない（元ファイル不変の原則）。改稿版をゲームに入れるときの差分一覧。
+> 【GM】2026-11-08 pt2c（作者のテストプレイ2回目のメモ）：①《庇う》の説明から最終戦の行を外した（決まりは変えない）②部屋で魔力薬を拾えなくした（U4・U9・L5 の品、U9 の部屋LSの報酬。支給品とエドガーの1本はそのまま）③ミクシィの《クラフト》と命脈断絶工房の三工程・炉・封印武器の作り方を外した（L3 はふつうの部屋。封印銀塊は宝として残す。封印武器は手に入らない）④ミクシィの《危険察知》（追跡者の気配）を外した⑤エドガーの素材を置く偽装を外した（祭壇の側では荷物から一つ持ち去るか、何もしないか）⑥ミレイユの遺体の専門の段（診断）は調べた回数に数えない。この資料の本文に残る旧い記述（三工程・炉・予備の剣・クラフト・危険察知・素材の偽装・部屋の魔力薬）は旧仕様。報告 `mm7_wt_pt2c/REPORT_PT2C_20261108.md`。
 > 対象：Ver3.4（src/data.js・src/engine.js・src/app.js）。作業前に必ずバックアップ。
 > 【2026-11-01】作者の修正事項の差分は `25_fix_20261101/SPEC_20261101.md`（ENGの欄）と `25_fix_20261101/draft_05/REPORT_W1.md`（新しいカードの出る場所の表）。リックの最大MPは20（下の古い節の数字も20に直した）。
 > 【旧王国改訂 2026-10-19】名前フェイズ・P9「名を叫ぶ」・最終LS①〜⑤・戦況優位・旧い人名（テレグラム・グラム・カイ・アステラ等）は廃止。下の古い節のうち、これらに関わる行は履歴として残している。**末尾の「旧王国改訂：ゲームへの差分一覧」が優先**。さらにその後ろの「旧王国改訂r2：ゲームへの差分一覧」（2026-10-19 午後）が、それより優先。
@@ -12,7 +13,7 @@
 | `manuscript.rooms` | 27部屋の公開文を `カード/01_部屋公開文.md` に差し替え |
 | `manuscript.cards` | 全カード本文を `カード/02〜08` に差し替え。`info()` 側の古いtitle/textは削除して二重定義をなくす（INFO-E-SCENE1〜3、INFO-X-CONNECTION、INFO-E-LEDGER、INFO-E-MOTIVE） |
 | `INFO-W-U4` | タイトル「冷却水路」→「水門の操作」 |
-| `INFO-X-CONNECTION` | タイトル「魔力解析」→「黒金色の魔力反応」 |
+| `INFO-X-CONNECTION` | タイトル「魔力解析」→「黒い魔力反応」 |
 | U7 step1 items | `potion` → `mana` |
 | 新カード | INFO-P3-A/B/C、INFO-P6-A、INFO-P7-LEON、INFO-P9-B、INFO-P9-C、REC-U2/U5/U6/U8/U9/L1/L2/L8/L10。証拠値：INFO-P3-A は `{C:'C-B'}`（台帳と同じ系統、二重計上しない） |
 | 新しい品 | guardCoin（警備兵の銀貨30）、silverCup（騎士の銀杯40）、jeweledGuard（宝石付きの鍔50）、crownShard（宝冠の欠片60） |
@@ -476,7 +477,7 @@
 - **パーティ欄「リック（壁の向こう）」**：C組が隙間に着いた時点（R06／R24の始まり）から、C組の画面の `partyView` にリックの行（名札「パーティ欄の名」：リック（壁の向こう））。HP13／25・**MP0／20**（2026-11-01 C1）。A・B組には出さない（`apartMates` のまま）。救出後（P4）は今の `leon` の行。engine.js 1083行の `leon` は `s.leon.rescued` のときだけなので、P3のC組用に `s.leon.wall=true` の間だけ見せる行を足す。
 - **確定の受け渡し**：R06／R24の場面の終わり（`sceneDone` の前）に、ボタンなしで `poisonUid` の品を `used=true`、`s.leon.mp=9`（HPは13のまま）、`s.secret.poisonGiven={phase:3}`、エドガーの note だけに名札「渡した」の文。**公開ログ（log）には書かない**。数字は書き換わるだけ（光らせない・音なし・前後を並べない。r3-1 の入手の演出も出さない）。C組がエドガー一人なら、エドガーの画面だけに名札「一人で渡す」の一行。名札「首の線」は隙間に着いたときエドガーの画面だけに。
 - **同行者**：同じ組の同行者は、エドガーの所持品欄を開ける（今の数だけ。回復薬はそのまま・魔力薬0。減ったことは知らせない）。R06の「回復薬だ。飲んどけ」はC組にエドガーとほかのPCがいるときの本文（担当CのR06。condKeys の条件の名を合わせる。例 `p3c.withOthers`／`p3c.galdAlone`）。
-- **追加HO②《黒金色の痕》**：P3のC組の隙間の場面、渡す直前にエドガーへ（`startGate(s,'PC4_2','P4_R07')` を P3のC組の場面に移す。ファイル名は `PC4_エドガー_②追加HO_P3《黒金色の痕》.md`。担当C）。
+- **追加HO②《黒い痕》**：P3のC組の隙間の場面、渡す直前にエドガーへ（`startGate(s,'PC4_2','P4_R07')` を P3のC組の場面に移す。ファイル名は `PC4_エドガー_②追加HO_P3《黒い痕》.md`。担当C）。
 - **Disgordのエドガーの乱れ**（`galdNoise`）：`poisonUid` が used になった時点（毎回P3のR06／R24のあと）で止める。
 - r2-2 の `gapPotion`（渡す／渡さない）と名札「渡さない」は廃止。予備の1本の保護（engine.js 219・231行）は、渡したあとは外す（もう持っていない）。
 - テスト：P3でエドガーの選択がCで固定／時間切れでもエドガーはC／Bは攻撃合計4で成功・失敗−6／C組の画面だけに「リック（壁の向こう）」、飲む前MP0・飲んだあとMP20・HP13のまま／`s.logs` が増えない／エドガーの所持品の魔力薬が0／エドガーの note に「隙間から魔力薬をリックに渡した。リックはその場で飲んだ。」／A・B組にリックの行が出ない。
@@ -678,6 +679,10 @@
 - 共通（k2common）：最初の HO の画面に札（あなたのHO・共通HO・フェイズ進行表。最初から押せる）。`UI_TIMING.hoSeconds`・`timers.hoSeconds` 600→900（HO確認15分）。支給品は全員に回復薬1本＋3つから1つ（エドガーは魔力薬固定）。品は仲間に渡せて、仲間に使える。
 - ミレイユ（k2mir）：追加HO④の目標2つ。再生実験室＝`D.provisional.lowerGoals.mireilleLab`（rooms L6・cards INFO-K-HAIREI-MIR）・`mireilleLabMerit:1`（仮）、engine `lowerLabCheck`・`labRevisit`。診断＝今までの `lowerDiag`。目標の表と功績の画面の名札は『画面の小さな文』の節「ミレイユの追加HO④の目標（本人だけ）」（`mirGoal.*`）と `lower.mireilleLab`。お礼の場面 P6〜P9 は自動で閉じるまで90秒（`UI_TIMING.thanksLateMs`）。
 - ヴィオラ（k2vio）：《誘引》は P7 から（`lureFrom:7`）、印はそのフェイズだけ（`lureForceMoves:0`）。P7〜P9 は必ず遭遇（`pursuerSure={7:'notImmune',8:'LEON',9:'LEON'}`）。狙いの人 P8・P9＝LEON（`pursuerAim`）。新カード INFO-K-NOTE《研究ノート》（`viewer:'PC2'`・`exclusive`・共有可、追加HO④と同時＝`addHOCards`）。追加HO⑤《リックの死因》（`PC2_5`、trigger `P10:afterRules`、`addHOIf.PC2_5='lured'`）。HO の《Disgord》の欄（`hoSectionKeys` の `disgord`・app `hoDisgordHTML`）。
-- ミクシィ（k2mix）：常時の能力《人を見る目》と本人だけの《見ていたこと》（`D.provisional.mixiWatch`、engine `mixiWatch`・`watchView`、app `mixiWatchHTML`）。名札は節「見ていたこと（ミクシィ）」（`mixiWatch.*`）。
+- ミクシィ（k2mix）：常時の能力《人を見る目》と本人だけの《見ていたこと》（`D.provisional.mixiWatch`、engine `mixiWatch`・`watchView`、app `mixiWatchHTML`）。名札は節「見ていたこと（ミクシィ）」（`mixiWatch.*`）。【2026-11-07 mixi2】《見ていたこと》は外した。
+- 【2026-11-07 mixi2】ミクシィ《人を見る目》：仲間が《隠す》で隠した品（明かす前）は、PC3 の view の partyView にだけ `hidden:true` で入る（ほかの席・ADMIN には入らない）。隠したとき PC3 の個人の記録に1行（engine `mixiHideNote`）。app `mxHidItem`・`mxHidCount`。切り替え `D.provisional.mixiSeesHidden`。名札は節「人を見る目（ミクシィ）」（`mixiSees.*`）。
+- 【2026-11-07 mixi2】《誘引》：MP−3 を全員の記録（`log`）に「ヴィオラ：MP−3」（`lure.mpLog`、節「誘引の記録（ヴィオラ）」）。切り替え `D.provisional.lureMpLog`。
+- 【2026-11-07 mixi2】作者の新しい決定：最終戦の《庇う》は使えない（`coverInFinal:false`、engine `coverFinalNo`。名札 `cover.finalNo`）。「奥まで調べる」目標は功績+2（`lowerGoals.mireilleLabMerit=2`・`edgarDeepMerit=2`）。バフ薬は上限なし（useItem）。帰還は60秒（`timers.return`、tick で afterReturn）。
 - エドガー（k2edg）：《庇う》は P1〜P11 は自動（`coverAuto:true`。同じ行き先・同じLS・選択肢で分かれるLSは同じ選択肢。最終戦は構えのときだけ）、《頑健》は全てのダメージ−1（`ganken:{minus:1}`）、最初の一撃は致命傷の剣の持ち主＝リックを上に（`weaponStrike:600`。《誘引》の印 +1000 はそのまま）。追加HO④の三つ目の目標（`lowerGoals.edgarDeepCards`・`edgarDeepMerit:1`）。名札は節「庇う（エドガー）」の自動の5つ（`cover.autoUse`・`cover.autoMine`・`cover.autoNone`・`cover.autoTag`・`ganken.tag`）と、節「エドガーの下層の目標（本人だけ）」（`edgLower.*`）。
 - 整合（seigou2）：上の名札を data.js の TEXT_KEYS に入れ、app.js の UIX・engine の仮の文を外した。追跡者の狙いの順は「①致命傷の剣の持ち主＝リック（印があれば HP−3）②引きつける ③狙いの人 ④攻撃魔法」で原稿（真相 3-10・カード07 の【GM】・追跡者の位置の仕様案）とゲームをそろえた。リックの魔法剣＝エコー家に代々伝わる剣＝副長の命脈を断った剣（真相 1-7〜1-10。カード02《空の封印鞘》「同じものだ」・03《工房の控え》「家に伝わる古い剣を持ち込み」）。
+- 【2026-11-07 k5】密談フェイズ（分断のあと）の時間は `D.timers.huddle`（5分）だけ（engine の groupScenes。前は `timers.solo` の2分を足して7分）。延長 `timers.extend`（2分）・`provisional.extendMax`（3回）はそのまま。P10・P11 の「ダンジョンを探索する」の調べ尽くした部屋は名札 `room.doneLate`（app の investigatePanel・roomInfoPanel、phase≧10）。`provisional.forgeNeeds` はどこからも読まれていない（工房の三工程の値は `rooms.L3.steps` の need 6）ので 6・6・6 にそろえて注を付けた。カード INFO-A-DESIGN は T2_REMOVED（原稿に無いので出ない）。data.js の仮の文を今の作り方に直した。

@@ -480,3 +480,6 @@ body.as-edgar .vis.v-self:not([data-who="edgar"]):not([data-who="each"]) { displ
 .gm-inline { background: #fde9eb; color: #8f1d29; border: 1px solid #eab0b6; border-radius: 6px; padding: 0 6px; font-size: 13px; margin-left: 4px; }
 .gm-inline b { background: var(--v-gm); color: #fff; border-radius: 4px; padding: 0 4px; margin-right: 4px; font-size: 11px; }
 body.pl-mode .gm-inline { display: none !important; }
+
+/* 2026-11-11 本文の画像（分断LSの前置きのページ）は枠の幅まで */
+.page img { max-width: 100%; height: auto; border: 1px solid var(--line, #ccc); border-radius: 6px; display: block; margin: 8px 0 2px; }

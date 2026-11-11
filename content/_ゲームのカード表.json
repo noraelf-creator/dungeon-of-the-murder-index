@@ -1,8 +1,8 @@
 {
  "source": "mm7_game_v4 src/data.js",
  "branch": "fix-20261101",
- "commit": "69602b9",
- "made": "2026-11-06T19:30:44.018Z",
+ "commit": "e8a0fc8",
+ "made": "2026-11-11T06:05:32.730Z",
  "pcName": {
   "PC1": "ミレイユ",
   "PC2": "ヴィオラ",
@@ -774,7 +774,7 @@
     {
      "room": "L3",
      "name": "命脈断絶工房",
-     "depth": 3
+     "depth": 2
     }
    ]
   },
@@ -924,7 +924,7 @@
   },
   {
    "id": "INFO-X-CONNECTION",
-   "title": "黒金色の魔力反応",
+   "title": "黒い魔力反応",
    "category": "X",
    "viewer": "PC2",
    "noShare": true,
@@ -940,36 +940,6 @@
    "noShare": true,
    "personal": false,
    "expertBy": "diagnose",
-   "where": []
-  },
-  {
-   "id": "INFO-W-L3-ATK",
-   "title": "工程の記録（攻撃工程）",
-   "category": "W",
-   "viewer": "",
-   "noShare": false,
-   "personal": false,
-   "expertBy": "",
-   "where": []
-  },
-  {
-   "id": "INFO-W-L3-DEX",
-   "title": "工程の記録（器用工程）",
-   "category": "W",
-   "viewer": "",
-   "noShare": false,
-   "personal": false,
-   "expertBy": "",
-   "where": []
-  },
-  {
-   "id": "INFO-W-L3-INT",
-   "title": "工程の記録（頭脳工程）",
-   "category": "W",
-   "viewer": "",
-   "noShare": false,
-   "personal": false,
-   "expertBy": "",
    "where": []
   },
   {
@@ -1774,23 +1744,7 @@
     {
      "room": "L3",
      "name": "命脈断絶工房",
-     "depth": 3
-    }
-   ]
-  },
-  {
-   "id": "INFO-W-L3-SPARE",
-   "title": "予備のもう一振り",
-   "category": "W",
-   "viewer": "",
-   "noShare": false,
-   "personal": false,
-   "expertBy": "",
-   "where": [
-    {
-     "room": "L3",
-     "name": "命脈断絶工房",
-     "depth": 3
+     "depth": 1
     }
    ]
   },

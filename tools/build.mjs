@@ -30,7 +30,8 @@ const add = (group, sub, id, nav, file, kind = 'doc', audience = '', extra = {})
 const must = (f) => { if (!fs.existsSync(f)) throw new Error('ファイルが無い: ' + f); return f; };
 
 // 今の状態
-add('now', '', 'n-now', '今の状態（2026-11-07）', must(C('今の状態_20261107.md')), 'doc', '制作');
+add('now', '', 'n-now', '今の状態（2026-11-11）', must(C('今の状態_20261111.md')), 'doc', '制作');
+add('now', '', 'n-lspre', '分断LSの前置き・スチル v44（11/11・改善案つき）', must(C('分断LSの前置き_20261111.md')), 'doc', '制作');
 add('now', '', 'n-newtext', '新しく書いた文（作者の文でないもの）', must(C('新しく書いた文_20261107.md')), 'doc', '制作');
 add('now', '', 'n-spec', '今の仕様（ゲーム）', must(C('今の仕様（ゲーム）.md')), 'doc', 'GM専用');
 add('now', '', 'about', 'このサイトの使い方（印の見方）', must(C('サイトの使い方.md')), 'doc', '');
@@ -119,6 +120,7 @@ add('canon', '', 'n-canon-clues', '手がかりマップ', must(GM('正本/手�
 
 // 変更の記録
 add('log', '', 'n-changelog', 'CHANGELOG（今の原稿）', must(NOW('CHANGELOG.md')), 'doc', '制作');
+add('log', '前の「今の状態」', 'n-now-1107', '今の状態（2026-11-07・前の版）', must(C('今の状態_20261107.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1104', '今の状態（2026-11-04・前の版）', must(C('今の状態_20261104.md')), 'doc', '制作');
 
 // 参照・旧版（2026-10-06 の写し。前と同じページID）
@@ -170,7 +172,7 @@ const GROUP_READ = { R04: 'P3 分断で A「地図・物資を守る」を選ん
   R15: 'P9 分断で A「リックと共に戦う」を選んだ組', R16: 'P9 分断で B「名前を呼ぶ」を選んだ組', R17: 'P9 分断で C「魔力装置の解析」を選んだ組', R17b: 'P9 分断で「様子を見る」になった組',
   R24: '分断で一人だけの組になった人' };
 const PAGE_VIS = {
-  'n-now': V('make'), 'n-newtext': V('make'), 'n-spec': V('gm'), about: V('make'), 'n-gm-about': V('gm'), 'n-dist': V('gm'), 'n-directive': V('make'), 'n-match': V('make'),
+  'n-now': V('make'), 'n-lspre': V('make'), 'n-newtext': V('make'), 'n-spec': V('gm'), about: V('make'), 'n-gm-about': V('gm'), 'n-dist': V('gm'), 'n-directive': V('make'), 'n-match': V('make'),
   'n-ho-common': V('all'),
   'n-card-rooms': V('all', { cond: '部屋に入ったときに出る文' }), 'n-card-upper': V('here', { cond: 'その部屋を調べた人' }), 'n-card-lower': V('here', { cond: 'その部屋を調べた人' }), 'n-card-secret': V('here', { cond: '秘密区画を開けた人' }),
   'n-card-rec': V('here', { cond: '部屋LSで報酬を得た人' }), 'n-card-split': V('here', { cond: 'その組・同行していた人' }), 'n-card-skill': V('self', { cond: '技能を使った本人' }), 'n-card-case': V('here', { cond: 'P10〜P11 で調べた人' }),
@@ -179,7 +181,7 @@ const PAGE_VIS = {
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
   'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
-  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1104': V('make', { cond: '前の版' }),
+  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };
 // 資料の頭の「>」の説明（作者承認・書き方・本文はClaude案 など）は制作の注にする
 const INTRO_MAKE = new Set(['n-card-rooms', 'n-card-upper', 'n-card-lower', 'n-card-secret', 'n-card-rec', 'n-card-split', 'n-card-skill', 'n-card-case',
