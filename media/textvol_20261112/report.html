@@ -1,0 +1,225 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>マダミス7 文量・情報量の比較（2026-11-09）</title>
+<style>
+body{font-family:"Yu Gothic UI","Meiryo",sans-serif;margin:0;background:#f6f5f2;color:#222;line-height:1.7}
+.wrap{display:flex} nav{position:sticky;top:0;align-self:flex-start;width:230px;min-width:230px;height:100vh;overflow:auto;background:#2d2a3e;color:#eee;padding:18px 14px;box-sizing:border-box}
+nav a{color:#d9d4ff;text-decoration:none;display:block;padding:4px 0;font-size:14px} nav b{color:#fff}
+main{padding:24px 36px;max-width:1150px} h1{font-size:24px;margin:0 0 6px} h2{border-left:6px solid #6b5bd2;padding-left:10px;margin-top:38px}
+.path{font-family:Consolas,monospace;background:#fff;border:1px solid #ddd;padding:6px 10px;font-size:13px;word-break:break-all}
+.box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px 18px;margin:12px 0}
+.key{background:#fff4e0;border-color:#f0b860} .warn{background:#fdecec;border-color:#e3a0a0} .ok{background:#e9f6ec;border-color:#9fd0aa}
+table{border-collapse:collapse;background:#fff;font-size:13.5px;margin:10px 0} th,td{border:1px solid #d6d3cc;padding:5px 8px;text-align:right;vertical-align:top}
+th{background:#ece9f8;text-align:center} td:first-child{text-align:left} tr.r7 td{background:#fff1d6} td.k{background:#f3f0ff} tr.r7 td.k{background:#ffe0a8}
+.bars{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px 16px;margin:12px 0} .bt{font-weight:bold;margin-bottom:6px}
+.br{display:flex;align-items:center;gap:8px;font-size:13px;margin:3px 0} .bl{width:270px} .bw{flex:1;background:#eee;height:16px;border-radius:3px}
+.bf{display:block;height:16px;background:#8f86c9;border-radius:3px} .b7{background:#e8892b} .ba{background:#bbb} .bref{background:#6fa8c8} .bra{background:#9cc3d8} tr.ref td{background:#eef6fb} tr.ref td.k{background:#e3eef8} .bv{width:110px;text-align:right} .avg{color:#777}
+.big{font-size:20px;font-weight:bold;color:#c0601a} small{color:#666} li{margin:3px 0}
+</style></head><body><div class="wrap"><nav><b>目次</b>
+<a href="#s1">1. 結論（購入作品10本・自作）</a><a href="#s2">2. 比較表（1時間あたり・PC1人）</a><a href="#s3">3. グラフ</a><a href="#s4">4. 情報量（文・カード・手がかり）</a>
+<a href="#s5">5. 読むのにかかる時間</a><a href="#s6">6. マダミス7のPC別</a><a href="#s7">7. 市販・公開作品の目安</a><a href="#s8">8. 数え方と注意</a><a href="#s9">9. ファイルの場所</a><br><a href="time_report.html">→ 時間の区切りで見る（次のページ）</a></nav>
+<main><h1>マダミス7 文量・情報量の比較 ― PC1人・1時間あたり</h1>
+<small>2026-11-09 作成（Claude Opus。仕分けはサブエージェント6件、数える道具は1本で全作品同じ決まり）。<b>ネタバレなし</b>（数字だけ）。</small>
+
+<h2 id="s1">1. 結論</h2>
+<div class="box ok"><b>購入作品10本（参考にした作品）と比べると</b>
+<ul>
+<li><b>本体（共通HO＋自分のHO＋全カード）1時間あたり</b>：マダミス7 7,054字 ／ 購入作品の平均 3,936字・中央値 3,493字 → <span class="big">平均の1.8倍</span>。全16作品で2番目（上は参考 魔笛（7,755字））。</li>
+<li><b>紙の範囲すべて（＋読み合わせ・ルール）1時間あたり</b>：16,736字 ／ 購入作品の平均 7,030字 → <b>2.4倍</b>、全16作品で1番目。</li>
+<li><b>HOだけ（共通＋自分）1時間あたり</b>：2,077字 ／ 購入作品の平均 2,647字 → 0.8倍。<b>HOは購入作品より少なめ</b>。</li>
+<li><b>全カードの字数</b>：19,911字 ／ 購入作品の平均 4,830字（最多でも 9,632字）→ <b>4.1倍</b>。カードの枚数は1時間あたり 54枚 ／ 購入作品の平均 11.4枚（調査カード145枚だけでも 36枚）。</li>
+<li><b>読み合わせ（1回分）</b>：33,067字 ／ 購入作品の平均 9,234字。マダミス7より多いのは参考 この闇をあなたと（36,756字）。</li>
+</ul>
+<p>まとめると、<b>HOは購入作品並みかやや少なめで、カードの字数は購入作品の平均の約4.1倍、読み合わせは約3.6倍</b>。本体の重さは魔笛（HOが厚い作品）と同じくらいだが、重さの置き場所が違う（魔笛はHO、マダミス7はカード）。</p>
+<small>購入作品のカードの多くは画像で、文字認識で数えたため少なめに出ている（特に幻想推理は盤面のカードがほぼ読めず547字）。それでもマダミス7のカードの字数は、購入作品の最多の約2倍。</small></div>
+<div class="box key"><b>自作6作品の中では</b>
+<p>PC1人が<b>共通HO＋自分のHO（追加HO含む）＋全カード</b>を読み切ると、マダミス7は <span class="big">28,218字</span>（PCにより 25,289〜30,050字）。
+想定240分で割ると <span class="big">1時間あたり 7,054字</span>。自作6作品の中で1番目に多く、ほかの5作品の平均（4,298字）の<b>1.6倍</b>。</p>
+<p>読み合わせ（1回のプレイで読む分）とルールの文も足すと、紙の版と同じ範囲で <b>1時間あたり 16,736字</b>（平均の<b>1.9倍</b>、1番目）。ブラウザ版だけの画面の文（18,702字）まで入れると 21,412字。</p>
+<ul>
+<li><b>HOだけなら多くない</b>：共通HO＋自分のHOは1時間あたり 2,077字（ほかの平均 2,546字の0.8倍）。中国の劇本殺で言われる「1人1万字・3〜5時間」（約2,000〜3,300字/時）と同じくらい。</li>
+<li><b>重いのはカードと読み合わせ</b>：全カード 19,911字（ほかの作品は 4,449〜8,479字）と、読み合わせ 33,067字（ほかは 7,118〜26,819字）がどちらも最多。</li>
+<li><b>時間で見ると</b>：本体を黙読（600字/分）するだけで47分、HOのように考えながら読む速さ（200字/分）だと141分で、プレイ時間の59%に当たる。読み合わせを声に出すと（仮に300字/分）110分（46%）。</li>
+<li><b>PCの間の差</b>：自分のHOはミレイユ 4,673字に対してミクシィ 9,434字で、約2.0倍の差がある（事前HOの長さと追加HOの数の差。<a href="#s6">6章</a>）。</li>
+</ul></div>
+<div class="box warn"><b>この数字の性格</b>：作者の前提どおり「最後には全カードを読む」上限寄りの数字です。実際のプレイでは、条件つきの追加HOやカードは全部は出ません。分岐が1つのファイルの中に混ざっていて分けられないものは、多めに出ています（<a href="#s8">8章</a>）。</div>
+
+<h2 id="s2">2. 比較表（PC1人あたり）</h2>
+<table><tr><th>作品</th><th>人数</th><th>想定時間</th><th>HO<br><small>共通＋自分（平均）</small></th><th>全カード</th><th>本体<br><small>HO＋全カード</small></th><th>本体<br>1時間あたり</th><th>読み合わせ<br><small>1回分</small></th><th>紙の範囲すべて<br>1時間あたり</th><th>画面だけの文<br><small>（ゲーム版）</small></th></tr>
+<tr class="r7"><td>マダミス7 ダンジョン・オブ・ザ・マーダー</td><td>4人</td><td>240分</td>
+<td>8,308</td><td>19,911</td><td><b>28,218</b></td><td class="k"><b>7,054</b></td>
+<td>33,067</td><td class="k">16,736</td><td>18,702</td></tr><tr class=""><td>マダミス3 超マダミスガールズX</td><td>5人</td><td>175分</td>
+<td>7,376</td><td>8,479</td><td><b>15,855</b></td><td class="k"><b>5,436</b></td>
+<td>7,197</td><td class="k">8,174</td><td>—</td></tr><tr class=""><td>マダミス4 お母さんは大統領</td><td>4人</td><td>240分</td>
+<td>8,754</td><td>5,362</td><td><b>14,116</b></td><td class="k"><b>3,529</b></td>
+<td>26,819</td><td class="k">10,541</td><td>—</td></tr><tr class=""><td>マダミス5 こちら公安勇者パーティ</td><td>5人</td><td>255分</td>
+<td>8,934</td><td>5,507</td><td><b>14,441</b></td><td class="k"><b>3,398</b></td>
+<td>17,707</td><td class="k">7,745</td><td>—</td></tr><tr class=""><td>マダミス6 M.T.A</td><td>4人</td><td>220分</td>
+<td>4,342</td><td>4,449</td><td><b>8,791</b></td><td class="k"><b>2,398</b></td>
+<td>7,118</td><td class="k">4,775</td><td>—</td></tr><tr class=""><td>マダミス8 エルフ帝国の逆襲</td><td>4人</td><td>225分</td>
+<td>17,744</td><td>7,494</td><td><b>25,238</b></td><td class="k"><b>6,730</b></td>
+<td>19,856</td><td class="k">12,865</td><td>—</td></tr><tr class="ref"><td>参考 きがんだに</td><td>4人</td><td>180分</td>
+<td>3,109</td><td>3,125</td><td><b>6,234</b></td><td class="k"><b>2,078</b></td>
+<td>17,085</td><td class="k">8,911</td><td>—</td></tr><tr class="ref"><td>参考 この闇をあなたと</td><td>6人</td><td>210分</td>
+<td>12,442</td><td>5,835</td><td><b>18,277</b></td><td class="k"><b>5,222</b></td>
+<td>36,756</td><td class="k">16,282</td><td>—</td></tr><tr class="ref"><td>参考 クロノスが告げる</td><td>6人</td><td>270分</td>
+<td>7,944</td><td>5,006</td><td><b>12,950</b></td><td class="k"><b>2,878</b></td>
+<td>7,765</td><td class="k">4,973</td><td>—</td></tr><tr class="ref"><td>参考 幻想推理</td><td>6人</td><td>285分</td>
+<td>10,626</td><td>547</td><td><b>11,172</b></td><td class="k"><b>2,352</b></td>
+<td>6,713</td><td class="k">3,972</td><td>—</td></tr><tr class="ref"><td>参考 星陰りて、謀り響く</td><td>5人</td><td>240分</td>
+<td>14,198</td><td>6,947</td><td><b>21,145</b></td><td class="k"><b>5,286</b></td>
+<td>776</td><td class="k">6,793</td><td>—</td></tr><tr class="ref"><td>参考 サザンクロス20xx</td><td>6人</td><td>240分</td>
+<td>6,190</td><td>7,947</td><td><b>14,137</b></td><td class="k"><b>3,534</b></td>
+<td>2,514</td><td class="k">4,783</td><td>—</td></tr><tr class="ref"><td>参考 魔笛</td><td>5人</td><td>255分</td>
+<td>23,327</td><td>9,632</td><td><b>32,959</b></td><td class="k"><b>7,755</b></td>
+<td>4,431</td><td class="k">8,832</td><td>—</td></tr><tr class="ref"><td>参考 聖六花女学院殺人事件</td><td>5人</td><td>240分</td>
+<td>7,234</td><td>2,712</td><td><b>9,946</b></td><td class="k"><b>2,486</b></td>
+<td>1,818</td><td class="k">2,941</td><td>—</td></tr><tr class="ref"><td>参考 プルートニオンの忘却</td><td>4人</td><td>135分</td>
+<td>7,121</td><td>2,585</td><td><b>9,706</b></td><td class="k"><b>4,314</b></td>
+<td>3,184</td><td class="k">5,975</td><td>—</td></tr><tr class="ref"><td>参考 SUPERSTAR</td><td>5人</td><td>210分</td>
+<td>8,120</td><td>3,962</td><td><b>12,082</b></td><td class="k"><b>3,452</b></td>
+<td>11,293</td><td class="k">6,835</td><td>112</td></tr>
+<tr class="avg"><td>マダミス7以外の平均</td><td></td><td></td><td></td><td></td><td></td><td class="k">4,298</td><td></td><td class="k">8,820</td><td></td></tr>
+<tr class="avg"><td>購入作品10本の平均</td><td></td><td></td><td>10,031</td><td>4,830</td><td>14,861</td><td class="k">3,936</td><td>9,234</td><td class="k">7,030</td><td></td></tr>
+<tr class="avg"><td>購入作品10本の中央値</td><td></td><td></td><td></td><td></td><td></td><td class="k">3,493</td><td></td><td class="k">6,384</td><td></td></tr></table>
+<small>単位は字（記号・空白を除く文字数）。「紙の範囲すべて」＝本体＋読み合わせ＋ルール説明。画面だけの文は、ブラウザ版の画面に出る短い文・Disgordの書き込み・ヴィオラの案内などで、制作メモ（【GM】・引用の行）と名札は除いて数えた。</small>
+
+<h2 id="s3">3. グラフ</h2>
+<div class="bars"><div class="bt">本体（共通HO＋自分のHO＋全カード）の 1時間あたりの字数</div>
+<div class="br"><span class="bl">参考 魔笛</span><span class="bw"><span class="bf bref" style="width:100.0%"></span></span><span class="bv">7,755字</span></div>
+<div class="br"><span class="bl">マダミス7 ダンジョン・オブ・ザ・マーダー</span><span class="bw"><span class="bf b7" style="width:91.0%"></span></span><span class="bv">7,054字</span></div>
+<div class="br"><span class="bl">マダミス8 エルフ帝国の逆襲</span><span class="bw"><span class="bf " style="width:86.8%"></span></span><span class="bv">6,730字</span></div>
+<div class="br"><span class="bl">マダミス3 超マダミスガールズX</span><span class="bw"><span class="bf " style="width:70.1%"></span></span><span class="bv">5,436字</span></div>
+<div class="br"><span class="bl">参考 星陰りて、謀り響く</span><span class="bw"><span class="bf bref" style="width:68.2%"></span></span><span class="bv">5,286字</span></div>
+<div class="br"><span class="bl">参考 この闇をあなたと</span><span class="bw"><span class="bf bref" style="width:67.3%"></span></span><span class="bv">5,222字</span></div>
+<div class="br"><span class="bl">参考 プルートニオンの忘却</span><span class="bw"><span class="bf bref" style="width:55.6%"></span></span><span class="bv">4,314字</span></div>
+<div class="br"><span class="bl">参考 サザンクロス20xx</span><span class="bw"><span class="bf bref" style="width:45.6%"></span></span><span class="bv">3,534字</span></div>
+<div class="br"><span class="bl">マダミス4 お母さんは大統領</span><span class="bw"><span class="bf " style="width:45.5%"></span></span><span class="bv">3,529字</span></div>
+<div class="br"><span class="bl">参考 SUPERSTAR</span><span class="bw"><span class="bf bref" style="width:44.5%"></span></span><span class="bv">3,452字</span></div>
+<div class="br"><span class="bl">マダミス5 こちら公安勇者パーティ</span><span class="bw"><span class="bf " style="width:43.8%"></span></span><span class="bv">3,398字</span></div>
+<div class="br"><span class="bl">参考 クロノスが告げる</span><span class="bw"><span class="bf bref" style="width:37.1%"></span></span><span class="bv">2,878字</span></div>
+<div class="br"><span class="bl">参考 聖六花女学院殺人事件</span><span class="bw"><span class="bf bref" style="width:32.1%"></span></span><span class="bv">2,486字</span></div>
+<div class="br"><span class="bl">マダミス6 M.T.A</span><span class="bw"><span class="bf " style="width:30.9%"></span></span><span class="bv">2,398字</span></div>
+<div class="br"><span class="bl">参考 幻想推理</span><span class="bw"><span class="bf bref" style="width:30.3%"></span></span><span class="bv">2,352字</span></div>
+<div class="br"><span class="bl">参考 きがんだに</span><span class="bw"><span class="bf bref" style="width:26.8%"></span></span><span class="bv">2,078字</span></div>
+<div class="br avg"><span class="bl">（マダミス7以外の平均）</span><span class="bw"><span class="bf ba" style="width:55.4%"></span></span><span class="bv">4,298字</span></div>
+<div class="br avg"><span class="bl">（購入作品10本の平均）</span><span class="bw"><span class="bf bra" style="width:50.8%"></span></span><span class="bv">3,936字</span></div></div>
+<div class="bars"><div class="bt">紙の範囲すべて（＋読み合わせ・ルール）の 1時間あたりの字数</div>
+<div class="br"><span class="bl">マダミス7 ダンジョン・オブ・ザ・マーダー</span><span class="bw"><span class="bf b7" style="width:100.0%"></span></span><span class="bv">16,736字</span></div>
+<div class="br"><span class="bl">参考 この闇をあなたと</span><span class="bw"><span class="bf bref" style="width:97.3%"></span></span><span class="bv">16,282字</span></div>
+<div class="br"><span class="bl">マダミス8 エルフ帝国の逆襲</span><span class="bw"><span class="bf " style="width:76.9%"></span></span><span class="bv">12,865字</span></div>
+<div class="br"><span class="bl">マダミス4 お母さんは大統領</span><span class="bw"><span class="bf " style="width:63.0%"></span></span><span class="bv">10,541字</span></div>
+<div class="br"><span class="bl">参考 きがんだに</span><span class="bw"><span class="bf bref" style="width:53.2%"></span></span><span class="bv">8,911字</span></div>
+<div class="br"><span class="bl">参考 魔笛</span><span class="bw"><span class="bf bref" style="width:52.8%"></span></span><span class="bv">8,832字</span></div>
+<div class="br"><span class="bl">マダミス3 超マダミスガールズX</span><span class="bw"><span class="bf " style="width:48.8%"></span></span><span class="bv">8,174字</span></div>
+<div class="br"><span class="bl">マダミス5 こちら公安勇者パーティ</span><span class="bw"><span class="bf " style="width:46.3%"></span></span><span class="bv">7,745字</span></div>
+<div class="br"><span class="bl">参考 SUPERSTAR</span><span class="bw"><span class="bf bref" style="width:40.8%"></span></span><span class="bv">6,835字</span></div>
+<div class="br"><span class="bl">参考 星陰りて、謀り響く</span><span class="bw"><span class="bf bref" style="width:40.6%"></span></span><span class="bv">6,793字</span></div>
+<div class="br"><span class="bl">参考 プルートニオンの忘却</span><span class="bw"><span class="bf bref" style="width:35.7%"></span></span><span class="bv">5,975字</span></div>
+<div class="br"><span class="bl">参考 クロノスが告げる</span><span class="bw"><span class="bf bref" style="width:29.7%"></span></span><span class="bv">4,973字</span></div>
+<div class="br"><span class="bl">参考 サザンクロス20xx</span><span class="bw"><span class="bf bref" style="width:28.6%"></span></span><span class="bv">4,783字</span></div>
+<div class="br"><span class="bl">マダミス6 M.T.A</span><span class="bw"><span class="bf " style="width:28.5%"></span></span><span class="bv">4,775字</span></div>
+<div class="br"><span class="bl">参考 幻想推理</span><span class="bw"><span class="bf bref" style="width:23.7%"></span></span><span class="bv">3,972字</span></div>
+<div class="br"><span class="bl">参考 聖六花女学院殺人事件</span><span class="bw"><span class="bf bref" style="width:17.6%"></span></span><span class="bv">2,941字</span></div>
+<div class="br avg"><span class="bl">（マダミス7以外の平均）</span><span class="bw"><span class="bf ba" style="width:52.7%"></span></span><span class="bv">8,820字</span></div>
+<div class="br avg"><span class="bl">（購入作品10本の平均）</span><span class="bw"><span class="bf bra" style="width:42.0%"></span></span><span class="bv">7,030字</span></div></div>
+<div class="bars"><div class="bt">HOだけ（共通＋自分）の 1時間あたりの字数</div>
+<div class="br"><span class="bl">参考 魔笛</span><span class="bw"><span class="bf bref" style="width:100.0%"></span></span><span class="bv">5,489字</span></div>
+<div class="br"><span class="bl">マダミス8 エルフ帝国の逆襲</span><span class="bw"><span class="bf " style="width:86.2%"></span></span><span class="bv">4,732字</span></div>
+<div class="br"><span class="bl">参考 この闇をあなたと</span><span class="bw"><span class="bf bref" style="width:64.8%"></span></span><span class="bv">3,555字</span></div>
+<div class="br"><span class="bl">参考 星陰りて、謀り響く</span><span class="bw"><span class="bf bref" style="width:64.7%"></span></span><span class="bv">3,549字</span></div>
+<div class="br"><span class="bl">参考 プルートニオンの忘却</span><span class="bw"><span class="bf bref" style="width:57.7%"></span></span><span class="bv">3,165字</span></div>
+<div class="br"><span class="bl">マダミス3 超マダミスガールズX</span><span class="bw"><span class="bf " style="width:46.0%"></span></span><span class="bv">2,526字</span></div>
+<div class="br"><span class="bl">参考 SUPERSTAR</span><span class="bw"><span class="bf bref" style="width:42.3%"></span></span><span class="bv">2,320字</span></div>
+<div class="br"><span class="bl">参考 幻想推理</span><span class="bw"><span class="bf bref" style="width:40.8%"></span></span><span class="bv">2,237字</span></div>
+<div class="br"><span class="bl">マダミス4 お母さんは大統領</span><span class="bw"><span class="bf " style="width:39.9%"></span></span><span class="bv">2,188字</span></div>
+<div class="br"><span class="bl">マダミス5 こちら公安勇者パーティ</span><span class="bw"><span class="bf " style="width:38.3%"></span></span><span class="bv">2,102字</span></div>
+<div class="br"><span class="bl">マダミス7 ダンジョン・オブ・ザ・マーダー</span><span class="bw"><span class="bf b7" style="width:37.8%"></span></span><span class="bv">2,077字</span></div>
+<div class="br"><span class="bl">参考 聖六花女学院殺人事件</span><span class="bw"><span class="bf bref" style="width:32.9%"></span></span><span class="bv">1,808字</span></div>
+<div class="br"><span class="bl">参考 クロノスが告げる</span><span class="bw"><span class="bf bref" style="width:32.2%"></span></span><span class="bv">1,765字</span></div>
+<div class="br"><span class="bl">参考 サザンクロス20xx</span><span class="bw"><span class="bf bref" style="width:28.2%"></span></span><span class="bv">1,548字</span></div>
+<div class="br"><span class="bl">マダミス6 M.T.A</span><span class="bw"><span class="bf " style="width:21.6%"></span></span><span class="bv">1,183字</span></div>
+<div class="br"><span class="bl">参考 きがんだに</span><span class="bw"><span class="bf bref" style="width:18.9%"></span></span><span class="bv">1,036字</span></div>
+<div class="br avg"><span class="bl">（マダミス7以外の平均）</span><span class="bw"><span class="bf ba" style="width:46.4%"></span></span><span class="bv">2,546字</span></div>
+<div class="br avg"><span class="bl">（購入作品10本の平均）</span><span class="bw"><span class="bf bra" style="width:48.2%"></span></span><span class="bv">2,647字</span></div></div>
+<div class="bars"><div class="bt">読み合わせ（1回分）の 1時間あたりの字数</div>
+<div class="br"><span class="bl">参考 この闇をあなたと</span><span class="bw"><span class="bf bref" style="width:100.0%"></span></span><span class="bv">10,502字</span></div>
+<div class="br"><span class="bl">マダミス7 ダンジョン・オブ・ザ・マーダー</span><span class="bw"><span class="bf b7" style="width:78.7%"></span></span><span class="bv">8,267字</span></div>
+<div class="br"><span class="bl">マダミス4 お母さんは大統領</span><span class="bw"><span class="bf " style="width:63.8%"></span></span><span class="bv">6,705字</span></div>
+<div class="br"><span class="bl">参考 きがんだに</span><span class="bw"><span class="bf bref" style="width:54.2%"></span></span><span class="bv">5,695字</span></div>
+<div class="br"><span class="bl">マダミス8 エルフ帝国の逆襲</span><span class="bw"><span class="bf " style="width:50.4%"></span></span><span class="bv">5,295字</span></div>
+<div class="br"><span class="bl">マダミス5 こちら公安勇者パーティ</span><span class="bw"><span class="bf " style="width:39.7%"></span></span><span class="bv">4,166字</span></div>
+<div class="br"><span class="bl">参考 SUPERSTAR</span><span class="bw"><span class="bf bref" style="width:30.7%"></span></span><span class="bv">3,227字</span></div>
+<div class="br"><span class="bl">マダミス3 超マダミスガールズX</span><span class="bw"><span class="bf " style="width:23.5%"></span></span><span class="bv">2,465字</span></div>
+<div class="br"><span class="bl">マダミス6 M.T.A</span><span class="bw"><span class="bf " style="width:18.5%"></span></span><span class="bv">1,940字</span></div>
+<div class="br"><span class="bl">参考 クロノスが告げる</span><span class="bw"><span class="bf bref" style="width:16.4%"></span></span><span class="bv">1,726字</span></div>
+<div class="br"><span class="bl">参考 プルートニオンの忘却</span><span class="bw"><span class="bf bref" style="width:13.5%"></span></span><span class="bv">1,415字</span></div>
+<div class="br"><span class="bl">参考 幻想推理</span><span class="bw"><span class="bf bref" style="width:13.5%"></span></span><span class="bv">1,413字</span></div>
+<div class="br"><span class="bl">参考 魔笛</span><span class="bw"><span class="bf bref" style="width:9.9%"></span></span><span class="bv">1,043字</span></div>
+<div class="br"><span class="bl">参考 サザンクロス20xx</span><span class="bw"><span class="bf bref" style="width:6.0%"></span></span><span class="bv">628字</span></div>
+<div class="br"><span class="bl">参考 聖六花女学院殺人事件</span><span class="bw"><span class="bf bref" style="width:4.3%"></span></span><span class="bv">454字</span></div>
+<div class="br"><span class="bl">参考 星陰りて、謀り響く</span><span class="bw"><span class="bf bref" style="width:1.8%"></span></span><span class="bv">194字</span></div>
+<div class="br avg"><span class="bl">（マダミス7以外の平均）</span><span class="bw"><span class="bf ba" style="width:39.2%"></span></span><span class="bv">4,114字</span></div>
+<div class="br avg"><span class="bl">（購入作品10本の平均）</span><span class="bw"><span class="bf bra" style="width:25.0%"></span></span><span class="bv">2,630字</span></div></div>
+
+<h2 id="s4">4. 情報量（文・カード・手がかり）</h2>
+<table><tr><th>作品</th><th>本体の文の数<br>1時間あたり</th><th>カード枚数</th><th>カード<br>1時間あたり</th><th>手がかり<br><small>GMの手がかりマップの項目数</small></th><th>手がかり<br>1時間あたり</th></tr><tr class="r7"><td>マダミス7 ダンジョン・オブ・ザ・マーダー</td><td>364</td><td>216</td><td>54.0</td><td>180</td><td>45.0</td></tr><tr class=""><td>マダミス3 超マダミスガールズX</td><td>307</td><td>73</td><td>25.0</td><td>91</td><td>31.2</td></tr><tr class=""><td>マダミス4 お母さんは大統領</td><td>176</td><td>27</td><td>6.8</td><td>53</td><td>13.2</td></tr><tr class=""><td>マダミス5 こちら公安勇者パーティ</td><td>185</td><td>50</td><td>11.8</td><td>49</td><td>11.5</td></tr><tr class=""><td>マダミス6 M.T.A</td><td>127</td><td>48</td><td>13.1</td><td>—</td><td>—</td></tr><tr class=""><td>マダミス8 エルフ帝国の逆襲</td><td>516</td><td>50</td><td>13.3</td><td>50</td><td>13.3</td></tr><tr class="ref"><td>参考 きがんだに</td><td>183</td><td>52</td><td>17.3</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 この闇をあなたと</td><td>308</td><td>52</td><td>14.9</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 クロノスが告げる</td><td>203</td><td>51</td><td>11.3</td><td>0</td><td>—</td></tr><tr class="ref"><td>参考 幻想推理</td><td>144</td><td>3</td><td>0.6</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 星陰りて、謀り響く</td><td>424</td><td>40</td><td>10.0</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 サザンクロス20xx</td><td>224</td><td>71</td><td>17.8</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 魔笛</td><td>411</td><td>69</td><td>16.2</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 聖六花女学院殺人事件</td><td>152</td><td>39</td><td>9.8</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 プルートニオンの忘却</td><td>261</td><td>9</td><td>4.0</td><td>—</td><td>—</td></tr><tr class="ref"><td>参考 SUPERSTAR</td><td>221</td><td>43</td><td>12.3</td><td>—</td><td>—</td></tr>
+<tr class="avg"><td>マダミス7以外の平均</td><td>262</td><td></td><td>14.0</td><td></td><td></td></tr>
+<tr class="avg"><td>購入作品10本の平均</td><td>253</td><td></td><td>11.4</td><td></td><td></td></tr></table>
+<ul><li><b>文の数</b>は、句点で区切った文と、箇条書き・表の1行を1つと数えた。マダミス7は364文/時で、平均の1.4倍。マダミス8は短い行が多いので、字数より文の数が多めに出る。</li>
+<li><b>マダミス7のカード216枚</b>の内訳は、カード本体145（02〜08）、部屋の公開文28、品43。調査カードだけなら145枚で、1時間あたり36枚。記録の「110枚」はゲームに取り込んだ10/17時点の数で、その後に増えている。</li>
+<li><b>手がかりの数</b>は、作品ごとに手がかりマップの作りが違う（マダミス7はカード別の対応表の行、マダミス3は命題とカードの行、など）ので、<b>作品をまたいだ比べ方には使わず参考</b>にとどめる。マダミス6は全体の手がかり一覧が無い。</li>
+<li>市販の参考：グループSNE『八月のタイムマシン』（6〜7人・180分）は情報カード99枚で、1時間あたり33枚。作り手の目安として「1人が引けるカードは3〜6枚程度に抑えたほうがいい」（もくはずし）という声もある。</li></ul>
+
+<h2 id="s5">5. 読むのにかかる時間（PC1人）</h2>
+<table><tr><th>作品</th><th>想定時間</th><th>本体を黙読<br><small>600字/分</small></th><th>本体を読み込む<br><small>200字/分</small></th><th>読み合わせを声で<br><small>300字/分（仮）</small></th></tr><tr class="r7"><td>マダミス7 ダンジョン・オブ・ザ・マーダー</td><td>240分</td><td>47分（20%）</td><td>141分（59%）</td><td>110分（46%）</td></tr><tr class=""><td>マダミス3 超マダミスガールズX</td><td>175分</td><td>26分（15%）</td><td>79分（45%）</td><td>24分（14%）</td></tr><tr class=""><td>マダミス4 お母さんは大統領</td><td>240分</td><td>24分（10%）</td><td>71分（30%）</td><td>89分（37%）</td></tr><tr class=""><td>マダミス5 こちら公安勇者パーティ</td><td>255分</td><td>24分（9%）</td><td>72分（28%）</td><td>59分（23%）</td></tr><tr class=""><td>マダミス6 M.T.A</td><td>220分</td><td>15分（7%）</td><td>44分（20%）</td><td>24分（11%）</td></tr><tr class=""><td>マダミス8 エルフ帝国の逆襲</td><td>225分</td><td>42分（19%）</td><td>126分（56%）</td><td>66分（29%）</td></tr><tr class="ref"><td>参考 きがんだに</td><td>180分</td><td>10分（6%）</td><td>31分（17%）</td><td>57分（32%）</td></tr><tr class="ref"><td>参考 この闇をあなたと</td><td>210分</td><td>30分（14%）</td><td>91分（43%）</td><td>123分（59%）</td></tr><tr class="ref"><td>参考 クロノスが告げる</td><td>270分</td><td>22分（8%）</td><td>65分（24%）</td><td>26分（10%）</td></tr><tr class="ref"><td>参考 幻想推理</td><td>285分</td><td>19分（7%）</td><td>56分（20%）</td><td>22分（8%）</td></tr><tr class="ref"><td>参考 星陰りて、謀り響く</td><td>240分</td><td>35分（15%）</td><td>106分（44%）</td><td>3分（1%）</td></tr><tr class="ref"><td>参考 サザンクロス20xx</td><td>240分</td><td>24分（10%）</td><td>71分（30%）</td><td>8分（3%）</td></tr><tr class="ref"><td>参考 魔笛</td><td>255分</td><td>55分（22%）</td><td>165分（65%）</td><td>15分（6%）</td></tr><tr class="ref"><td>参考 聖六花女学院殺人事件</td><td>240分</td><td>17分（7%）</td><td>50分（21%）</td><td>6分（2%）</td></tr><tr class="ref"><td>参考 プルートニオンの忘却</td><td>135分</td><td>16分（12%）</td><td>49分（36%）</td><td>11分（8%）</td></tr><tr class="ref"><td>参考 SUPERSTAR</td><td>210分</td><td>20分（10%）</td><td>60分（29%）</td><td>38分（18%）</td></tr></table>
+<ul><li><b>600字/分</b>：日本語の黙読速度の研究値（約580〜1,000字/分。竹田・赤井2012：黙読103.51ミリ秒/字、髙橋・清河2011：黙読16.69字/秒）の低い方。</li>
+<li><b>200字/分</b>：マダミスの作り手の目安「1000字（A4 1枚）を5分程度で読んでほしい」（アラン校長のnote）から。覚えながら・読み返しながら読む速さ。</li>
+<li><b>300字/分</b>：配役を分けて読み合わせる速さの<b>仮の目安</b>（はっきりした出典は無い）。ウズでは「自分の役の本を約20分かけて読む」（DIME取材）。</li>
+<li>カッコの％はプレイ時間に対する割合。各自が読む時間と読み合わせの時間は、同じ時間の中で重なることがある。</li></ul>
+
+<h2 id="s6">6. マダミス7のPC別</h2>
+<table><tr><th>PC</th><th>自分のHO（事前＋追加）</th><th>本体（共通HO＋自分のHO＋全カード）</th><th>本体 1時間あたり</th><th>本体を読む時間<br><small>600〜200字/分</small></th></tr><tr><td>PC1（ミレイユ）</td><td>4,673</td><td>25,289</td><td>6,322</td><td>42〜126分</td></tr><tr><td>PC2（ヴィオラ）</td><td>8,014</td><td>28,630</td><td>7,158</td><td>48〜143分</td></tr><tr><td>PC3（ミクシィ）</td><td>9,434</td><td>30,050</td><td>7,512</td><td>50〜150分</td></tr><tr><td>PC4（エドガー）</td><td>8,289</td><td>28,905</td><td>7,226</td><td>48〜145分</td></tr></table>
+<ul><li>追加HOの数は、ミレイユ3・ヴィオラ4・ミクシィ5・エドガー3。ミレイユは事前HOも短く、自分だけの文がいちばん少ない。</li>
+<li>追加HOは条件つき（P4のあと、解析でカードを得たとき、特定の部屋を初めて調べたとき など）なので、実際のプレイではここより少なくなることがある。</li>
+<li>分類別：共通HO 705字 ／ 全カード 19,911字 ／ 読み合わせ（1回分）33,067字 ／ ルール（スキル一覧・フェイズ進行表・ライブセレクション説明・P10の新しいルール）5,660字 ／ 画面だけの文 18,702字。</li></ul>
+
+<h2 id="s7">7. 市販・公開作品の目安（Web調査）</h2>
+<table><tr><th>作品・発言</th><th>数字（原文どおり）</th><th>1時間あたりに直すと</th><th>出典</th></tr>
+<tr><td>中国 劇本殺『刀鞘』</td><td>「人均剧本1万字」（1人あたりの台本1万字）</td><td>プレイ時間が3〜5時間なら 約2,000〜3,300字/時（HOに当たる個人の台本だけ）</td><td><a href="https://news.qq.com/rain/a/20200730A0FISW00">腾讯新闻</a>（メディア）</td></tr>
+<tr><td>中国 劇本殺 全般（箱もの）</td><td>「每个角色本都得1万多字…线索卡等，差不多要10万字」</td><td>—</td><td><a href="http://chnjinju.com/m/view.php?aid=15207">山西戏剧网</a>（メディア）</td></tr>
+<tr><td>中国 劇本殺『蓬莱传』</td><td>「人均阅读量能有两万字左右」（1人あたり読む量 約2万字）</td><td>—</td><td><a href="https://www.gamersky.com/zt/74431/List_150.html">游民星空</a>（レビュー）</td></tr>
+<tr><td>中国 制作体験記（5人・推理）</td><td>「人均八千字」、手がかり・GM本を入れて約5万字</td><td>4時間なら 2,000字/時</td><td><a href="https://blog.csdn.net/weixin_54140739/article/details/136695585">CSDN</a>（個人）</td></tr>
+<tr><td>中国 作り手の目安</td><td>人物の台本は「4000字以内、最多でも4500字」とする声と、「箱もの6人本は1人6千〜1万字」とする声がある</td><td>—</td><td><a href="https://www.zhihu.com/question/315397055">知乎</a>（個人）</td></tr>
+<tr><td>日本 HOの目安（アラン校長）</td><td>HO約1000字（A4 1枚）を「5分程度で読んで欲しい」</td><td>—</td><td><a href="https://note.com/school_enigma/n/n5c1f86bd0599">note</a>（個人）</td></tr>
+<tr><td>日本 ウズ『嵐の山荘事件』</td><td>「自分の役の人生が書かれた本を約20分かけて読みます」</td><td>—</td><td><a href="https://dime.jp/genre/1973916/">DIME</a>（メディア）</td></tr>
+<tr><td>日本 BOOTH『校了、二十三時』『献花、十五時』</td><td>HO 各4〜5ページ、手がかり12枚、90〜120分</td><td>手がかり 6〜8枚/時</td><td><a href="https://booth.pm/ja/items/8723980">BOOTH</a>（公式）</td></tr>
+<tr><td>グループSNE『八月のタイムマシン』</td><td>6〜7人・180分、キャラクター設定書7冊、情報カード99枚</td><td>カード 33枚/時</td><td><a href="https://group.kadokawa.co.jp/information/promotional_topics/article-6602.html">KADOKAWA</a>（公式）</td></tr>
+</table>
+<div class="box"><b>読み方</b>：市販・同人の作品は、HOを「ページ数」でしか公表していないことが多く、字数で直接比べられる日本の例は見つかりませんでした。字数で比べられるのは中国の劇本殺だけで、「1人1万字・3〜5時間」は<b>HOに当たる個人の台本だけ</b>の数字です。マダミス7のHOだけの数字（2,077字/時）は、この範囲に入ります。全文の一覧は <span class="path">notes/web_benchmarks.md</span>。</div>
+
+<h2 id="s8">8. 数え方と注意</h2>
+<div class="box"><b>購入作品10本の数え方</b>
+<ul>
+<li>作者の手元にある購入ZIP（10本）から、PDFは文字の層を、文字の層が無いページと画像のカードはWindowsの日本語文字認識で取り出した。取り出した文は <span class="path">work_claude_opus_20261015\private\66_purchased_text\</span>（外に出さない）。このページには数字だけを載せている。</li>
+<li>PDFの読み取りは、2つの方法（pypdf と pdfium）でページごとに多い方を採った。最初は pypdf だけで、きがんだにのHOを約4割しか読めていなかった（同じページの文字認識と比べて分かった）ため、全10本を取り出し直した。直して増えたのは、きがんだに（PDFの字数2.3倍）・幻想推理（1.5倍）・星陰りて（1%）で、ほかは変わらない。</li>
+<li>同じ文が形を変えて何度も入っている（カード一覧PDFとカード1枚ずつの画像、ココフォリア用の盤面、旧版、ハードモード等）ので、プレイヤーが読む正本を1組だけ数えた。仕分けはサブエージェント10体（1本ずつ）、数えるのは自作と同じ道具。</li>
+<li><b>少なめに出ているもの</b>：画像のカード（文字認識は装飾の字や縦書きを落とす）。幻想推理は盤面のカードがほぼ読めず、カード547字・3枚になっている。クロノスとサザンクロスは、あらすじ・エンディングの一部がツールのデータやWebにあって数えられていない。</li>
+<li><b>多めに出ているもの</b>：この闇をあなたとの読み合わせ（エンディングの分岐の多くを全部数えた）、きがんだにのED（犯人が分かった／分からないで同じ場面が二重）。</li>
+<li><b>想定時間</b>は各作品の公称（BOOTHの商品説明・GM資料）。星陰りては公称3〜5時間とは別に「HOの事前読み込み2時間程度」があり、そこは時間に入れていない（入れると1時間あたりは約2/3になる）。魔笛は公称の4時間〜4時間半の中にHOの読み込み約30分を含む。</li>
+<li>人数は5人・6人の作品が多い（マダミス7は4人）。PC1人あたりの量なので人数の違いはそのまま比べられるが、カードは全員で分けて調べるため、人数が多い作品ほど1人が自分で引く枚数は少なくなる。</li>
+</ul></div>
+<ul>
+<li><b>数えたもの</b>：プレイヤーが読む文だけ（プレイヤー配布の版。GM資料の同じ文は二重に数えない）。記号・空白を除いた文字数。</li>
+<li><b>カード</b>：PC専用のカードも含め、全員が全カードを読む前提（作者の前提どおり）。</li>
+<li><b>分岐</b>：1回のプレイで1つしか起きない分岐（投票の結果、成功・失敗、分断の組、結末）は平均で数えた。マダミス7のR20（反応は1回につき1つ、決着は1節）・R22（ED-1〜3）・R23（ED-A〜C）は、1回分を抜き出した写しで数えた（<span class="path">notes/extract_mm7/</span>）。</li>
+<li><b>多めに出ているもの</b>：マダミス7のR23共通部分の【条件】段、P12同行組・一人組の読み合わせ（起きないこともある）。マダミス5のR09・R11・R16（ファイルの中の分岐）。マダミス8の解決封筒（条件ごとの表を全部数えた）とエンディング（約900字多め）。マダミス3のHOの末尾にある初期カードの控え。</li>
+<li><b>マダミス7の画面だけの文</b>は、すべての状況の文（全PC分・全分岐）を合わせた数字なので、1人が実際に目にする量はこれより少ない。比べるときは「紙の範囲すべて」の列を使う。</li>
+<li><b>想定時間</b>：マダミス7は、プレイヤー向けのフェイズ進行表の「合計の目安：約4時間（休憩を除く）」から240分にした。各作品の根拠は下の表。</li>
+</ul>
+<table><tr><th>作品</th><th>想定時間の根拠（仕分け表の記録）</th></tr><tr><td>マダミス7 ダンジョン・オブ・ザ・マーダー</td><td>プレイヤー配布/共通/フェイズ進行表（プレイヤー向け）.md:15（1フェイズ約15分）・:29-46（表：開始前15+ギルド15+P1 10+P2〜P11各15+P12 50＝合計の目安 約4時間〔休憩を除く〕:46）。GM資料/GM進行ガイド.md:21-22〔2026-11-07 k3〕も「全体の所要時間は約4時間」「P2〜P11＝15分、P12＝50分」。STATUS.md:99〔2026-10-17〕の「合計約4時間15分」は古い決定なので不採用。max=270は推定（密談の延長2分×3回・P11議論20分・P12の伸びを考慮した目安。明確な根拠行は無い）</td></tr><tr><td>マダミス3 超マダミスガールズX</td><td>05_完成版/GM資料/GM進行ガイド.md 行21「## 2. 進行表（仮 約175分＋休憩）」。行25〜36の各段階の合計は173分。実卓での実測は未実施（PROJECT_MASTER.md 行57「未実施 人間による実卓の試遊と時間の実測」）なのでmin/maxは±休憩・雑談込みの見積り</td></tr><tr><td>マダミス4 お母さんは大統領</td><td>GM資料/GM進行ガイド.md:4『所要：約4時間（休憩10分込み。ED読みの速さで前後）』、同01_フォルダ側のREPORT.md:56『約4時間（休憩10分込み。目安3時間40分〜4時間20分）』→ 220〜260分、typical 240分。もっとも進行表（GM進行ガイド.md:23-42）の時間目安を足すと178〜200分＋感想戦</td></tr><tr><td>マダミス5 こちら公安勇者パーティ</td><td>GM資料/GM進行ガイド.md:10『時間：約4時間〜4時間半（休憩・説明込み）』、同:46『合計：約3時間50分＋説明・集計の予備（実プレイの目安：4時間〜4時間半）』、PROJECT_MASTER.md:34（05_完成版の2つ上）『約4時間〜4時間半』→ 240〜270分、中間の255分をtypicalに</td></tr><tr><td>マダミス6 M.T.A</td><td>解説/公開基本情報.md 行3『4PL・GMレス・想定約3時間40分（最大4時間）』、解説/GMレス進行.md 行20『合計 | 約3時間40分。上限4時間』、同進行表は最終議論・投票が176～203分で終幕（R06）は目安5～15分（読み合わせ/R06.md 行2）→ 上限240分・下限約208分を210分とし、表の想定220分をtypicalに</td></tr><tr><td>マダミス8 エルフ帝国の逆襲</td><td>content/README.md 行35『目安時間はHO読了20～30分、各作戦30～45分、得点とED20分、全体3～4時間半（未実測）』→ 180～270分、中間の225分をtypicalに（実卓は未検証、00_PROJECT_STATUS.mdも『実参加者4人のテストは未実施』と明記）</td></tr><tr><td>参考 きがんだに</td><td>Booth製品概要「プレイ時間：３時間」／プレイ人数４人（GMレス可能）</td></tr><tr><td>参考 この闇をあなたと</td><td>導入資料p.4「■全体の流れ」(明記計153分)+GM進行例p.8(エンディング処理10分)</td></tr><tr><td>参考 クロノスが告げる</td><td>GM資料.pdf:2 「全体プレイ時間は4.5時間」</td></tr><tr><td>参考 幻想推理</td><td>0374 GM用マニュアル p.1「ゲーム本編：４時間半〜５時間」</td></tr><tr><td>参考 星陰りて、謀り響く</td><td>BOOTH商品説明(items/3287454)「プレイ時間: 3-5時間」「プレイ人数: 5人（+GM）」</td></tr><tr><td>参考 サザンクロス20xx</td><td>進行役マニュアルp.1「プレイ時間４時間」／進行表のフェイズ合計は約185分</td></tr><tr><td>参考 魔笛</td><td>BOOTH商品説明「本編４時間～４時間半（うちハンドアウト読み込み約３０分）」</td></tr><tr><td>参考 聖六花女学院殺人事件</td><td>GM向けルールブック.pdf p.2 「所要時間は約4時間前後」</td></tr><tr><td>参考 プルートニオンの忘却</td><td>BOOTH商品説明「時間：2時間～2時間半程度（解説・感想戦別）」。GMガイドp.5-6 内訳：第一議論25分・最終議論35分・事前HOなしの場合15分</td></tr><tr><td>参考 SUPERSTAR</td><td>Booth『スーパースター劇団』(items/5879339)「プレイ時間 3.5時間」／todo_superstar.txt(進行表)の内訳 合計152分（事前読込0分の場合）</td></tr></table>
+
+<h2 id="s9">9. ファイルの場所</h2>
+<div class="path">C:\00_【創作】一時フォルダ\100_【マダミス】ハーネス作成\work_claude_opus_20261015\66_text_volume_20261109\</div>
+<ul><li><b>report.html</b>（このページ）／ <b>count.py</b>（数える道具）／ <b>build_report.py</b>（このページを作る）</li>
+<li><b>manifests/</b>：作品ごとの仕分け表（どのファイルを何として数えたか）。<b>notes/</b>：作品ごとの判断のメモと、Web調査。<b>results/</b>：ファイルごとの字数まで入った結果。</li>
+<li>作り直し：<span class="path">python -X utf8 count.py --all &amp;&amp; python -X utf8 build_report.py</span></li></ul>
+</main></div></body></html>
