@@ -483,3 +483,41 @@ body.pl-mode .gm-inline { display: none !important; }
 
 /* 2026-11-11 本文の画像（分断LSの前置きのページ）は枠の幅まで */
 .page img { max-width: 100%; height: auto; border: 1px solid var(--line, #ccc); border-radius: 6px; display: block; margin: 8px 0 2px; }
+
+/* その場で直す・削除の印（2026-11-13） */
+.edit-bar { position: absolute; z-index: 8; display: flex; gap: 4px; }
+.edit-bar[hidden] { display: none; }
+.edit-bar button { height: 30px; padding: 0 10px; border-radius: 9px; border: 1px solid #c9d3e6; background: #f4f7fd; color: #2b4a80; font-size: 13px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.10); white-space: nowrap; }
+.edit-bar button:hover { background: #e3ebfa; }
+.edit-bar button[data-bar="del"] { border-color: #e6b8b8; background: #fdf3f3; color: #a12a2a; }
+.edit-bar button[data-bar="del"]:hover, .edit-bar button[data-bar="del"].on { background: #f9dede; }
+.page .mark-del, .page .mark-del-sec { text-decoration: line-through; text-decoration-color: rgba(200, 40, 40, .75); text-decoration-thickness: 2px; opacity: .55; background: rgba(220, 60, 60, .07) !important; }
+.page .mark-del *, .page .mark-del-sec * { text-decoration: inherit; }
+.page .mark-del-head { opacity: .75; }
+.page .mark-del::before { content: '削除'; display: inline-block; margin-right: .5em; padding: 0 .45em; border-radius: 5px; background: #c62828; color: #fff; font-size: 11px; font-weight: 700; line-height: 1.7; vertical-align: .15em; text-decoration: none; opacity: 1; }
+.page tr.mark-del::before { content: none; }
+.page tr.mark-del td:first-child::before { content: '削除'; display: inline-block; margin-right: .4em; padding: 0 .4em; border-radius: 5px; background: #c62828; color: #fff; font-size: 11px; font-weight: 700; }
+.page .mark-del-head::before { content: '節ごと削除'; }
+.page .edit-old { text-decoration: line-through; text-decoration-color: rgba(120, 120, 120, .6); color: var(--muted, #888) !important; opacity: .7; font-size: .92em; }
+.page .edit-old * { text-decoration: inherit; color: inherit !important; }
+.page .edit-view { list-style: none; margin: 4px 0 10px; padding: 8px 12px; border-left: 4px solid #2f7de1; background: #eef5ff; border-radius: 6px; }
+.page tr.edit-view td { background: #eef5ff; border-left: 4px solid #2f7de1; }
+.page .edit-view .ev-head { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 4px; }
+.page .edit-view .ev-tag { font-weight: 700; color: #1f5fb8; }
+.page .edit-view .ev-draft { color: #a66b00; }
+.page .edit-view .ev-btn { margin-left: auto; font-size: 12px; padding: 1px 8px; border-radius: 6px; border: 1px solid #b9cdeb; background: #fff; color: #1f5fb8; cursor: pointer; }
+.page .edit-view .ev-btn + .ev-btn { margin-left: 0; }
+.page .edit-view .ev-text { white-space: pre-wrap; line-height: 1.75; }
+.page .inline-edit { list-style: none; margin: 4px 0 12px; padding: 10px 12px; border: 2px solid #2f7de1; background: #fff; border-radius: 8px; box-shadow: 0 3px 12px rgba(47, 125, 225, .15); }
+.page tr.inline-edit td { padding: 10px 12px; border: 2px solid #2f7de1; background: #fff; }
+.page .inline-edit .ie-head { font-size: 12px; font-weight: 700; color: #1f5fb8; margin-bottom: 6px; display: flex; gap: 10px; }
+.page .inline-edit .ie-hint { font-weight: 400; color: #888; }
+.page .inline-edit .ie-text { width: 100%; box-sizing: border-box; font: inherit; line-height: 1.75; padding: 8px 10px; border: 1px solid #c9d3e6; border-radius: 6px; resize: vertical; min-height: 4em; }
+.page .inline-edit .ie-actions { display: flex; gap: 6px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+.page .inline-edit .ie-orig { font-size: 12px; color: #888; margin-left: auto; }
+.page .is-editing { outline: 2px dashed #2f7de1; outline-offset: 2px; opacity: .6; }
+.st.kind { background: #eef2f8; color: #3a4a66; }
+.st.kind.k-edit { background: #e3eeff; color: #1f5fb8; }
+.st.kind.k-del, .st.kind.k-del-sec { background: #fde4e4; color: #b42020; }
+.mi-body.is-del { color: #b42020; }
+@media print { .edit-bar, .inline-edit { display: none !important; } }

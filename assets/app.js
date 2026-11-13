@@ -34,7 +34,7 @@
 
   // ---------- 状態 ----------
   const S = {
-    page: null, group: null, anchor: null,
+    page: null, group: null, anchor: null, fixing: null,
     memos: new Map(),            // `${pageId}|${anchor}` -> サーバーのメモ
     drafts: LS.get('drafts', {}), // `${pageId}|${anchor}` -> 端末の下書き
     status: {},                   // key -> 'saving'|'saved'|'local'|'conflict'|'error'
@@ -159,8 +159,18 @@
     const server = S.memos.get(key); const draft = S.drafts[key];
     const content = draft ? draft.content : server ? server.content : '';
     const resolved = draft ? !!draft.resolved : server ? !!server.resolved : false;
-    return { key, server, draft, content, resolved, title: (draft && draft.title) || (server && server.title) || '', updated: (draft && draft.updated_at) || (server && server.updated_at) || '' };
+    const raw = draft && draft.kind != null ? draft.kind : server ? (server.character || '') : '';
+    return { key, server, draft, content, resolved, kind: kindOf(raw, content, key), title: (draft && draft.title) || (server && server.title) || '', updated: (draft && draft.updated_at) || (server && server.updated_at) || '' };
   }
+  // 種類：'' 修正案／'edit' 直した文／'del' 削除の印／'del-sec' 見出しの節ごと削除。前に「削除」とだけ書いた修正案も削除の印として扱う
+  const DEL_WORDS = /^(削除|全て削除|すべて削除|この項目自体を削除|この節を削除)$/;
+  function kindOf(raw, content, key) {
+    if (raw === 'edit' || raw === 'del' || raw === 'del-sec') return raw;
+    const isHead = /^h/.test(splitKey(key)[1]);
+    if (DEL_WORDS.test(String(content || '').trim())) return isHead ? 'del-sec' : 'del';
+    return '';
+  }
+  const KIND_LABEL = { '': '修正案', edit: '直した文', del: '削除の印', 'del-sec': '節ごと削除' };
   function allKeys() { return [...new Set([...S.memos.keys(), ...Object.keys(S.drafts)])]; }
   function visibleEntries() { return allKeys().map(entry).filter((e) => (e.content || '').trim() || e.resolved); }
   function stage(key, patch) {
@@ -171,6 +181,7 @@
       title: patch.title ?? cur.title ?? '',
       content: patch.content ?? cur.content ?? '',
       resolved: patch.resolved ?? cur.resolved ?? false,
+      kind: patch.kind ?? (cur.draft && cur.draft.kind != null ? cur.draft.kind : (cur.server ? (cur.server.character || '') : '')),
       updated_at: new Date().toISOString(),
     };
     LS.set('drafts', S.drafts);
@@ -187,7 +198,7 @@
     const d = S.drafts[key]; if (!d) return true;
     if (!canWrite()) { setStatus(key, 'local'); return false; }
     const server = S.memos.get(key);
-    const memo = { page_id: PAGE_PREFIX + d.page_id, section_id: d.section_id, title: String(d.title || '').slice(0, 600), content: String(d.content || '').slice(0, 12000), resolved: !!d.resolved, character: '', card: '' };
+    const memo = { page_id: PAGE_PREFIX + d.page_id, section_id: d.section_id, title: String(d.title || '').slice(0, 600), content: String(d.content || '').slice(0, 12000), resolved: !!d.resolved, character: String(d.kind || '').slice(0, 80), card: '' };
     setStatus(key, 'saving');
     try {
       let saved;
@@ -306,7 +317,7 @@
     checkHiddenPage();
     refreshMarks();
     renderGroups(); renderPagesCol();
-    $('#pencil').hidden = true;
+    $('#pencil').hidden = true; if ($('#editBar')) $('#editBar').hidden = true; S.fixing = null;
     const main = $('#main');
     if (anchor) {
       requestAnimationFrame(() => {
@@ -353,13 +364,103 @@
   function refreshMarks() {
     if (!S.page) return;
     $$('#page .has-memo').forEach((el) => el.classList.remove('has-memo', 'memo-done', 'memo-draft'));
+    $$('#page .edit-view').forEach((el) => el.remove());
+    $$('#page .edit-old, #page .mark-del, #page .mark-del-sec, #page .mark-del-head').forEach((el) => el.classList.remove('edit-old', 'mark-del', 'mark-del-sec', 'mark-del-head', 'mark-done'));
+    const all = $$('#page .page-body [data-a]');
     for (const e of visibleEntries()) {
       const [pid, a] = splitKey(e.key); if (pid !== S.page.id) continue;
       const el = findAnchor(a); if (!el) continue;
       el.classList.add('has-memo');
       if (e.resolved) el.classList.add('memo-done'); else if (e.draft && !e.server) el.classList.add('memo-draft');
-      el.title = '修正案：' + (e.content || '').slice(0, 80);
+      el.title = KIND_LABEL[e.kind] + '：' + (e.content || '').slice(0, 80);
+      if (e.resolved) continue;   // 反映済みは印だけ
+      if (e.kind === 'edit' && !el.classList.contains('is-editing')) {
+        el.classList.add('edit-old');
+        el.insertAdjacentElement('afterend', editViewEl(el, e));
+      } else if (e.kind === 'del') {
+        el.classList.add('mark-del');
+      } else if (e.kind === 'del-sec') {
+        el.classList.add('mark-del', 'mark-del-head');
+        const lv = headLevel(el); const i = all.indexOf(el);
+        for (let j = i + 1; j < all.length; j++) {
+          const x = all[j]; const l = headLevel(x);
+          if (l && l <= lv) break;
+          x.classList.add('mark-del-sec');
+        }
+      }
     }
+  }
+  function headLevel(el) { const m = /^H([1-6])$/.exec(el.tagName); return m ? +m[1] : 0; }
+  // 直した文の表示（元の段のすぐ後ろ。表の行・箇条の中でも崩れないように同じ種類の要素で包む）
+  function editViewEl(el, e) {
+    const body = `<div class="ev-head"><span class="ev-tag">直した文</span>${e.draft && !e.server ? '<span class="ev-draft">下書き</span>' : ''}<button type="button" class="ev-btn" data-ev="fix" data-a="${esc(el.dataset.a)}">もう一度直す</button><button type="button" class="ev-btn" data-ev="undo" data-a="${esc(el.dataset.a)}">元に戻す</button></div><div class="ev-text">${esc(e.content)}</div>`;
+    return wrapLike(el, 'edit-view', body);
+  }
+  function wrapLike(el, cls, inner) {
+    let w;
+    if (el.tagName === 'TR') { w = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = el.children.length || 1; td.innerHTML = inner; w.appendChild(td); }
+    else if (el.tagName === 'LI') { w = document.createElement('li'); w.innerHTML = inner; }
+    else { w = document.createElement('div'); w.innerHTML = inner; }
+    w.className = cls; w.dataset.for = el.dataset.a;
+    return w;
+  }
+  // 元の段の文（直すときの初めの文）。ボタン・注意点の印を除き、改行を残す
+  function plainOf(el) {
+    const c = el.cloneNode(true);
+    $$('.note-mark, button, .vis-label', c).forEach((b) => b.remove());
+    if (el.tagName === 'TR') return [...c.children].map((td) => td.innerText.trim()).join(' ｜ ');
+    const box = document.createElement('div'); box.style.cssText = 'position:absolute;left:-9999px;white-space:normal;width:600px'; box.appendChild(c); document.body.appendChild(box);
+    const t = c.innerText.replace(/\n{3,}/g, '\n\n').trim(); box.remove();
+    return t;
+  }
+  // ---------- その場で直す ----------
+  function startFix(a) {
+    const el = findAnchor(a); if (!el) return;
+    cancelFix();
+    const key = keyOf(S.page.id, a); const e = entry(key);
+    const start = e.kind === 'edit' && e.content ? e.content : plainOf(el);
+    el.classList.add('is-editing');
+    $$(`#page .edit-view[data-for="${CSS.escape(a)}"]`).forEach((x) => x.remove());
+    const box = wrapLike(el, 'inline-edit', `<div class="ie-head">この段をその場で直す<span class="ie-hint">Ctrl+Enter で保存／Esc でやめる</span></div><textarea class="ie-text" rows="3"></textarea><div class="ie-actions"><button type="button" class="btn small primary" data-ie="save">保存</button><button type="button" class="btn small" data-ie="cancel">やめる</button>${e.kind === 'edit' ? '<button type="button" class="btn small danger" data-ie="undo">元の文に戻す</button>' : ''}<span class="ie-orig">元：${esc(excerptOf(el).slice(0, 70))}${excerptOf(el).length > 70 ? '…' : ''}</span></div>`);
+    el.insertAdjacentElement('afterend', box);
+    const ta = $('.ie-text', box); ta.value = start;
+    const fit = () => { ta.style.height = 'auto'; ta.style.height = Math.min(600, ta.scrollHeight + 4) + 'px'; };
+    ta.addEventListener('input', fit); fit(); ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+    ta.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); saveFix(a, ta.value); }
+      if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); cancelFix(); }
+    });
+    S.fixing = a; placePencil(null);
+  }
+  function cancelFix() {
+    if (!S.fixing) return;
+    $$('#page .inline-edit').forEach((x) => x.remove());
+    $$('#page .is-editing').forEach((x) => x.classList.remove('is-editing'));
+    S.fixing = null; refreshMarks();
+  }
+  async function saveFix(a, text) {
+    const el = findAnchor(a); const key = keyOf(S.page.id, a);
+    const orig = plainOf(el);
+    if (text.trim() === orig.trim()) { toast('元の文と同じなので、保存しませんでした。'); cancelFix(); return; }
+    stage(key, { kind: 'edit', content: text, resolved: false, title: S.page.nav + '｜' + orig.slice(0, 560) });
+    cancelFix();
+    if (canWrite()) await push(key); else { setStatus(key, 'local'); toast('この端末に下書き保存しました。共有するには編集キーで解除してください。'); }
+    refreshAll();
+  }
+  async function undoFix(a) {
+    const key = keyOf(S.page.id, a);
+    if (!confirm('この段の直した文を消して、元の文に戻しますか？')) return;
+    cancelFix(); await removeMemo(key);
+  }
+  async function toggleDel(a) {
+    const el = findAnchor(a); if (!el) return;
+    const key = keyOf(S.page.id, a); const e = entry(key);
+    if (e.kind === 'del' || e.kind === 'del-sec') { await removeMemo(key); toast('削除の印を外しました。'); return; }
+    if (e.server || e.draft) { if ((e.content || '').trim() && !confirm('この段には' + KIND_LABEL[e.kind] + 'があります。削除の印に置き換えますか？')) return; }
+    const sec = !!headLevel(el);
+    stage(key, { kind: sec ? 'del-sec' : 'del', content: sec ? '削除（この見出しの節ごと）' : '削除', resolved: false, title: S.page.nav + '｜' + plainOf(el).slice(0, 560) });
+    if (canWrite()) await push(key); else { setStatus(key, 'local'); toast('この端末に下書き保存しました。共有するには編集キーで解除してください。'); }
+    refreshAll();
   }
   function selectAnchor(anchor, open = true) {
     $$('#page .is-selected').forEach((el) => el.classList.remove('is-selected'));
@@ -376,13 +477,21 @@
   let hoverEl = null;
   function placePencil(el) {
     const main = $('#main'); const pen = $('#pencil');
-    if (!el) { pen.hidden = true; if (hoverEl) hoverEl.classList.remove('is-hover'); hoverEl = null; return; }
+    if (!el) { pen.hidden = true; const bar = $('#editBar'); if (bar) bar.hidden = true; if (hoverEl) hoverEl.classList.remove('is-hover'); hoverEl = null; return; }
     if (hoverEl && hoverEl !== el) hoverEl.classList.remove('is-hover');
     hoverEl = el; el.classList.add('is-hover');
     const mr = main.getBoundingClientRect(); const er = el.getBoundingClientRect(); const pr = $('#page').getBoundingClientRect();
     pen.style.top = (er.top - mr.top + main.scrollTop + Math.min(4, er.height / 4)) + 'px';
     pen.style.left = (Math.min(pr.right, mr.right - 10) - mr.left - 38) + 'px';
     pen.hidden = false;
+    const bar = $('#editBar');
+    if (bar) {
+      const e = entry(keyOf(S.page.id, el.dataset.a)); const isDel = e.kind === 'del' || e.kind === 'del-sec';
+      const db = $('[data-bar="del"]', bar); db.textContent = isDel ? '削除を外す' : (headLevel(el) ? '節ごと削除' : '削除'); db.classList.toggle('on', isDel);
+      bar.style.top = pen.style.top; bar.style.left = (parseFloat(pen.style.left) - bar.offsetWidth - 4) + 'px';
+      bar.hidden = false;
+      bar.style.left = (parseFloat(pen.style.left) - bar.offsetWidth - 4) + 'px';
+    }
   }
 
   // ---------- 修正案（右） ----------
@@ -409,7 +518,7 @@
   function writeView() {
     const mode = canWrite() ? '' : `<div class="notice">いまは<strong>この端末の下書き</strong>として保存されます。共有するには <button type="button" class="btn small" data-act="key">編集キーで解除</button></div>`;
     if (!S.page || !S.anchor) {
-      return mode + `<div class="empty-state"><div class="big">✎</div>本文の直したい段落・台詞・表の行に<br>カーソルを合わせて「✎」を押すと、<br>その箇所の修正案を書けます。<br><br>注意点（折りたたみ）の中や見出しにも書けます。</div>`;
+      return mode + `<div class="empty-state"><div class="big">✎</div>本文の直したい段落・台詞・表の行に<br>カーソルを合わせて「✎」を押すと、<br>その箇所の修正案を書けます。<br><br>本文をそのまま書き直すときは「直す」（段をダブルクリックでも）、消したい段には「削除」で印を付けます。見出しの「節ごと削除」は、次の同じ大きさの見出しまでに印が付きます。</div>`;
     }
     const key = keyOf(S.page.id, S.anchor); const e = entry(key); const el = findAnchor(S.anchor);
     const ex = excerptOf(el) || (e.title.split('｜').slice(1).join('｜'));
@@ -417,7 +526,8 @@
     return mode + `
       <div class="target"><div class="target-page">${esc(S.page.nav)}</div><div class="target-text">${esc(ex) || '（見出し）'}</div><a href="#/${S.page.id}/${S.anchor}" data-act="goto">本文で表示</a></div>
       ${conflict}
-      <label class="field-label" for="memoText">修正案</label>
+      ${e.kind ? `<div class="notice">この段は<strong>${esc(KIND_LABEL[e.kind])}</strong>です。${e.kind === 'edit' ? '本文の「もう一度直す」か、下の欄で直せます。' : '本文の「削除を外す」で外せます。'}</div>` : ''}
+      <label class="field-label" for="memoText">${esc(e.kind === 'edit' ? '直した文' : '修正案')}</label>
       <textarea id="memoText" class="memo-input" placeholder="どう直したいかを書いてください。&#10;例：「〇〇」を「△△」にする／この台詞はルークに言わせたい">${esc(e.content)}</textarea>
       <div class="seg" role="group" aria-label="状態"><button type="button" data-st="open" class="${!e.resolved ? 'on open' : ''}">未反映</button><button type="button" data-st="done" class="${e.resolved ? 'on done' : ''}">反映済み</button></div>
       <div id="saveState" class="save-state"></div>
@@ -446,9 +556,9 @@
     const ex = (e.title || '').split('｜').slice(1).join('｜') || (onPage ? excerptOf(findAnchor(a)) : '');
     const active = S.page && S.anchor && e.key === keyOf(S.page.id, S.anchor);
     return `<button type="button" class="memo-item${active ? ' active' : ''}" data-key="${esc(e.key)}">
-      <div class="mi-top">${stateLabel(e)}${lost ? '<span class="st lost" title="本文が変わったため場所が見つかりません">場所不明</span>' : ''}${showPage && p ? `<span>${esc(p.nav)}</span>` : ''}<span style="margin-left:auto">${esc(fmtTime(e.updated))}</span></div>
+      <div class="mi-top">${stateLabel(e)}<span class="st kind k-${e.kind || 'note'}">${esc(KIND_LABEL[e.kind])}</span>${lost ? '<span class="st lost" title="本文が変わったため場所が見つかりません">場所不明</span>' : ''}${showPage && p ? `<span>${esc(p.nav)}</span>` : ''}<span style="margin-left:auto">${esc(fmtTime(e.updated))}</span></div>
       ${ex ? `<div class="mi-ex">${esc(ex)}</div>` : ''}
-      <div class="mi-body">${esc(e.content || '（空）')}</div></button>`;
+      <div class="mi-body${e.kind === 'del' || e.kind === 'del-sec' ? ' is-del' : ''}">${esc(e.content || '（空）')}</div></button>`;
   }
   function listView(list, onPage) {
     if (!list.length) return `<div class="empty-state">${onPage ? 'このページの修正案はまだありません。' : '修正案はまだありません。'}</div>`;
@@ -529,7 +639,7 @@
       const [pid, a] = splitKey(e.key); const p = pageById.get(pid);
       if (pid !== last) { md += `\n## ${p ? groupById.get(p.group).label + '｜' + p.nav : pid}\n${p && p.source ? `元ファイル：content/${p.source}\n` : ''}`; last = pid; }
       const ex = (e.title || '').split('｜').slice(1).join('｜');
-      md += `\n- 対象：${ex || '（見出し・その他）'}\n  - 場所：#/${pid}/${a}\n  - 修正案：${(e.content || '').replace(/\n/g, '\n    ')}\n`;
+      md += `\n- 対象：${(ex || '（見出し・その他）').replace(/\n/g, '\n    ')}\n  - 場所：#/${pid}/${a}\n  - 種類：${KIND_LABEL[e.kind]}\n  - ${e.kind === 'edit' ? '直した文' : '修正案'}：${(e.content || '').replace(/\n/g, '\n    ')}\n`;
     }
     return md;
   }
@@ -671,24 +781,34 @@
     // 本文：鉛筆ボタン・注意点の印
     const main = $('#main');
     main.addEventListener('mouseover', (e) => {
-      if (e.target.closest('#pencil')) return;
+      if (e.target.closest('#pencil, #editBar, .inline-edit, .edit-view')) return;
       const el = e.target.closest('#page .page-body [data-a]');
       if (el) placePencil(el);
     });
     main.addEventListener('mouseleave', () => placePencil(null));
     $('#pencil').addEventListener('click', () => { if (hoverEl) selectAnchor(hoverEl.dataset.a); });
+    $('#editBar').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-bar]'); if (!b || !hoverEl) return;
+      const a = hoverEl.dataset.a;
+      if (b.dataset.bar === 'fix') startFix(a); else if (b.dataset.bar === 'del') toggleDel(a);
+    });
     $('#page').addEventListener('click', (e) => {
       const mark = e.target.closest('.note-mark');
       if (mark) { e.preventDefault(); const d = document.getElementById(mark.dataset.note); if (d) { d.open = true; d.scrollIntoView({ block: 'center' }); d.classList.remove('flash'); void d.offsetWidth; d.classList.add('flash'); } return; }
-      if (e.target.closest('a, button, summary, input, textarea')) return;
+      const ie = e.target.closest('[data-ie]');
+      if (ie) { const box = ie.closest('.inline-edit'); const a = box.dataset.for; if (ie.dataset.ie === 'save') saveFix(a, $('.ie-text', box).value); else if (ie.dataset.ie === 'cancel') cancelFix(); else undoFix(a); return; }
+      const ev = e.target.closest('[data-ev]');
+      if (ev) { if (ev.dataset.ev === 'fix') startFix(ev.dataset.a); else undoFix(ev.dataset.a); return; }
+      if (e.target.closest('a, button, summary, input, textarea, .inline-edit, .edit-view')) return;
       const el = e.target.closest('.page-body [data-a]');
       if (!el) return;
       if (window.matchMedia('(hover: none)').matches) placePencil(el);
       else if (el.classList.contains('has-memo')) selectAnchor(el.dataset.a);
     });
     main.addEventListener('dblclick', (e) => {
+      if (e.target.closest('.inline-edit, .edit-view')) return;
       const el = e.target.closest('.page-body [data-a]'); if (!el || e.target.closest('summary')) return;
-      selectAnchor(el.dataset.a);
+      startFix(el.dataset.a);
     });
 
     // 右：修正案
@@ -734,11 +854,12 @@
     $('#hideAfter').addEventListener('change', (e) => { S.hideAfter = e.target.checked; LS.set('hideAfter', S.hideAfter); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
     document.addEventListener('click', (e) => { const b = e.target.closest('[data-view]'); if (!b) return; S.view = b.dataset.view; LS.set('view', S.view); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
     window.addEventListener('hashchange', route);
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.activeElement && document.activeElement.id !== 'memoText') { if (S.anchor) selectAnchor(null); } });
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') loadMemos(true); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.fixing) { cancelFix(); return; } if (e.key === 'Escape' && document.activeElement && document.activeElement.id !== 'memoText') { if (S.anchor) selectAnchor(null); } });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && !S.fixing) loadMemos(true); });
     setInterval(() => {
       if (document.visibilityState !== 'visible') return;
       if (document.activeElement && document.activeElement.id === 'memoText') return;
+      if (S.fixing) return;
       loadMemos(true);
     }, 45000);
     window.addEventListener('resize', () => placePencil(null));
