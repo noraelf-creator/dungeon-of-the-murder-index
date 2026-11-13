@@ -42,7 +42,7 @@
     session: null,
     sync: { state: 'idle', last: null, error: '' },
     tab: 'write', filter: 'open', query: '', legacyCount: 0, loaded: false,
-    view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true),
+    view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true), shots: LS.get('shots', true),
   };
   const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
   const now = () => Date.now();
@@ -309,9 +309,11 @@
         <div class="crumbs"><span>${esc(g.label)}</span>${p.sub ? `<span>${esc(p.sub)}</span>` : ''}<span>${esc(p.nav)}</span></div>
         <h1 class="page-title">${esc(p.title)}</h1>
         <div class="vis-legend"><span class="lg-t">印</span><span class="kc v-all">◎PL・全員が見る</span><span class="kc v-self">◆PL・本人だけ</span><span class="kc v-here">◇PL・その場にいた人だけ</span><span class="kc v-gm">■GMだけ（赤枠・たたみ）</span><span class="kc v-make">▲制作</span><a href="#/about">印の見方</a><span class="lg-n">このページの段：${kc}</span></div>
-        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button></div>
+        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : ''}</div>
       </header>
-      <div class="page-body">${p.html}</div>`;
+      ${p.shots && S.shots ? `<div class="split"><div class="page-body">${p.html}</div>${shotsHTML(p)}</div>` : `<div class="page-body">${p.html}</div>`}`;
+    document.body.classList.toggle('has-shots', !!(p.shots && S.shots));
+    if ($('#btnShots')) $('#btnShots').addEventListener('click', () => { S.shots = !S.shots; LS.set('shots', S.shots); const a = S.anchor; renderPage(p, a); });
     document.title = p.nav + '｜ダンジョン・オブ・ザ・マーダー 制作INDEX';
     $('#pageMemos').addEventListener('click', () => { openPanel('page'); });
     checkHiddenPage();
@@ -332,6 +334,13 @@
     } else { main.scrollTop = 0; selectAnchor(null, false); }
     if (S.query) highlightInPage(S.query);
     renderPanel();
+  }
+  // ゲームの実際の画面（右半分）
+  function shotsHTML(p) {
+    const gv = D.gameview || {};
+    const when = gv.builtAt ? new Date(gv.builtAt).toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+    return `<aside class="gv" aria-label="ゲームの実際の画面"><div class="gv-head"><b>ゲームの実際の画面</b><small>今の原稿をゲーム${gv.gameCommit ? '（' + esc(gv.gameCommit) + '）' : ''}に取り込んで撮影${when ? '・' + esc(when) : ''}。押すと大きく開く</small></div>` +
+      p.shots.map((x, i) => `<figure class="gv-shot"><a href="${esc(x.file)}" target="_blank" rel="noopener"><img src="${esc(x.file)}" alt="${esc(x.caption)}" loading="${i < 2 ? 'eager' : 'lazy'}"${x.w ? ` width="${x.w}" height="${x.h}"` : ''}></a><figcaption>${esc(x.caption)}</figcaption></figure>`).join('') + '</aside>';
   }
   function findAnchor(a) { return a ? $(`#page [data-a="${CSS.escape(a)}"]`) : null; }
   function openParents(el) { for (let d = el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true; }
@@ -480,7 +489,7 @@
     if (!el) { pen.hidden = true; const bar = $('#editBar'); if (bar) bar.hidden = true; if (hoverEl) hoverEl.classList.remove('is-hover'); hoverEl = null; return; }
     if (hoverEl && hoverEl !== el) hoverEl.classList.remove('is-hover');
     hoverEl = el; el.classList.add('is-hover');
-    const mr = main.getBoundingClientRect(); const er = el.getBoundingClientRect(); const pr = $('#page').getBoundingClientRect();
+    const mr = main.getBoundingClientRect(); const er = el.getBoundingClientRect(); const pr = (document.body.classList.contains('has-shots') && $('#page .page-body') ? $('#page .page-body') : $('#page')).getBoundingClientRect();
     pen.style.top = (er.top - mr.top + main.scrollTop + Math.min(4, er.height / 4)) + 'px';
     pen.style.left = (Math.min(pr.right, mr.right - 10) - mr.left - 38) + 'px';
     pen.hidden = false;

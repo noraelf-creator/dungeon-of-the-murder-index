@@ -108,6 +108,7 @@ add('rule', 'GM向け', 'n-rule-chaser', '追跡者の位置の仕様', must(GM(
 add('rule', '制作・ゲーム向け', 'n-impl', '実装反映メモ（Codex向け）', must(GM('実装反映メモ（Codex向け）.md')), 'doc', '制作');
 
 // 部屋LS・画面の文
+add('screen', '最初の画面', 'n-charsel', 'キャラ選択画面の文（タイトル〜HO を読む画面）', must(C('キャラ選択画面の文_20261113.md')), 'doc', 'PL配布');
 add('screen', '部屋LS', 'n-room-ls', '部屋ライブセレクション一覧', must(GM('部屋ライブセレクション一覧（GM）.md')), 'doc', 'GM専用');
 add('screen', '探索', 'n-explore', '探索の調べた場所（ゲーム用）', must(GM('探索の調べた場所（ゲーム用）.md')), 'doc', 'GM専用');
 add('screen', '画面の文', 'n-huddle', '密談の画面の文（ゲーム用）', must(GM('密談の画面の文（ゲーム用）.md')), 'doc', 'GM専用');
@@ -183,7 +184,7 @@ const PAGE_VIS = {
   'n-card-items': V('gm'), 'n-card-items-pl': V('all'),
   'n-rule-intro': V('all'), 'n-rule-phase': V('all'), 'n-rule-ls': V('all'), 'n-rule-skill': V('all'), 'n-rule-p10': V('all', { cond: 'P10 で配る' }),
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
-  'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
+  'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
   'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };
@@ -693,7 +694,16 @@ for (const p of P) {
 const ids = new Set();
 for (const p of pages) { if (ids.has(p.id)) throw new Error('ページIDの重複: ' + p.id); ids.add(p.id); }
 
-const data = { version: 'dom-rv2', built: new Date().toISOString(), home: 'n-now', groups: GROUPS, pages };
+// ゲームの実際の画面（node tools/game-shots.mjs が media/gameview/ に撮る）。ページIDごとに右半分へ並べる
+let gameview = null;
+try {
+  const gv = JSON.parse(fs.readFileSync(path.join(ROOT, 'media', 'gameview', 'manifest.json'), 'utf8'));
+  let n = 0;
+  for (const p of pages) { const list = (gv.pages || {})[p.id]; if (list && list.length) { p.shots = list.map((x) => ({ file: x.file, caption: x.caption || '', w: x.w || 0, h: x.h || 0 })); n += list.length; } }
+  gameview = { builtAt: gv.builtAt || '', gameCommit: gv.gameCommit || '', importWarnings: gv.importWarnings ?? null };
+  console.log('ゲームの画面:', n, '枚', Object.keys(gv.pages || {}).filter((id) => !ids.has(id)).map((id) => '（ページが無いID ' + id + '）').join(' '));
+} catch (e) { if (e.code !== 'ENOENT') throw e; }
+const data = { version: 'dom-rv2', built: new Date().toISOString(), home: 'n-now', groups: GROUPS, pages, gameview };
 fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data', 'site-data.js'), 'window.SITE_DATA=' + JSON.stringify(data) + ';\n');
 const size = fs.statSync(path.join(ROOT, 'data', 'site-data.js')).size;

@@ -521,3 +521,16 @@ body.pl-mode .gm-inline { display: none !important; }
 .st.kind.k-del, .st.kind.k-del-sec { background: #fde4e4; color: #b42020; }
 .mi-body.is-del { color: #b42020; }
 @media print { .edit-bar, .inline-edit { display: none !important; } }
+/* ゲームの実際の画面を右半分に（2026-11-13） */
+body.has-shots .page { max-width: none; margin-left: 18px; margin-right: 18px; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.gv { position: sticky; top: 8px; max-height: calc(100vh - 90px); overflow-y: auto; padding: 0 6px 20px 0; border-left: 1px solid var(--line-soft); padding-left: 20px; }
+.gv-head { position: sticky; top: 0; z-index: 2; background: var(--sheet); padding: 4px 0 10px; display: flex; flex-direction: column; gap: 2px; }
+.gv-head b { font-size: 14px; }
+.gv-head small { color: var(--muted); font-size: 12px; }
+.gv-shot { margin: 0 0 18px; }
+.gv-shot img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #2a3344; background: #111; box-shadow: 0 2px 10px rgba(0,0,0,.18); }
+.gv-shot figcaption { font-size: 12.5px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+#btnShots.on { background: #e3eeff; border-color: #9cbbe8; }
+@media (max-width: 1200px) { .split { grid-template-columns: 1fr; } .gv { position: static; max-height: none; border-left: 0; padding-left: 0; border-top: 1px solid var(--line-soft); padding-top: 14px; } }
+@media print { .gv { display: none; } .split { display: block; } }
