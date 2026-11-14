@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>マダミス7 文量の数え直し（2026-11-14）</title>
+<style>
+:root{--ho:#2f6fb3;--read:#2b8a5b;--card:#c0632a;--rules:#6a4fa3;--extra:#6b7280;--body:#0f172a;
+--bg:#f7f8fa;--line:#e3e6ea;--ink:#1f2328;--need:#c0392b;--done:#1f7a3d;--amber:#b7791f}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+header{background:#101828;color:#fff;padding:22px 28px}
+header h1{margin:0 0 6px;font-size:21px}
+header p{margin:2px 0;font-size:13px;color:#c8d0da}
+.wrap{display:grid;grid-template-columns:250px 1fr;gap:0;align-items:start}
+nav{position:sticky;top:0;height:100vh;overflow:auto;background:#fff;border-right:1px solid var(--line);padding:16px 12px}
+nav .grp{font-size:11px;letter-spacing:.08em;color:#8a929c;margin:14px 0 4px}
+nav a{display:block;padding:5px 8px;border-radius:6px;text-decoration:none;color:#28303a;font-size:13px;border-left:3px solid transparent}
+nav a:hover{background:#eef1f5}
+nav a.s1{border-left-color:var(--card)} nav a.s2{border-left-color:var(--ho)} nav a.s3{border-left-color:var(--read)}
+nav a.s4{border-left-color:var(--rules)} nav a.s5{border-left-color:var(--extra)} nav a.s6{border-left-color:var(--body)}
+nav a.s7{border-left-color:#8a929c}
+main{padding:24px 32px 80px;max-width:1180px}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 20px}
+h2{margin:0 0 12px;font-size:18px;padding-left:12px;border-left:6px solid #999}
+#s1 h2{border-color:var(--card)} #s2 h2{border-color:var(--ho)} #s3 h2{border-color:var(--read)}
+#s4 h2{border-color:var(--rules)} #s5 h2{border-color:var(--extra)} #s6 h2{border-color:var(--body)} #s7 h2{border-color:#8a929c}
+h3{font-size:15px;margin:18px 0 8px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f1f3f6;font-size:12px;font-weight:600;color:#3c4551;position:sticky;top:0}
+td.k{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+small{color:#6b7280;font-size:11px}
+.up{color:var(--need)} .down{color:var(--done)} .flat{color:#6b7280}
+tr.g-ho td:first-child{border-left:4px solid var(--ho)} tr.g-read td:first-child{border-left:4px solid var(--read)}
+tr.g-card td:first-child{border-left:4px solid var(--card)} tr.g-rules td:first-child{border-left:4px solid var(--rules)}
+tr.g-extra td:first-child{border-left:4px solid var(--extra)} tr.g-body td:first-child{border-left:4px solid var(--body)}
+tr.ok td:first-child{color:var(--done);font-weight:700} tr.ng td:first-child{color:var(--need);font-weight:700}
+tr.ng{background:#fdf3f2}
+.bar{position:relative;background:#eef0f3;border-radius:6px;height:18px;min-width:110px}
+.bar .bf{display:block;height:18px;border-radius:6px;background:linear-gradient(90deg,#4b8fd6,#2f6fb3)}
+.bar .bv{position:absolute;inset:0;text-align:center;font-size:11px;color:#22303d;line-height:18px;font-variant-numeric:tabular-nums}
+.need{color:var(--need)} .done{color:var(--done)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:8px 0 4px}
+.card{border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:#fcfcfd}
+.card .t{font-size:12px;color:#5b636e} .card .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.card.warn{border-color:#f0c6c1;background:#fdf5f4} .card.good{border-color:#c3e2cd;background:#f4fbf6}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;margin:6px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:3px 10px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+ul{margin:6px 0 6px 20px;padding:0} li{margin:3px 0;font-size:13px}
+.note{background:#f7f9fb;border:1px solid var(--line);border-left:4px solid #8a929c;border-radius:6px;padding:10px 12px;font-size:12.5px;color:#3c4551}
+code{background:#f1f3f6;padding:1px 5px;border-radius:4px;font-size:12px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}}
+</style></head><body>
+<header>
+<h1>マダミス7『ダンジョン・オブ・ザ・マーダー』 文量の数え直し</h1>
+<p>作った日：2026-11-14 20:44／対象：2026-11-13 の作者の修正を入れた今の原稿（C:/00_【創作】一時フォルダ/_マダミス改訂_20261004/ダンジョン・オブ・ザ・マーダー/05_完成版）</p>
+<p>2026-11-14 に数え直した。原稿・ゲーム・設定は変更していない（読んで数えただけ）。作者が 11/13 に入れた修正（共通HO・はじめに・フェイズ進行表・LSの説明・P10の新しいルール・スキル一覧・R00）は反映済み。</p>
+</header>
+<div class="wrap">
+<nav>
+<div class="grp">結論</div>
+<a class="s1" href="#s1">1. 目標まであと何字か</a>
+<div class="grp">数え直し</div>
+<a class="s2" href="#s2">2. 項目別（旧 → 新）</a>
+<a class="s2" href="#s2b">2b. PC別HO</a>
+<a class="s3" href="#s3">3. フェイズ別の読み込み</a>
+<div class="grp">確かめ</div>
+<a class="s4" href="#s4">4. 数え方の確かめ</a>
+<a class="s5" href="#s5">5. 数え方（決まり）</a>
+<div class="grp">運用</div>
+<a class="s6" href="#s6">6. 作り直しの手順</a>
+<a class="s7" href="#s7">7. 変えたファイル</a>
+</nav>
+<main>
+
+<section id="s1">
+<h2>1. 目標まであと何字か（2026-11-10 の決定に対して）</h2>
+<div class="legend">
+<span><i style="background:var(--card)"></i>カード</span>
+<span><i style="background:var(--read)"></i>読み合わせ</span>
+<span><i style="background:var(--ho)"></i>HO</span>
+<span><i style="background:var(--rules)"></i>ルールの文</span>
+<span><i style="background:var(--extra)"></i>画面だけの文</span>
+</div>
+<div class="cards">
+<div class="card warn"><div class="t">カード（目標 9,956字＝1/2）</div><div class="v">9,955字</div><div class="t">まだ削る字数（今 19,911字）</div></div>
+<div class="card warn"><div class="t">読み合わせ 本編（目標 7,652字＝1/3）</div><div class="v">15,269字</div><div class="t">まだ削る字数（今 22,921字）</div></div>
+<div class="card warn"><div class="t">読み合わせ ED（目標 5,056字＝1/2）</div><div class="v">5,055字</div><div class="t">まだ削る字数（今 10,111字）</div></div>
+<div class="card good"><div class="t">本体（PC1人あたり・1時間あたり）</div><div class="v">7,006字</div><div class="t">旧 7,054字／時（差 −48）</div></div>
+</div>
+<div class="note">
+目標は <b>2026-11-10 に作者が決めた比率</b>（カード1/2・読み合わせ（ED以外）1/3・ED 1/2）を、
+<b>決定した時点の値</b>（19,911字／22,956字／10,111字）に掛けた固定の数。
+「今の値の半分」ではありません（今の値を半分にすると、削るほど目標も下がって永遠に届かないため）。
+</div>
+<h3>今回の数え直しで動いたこと</h3>
+<ul>
+<li>原稿が変わったのは 11/13 の作者の修正（共通HO・はじめに・フェイズ進行表・LSの説明・P10の新しいルール・スキル一覧・R00）。</li>
+<li>減少：共通HO −197字、読み合わせ本編 −35字、ルールの文 −2,730字。</li>
+<li>増減なし：カード 19,911字（216単位）、ED 10,111字、追加HO 3,738字／人。</li>
+<li>つまり <b>カードと ED はまだ手が入っていない</b>。方針の削減はこれから（原稿はこちらで削らない）。</li>
+</ul>
+</section>
+
+<section id="s2">
+<h2>2. 項目別（旧 → 新）</h2>
+<p><small>旧＝11/9〜11/12 の計測（<code>results/_mm7_baseline_20261109.json</code>）／新＝2026-11-14 の数え直し（<code>results/mm7.json</code>）。字数は空白・記号・【GM】を除く。読み合わせは1回分。</small></p>
+<table>
+<tr><th>項目</th><th>旧</th><th>新</th><th>差</th><th>目標（11/10）</th><th>目標まで残り</th><th>進み</th></tr>
+<tr class='g-ho'><td>共通HO<br><small>11/13 に作者が短くした</small></td><td class='k'>705</td><td class='k'><b>508</b></td><td class='k down'>−197</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-ho'><td>初期HO（共通HO＋自分のHO①／PC1人あたり平均）<br><small>方針では削らない（多すぎない、が 11/10 の判断）</small></td><td class='k'>4,569</td><td class='k'><b>4,372</b></td><td class='k down'>−197</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-ho'><td>追加HO 合計（15件）<br><small>旧値は 11/11 のフェイズ表の hox 合計（15件・results/_mm7_phase_calc.json）。今の原稿で数え直しても同じ</small></td><td class='k'>14,954</td><td class='k'><b>14,954</b></td><td class='k flat'>±0</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-ho'><td>追加HO（PC1人あたり平均）<br><small>方針なし（配る時期をずらす案あり）</small></td><td class='k'>3,738</td><td class='k'><b>3,738</b></td><td class='k flat'>±0</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-read'><td>読み合わせ 本編（ED以外・1回分）</td><td class='k'>22,956</td><td class='k'><b>22,921</b></td><td class='k down'>−35</td><td class='k'><b>7,652</b><small>（1/3）</small></td><td class='k'><b class='need'>15,269</b></td><td><div class='bar'><span class='bf' style='width:0.2%'></span><span class='bv'>0%</span></div></td></tr><tr class='g-read'><td>読み合わせ ED（真相・ED・後日談・1回分）</td><td class='k'>10,111</td><td class='k'><b>10,111</b></td><td class='k flat'>±0</td><td class='k'><b>5,056</b><small>（1/2）</small></td><td class='k'><b class='need'>5,055</b></td><td><div class='bar'><span class='bf' style='width:0.0%'></span><span class='bv'>0%</span></div></td></tr><tr class='g-card'><td>カード 全部（216単位）</td><td class='k'>19,911</td><td class='k'><b>19,911</b></td><td class='k flat'>±0</td><td class='k'><b>9,956</b><small>（1/2）</small></td><td class='k'><b class='need'>9,955</b></td><td><div class='bar'><span class='bf' style='width:0.0%'></span><span class='bv'>0%</span></div></td></tr><tr class='g-rules'><td>ルールの文（はじめに・進行表・LS・スキル一覧・P10の新しいルール）<br><small>11/13 に作者が短くした（目標なし）</small></td><td class='k'>5,660</td><td class='k'><b>2,930</b></td><td class='k down'>−2,730</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-extra'><td>ゲーム画面だけに出る文<br><small>紙の版に無いがプレイヤーが読むもの</small></td><td class='k'>18,702</td><td class='k'><b>18,702</b></td><td class='k flat'>±0</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-body'><td>本体（共通HO＋自分のHO＋全カード／PC1人あたり平均）</td><td class='k'>28,218</td><td class='k'><b>28,022</b></td><td class='k down'>−196</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr><tr class='g-body'><td>全部（本体＋読み合わせ＋ルール＋画面の文／PC1人あたり平均）</td><td class='k'>85,648</td><td class='k'><b>82,686</b></td><td class='k down'>−2,962</td><td class='k'><span class='muted'>—</span></td><td class='k'><span class='muted'>—</span></td><td><span class='muted'>目標なし</span></td></tr>
+</table>
+</section>
+
+<section id="s2b">
+<h2>2b. PC別HO（初期＋追加）</h2>
+<table>
+<tr><th>PC</th><th>初期HO<br><small>共通HO＋自分のHO①</small></th><th>追加HO<br><small>共通HOを含まない</small></th><th>個人HO合計<br><small>共通HOを除く</small></th><th>共通HO込み合計</th><th>差</th></tr>
+<tr><td>PC1</td><td class='k'>3,158<small>（旧 3,355）</small></td><td class='k'>2,023<small>（旧 2,023）</small></td><td class='k'><b>4,673</b><small>（旧 4,673）</small></td><td class='k'>5,181<small>（旧 5,378）</small></td><td class='k flat'>±0</td></tr><tr><td>PC2</td><td class='k'>4,542<small>（旧 4,739）</small></td><td class='k'>3,980<small>（旧 3,980）</small></td><td class='k'><b>8,014</b><small>（旧 8,014）</small></td><td class='k'>8,522<small>（旧 8,719）</small></td><td class='k flat'>±0</td></tr><tr><td>PC3</td><td class='k'>4,192<small>（旧 4,389）</small></td><td class='k'>5,750<small>（旧 5,750）</small></td><td class='k'><b>9,434</b><small>（旧 9,434）</small></td><td class='k'>9,942<small>（旧 10,139）</small></td><td class='k flat'>±0</td></tr><tr><td>PC4</td><td class='k'>5,596<small>（旧 5,793）</small></td><td class='k'>3,201<small>（旧 3,201）</small></td><td class='k'><b>8,289</b><small>（旧 8,289）</small></td><td class='k'>8,797<small>（旧 8,994）</small></td><td class='k flat'>±0</td></tr>
+</table>
+<p><small><b>定義</b>：初期HO＝共通HO（508字）＋自分のHO①。追加HO＝自分のHO②以降（共通HOを含まない）。
+「個人HO合計（共通HOを除く）」＝初期HO＋追加HO−共通HO（例 PC1：3,158＋2,023−508＝4,673）。
+「共通HO込み合計」＝個人HO合計＋共通HO（例 4,673＋508＝5,181）。
+初期＋追加は共通HOを2回数えるため、個人HO合計とは一致しない（初期HOの列だけが共通HO込み）。旧値も同じ式（共通HO 旧 705字）。
+共通HO が −197字 減ったので、初期HO は全PCで同じだけ減っています（−197字）。</small></p>
+</section>
+
+<section id="s3">
+<h2>3. フェイズ別の読み込み（PC1人あたり）</h2>
+<p><small>分数は進行表から（11/13 の修正では動いていない）。字数は今の原稿から数え直した。追加HO は「そのフェイズで配る追加HOの合計 ÷ 4人」。</small></p>
+<table>
+<tr><th>フェイズ</th><th>枠</th><th>議論<br><small>分</small></th><th>読み枠<br><small>分</small></th><th>カード</th><th>追加HO</th><th>読み合わせ</th><th>300字/分で<br>要る分</th><th>（カード＋追加HO）<br>÷（議論＋読み枠）</th></tr>
+<tr><td>開始前</td><td class='k'>15分</td><td class='k'>—</td><td class='k'>—</td><td class='k'>395</td><td class='k'>0</td><td class='k'>0<small>（旧 0）</small></td><td class='k'>—</td><td class='k'>—</td></tr><tr><td>ギルド</td><td class='k'>15分</td><td class='k'>—</td><td class='k'>15</td><td class='k'>0</td><td class='k'>0</td><td class='k'>2,957<small>（旧 2,992）</small></td><td class='k'>9.9</td><td class='k'>—</td></tr><tr><td>P1</td><td class='k'>10分</td><td class='k'>—</td><td class='k'>10</td><td class='k'>649</td><td class='k'>0</td><td class='k'>1,470<small>（旧 1,470）</small></td><td class='k'>4.9</td><td class='k'>64.9</td></tr><tr><td>P2</td><td class='k'>15分</td><td class='k'>11</td><td class='k'>—</td><td class='k'>5,408</td><td class='k'>1,110</td><td class='k'>0<small>（旧 0）</small></td><td class='k'>—</td><td class='k'>592.5</td></tr><tr><td>P3</td><td class='k'>15分</td><td class='k'>8</td><td class='k'>2</td><td class='k'>579</td><td class='k'>315</td><td class='k'>2,763<small>（旧 2,763）</small></td><td class='k'>9.2</td><td class='k'>89.4</td></tr><tr><td>P4</td><td class='k'>15分</td><td class='k'>7</td><td class='k'>5</td><td class='k'>1,007</td><td class='k'>474</td><td class='k'>3,395<small>（旧 3,395）</small></td><td class='k'>11.3</td><td class='k'>123.4</td></tr><tr><td>P5</td><td class='k'>15分</td><td class='k'>11</td><td class='k'>—</td><td class='k'>0</td><td class='k'>0</td><td class='k'>0<small>（旧 0）</small></td><td class='k'>—</td><td class='k'>—</td></tr><tr><td>P6</td><td class='k'>15分</td><td class='k'>8</td><td class='k'>2</td><td class='k'>827</td><td class='k'>382</td><td class='k'>1,756<small>（旧 1,756）</small></td><td class='k'>5.9</td><td class='k'>120.9</td></tr><tr><td>P7</td><td class='k'>15分</td><td class='k'>13</td><td class='k'>1</td><td class='k'>7,387</td><td class='k'>1,103</td><td class='k'>1,123<small>（旧 1,123）</small></td><td class='k'>3.7</td><td class='k'>606.4</td></tr><tr><td>P8</td><td class='k'>15分</td><td class='k'>10</td><td class='k'>1</td><td class='k'>0</td><td class='k'>0</td><td class='k'>449<small>（旧 449）</small></td><td class='k'>1.5</td><td class='k'>—</td></tr><tr><td>P9</td><td class='k'>15分</td><td class='k'>8</td><td class='k'>2</td><td class='k'>1,598</td><td class='k'>230</td><td class='k'>2,008<small>（旧 2,008）</small></td><td class='k'>6.7</td><td class='k'>182.8</td></tr><tr><td>P10</td><td class='k'>15分</td><td class='k'>12</td><td class='k'>2</td><td class='k'>1,719</td><td class='k'>124</td><td class='k'>1,157<small>（旧 1,157）</small></td><td class='k'>3.9</td><td class='k'>131.6</td></tr><tr><td>P11</td><td class='k'>15分</td><td class='k'>13</td><td class='k'>—</td><td class='k'>342</td><td class='k'>0</td><td class='k'>0<small>（旧 0）</small></td><td class='k'>—</td><td class='k'>26.3</td></tr><tr><td>P12</td><td class='k'>35分</td><td class='k'>—</td><td class='k'>17</td><td class='k'>0</td><td class='k'>0</td><td class='k'>5,843<small>（旧 5,843）</small></td><td class='k'>19.5</td><td class='k'>—</td></tr><tr><td>帰還後/ED</td><td class='k'>15分</td><td class='k'>—</td><td class='k'>15</td><td class='k'>0</td><td class='k'>0</td><td class='k'>10,111<small>（旧 10,111）</small></td><td class='k'>33.7</td><td class='k'>—</td></tr>
+</table>
+<p><small>読み合わせの列の「旧」は、11/11 のフェイズ表の値。変わったのはギルドの読み合わせ（R00）だけ（−35字）。</small></p>
+</section>
+
+<section id="s4">
+<h2>4. 数え方の確かめ</h2>
+<table>
+<tr><th></th><th>確かめたこと</th><th>結果</th></tr>
+<tr class='ok'><td>✓</td><td>仕分け表（manifest）のファイルが今もあるか</td><td>147件のうち 147件あり・無い 0件</td></tr><tr class='ok'><td>✓</td><td>原稿にあって仕分け表に無いファイル（数え漏れ）</td><td>原稿の md/txt 139件・数えていない 0件</td></tr><tr class='ok'><td>✓</td><td>sub（初期/追加・本編/ED）の印</td><td>ho_untagged=0・印の無いHO 0件（initial 5件／extra 15件／main 26件／ed 8件）</td></tr><tr class='ok'><td>✓</td><td>分けて数えている写し（R20・R22・R23）が今の原稿の一部か</td><td>8ファイルを照合・今の原稿に無い行があるもの 0件</td></tr><tr class='ok'><td>✓</td><td>フェイズ別の表と今の字数が合うか</td><td>カード合計 19,911字／results 19,911字</td></tr><tr class='ok'><td>✓</td><td>目標・謎の仕分け（structure/mm7.json）と今のカード字数が合うか</td><td>仕分け側 19,911字・結果側 19,911字・差 0</td></tr><tr class='ok'><td>✓</td><td>カードの一覧（results/_mm7_card_inventory.json）</td><td>121枚 13,575字。これは手がかりのカードだけの一覧（品の一覧・見出し・方針文を含まない）なので、カード全体 19,911字より小さいのが正しい</td></tr><tr class='ok'><td>✓</td><td>想定時間（240分）の根拠の行</td><td>はじめにの「約4時間（休憩別）」と GM進行ガイド:21「全体の所要時間は約4時間」で確認。フェイズ進行表（プレイヤー向け）は11/13に「このゲームの謎」だけになり、以前の根拠の行は無くなったので仕分け表の source を書き換えた</td></tr>
+</table>
+<p><small>仕分け表（<code>manifests/mm7.json</code>）は「どのファイルを何として数えたか」の一覧。原稿の md/txt と突き合わせて、数え漏れと二重数えが無いことを確かめた。
+R20・R22・R23 は「1回分」に分けた写しで数えているため、写しの各行が今の原稿にそのまま含まれるかを照合した（原稿が変わっていたら写しも作り直す必要がある）。</small></p>
+</section>
+
+<section id="s5">
+<h2>5. 数え方（決まり）</h2>
+<ul>
+<li><b>字数</b>＝空白・記号（Markdownの記法）・【GM】行を除いた文字数。<code>count.py</code> と同じ関数で、全体も1枚も数える。</li>
+<li><b>本体</b>＝共通HO＋自分のHO＋全カード（PC1人が見る紙の量）。GM用（真相・進行表・解答）は入れない。</li>
+<li><b>PC別HOの区切り</b>＝初期HO（共通HO＋自分のHO①）と追加HO（自分のHO②以降）。初期HOだけが共通HOを含むので、初期＋追加は「個人HO合計（共通HOを除く）」と一致しない。共通HO込みの合計は 個人合計＋共通HO で出す。</li>
+<li><b>読み合わせは1回分</b>。分岐（分断の組・EDの種類）は平均で数え、最大も別に記録している。</li>
+<li><b>追加HOの合計</b>は15件の実数の合計、<b>PC1人あたり</b>はそれを4人で割った数。</li>
+<li><b>目標</b>は 11/10 の決定の比率を、決定時点の値に掛けた固定値（上の注意のとおり）。</li>
+<li><b>数字はすべてこのページのビルド（<code>build_recount.py</code>）が結果ファイルから作る</b>。手で書いた数字は無い。</li>
+</ul>
+</section>
+
+<section id="s6">
+<h2>6. 作り直しの手順</h2>
+<pre><code>cd "C:\00_【創作】一時フォルダ\100_【マダミス】ハーネス作成\work_claude_opus_20261015\66_text_volume_20261109"
+python -X utf8 count.py manifests/mm7.json      # 字数（results/mm7.json）
+python -X utf8 build_phase_calc.py              # フェイズ別（読み合わせ・追加HOを測り直す）
+python -X utf8 time_ratio.py                    # 時間の区切り（results/_time.json）
+python -X utf8 build_report.py                  # report.html
+python -X utf8 build_time.py                    # time_report.html
+python -X utf8 build_plan.py                    # plan_report.html
+python -X utf8 build_disc.py                    # disc_report.html
+python -X utf8 build_structure.py               # structure_report.html
+python -X utf8 build_recount.py                 # このページ（recount_report.html）
+</code></pre>
+<p><small>制作INDEX（<code>#/n-textcut</code>）は <code>build_index_page.py</code> が書き出す。このページの写し（<code>media/textvol_20261112/recount_report.html</code>）と、旧→新・目標まで残りの表が n-textcut の0章に入る。</small></p>
+</section>
+
+<section id="s7">
+<h2>7. 変えたファイル（この数え直しで）</h2>
+<ul>
+<li>控え：<code>old/</code>（前の results・前の5枚のHTML・前の仕分け表・前のフェイズ表）</li>
+<li>固定した旧値：<code>results/_mm7_baseline_20261109.json</code></li>
+<li>数え直し：<code>results/mm7.json</code>・<code>results/_time.json</code>・<code>results/_mm7_phase_calc.json</code></li>
+<li>比較：<code>results/_recount_20261114.json</code>・<code>recount_report.html</code></li>
+<li>仕分け表の直し：<code>manifests/mm7.json</code> の <code>play_minutes.source</code>（フェイズ進行表の行番号が無くなったため、はじめに・GM進行ガイドの行に書き換え。想定時間の値は変えていない）</li>
+<li>作った道具：<code>build_phase_calc.py</code>（フェイズ表の作り直し）・<code>build_recount.py</code>（このページ）</li>
+<li>原稿・ゲーム・設定は<b>変更していない</b>。</li>
+</ul>
+</section>
+
+</main></div></body></html>

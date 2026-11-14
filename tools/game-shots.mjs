@@ -198,6 +198,8 @@ const LBSEL = '.lb-doc';
 for (const p of ['PC1', 'PC2', 'PC3', 'PC4']) {
   const t = tabs[p];
   await t.bringToFront();
+  /* 2026-11-14：ゲームの最初の札の初期表示が「はじめに」になったので、個人HOを撮る前に「あなたのHO」を押す（押さないと全員「はじめに」になる） */
+  await clickAct(t, '[data-act=lbDoc][data-k=ho]');
   const n = await scrollShots(t, `n-ho-${p.toLowerCase()}-1`, LBSEL, (i, n) => `最初の HO の画面：${p} ${NAMES[p]} の「あなたのHO」タブ（${i}/${n}・文書の欄を上から順にスクロールして撮影）`);
   checks['ho_' + p] = (await textOf(t, LBSEL)).slice(0, 80).replace(/\s+/g, ' ');
   if (!n) problems.push(p + ' HO が撮れない');
