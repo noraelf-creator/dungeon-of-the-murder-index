@@ -534,3 +534,77 @@ body.has-shots .page { max-width: none; margin-left: 18px; margin-right: 18px; }
 #btnShots.on { background: #e3eeff; border-color: #9cbbe8; }
 @media (max-width: 1200px) { .split { grid-template-columns: 1fr; } .gv { position: static; max-height: none; border-left: 0; padding-left: 0; border-top: 1px solid var(--line-soft); padding-top: 14px; } }
 @media print { .gv { display: none; } .split { display: block; } }
+
+
+/* ===== 3列比較：左＝本仕様／中＝AI案／右＝実際のゲーム画面（2026-11-14） ===== */
+body.cmp-on .page { max-width: none; margin-left: 18px; margin-right: 18px; }
+.cmp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 16px;
+  align-items: start;
+  margin: 6px 0 4px;
+}
+.cmp-spec { min-width: 0; }
+.cmp-ai, .cmp-shot { min-width: 0; }
+.cmp-ai { border: 1px solid #cfdaea; border-radius: 10px; background: #f7faff; padding: 10px 12px; font-size: 13.5px; line-height: 1.75; }
+.cmp-ai-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+.cmp-badge { font-size: 11.5px; font-weight: 800; border-radius: 999px; padding: 0 9px; line-height: 21px; color: #fff; background: #6b7280; white-space: nowrap; }
+.cmp-badge.del { background: #c62828; }
+.cmp-badge.short { background: #b7791f; }
+.cmp-badge.proof { background: #2f6db5; }
+.cmp-badge.keep { background: #6b7280; }
+.cmp-chars { font-size: 12px; color: #3a4252; font-variant-numeric: tabular-nums; }
+.cmp-warn { background: #fff3cd; border: 1px solid #e6b84a; color: #7a5a00; border-radius: 8px; padding: 5px 9px; font-size: 12.5px; margin: 6px 0; }
+.cmp-del { background: #fdecec; border: 1px dashed #e6a6a6; color: #a12a2a; border-radius: 8px; padding: 8px 10px; font-weight: 700; margin: 6px 0; }
+.cmp-text { white-space: pre-wrap; background: #fff; border: 1px solid #e3e9f3; border-radius: 8px; padding: 8px 10px; margin: 6px 0; }
+.cmp-reason { font-size: 12.5px; color: #3a4252; margin: 8px 0 0; }
+.cmp-reason b, .cmp-facts b { display: block; font-size: 11.5px; color: #6b7280; letter-spacing: .04em; }
+.cmp-facts { font-size: 12.5px; margin: 6px 0 0; }
+.cmp-facts ul { margin: 2px 0 0; padding-left: 1.2em; }
+.cmp-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.cmp-src { font-size: 11px; color: #8290a6; }
+.cmp-empty { color: #56637a; font-size: 12.5px; }
+.cmp-empty b { display: block; color: #b42020; margin-bottom: 4px; }
+.cmp-empty span { display: block; margin-top: 4px; }
+.cmp-prot { color: #7a5a00; }
+.cmp-shot { border: 1px solid #d9dee6; border-radius: 10px; background: #fff; padding: 8px; }
+.cmp-shot-head { margin-bottom: 6px; }
+.cmp-prev { display: inline-block; font-size: 11px; font-weight: 700; color: #8a5a00; background: #fff1bf; border-radius: 6px; padding: 1px 7px; line-height: 19px; }
+.cmp-fig { margin: 0 0 8px; }
+.cmp-fig img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid #2a3344; background: #111; }
+.cmp-fig figcaption { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.cmp-noshot { border: 1px dashed #b9c2d0; border-radius: 8px; background: #f8f9fb; padding: 10px; font-size: 12.5px; color: #4b5563; }
+.cmp-noshot b { display: block; margin-bottom: 4px; color: #374151; }
+.cmp-summary { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 12.5px; color: #3a4252; background: #f6f8fc; border: 1px solid #dbe3f0; border-radius: 10px; padding: 8px 12px; margin: 0 0 14px; }
+.cmp-summary b { font-variant-numeric: tabular-nums; }
+.cmp-sum-unit { font-weight: 700; }
+.cmp-sum-miss { color: #a12a2a; font-weight: 700; }
+.cmp-sum-scope { color: #56637a; }
+/* 部屋公開文：1室＝1行（表をやめて、3列に並べられる形にする） */
+.room-list { display: grid; gap: 8px; margin: 8px 0 14px; }
+.room-row { display: grid; grid-template-columns: 4.4em 9.5em minmax(0, 1fr); gap: 10px; align-items: baseline; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.room-id { font-weight: 800; font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--accent); font-size: 13px; }
+.room-name { font-weight: 700; font-size: 14px; }
+.room-text { font-size: 14.5px; }
+.vis-card > .vis-body > .cmp-grid > .cmp-spec > .cardx { margin-top: 0; }
+/* 列の表示切替 */
+body.cmp-no-ai .cmp-ai { display: none; }
+body.cmp-no-shot .cmp-shot { display: none; }
+body.cmp-no-ai .cmp-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+body.cmp-no-shot .cmp-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr); }
+body.cmp-no-ai.cmp-no-shot .cmp-grid { grid-template-columns: minmax(0, 1fr); }
+/* プレイヤー表示：AI案（GMの言葉を含みうる）と実画面（本番未デプロイのプレビュー）は出さない */
+body.pl-mode .cmp-ai, body.pl-mode .cmp-shot, body.pl-mode .cmp-summary { display: none !important; }
+body.pl-mode .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }
+.st.old { background: #e8eef6; color: #2c4a8a; }
+@media (max-width: 1200px) {
+  .cmp-grid, body.cmp-no-ai .cmp-grid, body.cmp-no-shot .cmp-grid, body.cmp-no-ai.cmp-no-shot .cmp-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .cmp-ai, .cmp-shot { border-left-width: 4px; }
+  .room-row { grid-template-columns: 4em minmax(0, 1fr); }
+  .room-text { grid-column: 1 / -1; }
+}
+@media print {
+  .cmp-ai, .cmp-shot, .cmp-summary { display: none !important; }
+  .cmp-grid, body.cmp-no-ai .cmp-grid, body.cmp-no-shot .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }
+}

@@ -1,8 +1,13 @@
 {
-  "builtAt": "2026-11-14T12:16:02.658Z",
+  "builtAt": "2026-11-14T15:43:16.022Z",
   "gameCommit": "f56e412",
   "gameDirty": false,
   "manuscriptRoot": "C:/00_【創作】一時フォルダ/_マダミス改訂_20261004/ダンジョン・オブ・ザ・マーダー/05_完成版",
+  "manuscriptSnapshot": {
+    "date": "2026-11-14",
+    "files": 139,
+    "sha256": "248b0e6b2f7eabf2822255e8c9f73fdb37ec2502955731cdc5871dda953bfe9e"
+  },
   "importWarnings": 0,
   "importWarningList": [],
   "viewport": {
@@ -10,6 +15,4799 @@
     "height": 800,
     "deviceScaleFactor": 1
   },
+  "preview": true,
+  "liveDeployed": false,
+  "previewLabel": "プレビュー（ゲーム f56e412 ＋ 2026-11-14の本仕様原稿 248b0e6b 取込・本番未デプロイ）",
+  "unitShots": {
+    "HO:n-ho-pc1-1:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_0_intro-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「冒頭」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_0_intro-02.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「冒頭」（つづき・2枚目）",
+        "w": 892,
+        "h": 960
+      }
+    ],
+    "HO:n-ho-pc1-1:3_companions": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_3_companions-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「仲間のこと」",
+        "w": 960,
+        "h": 317
+      }
+    ],
+    "HO:n-ho-pc1-1:1_goals": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_1_goals-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「あなたの目的」",
+        "w": 960,
+        "h": 193
+      }
+    ],
+    "HO:n-ho-pc1-1:2_knows": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_2_knows-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「あなたが知っていること」",
+        "w": 960,
+        "h": 287
+      }
+    ],
+    "HO:n-ho-pc1-1:4_skills": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_4_skills-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「スキル」",
+        "w": 960,
+        "h": 193
+      }
+    ],
+    "HO:n-ho-pc1-1:5_speech": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-1_5_speech-01.webp",
+        "caption": "ゲーム画面：PC1 ミレイユ・アルセア の「あなたのHO」「話し方」",
+        "w": 960,
+        "h": 879
+      }
+    ],
+    "HO:n-ho-pc2-1:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_0_intro-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「冒頭」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_0_intro-02.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「冒頭」（つづき・2枚目）",
+        "w": 960,
+        "h": 718
+      }
+    ],
+    "HO:n-ho-pc2-1:4_companions": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_4_companions-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「仲間のこと」",
+        "w": 960,
+        "h": 255
+      }
+    ],
+    "HO:n-ho-pc2-1:5_disgord": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_5_disgord-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「《Disgord》（あなたの通信機）」",
+        "w": 960,
+        "h": 287
+      }
+    ],
+    "HO:n-ho-pc2-1:1_goals": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_1_goals-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「あなたの目的」",
+        "w": 960,
+        "h": 737
+      }
+    ],
+    "HO:n-ho-pc2-1:2_secrets": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_2_secrets-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「あなたの胸にしまっていること（自分から言わなくてよい）」",
+        "w": 960,
+        "h": 99
+      }
+    ],
+    "HO:n-ho-pc2-1:3_knows": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_3_knows-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「あなたが知っていること」",
+        "w": 960,
+        "h": 505
+      }
+    ],
+    "HO:n-ho-pc2-1:6_skills": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_6_skills-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「スキル」",
+        "w": 960,
+        "h": 317
+      }
+    ],
+    "HO:n-ho-pc2-1:7_speech": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_7_speech-01.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「話し方」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-1_7_speech-02.webp",
+        "caption": "ゲーム画面：PC2 ヴィオラ・クロウ の「あなたのHO」「話し方」（つづき・2枚目）",
+        "w": 892,
+        "h": 960
+      }
+    ],
+    "HO:n-ho-pc3-1:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_0_intro-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「冒頭」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_0_intro-02.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「冒頭」（つづき・2枚目）",
+        "w": 960,
+        "h": 105
+      }
+    ],
+    "HO:n-ho-pc3-1:1_companions": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_1_companions-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「仲間のこと（全員と顔見知りなのは、あなただけ）」",
+        "w": 960,
+        "h": 535
+      }
+    ],
+    "HO:n-ho-pc3-1:2_goals": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_2_goals-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「あなたの目的」",
+        "w": 960,
+        "h": 473
+      }
+    ],
+    "HO:n-ho-pc3-1:3_secrets": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_3_secrets-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「あなたの胸にしまっていること（言いたくない）」",
+        "w": 960,
+        "h": 131
+      }
+    ],
+    "HO:n-ho-pc3-1:4_knows": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_4_knows-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「あなたが知っていること」",
+        "w": 960,
+        "h": 223
+      }
+    ],
+    "HO:n-ho-pc3-1:5_skills": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_5_skills-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「スキル」",
+        "w": 960,
+        "h": 537
+      }
+    ],
+    "HO:n-ho-pc3-1:6_speech": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_6_speech-01.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「話し方」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-1_6_speech-02.webp",
+        "caption": "ゲーム画面：PC3 ミクシィ・グリー の「あなたのHO」「話し方」（つづき・2枚目）",
+        "w": 892,
+        "h": 960
+      }
+    ],
+    "HO:n-ho-pc4-1:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_0_intro-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「冒頭」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_0_intro-02.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「冒頭」（つづき・2枚目）",
+        "w": 892,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_0_intro-03.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「冒頭」（つづき・3枚目）",
+        "w": 892,
+        "h": 960
+      }
+    ],
+    "HO:n-ho-pc4-1:1_goals": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_1_goals-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「あなたの目的（公開してよい）」",
+        "w": 960,
+        "h": 99
+      }
+    ],
+    "HO:n-ho-pc4-1:2_secrets": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_2_secrets-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「あなたの秘密目標（絶対に言わない）」",
+        "w": 960,
+        "h": 223
+      }
+    ],
+    "HO:n-ho-pc4-1:3_steps": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_3_steps-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「あなたの手順」",
+        "w": 960,
+        "h": 473
+      }
+    ],
+    "HO:n-ho-pc4-1:4_hiding": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_4_hiding-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「隠し方の指針」",
+        "w": 960,
+        "h": 907
+      }
+    ],
+    "HO:n-ho-pc4-1:5_skills": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_5_skills-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「スキル」",
+        "w": 960,
+        "h": 505
+      }
+    ],
+    "HO:n-ho-pc4-1:6_speech": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_6_speech-01.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「話し方」",
+        "w": 895,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-1_6_speech-02.webp",
+        "caption": "ゲーム画面：PC4 エドガー・アーサー・ハンザー の「あなたのHO」「話し方」（つづき・2枚目）",
+        "w": 892,
+        "h": 960
+      }
+    ],
+    "HO:n-ho-common:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_0_intro-01.webp",
+        "caption": "ゲーム画面：「共通HO」「冒頭」",
+        "w": 960,
+        "h": 239
+      }
+    ],
+    "HO:n-ho-common:1_依頼の内容": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_1-01.webp",
+        "caption": "ゲーム画面：「共通HO」「依頼の内容」",
+        "w": 960,
+        "h": 326
+      }
+    ],
+    "HO:n-ho-common:2_生還したトマの証言": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_2-01.webp",
+        "caption": "ゲーム画面：「共通HO」「生還したトマの証言」",
+        "w": 960,
+        "h": 232
+      }
+    ],
+    "HO:n-ho-common:3_任務": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_3-01.webp",
+        "caption": "ゲーム画面：「共通HO」「任務」",
+        "w": 960,
+        "h": 186
+      }
+    ],
+    "HO:n-ho-common:4_共通認識": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_4-01.webp",
+        "caption": "ゲーム画面：「共通HO」「共通認識」",
+        "w": 960,
+        "h": 180
+      }
+    ],
+    "HO:n-ho-common:5_支給品HO読み込み時全員": [
+      {
+        "file": "media/gameview/u_HO_n-ho-common_5__HO-01.webp",
+        "caption": "ゲーム画面：「共通HO」「支給品-HO読み込み時全員追加で1つ選択すること」",
+        "w": 960,
+        "h": 428
+      }
+    ],
+    "ROOM:U0": [
+      {
+        "file": "media/gameview/u_ROOM_U0-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U0」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:U1": [
+      {
+        "file": "media/gameview/u_ROOM_U1-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U1」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U2": [
+      {
+        "file": "media/gameview/u_ROOM_U2-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U2」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U3": [
+      {
+        "file": "media/gameview/u_ROOM_U3-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U3」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U4": [
+      {
+        "file": "media/gameview/u_ROOM_U4-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U4」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U5": [
+      {
+        "file": "media/gameview/u_ROOM_U5-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U5」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U6": [
+      {
+        "file": "media/gameview/u_ROOM_U6-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U6」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U7": [
+      {
+        "file": "media/gameview/u_ROOM_U7-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U7」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U8": [
+      {
+        "file": "media/gameview/u_ROOM_U8-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U8」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U9": [
+      {
+        "file": "media/gameview/u_ROOM_U9-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U9」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U10": [
+      {
+        "file": "media/gameview/u_ROOM_U10-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U10」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:U11": [
+      {
+        "file": "media/gameview/u_ROOM_U11-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U11」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:U12": [
+      {
+        "file": "media/gameview/u_ROOM_U12-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「U12」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:L0": [
+      {
+        "file": "media/gameview/u_ROOM_L0-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L0」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:L1": [
+      {
+        "file": "media/gameview/u_ROOM_L1-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L1」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:L2": [
+      {
+        "file": "media/gameview/u_ROOM_L2-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L2」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L3": [
+      {
+        "file": "media/gameview/u_ROOM_L3-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L3」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L4": [
+      {
+        "file": "media/gameview/u_ROOM_L4-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L4」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L5": [
+      {
+        "file": "media/gameview/u_ROOM_L5-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L5」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L6": [
+      {
+        "file": "media/gameview/u_ROOM_L6-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L6」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L7": [
+      {
+        "file": "media/gameview/u_ROOM_L7-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L7」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:L8": [
+      {
+        "file": "media/gameview/u_ROOM_L8-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L8」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 453
+      }
+    ],
+    "ROOM:L9": [
+      {
+        "file": "media/gameview/u_ROOM_L9-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L9」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L10": [
+      {
+        "file": "media/gameview/u_ROOM_L10-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L10」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "ROOM:L11": [
+      {
+        "file": "media/gameview/u_ROOM_L11-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L11」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 398
+      }
+    ],
+    "ROOM:L12": [
+      {
+        "file": "media/gameview/u_ROOM_L12-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L12」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:L13": [
+      {
+        "file": "media/gameview/u_ROOM_L13-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L13」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 359
+      }
+    ],
+    "ROOM:L14": [
+      {
+        "file": "media/gameview/u_ROOM_L14-01.webp",
+        "caption": "ゲーム画面：探索先を選ぶ地図で「L14」を選んだときの部屋パネル（公開文）",
+        "w": 504,
+        "h": 394
+      }
+    ],
+    "CARD:INFO-A-TRACK": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-TRACK-01.webp",
+        "caption": "ゲーム画面：共有カード「追尾特性」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-A-SUPPLY": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-SUPPLY-01.webp",
+        "caption": "ゲーム画面：共有カード「外部からの魔力供給」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-A-PRIORITY": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-PRIORITY-01.webp",
+        "caption": "ゲーム画面：共有カード「攻撃優先順位」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-A-RING": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-RING-01.webp",
+        "caption": "ゲーム画面：共有カード「封印環の固定点」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-A-PATH": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-PATH-01.webp",
+        "caption": "ゲーム画面：共有カード「再生経路制御」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-A-THEORY": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-THEORY-01.webp",
+        "caption": "ゲーム画面：共有カード「守護核停止論」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-E-BODY1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-BODY1-01.webp",
+        "caption": "ゲーム画面：共有カード「致命傷が見当たらない」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-BODY2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-BODY2-01.webp",
+        "caption": "ゲーム画面：共有カード「体内性の異常」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-TIMING": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-TIMING-01.webp",
+        "caption": "ゲーム画面：共有カード「投与時期推定」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-POSSESSIONS": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-POSSESSIONS-01.webp",
+        "caption": "ゲーム画面：共有カード「リックの携行品」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SYMPTOMS": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SYMPTOMS-01.webp",
+        "caption": "ゲーム画面：共有カード「症状メモ」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-E-MOTIVE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-MOTIVE-01.webp",
+        "caption": "ゲーム画面：共有カード「未送信の手紙」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-E-NOOTHER": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-NOOTHER-01.webp",
+        "caption": "ゲーム画面：共有カード「救出後の摂取」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-LEDGER": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-LEDGER-01.webp",
+        "caption": "ゲーム画面：共有カード「救難所物資台帳」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-BOTTLE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-BOTTLE-01.webp",
+        "caption": "ゲーム画面：共有カード「空き瓶の山」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-E-DISGORD1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-DISGORD1-01.webp",
+        "caption": "ゲーム画面：共有カード「影写しの記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SUPPLY": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SUPPLY-01.webp",
+        "caption": "ゲーム画面：共有カード「支給台帳の写し」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-COMPARE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-COMPARE-01.webp",
+        "caption": "ゲーム画面：共有カード「所持品の見比べ」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-E-DISGORD2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-DISGORD2-01.webp",
+        "caption": "ゲーム画面：共有カード「乱れの形」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SOURCE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SOURCE-01.webp",
+        "caption": "ゲーム画面：共有カード「工作素材の出所」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-FORGED": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-FORGED-01.webp",
+        "caption": "ゲーム画面：共有カード「現場と探索履歴の不整合」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SCENE1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SCENE1-01.webp",
+        "caption": "ゲーム画面：共有カード「祭壇周辺」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SCENE2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SCENE2-01.webp",
+        "caption": "ゲーム画面：共有カード「手元の瓶の中」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-SCENE3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-SCENE3-01.webp",
+        "caption": "ゲーム画面：共有カード「事故痕の違和感」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U1-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U1-2-01.webp",
+        "caption": "ゲーム画面：共有カード「西警備用小扉」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U2-01.webp",
+        "caption": "ゲーム画面：共有カード「騎士団長ミクロソフツ」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-U2-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U2-2-01.webp",
+        "caption": "ゲーム画面：共有カード「団長と副長」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-W-U3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U3-01.webp",
+        "caption": "ゲーム画面：共有カード「地下へ続く整備孔」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U3-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U3-2-01.webp",
+        "caption": "ゲーム画面：共有カード「灰色の石粉」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U4": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U4-01.webp",
+        "caption": "ゲーム画面：共有カード「水門の操作」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U4-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U4-2-01.webp",
+        "caption": "ゲーム画面：共有カード「祭壇へ届かない水」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U5": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U5-01.webp",
+        "caption": "ゲーム画面：共有カード「対守護者装備」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U5-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U5-2-01.webp",
+        "caption": "ゲーム画面：共有カード「空の封印鞘」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U6": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U6-01.webp",
+        "caption": "ゲーム画面：共有カード「名簿を読む声」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-U6-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U6-2-01.webp",
+        "caption": "ゲーム画面：共有カード「削られた一名」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U7": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U7-01.webp",
+        "caption": "ゲーム画面：共有カード「救難所の薬品棚」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U8": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U8-01.webp",
+        "caption": "ゲーム画面：共有カード「二人の英雄」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-U9": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U9-01.webp",
+        "caption": "ゲーム画面：共有カード「守護者計画」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-U9-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U9-2-01.webp",
+        "caption": "ゲーム画面：共有カード「交換される肉体」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-U9-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U9-3-01.webp",
+        "caption": "ゲーム画面：共有カード「人格侵食」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U10-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U10-2-01.webp",
+        "caption": "ゲーム画面：共有カード「一致する魔力」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U10-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U10-3-01.webp",
+        "caption": "ゲーム画面：共有カード「分核の目録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U11": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U11-01.webp",
+        "caption": "ゲーム画面：共有カード「内部封鎖」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-U12": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-U12-01.webp",
+        "caption": "ゲーム画面：共有カード「二つの施設」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-L0": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L0-01.webp",
+        "caption": "ゲーム画面：共有カード「祭壇前の装置」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L1-01.webp",
+        "caption": "ゲーム画面：共有カード「墓廊の死亡日」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L1-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L1-2-01.webp",
+        "caption": "ゲーム画面：共有カード「最後の命令」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-ELDIN": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-ELDIN-01.webp",
+        "caption": "ゲーム画面：共有カード「消された副長の名」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L2-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L2-2-01.webp",
+        "caption": "ゲーム画面：共有カード「封印剣」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-STYLE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-STYLE-01.webp",
+        "caption": "ゲーム画面：共有カード「エコー流」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L3-01.webp",
+        "caption": "ゲーム画面：共有カード「封印損傷痕」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-USED": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-USED-01.webp",
+        "caption": "ゲーム画面：共有カード「一度だけ使われた剣」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L4": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L4-01.webp",
+        "caption": "ゲーム画面：共有カード「王家秘蔵品」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L4-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L4-2-01.webp",
+        "caption": "ゲーム画面：共有カード「黒曜の呪物」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L5-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L5-2-01.webp",
+        "caption": "ゲーム画面：共有カード「殺害者の波形」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-E-WOUND": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-WOUND-01.webp",
+        "caption": "ゲーム画面：共有カード「本物の追跡者傷」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L6-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L6-3-01.webp",
+        "caption": "ゲーム画面：共有カード「接続対象の拡張」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L6-B": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L6-B-01.webp",
+        "caption": "ゲーム画面：共有カード「空の器」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-SEVER": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-SEVER-01.webp",
+        "caption": "ゲーム画面：共有カード「接続者の切離し」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-MAGIC": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-MAGIC-01.webp",
+        "caption": "ゲーム画面：共有カード「追跡者の攻撃魔力」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L7": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L7-01.webp",
+        "caption": "ゲーム画面：共有カード「地下水流」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L7-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L7-2-01.webp",
+        "caption": "ゲーム画面：共有カード「深層水泥」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L8": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L8-01.webp",
+        "caption": "ゲーム画面：共有カード「隔離規定」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L8-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L8-2-01.webp",
+        "caption": "ゲーム画面：共有カード「祭壇水位記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L9": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L9-01.webp",
+        "caption": "ゲーム画面：共有カード「終わらない捜索」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-L10": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L10-01.webp",
+        "caption": "ゲーム画面：共有カード「最後の精神記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L10-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L10-2-01.webp",
+        "caption": "ゲーム画面：共有カード「完了条件」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-W-L12": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L12-01.webp",
+        "caption": "ゲーム画面：共有カード「自分に向けた跡」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-ERASE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-ERASE-01.webp",
+        "caption": "ゲーム画面：共有カード「移管目録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-BLACK1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-BLACK1-01.webp",
+        "caption": "ゲーム画面：共有カード「黒くなる体」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-BLACK2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-BLACK2-01.webp",
+        "caption": "ゲーム画面：共有カード「黒い者たち」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-A-BLACK": [
+      {
+        "file": "media/gameview/u_CARD_INFO-A-BLACK-01.webp",
+        "caption": "ゲーム画面：共有カード「黒を追う」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:REC-U2": [
+      {
+        "file": "media/gameview/u_CARD_REC-U2-01.webp",
+        "caption": "ゲーム画面：共有カード「済の欄」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:REC-U8": [
+      {
+        "file": "media/gameview/u_CARD_REC-U8-01.webp",
+        "caption": "ゲーム画面：共有カード「外套」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:REC-U9": [
+      {
+        "file": "media/gameview/u_CARD_REC-U9-01.webp",
+        "caption": "ゲーム画面：共有カード「ズゥーム殿の往診」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:REC-L1": [
+      {
+        "file": "media/gameview/u_CARD_REC-L1-01.webp",
+        "caption": "ゲーム画面：共有カード「伝声管の知らせ」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:REC-L8": [
+      {
+        "file": "media/gameview/u_CARD_REC-L8-01.webp",
+        "caption": "ゲーム画面：共有カード「研究主任の悔恨」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-U1-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-U1-3-01.webp",
+        "caption": "ゲーム画面：共有カード「伝声管の頁」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-U1-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-U1-2-01.webp",
+        "caption": "ゲーム画面：共有カード「夜の縄」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-U5-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-U5-2-01.webp",
+        "caption": "ゲーム画面：共有カード「扉の前で眠る団長」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-J-U6": [
+      {
+        "file": "media/gameview/u_CARD_INFO-J-U6-01.webp",
+        "caption": "ゲーム画面：共有カード「団長の最期」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-J-L2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-J-L2-01.webp",
+        "caption": "ゲーム画面：共有カード「誰にも殺されていない」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-N-NOTE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-NOTE-01.webp",
+        "caption": "ゲーム画面：共有カード「副長の覚え書き」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-K-L3-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L3-2-01.webp",
+        "caption": "ゲーム画面：共有カード「工房の控え」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-L4-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L4-2-01.webp",
+        "caption": "ゲーム画面：共有カード「伝令の控え帳」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-K-L4-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L4-3-01.webp",
+        "caption": "ゲーム画面：共有カード「会議録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 127
+      }
+    ],
+    "CARD:INFO-K-L5-1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L5-1-01.webp",
+        "caption": "ゲーム画面：共有カード「実験の経過記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-W-L6-OVER": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L6-OVER-01.webp",
+        "caption": "ゲーム画面：共有カード「過充填の記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-L6-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L6-2-01.webp",
+        "caption": "ゲーム画面：共有カード「回路の趣意書」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-HAIREI-CARE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-HAIREI-CARE-01.webp",
+        "caption": "ゲーム画面：共有カード「灰嶺から来た者たちの経過」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-KUROZU": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-KUROZU-01.webp",
+        "caption": "ゲーム画面：共有カード「クロヅクメーの記録」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-K-L10-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L10-2-01.webp",
+        "caption": "ゲーム画面：共有カード「渡さなかった手紙」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-N-MARK": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-MARK-01.webp",
+        "caption": "ゲーム画面：共有カード「一瞬見えたもの」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-K-L12-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-L12-2-01.webp",
+        "caption": "ゲーム画面：共有カード「封印剣の注文札」（中央の # 共有カード で開いた本文）",
+        "w": 960,
+        "h": 104
+      }
+    ],
+    "CARD:INFO-E-DIAGNOSIS": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-DIAGNOSIS-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「魔力の暴走の跡」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-X-WOUNDS": [
+      {
+        "file": "media/gameview/u_CARD_INFO-X-WOUNDS-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「致命傷ではない」（本人だけのカード）",
+        "w": 612,
+        "h": 403
+      }
+    ],
+    "CARD:INFO-N-MARK-PC1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-MARK-PC1-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「一瞬見えたもの」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P3-A": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P3-A-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「トマの手帳」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P6-A": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P6-A-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「胸の古傷」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P9-B2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-B2-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「焦げていない外套」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P9-W": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-W-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「最初に見た祭壇」（本人だけのカード）",
+        "w": 612,
+        "h": 581
+      }
+    ],
+    "CARD:INFO-E-CAUSE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-CAUSE-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「死因の診断」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-K-HAIREI-MIR": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-HAIREI-MIR-01.webp",
+        "caption": "ゲーム画面：PC1 の手元「情報」のカード「同じ所から」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-E-WAVE1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-WAVE1-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「一本だけの反応」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-X-COREPULSE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-X-COREPULSE-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「核の脈」（本人だけのカード）",
+        "w": 612,
+        "h": 403
+      }
+    ],
+    "CARD:INFO-N-MARK-PC2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-MARK-PC2-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「一瞬見えたもの」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P3-B": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P3-B-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「再生中の呟き」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P7-LEON": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P7-LEON-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「鳴る剣」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-K-V1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-V1-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「同じ根」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-K-V2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-V2-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「網のつながり」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-K-V3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-V3-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「共鳴」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-K-NOTE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-NOTE-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「研究ノート」（本人だけのカード）",
+        "w": 612,
+        "h": 948
+      }
+    ],
+    "CARD:INFO-X-LEON-PRE": [
+      {
+        "file": "media/gameview/u_CARD_INFO-X-LEON-PRE-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「深い傷と黒い痣」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-P6-M": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P6-M-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「夜の番の小部屋」（本人だけのカード）",
+        "w": 612,
+        "h": 442
+      }
+    ],
+    "CARD:INFO-P9-B3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-B3-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「祭壇の床の回路」（本人だけのカード）",
+        "w": 612,
+        "h": 587
+      }
+    ],
+    "CARD:INFO-P9-XV": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-XV-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「殻の薄い所」（本人だけのカード）",
+        "w": 612,
+        "h": 541
+      }
+    ],
+    "CARD:INFO-P9-X1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-X1-01.webp",
+        "caption": "ゲーム画面：PC2 の手元「情報」のカード「装置に残る登録」（本人だけのカード）",
+        "w": 612,
+        "h": 442
+      }
+    ],
+    "CARD:INFO-E-CONTAMINATION": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-CONTAMINATION-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「内側からの魔力汚染」（本人だけのカード）",
+        "w": 612,
+        "h": 587
+      }
+    ],
+    "CARD:INFO-X-CONNECTION": [
+      {
+        "file": "media/gameview/u_CARD_INFO-X-CONNECTION-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「黒い魔力反応」（本人だけのカード）",
+        "w": 612,
+        "h": 403
+      }
+    ],
+    "CARD:INFO-W-L8-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-W-L8-3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「灰嶺分核の事故」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-N-MARK-PC3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-MARK-PC3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「一瞬見えたもの」（本人だけのカード）",
+        "w": 612,
+        "h": 306
+      }
+    ],
+    "CARD:INFO-P3-C": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P3-C-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「リックの第一声」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P9-A": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-A-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「受け止めた一撃」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P9-B4": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-B4-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「外套の留め具」（本人だけのカード）",
+        "w": 612,
+        "h": 541
+      }
+    ],
+    "CARD:INFO-P9-C3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-C3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「名に止まる足」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P9-X2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-X2-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「再生の拍」（本人だけのカード）",
+        "w": 612,
+        "h": 442
+      }
+    ],
+    "CARD:INFO-M-U1-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U1-3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「閉めっぱなしの蓋」（本人だけのカード）",
+        "w": 612,
+        "h": 634
+      }
+    ],
+    "CARD:INFO-M-U1-2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U1-2-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「鈴の夜」（本人だけのカード）",
+        "w": 612,
+        "h": 587
+      }
+    ],
+    "CARD:INFO-M-U2-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U2-3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「袖を二回」（本人だけのカード）",
+        "w": 612,
+        "h": 541
+      }
+    ],
+    "CARD:INFO-M-U5": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U5-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「いびき」（本人だけのカード）",
+        "w": 612,
+        "h": 541
+      }
+    ],
+    "CARD:INFO-M-U8": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U8-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「オウム返し」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-M-U8-3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-U8-3-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「鳴る剣術」（本人だけのカード）",
+        "w": 612,
+        "h": 449
+      }
+    ],
+    "CARD:INFO-M-PUR1": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-PUR1-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「見覚えのある構え」（本人だけのカード）",
+        "w": 612,
+        "h": 403
+      }
+    ],
+    "CARD:INFO-M-PUR2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-M-PUR2-01.webp",
+        "caption": "ゲーム画面：PC3 の手元「情報」のカード「外套の裾」（本人だけのカード）",
+        "w": 612,
+        "h": 356
+      }
+    ],
+    "CARD:INFO-X-DIAGMEMO": [
+      {
+        "file": "media/gameview/u_CARD_INFO-X-DIAGMEMO-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「診断メモ」（本人だけのカード）",
+        "w": 612,
+        "h": 403
+      }
+    ],
+    "CARD:INFO-N-MARK-PC4": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-MARK-PC4-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「一瞬見えたもの」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P3-B2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P3-B2-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「流れ込む光」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P3-E": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P3-E-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「通り過ぎた巨体」（本人だけのカード）",
+        "w": 612,
+        "h": 442
+      }
+    ],
+    "CARD:INFO-P9-B": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-B-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「祭壇脇の隙間」（本人だけのカード）",
+        "w": 612,
+        "h": 350
+      }
+    ],
+    "CARD:INFO-P9-C2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-C2-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「振り向いた追跡者」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-P9-X3": [
+      {
+        "file": "media/gameview/u_CARD_INFO-P9-X3-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「断つ線」（本人だけのカード）",
+        "w": 612,
+        "h": 396
+      }
+    ],
+    "CARD:INFO-K-HAIREI-EDG": [
+      {
+        "file": "media/gameview/u_CARD_INFO-K-HAIREI-EDG-01.webp",
+        "caption": "ゲーム画面：PC4 の手元「情報」のカード「埋め戻した坑道」（本人だけのカード）",
+        "w": 612,
+        "h": 495
+      }
+    ],
+    "CARD:INFO-N-STYLE@07": [
+      {
+        "file": "media/gameview/u_CARD_INFO-N-STYLE-01.webp",
+        "caption": "ゲーム画面：共有カード「エコー流」（中央の # 共有カード で開いた本文）（同じ見出しの別ページ）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "CARD:INFO-E-DISGORD1_2": [
+      {
+        "file": "media/gameview/u_CARD_INFO-E-DISGORD1-01.webp",
+        "caption": "ゲーム画面：共有カード「影写しの記録」（中央の # 共有カード で開いた本文）（同じ見出しの別ページ）",
+        "w": 960,
+        "h": 81
+      }
+    ],
+    "ITEMSEC:n-card-items:0": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_0-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「消耗品」（0番目の節）",
+        "w": 702,
+        "h": 939
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:0": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_0-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「消耗品」（0番目の節）（配布版の同じ節）",
+        "w": 702,
+        "h": 939
+      }
+    ],
+    "ITEMSEC:n-card-items:1": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・2枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-03.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・3枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-04.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・4枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-05.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・5枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-06.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・6枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-07.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・7枚目）",
+        "w": 622,
+        "h": 960
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:1": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（配布版の同じ節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・2枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-03.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・3枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-04.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・4枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-05.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・5枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-06.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・6枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_1-07.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝」（1番目の節）（つづき・7枚目）（配布版の同じ節）",
+        "w": 622,
+        "h": 960
+      }
+    ],
+    "ITEMSEC:n-card-items:2": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_2-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝・使える」（2番目の節）",
+        "w": 702,
+        "h": 895
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:2": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_2-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「お宝・使える」（2番目の節）（配布版の同じ節）",
+        "w": 702,
+        "h": 895
+      }
+    ],
+    "ITEMSEC:n-card-items:3": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_3-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「装備」（3番目の節）",
+        "w": 625,
+        "h": 960
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:3": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_3-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「装備」（3番目の節）（配布版の同じ節）",
+        "w": 625,
+        "h": 960
+      }
+    ],
+    "ITEMSEC:n-card-items:4": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）（つづき・2枚目）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-03.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）（つづき・3枚目）",
+        "w": 702,
+        "h": 273
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:4": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）（配布版の同じ節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）（つづき・2枚目）（配布版の同じ節）",
+        "w": 598,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_4-03.webp",
+        "caption": "ゲーム画面：手元「所持品」の「道具」（4番目の節）（つづき・3枚目）（配布版の同じ節）",
+        "w": 702,
+        "h": 273
+      }
+    ],
+    "ITEMSEC:n-card-items:5": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_5-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「素材」（5番目の節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_5-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「素材」（5番目の節）（つづき・2枚目）",
+        "w": 702,
+        "h": 587
+      }
+    ],
+    "ITEMSEC:n-card-items-pl:5": [
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_5-01.webp",
+        "caption": "ゲーム画面：手元「所持品」の「素材」（5番目の節）（配布版の同じ節）",
+        "w": 603,
+        "h": 960
+      },
+      {
+        "file": "media/gameview/u_ITEMSEC_n-card-items_5-02.webp",
+        "caption": "ゲーム画面：手元「所持品」の「素材」（5番目の節）（つづき・2枚目）（配布版の同じ節）",
+        "w": 702,
+        "h": 587
+      }
+    ],
+    "HO:n-ho-pc1-2:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO②】《再会》」（PC1_2）の冒頭",
+        "w": 960,
+        "h": 691
+      }
+    ],
+    "HO:n-ho-pc1-2:1_あなたが今できること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-2_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO②】《再会》」（PC1_2）の「あなたが今できること」",
+        "w": 960,
+        "h": 289
+      }
+    ],
+    "HO:n-ho-pc1-3:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO③】《二人きりで》」（PC1_3）の冒頭",
+        "w": 960,
+        "h": 433
+      }
+    ],
+    "HO:n-ho-pc1-3:1_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-3_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO③】《二人きりで》」（PC1_3）の「追加された目標」",
+        "w": 960,
+        "h": 189
+      }
+    ],
+    "HO:n-ho-pc1-3:2_知っておくこと": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-3_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO③】《二人きりで》」（PC1_3）の「知っておくこと」",
+        "w": 960,
+        "h": 217
+      }
+    ],
+    "HO:n-ho-pc1-4:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO④】《前室の図》」（PC1_4）の冒頭",
+        "w": 960,
+        "h": 768
+      }
+    ],
+    "HO:n-ho-pc1-4:1_前室で見たもの": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-4_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO④】《前室の図》」（PC1_4）の「前室で見たもの」",
+        "w": 960,
+        "h": 227
+      }
+    ],
+    "HO:n-ho-pc1-4:2_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-4_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO④】《前室の図》」（PC1_4）の「追加された目標」",
+        "w": 960,
+        "h": 529
+      }
+    ],
+    "HO:n-ho-pc2-2:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 341
+      }
+    ],
+    "HO:n-ho-pc2-2:1_あなたが知ったこと": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の「あなたが知ったこと」",
+        "w": 960,
+        "h": 152
+      }
+    ],
+    "HO:n-ho-pc2-2:2_あなたが決めること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の「あなたが決めること」",
+        "w": 960,
+        "h": 427
+      }
+    ],
+    "HO:n-ho-pc2-3:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 385
+      }
+    ],
+    "HO:n-ho-pc2-3:1_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の「追加された目標（誰にも言わない）」",
+        "w": 960,
+        "h": 152
+      }
+    ],
+    "HO:n-ho-pc2-3:2_新しくできること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の「新しくできること」",
+        "w": 960,
+        "h": 529
+      }
+    ],
+    "HO:n-ho-pc2-3:3_secrets": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_3_secrets-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の「あなたの胸にしまっていること」",
+        "w": 960,
+        "h": 654
+      }
+    ],
+    "HO:n-ho-pc2-4:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 808
+      }
+    ],
+    "HO:n-ho-pc2-4:1_研究ノート": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の「研究ノート（分かったこと）」",
+        "w": 960,
+        "h": 820
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_1-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の「研究ノート（分かったこと）」（つづき・2枚目）",
+        "w": 960,
+        "h": 823
+      }
+    ],
+    "HO:n-ho-pc2-5:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-5_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO⑤】《リックの死因》」（PC2_5）の冒頭",
+        "w": 960,
+        "h": 396
+      }
+    ],
+    "HO:n-ho-pc2-5:1_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-5_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO⑤】《リックの死因》」（PC2_5）の「追加された目標（誰にも言わない）」",
+        "w": 960,
+        "h": 152
+      }
+    ],
+    "HO:n-ho-pc2-5:2_secrets": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-5_2_secrets-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO⑤】《リックの死因》」（PC2_5）の「あなたの胸にしまっていること」",
+        "w": 960,
+        "h": 175
+      }
+    ],
+    "HO:n-ho-pc3-2:1_その1――ミクロソフツチ": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 823
+      }
+    ],
+    "HO:n-ho-pc3-2:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭（このページの冒頭は GM 注だけで、画面には出ない。PC3_2_1 の冒頭を同じ単位に紐付け）",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭（つづき・2枚目）（このページの冒頭は GM 注だけで、画面には出ない。PC3_2_1 の冒頭を同じ単位に紐付け）",
+        "w": 960,
+        "h": 823
+      }
+    ],
+    "HO:n-ho-pc3-2:2_その2――副長の名と覚え": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_2__2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_2__2-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 664
+      }
+    ],
+    "HO:n-ho-pc3-2:3_あなたが分かること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_3-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の「あなたが分かること」",
+        "w": 960,
+        "h": 302
+      }
+    ],
+    "HO:n-ho-pc3-2:4_あなたにできること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_4-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の「あなたにできること」",
+        "w": 960,
+        "h": 671
+      }
+    ],
+    "HO:n-ho-pc3-3:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO③】《あのあとの砦》」（PC3_3）の冒頭",
+        "w": 960,
+        "h": 639
+      }
+    ],
+    "HO:n-ho-pc3-3:1_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-3_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO③】《あのあとの砦》」（PC3_3）の「追加された目標」",
+        "w": 960,
+        "h": 175
+      }
+    ],
+    "HO:n-ho-pc3-4:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO④】《柱の欠け》」（PC3_4）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-4_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO④】《柱の欠け》」（PC3_4）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 421
+      }
+    ],
+    "HO:n-ho-pc3-4:1_思い出したこと": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-4_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO④】《柱の欠け》」（PC3_4）の「思い出したこと」",
+        "w": 960,
+        "h": 700
+      }
+    ],
+    "HO:n-ho-pc3-5:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-5_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑤】《詰所の掛け板》」（PC3_5）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-5_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑤】《詰所の掛け板》」（PC3_5）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 427
+      }
+    ],
+    "HO:n-ho-pc3-5:1_思い出したこと": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-5_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑤】《詰所の掛け板》」（PC3_5）の「思い出したこと」",
+        "w": 960,
+        "h": 800
+      }
+    ],
+    "HO:n-ho-pc3-6:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-6_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑥】《手当て部屋》」（PC3_6）の冒頭",
+        "w": 960,
+        "h": 662
+      }
+    ],
+    "HO:n-ho-pc3-6:1_思い出したこと": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-6_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑥】《手当て部屋》」（PC3_6）の「思い出したこと」",
+        "w": 960,
+        "h": 327
+      }
+    ],
+    "HO:n-ho-pc4-2:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の冒頭",
+        "w": 960,
+        "h": 433
+      }
+    ],
+    "HO:n-ho-pc4-2:1_この場面であなたがするこ": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の「この場面であなたがすること」",
+        "w": 960,
+        "h": 333
+      }
+    ],
+    "HO:n-ho-pc4-2:2_これから起きること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の「これから起きること（あなたは知っている）」",
+        "w": 960,
+        "h": 189
+      }
+    ],
+    "HO:n-ho-pc4-2:3_気をつけること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_3-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の「気をつけること」",
+        "w": 960,
+        "h": 679
+      }
+    ],
+    "HO:n-ho-pc4-2:4_それでもあなたが守りたい": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_4-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の「それでも、あなたが守りたいもの」",
+        "w": 960,
+        "h": 431
+      }
+    ],
+    "HO:n-ho-pc4-3:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 150
+      }
+    ],
+    "HO:n-ho-pc4-3:1_この場面であなたが決める": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の「この場面であなたが決めること（画面で選ぶ）」",
+        "w": 960,
+        "h": 302
+      }
+    ],
+    "HO:n-ho-pc4-3:2_気をつけること": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の「気をつけること」",
+        "w": 960,
+        "h": 562
+      }
+    ],
+    "HO:n-ho-pc4-4:0_intro": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO④】《同じ積み方》」（PC4_4）の冒頭",
+        "w": 960,
+        "h": 823
+      }
+    ],
+    "HO:n-ho-pc4-4:1_前室で見たもの": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-4_1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO④】《同じ積み方》」（PC4_4）の「前室で見たもの」",
+        "w": 960,
+        "h": 227
+      }
+    ],
+    "HO:n-ho-pc4-4:2_追加された目標": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-4_2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO④】《同じ積み方》」（PC4_4）の「追加された目標（誰にも言わない）」",
+        "w": 960,
+        "h": 579
+      }
+    ],
+    "CARD_DOC:n-card-skill:@rule:hideNone": [
+      {
+        "file": "media/gameview/u_CARD_DOC_n-card-skill_@rule_hideNone-01.webp",
+        "caption": "ゲーム画面：エドガーの手元「技能」の《何もなかったことにする》の行（07 の「技能《隠す》」）",
+        "w": 704,
+        "h": 198
+      }
+    ],
+    "CARD_DOC:n-card-skill:@rule:lure": [
+      {
+        "file": "media/gameview/u_CARD_DOC_n-card-skill_@rule_lure-01.webp",
+        "caption": "ゲーム画面：ヴィオラの手元「技能」の《誘引》の行（07 の「ヴィオラの《誘引》」）",
+        "w": 704,
+        "h": 198
+      }
+    ],
+    "CARD_DOC:n-card-skill:@rule_hideNone": [
+      {
+        "file": "media/gameview/u_CARD_DOC_n-card-skill_@rule_hideNone-01.webp",
+        "caption": "ゲーム画面：エドガーの手元「技能」の《何もなかったことにする》の行（07 の「技能《隠す》」）（抽出側の綴りでも同じ画面）",
+        "w": 704,
+        "h": 198
+      }
+    ],
+    "CARD_DOC:n-card-skill:@rule_lure": [
+      {
+        "file": "media/gameview/u_CARD_DOC_n-card-skill_@rule_lure-01.webp",
+        "caption": "ゲーム画面：ヴィオラの手元「技能」の《誘引》の行（07 の「ヴィオラの《誘引》」）（抽出側の綴りでも同じ画面）",
+        "w": 704,
+        "h": 198
+      }
+    ]
+  },
+  "unitNoShotReason": {
+    "CARD:INFO-J-LEON": "ゲーム内に情報カードの画面が無い（「リックが拾った一頁」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD:INFO-E-NOTE": "ゲーム内に情報カードの画面が無い（「置き手紙めいた一行」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD:INFO-E-HANDBOTTLE": "ゲーム内に情報カードの画面が無い（「手元の空き瓶」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD:INFO-E-BODY3": "ゲーム内に情報カードの画面が無い（「専門判定」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD:INFO-E-BODY5": "ゲーム内に情報カードの画面が無い（「専門判定」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD:INFO-E-LETTER": "ゲーム内に情報カードの画面が無い（「エドガーへの手紙」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "CARD_DOC:n-card-case:INFO-E-LETTER": "ゲーム内に情報カードの画面が無い（「エドガーへの手紙」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）",
+    "ITEMSEC:n-card-items:6": "GM専用の注記（鑑定で分かることは《鑑定》の対象選択で1品ずつ出る。一覧の画面は無い）"
+  },
+  "unitMeta": {
+    "HO:n-ho-pc1-1:0_intro": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc1-1:3_companions": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "仲間のこと",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc1-1:1_goals": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "あなたの目的",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc1-1:2_knows": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "あなたが知っていること",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc1-1:4_skills": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "スキル",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc1-1:5_speech": {
+      "pageId": "n-ho-pc1-1",
+      "kind": "ho",
+      "heading": "話し方",
+      "tab": "PC1 ミレイユ・アルセア の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:0_intro": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:4_companions": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "仲間のこと",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:5_disgord": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "《Disgord》（あなたの通信機）",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:1_goals": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "あなたの目的",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:2_secrets": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "あなたの胸にしまっていること（自分から言わなくてよい）",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:3_knows": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "あなたが知っていること",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:6_skills": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "スキル",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc2-1:7_speech": {
+      "pageId": "n-ho-pc2-1",
+      "kind": "ho",
+      "heading": "話し方",
+      "tab": "PC2 ヴィオラ・クロウ の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:0_intro": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:1_companions": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "仲間のこと（全員と顔見知りなのは、あなただけ）",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:2_goals": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "あなたの目的",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:3_secrets": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "あなたの胸にしまっていること（言いたくない）",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:4_knows": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "あなたが知っていること",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:5_skills": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "スキル",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc3-1:6_speech": {
+      "pageId": "n-ho-pc3-1",
+      "kind": "ho",
+      "heading": "話し方",
+      "tab": "PC3 ミクシィ・グリー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:0_intro": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:1_goals": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "あなたの目的（公開してよい）",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:2_secrets": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "あなたの秘密目標（絶対に言わない）",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:3_steps": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "あなたの手順",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:4_hiding": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "隠し方の指針",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:5_skills": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "スキル",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-pc4-1:6_speech": {
+      "pageId": "n-ho-pc4-1",
+      "kind": "ho",
+      "heading": "話し方",
+      "tab": "PC4 エドガー・アーサー・ハンザー の「あなたのHO」"
+    },
+    "HO:n-ho-common:0_intro": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "「共通HO」"
+    },
+    "HO:n-ho-common:1_依頼の内容": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "依頼の内容",
+      "tab": "「共通HO」"
+    },
+    "HO:n-ho-common:2_生還したトマの証言": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "生還したトマの証言",
+      "tab": "「共通HO」"
+    },
+    "HO:n-ho-common:3_任務": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "任務",
+      "tab": "「共通HO」"
+    },
+    "HO:n-ho-common:4_共通認識": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "共通認識",
+      "tab": "「共通HO」"
+    },
+    "HO:n-ho-common:5_支給品HO読み込み時全員": {
+      "pageId": "n-ho-common",
+      "kind": "ho",
+      "heading": "支給品-HO読み込み時全員追加で1つ選択すること",
+      "tab": "「共通HO」"
+    },
+    "ROOM:U0": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U0"
+    },
+    "ROOM:U1": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U1"
+    },
+    "ROOM:U2": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U2"
+    },
+    "ROOM:U3": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U3"
+    },
+    "ROOM:U4": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U4"
+    },
+    "ROOM:U5": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U5"
+    },
+    "ROOM:U6": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U6"
+    },
+    "ROOM:U7": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U7"
+    },
+    "ROOM:U8": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U8"
+    },
+    "ROOM:U9": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U9"
+    },
+    "ROOM:U10": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U10"
+    },
+    "ROOM:U11": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U11"
+    },
+    "ROOM:U12": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "U12"
+    },
+    "ROOM:L0": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L0"
+    },
+    "ROOM:L1": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L1"
+    },
+    "ROOM:L2": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L2"
+    },
+    "ROOM:L3": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L3"
+    },
+    "ROOM:L4": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L4"
+    },
+    "ROOM:L5": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L5"
+    },
+    "ROOM:L6": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L6"
+    },
+    "ROOM:L7": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L7"
+    },
+    "ROOM:L8": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L8"
+    },
+    "ROOM:L9": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L9"
+    },
+    "ROOM:L10": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L10"
+    },
+    "ROOM:L11": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L11"
+    },
+    "ROOM:L12": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L12"
+    },
+    "ROOM:L13": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L13"
+    },
+    "ROOM:L14": {
+      "pageId": "n-card-rooms",
+      "kind": "room",
+      "heading": "L14"
+    },
+    "CARD:INFO-A-TRACK": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "追尾特性"
+    },
+    "CARD:INFO-A-SUPPLY": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "外部からの魔力供給"
+    },
+    "CARD:INFO-A-PRIORITY": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "攻撃優先順位"
+    },
+    "CARD:INFO-A-RING": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "封印環の固定点"
+    },
+    "CARD:INFO-A-PATH": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "再生経路制御"
+    },
+    "CARD:INFO-A-THEORY": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "守護核停止論"
+    },
+    "CARD:INFO-E-BODY1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "致命傷が見当たらない"
+    },
+    "CARD:INFO-E-BODY2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "体内性の異常"
+    },
+    "CARD:INFO-E-TIMING": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "投与時期推定"
+    },
+    "CARD:INFO-E-POSSESSIONS": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "リックの携行品"
+    },
+    "CARD:INFO-E-SYMPTOMS": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "症状メモ"
+    },
+    "CARD:INFO-E-MOTIVE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "未送信の手紙"
+    },
+    "CARD:INFO-E-NOOTHER": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "救出後の摂取"
+    },
+    "CARD:INFO-E-LEDGER": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "救難所物資台帳"
+    },
+    "CARD:INFO-E-BOTTLE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "空き瓶の山"
+    },
+    "CARD:INFO-E-DISGORD1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "影写しの記録"
+    },
+    "CARD:INFO-E-SUPPLY": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "支給台帳の写し"
+    },
+    "CARD:INFO-E-COMPARE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "所持品の見比べ"
+    },
+    "CARD:INFO-E-DISGORD2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "乱れの形"
+    },
+    "CARD:INFO-E-SOURCE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "工作素材の出所"
+    },
+    "CARD:INFO-E-FORGED": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "現場と探索履歴の不整合"
+    },
+    "CARD:INFO-E-SCENE1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇周辺"
+    },
+    "CARD:INFO-E-SCENE2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "手元の瓶の中"
+    },
+    "CARD:INFO-E-SCENE3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "事故痕の違和感"
+    },
+    "CARD:INFO-W-U1-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "西警備用小扉"
+    },
+    "CARD:INFO-W-U2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "騎士団長ミクロソフツ"
+    },
+    "CARD:INFO-W-U2-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "団長と副長"
+    },
+    "CARD:INFO-W-U3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "地下へ続く整備孔"
+    },
+    "CARD:INFO-W-U3-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "灰色の石粉"
+    },
+    "CARD:INFO-W-U4": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "水門の操作"
+    },
+    "CARD:INFO-W-U4-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇へ届かない水"
+    },
+    "CARD:INFO-W-U5": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "対守護者装備"
+    },
+    "CARD:INFO-W-U5-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "空の封印鞘"
+    },
+    "CARD:INFO-W-U6": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "名簿を読む声"
+    },
+    "CARD:INFO-W-U6-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "削られた一名"
+    },
+    "CARD:INFO-W-U7": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "救難所の薬品棚"
+    },
+    "CARD:INFO-W-U8": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "二人の英雄"
+    },
+    "CARD:INFO-W-U9": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "守護者計画"
+    },
+    "CARD:INFO-W-U9-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "交換される肉体"
+    },
+    "CARD:INFO-W-U9-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "人格侵食"
+    },
+    "CARD:INFO-W-U10-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一致する魔力"
+    },
+    "CARD:INFO-W-U10-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "分核の目録"
+    },
+    "CARD:INFO-W-U11": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "内部封鎖"
+    },
+    "CARD:INFO-W-U12": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "二つの施設"
+    },
+    "CARD:INFO-W-L0": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇前の装置"
+    },
+    "CARD:INFO-W-L1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "墓廊の死亡日"
+    },
+    "CARD:INFO-W-L1-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "最後の命令"
+    },
+    "CARD:INFO-N-ELDIN": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "消された副長の名"
+    },
+    "CARD:INFO-W-L2-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "封印剣"
+    },
+    "CARD:INFO-N-STYLE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "エコー流"
+    },
+    "CARD:INFO-W-L3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "封印損傷痕"
+    },
+    "CARD:INFO-N-USED": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一度だけ使われた剣"
+    },
+    "CARD:INFO-W-L4": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "王家秘蔵品"
+    },
+    "CARD:INFO-W-L4-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "黒曜の呪物"
+    },
+    "CARD:INFO-W-L5-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "殺害者の波形"
+    },
+    "CARD:INFO-E-WOUND": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "本物の追跡者傷"
+    },
+    "CARD:INFO-W-L6-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "接続対象の拡張"
+    },
+    "CARD:INFO-W-L6-B": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "空の器"
+    },
+    "CARD:INFO-N-SEVER": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "接続者の切離し"
+    },
+    "CARD:INFO-E-MAGIC": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "追跡者の攻撃魔力"
+    },
+    "CARD:INFO-W-L7": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "地下水流"
+    },
+    "CARD:INFO-W-L7-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "深層水泥"
+    },
+    "CARD:INFO-W-L8": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "隔離規定"
+    },
+    "CARD:INFO-W-L8-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇水位記録"
+    },
+    "CARD:INFO-W-L9": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "終わらない捜索"
+    },
+    "CARD:INFO-W-L10": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "最後の精神記録"
+    },
+    "CARD:INFO-W-L10-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "完了条件"
+    },
+    "CARD:INFO-W-L12": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "自分に向けた跡"
+    },
+    "CARD:INFO-N-ERASE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "移管目録"
+    },
+    "CARD:INFO-K-BLACK1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "黒くなる体"
+    },
+    "CARD:INFO-K-BLACK2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "黒い者たち"
+    },
+    "CARD:INFO-A-BLACK": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "黒を追う"
+    },
+    "CARD:REC-U2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "済の欄"
+    },
+    "CARD:REC-U8": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "外套"
+    },
+    "CARD:REC-U9": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "ズゥーム殿の往診"
+    },
+    "CARD:REC-L1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "伝声管の知らせ"
+    },
+    "CARD:REC-L8": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "研究主任の悔恨"
+    },
+    "CARD:INFO-K-U1-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "伝声管の頁"
+    },
+    "CARD:INFO-K-U1-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "夜の縄"
+    },
+    "CARD:INFO-K-U5-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "扉の前で眠る団長"
+    },
+    "CARD:INFO-J-U6": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "団長の最期"
+    },
+    "CARD:INFO-J-L2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "誰にも殺されていない"
+    },
+    "CARD:INFO-N-NOTE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "副長の覚え書き"
+    },
+    "CARD:INFO-K-L3-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "工房の控え"
+    },
+    "CARD:INFO-K-L4-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "伝令の控え帳"
+    },
+    "CARD:INFO-K-L4-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "会議録"
+    },
+    "CARD:INFO-K-L5-1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "実験の経過記録"
+    },
+    "CARD:INFO-W-L6-OVER": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "過充填の記録"
+    },
+    "CARD:INFO-K-L6-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "回路の趣意書"
+    },
+    "CARD:INFO-K-HAIREI-CARE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "灰嶺から来た者たちの経過"
+    },
+    "CARD:INFO-K-KUROZU": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "クロヅクメーの記録"
+    },
+    "CARD:INFO-K-L10-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "渡さなかった手紙"
+    },
+    "CARD:INFO-N-MARK": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一瞬見えたもの"
+    },
+    "CARD:INFO-K-L12-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "封印剣の注文札"
+    },
+    "CARD:INFO-E-DIAGNOSIS": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "魔力の暴走の跡"
+    },
+    "CARD:INFO-X-WOUNDS": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "致命傷ではない"
+    },
+    "CARD:INFO-N-MARK-PC1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一瞬見えたもの"
+    },
+    "CARD:INFO-P3-A": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "トマの手帳"
+    },
+    "CARD:INFO-P6-A": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "胸の古傷"
+    },
+    "CARD:INFO-P9-B2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "焦げていない外套"
+    },
+    "CARD:INFO-P9-W": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "最初に見た祭壇"
+    },
+    "CARD:INFO-E-CAUSE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "死因の診断"
+    },
+    "CARD:INFO-K-HAIREI-MIR": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "同じ所から"
+    },
+    "CARD:INFO-E-WAVE1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一本だけの反応"
+    },
+    "CARD:INFO-X-COREPULSE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "核の脈"
+    },
+    "CARD:INFO-N-MARK-PC2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一瞬見えたもの"
+    },
+    "CARD:INFO-P3-B": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "再生中の呟き"
+    },
+    "CARD:INFO-P7-LEON": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "鳴る剣"
+    },
+    "CARD:INFO-K-V1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "同じ根"
+    },
+    "CARD:INFO-K-V2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "網のつながり"
+    },
+    "CARD:INFO-K-V3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "共鳴"
+    },
+    "CARD:INFO-K-NOTE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "研究ノート"
+    },
+    "CARD:INFO-X-LEON-PRE": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "深い傷と黒い痣"
+    },
+    "CARD:INFO-P6-M": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "夜の番の小部屋"
+    },
+    "CARD:INFO-P9-B3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇の床の回路"
+    },
+    "CARD:INFO-P9-XV": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "殻の薄い所"
+    },
+    "CARD:INFO-P9-X1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "装置に残る登録"
+    },
+    "CARD:INFO-E-CONTAMINATION": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "内側からの魔力汚染"
+    },
+    "CARD:INFO-X-CONNECTION": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "黒い魔力反応"
+    },
+    "CARD:INFO-W-L8-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "灰嶺分核の事故"
+    },
+    "CARD:INFO-N-MARK-PC3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一瞬見えたもの"
+    },
+    "CARD:INFO-P3-C": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "リックの第一声"
+    },
+    "CARD:INFO-P9-A": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "受け止めた一撃"
+    },
+    "CARD:INFO-P9-B4": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "外套の留め具"
+    },
+    "CARD:INFO-P9-C3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "名に止まる足"
+    },
+    "CARD:INFO-P9-X2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "再生の拍"
+    },
+    "CARD:INFO-M-U1-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "閉めっぱなしの蓋"
+    },
+    "CARD:INFO-M-U1-2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "鈴の夜"
+    },
+    "CARD:INFO-M-U2-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "袖を二回"
+    },
+    "CARD:INFO-M-U5": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "いびき"
+    },
+    "CARD:INFO-M-U8": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "オウム返し"
+    },
+    "CARD:INFO-M-U8-3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "鳴る剣術"
+    },
+    "CARD:INFO-M-PUR1": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "見覚えのある構え"
+    },
+    "CARD:INFO-M-PUR2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "外套の裾"
+    },
+    "CARD:INFO-X-DIAGMEMO": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "診断メモ"
+    },
+    "CARD:INFO-N-MARK-PC4": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "一瞬見えたもの"
+    },
+    "CARD:INFO-P3-B2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "流れ込む光"
+    },
+    "CARD:INFO-P3-E": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "通り過ぎた巨体"
+    },
+    "CARD:INFO-P9-B": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "祭壇脇の隙間"
+    },
+    "CARD:INFO-P9-C2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "振り向いた追跡者"
+    },
+    "CARD:INFO-P9-X3": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "断つ線"
+    },
+    "CARD:INFO-K-HAIREI-EDG": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "埋め戻した坑道"
+    },
+    "CARD:INFO-N-STYLE@07": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "エコー流",
+      "aliasOf": "CARD:INFO-N-STYLE"
+    },
+    "CARD:INFO-E-DISGORD1_2": {
+      "pageId": null,
+      "kind": "card",
+      "heading": "影写しの記録",
+      "aliasOf": "CARD:INFO-E-DISGORD1"
+    },
+    "ITEMSEC:n-card-items:0": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "消耗品"
+    },
+    "ITEMSEC:n-card-items-pl:0": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "消耗品"
+    },
+    "ITEMSEC:n-card-items:1": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "お宝"
+    },
+    "ITEMSEC:n-card-items-pl:1": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "お宝"
+    },
+    "ITEMSEC:n-card-items:2": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "お宝・使える"
+    },
+    "ITEMSEC:n-card-items-pl:2": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "お宝・使える"
+    },
+    "ITEMSEC:n-card-items:3": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "装備"
+    },
+    "ITEMSEC:n-card-items-pl:3": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "装備"
+    },
+    "ITEMSEC:n-card-items:4": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "道具"
+    },
+    "ITEMSEC:n-card-items-pl:4": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "道具"
+    },
+    "ITEMSEC:n-card-items:5": {
+      "pageId": "n-card-items",
+      "kind": "itemsec",
+      "heading": "素材"
+    },
+    "ITEMSEC:n-card-items-pl:5": {
+      "pageId": "n-card-items-pl",
+      "kind": "itemsec",
+      "heading": "素材"
+    },
+    "HO:n-ho-pc1-2:0_intro": {
+      "pageId": "n-ho-pc1-2",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC1_2"
+    },
+    "HO:n-ho-pc1-2:1_あなたが今できること": {
+      "pageId": "n-ho-pc1-2",
+      "kind": "ho",
+      "heading": "あなたが今できること",
+      "tab": "追加HOの窓",
+      "key": "PC1_2"
+    },
+    "HO:n-ho-pc1-3:0_intro": {
+      "pageId": "n-ho-pc1-3",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC1_3"
+    },
+    "HO:n-ho-pc1-3:1_追加された目標": {
+      "pageId": "n-ho-pc1-3",
+      "kind": "ho",
+      "heading": "追加された目標",
+      "tab": "追加HOの窓",
+      "key": "PC1_3"
+    },
+    "HO:n-ho-pc1-3:2_知っておくこと": {
+      "pageId": "n-ho-pc1-3",
+      "kind": "ho",
+      "heading": "知っておくこと",
+      "tab": "追加HOの窓",
+      "key": "PC1_3"
+    },
+    "HO:n-ho-pc1-4:0_intro": {
+      "pageId": "n-ho-pc1-4",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC1_4"
+    },
+    "HO:n-ho-pc1-4:1_前室で見たもの": {
+      "pageId": "n-ho-pc1-4",
+      "kind": "ho",
+      "heading": "前室で見たもの",
+      "tab": "追加HOの窓",
+      "key": "PC1_4"
+    },
+    "HO:n-ho-pc1-4:2_追加された目標": {
+      "pageId": "n-ho-pc1-4",
+      "kind": "ho",
+      "heading": "追加された目標",
+      "tab": "追加HOの窓",
+      "key": "PC1_4"
+    },
+    "HO:n-ho-pc2-2:0_intro": {
+      "pageId": "n-ho-pc2-2",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC2_2"
+    },
+    "HO:n-ho-pc2-2:1_あなたが知ったこと": {
+      "pageId": "n-ho-pc2-2",
+      "kind": "ho",
+      "heading": "あなたが知ったこと",
+      "tab": "追加HOの窓",
+      "key": "PC2_2"
+    },
+    "HO:n-ho-pc2-2:2_あなたが決めること": {
+      "pageId": "n-ho-pc2-2",
+      "kind": "ho",
+      "heading": "あなたが決めること",
+      "tab": "追加HOの窓",
+      "key": "PC2_2"
+    },
+    "HO:n-ho-pc2-3:0_intro": {
+      "pageId": "n-ho-pc2-3",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC2_3"
+    },
+    "HO:n-ho-pc2-3:1_追加された目標": {
+      "pageId": "n-ho-pc2-3",
+      "kind": "ho",
+      "heading": "追加された目標（誰にも言わない）",
+      "tab": "追加HOの窓",
+      "key": "PC2_3"
+    },
+    "HO:n-ho-pc2-3:2_新しくできること": {
+      "pageId": "n-ho-pc2-3",
+      "kind": "ho",
+      "heading": "新しくできること",
+      "tab": "追加HOの窓",
+      "key": "PC2_3"
+    },
+    "HO:n-ho-pc2-3:3_secrets": {
+      "pageId": "n-ho-pc2-3",
+      "kind": "ho",
+      "heading": "あなたの胸にしまっていること",
+      "tab": "追加HOの窓",
+      "key": "PC2_3"
+    },
+    "HO:n-ho-pc2-4:0_intro": {
+      "pageId": "n-ho-pc2-4",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC2_4"
+    },
+    "HO:n-ho-pc2-4:1_研究ノート": {
+      "pageId": "n-ho-pc2-4",
+      "kind": "ho",
+      "heading": "研究ノート（分かったこと）",
+      "tab": "追加HOの窓",
+      "key": "PC2_4"
+    },
+    "HO:n-ho-pc2-5:0_intro": {
+      "pageId": "n-ho-pc2-5",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC2_5"
+    },
+    "HO:n-ho-pc2-5:1_追加された目標": {
+      "pageId": "n-ho-pc2-5",
+      "kind": "ho",
+      "heading": "追加された目標（誰にも言わない）",
+      "tab": "追加HOの窓",
+      "key": "PC2_5"
+    },
+    "HO:n-ho-pc2-5:2_secrets": {
+      "pageId": "n-ho-pc2-5",
+      "kind": "ho",
+      "heading": "あなたの胸にしまっていること",
+      "tab": "追加HOの窓",
+      "key": "PC2_5"
+    },
+    "HO:n-ho-pc3-2:1_その1――ミクロソフツチ": {
+      "pageId": "n-ho-pc3-2",
+      "kind": "ho",
+      "heading": "その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき",
+      "tab": "追加HOの窓",
+      "key": "PC3_2_1"
+    },
+    "HO:n-ho-pc3-2:0_intro": {
+      "pageId": "n-ho-pc3-2",
+      "kind": "ho",
+      "heading": "（冒頭・画面には出ない）",
+      "tab": "追加HOの窓",
+      "key": "PC3_2_1",
+      "aliasOf": "HO:n-ho-pc3-2:1_その1――ミクロソフツチ"
+    },
+    "HO:n-ho-pc3-2:2_その2――副長の名と覚え": {
+      "pageId": "n-ho-pc3-2",
+      "kind": "ho",
+      "heading": "その2 ―― 副長の名と、覚え書きを読んだとき",
+      "tab": "追加HOの窓",
+      "key": "PC3_2_2"
+    },
+    "HO:n-ho-pc3-2:3_あなたが分かること": {
+      "pageId": "n-ho-pc3-2",
+      "kind": "ho",
+      "heading": "あなたが分かること",
+      "tab": "追加HOの窓",
+      "key": "PC3_2_2"
+    },
+    "HO:n-ho-pc3-2:4_あなたにできること": {
+      "pageId": "n-ho-pc3-2",
+      "kind": "ho",
+      "heading": "あなたにできること",
+      "tab": "追加HOの窓",
+      "key": "PC3_2_2"
+    },
+    "HO:n-ho-pc3-3:0_intro": {
+      "pageId": "n-ho-pc3-3",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC3_3"
+    },
+    "HO:n-ho-pc3-3:1_追加された目標": {
+      "pageId": "n-ho-pc3-3",
+      "kind": "ho",
+      "heading": "追加された目標",
+      "tab": "追加HOの窓",
+      "key": "PC3_3"
+    },
+    "HO:n-ho-pc3-4:0_intro": {
+      "pageId": "n-ho-pc3-4",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC3_4"
+    },
+    "HO:n-ho-pc3-4:1_思い出したこと": {
+      "pageId": "n-ho-pc3-4",
+      "kind": "ho",
+      "heading": "思い出したこと",
+      "tab": "追加HOの窓",
+      "key": "PC3_4"
+    },
+    "HO:n-ho-pc3-5:0_intro": {
+      "pageId": "n-ho-pc3-5",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC3_5"
+    },
+    "HO:n-ho-pc3-5:1_思い出したこと": {
+      "pageId": "n-ho-pc3-5",
+      "kind": "ho",
+      "heading": "思い出したこと",
+      "tab": "追加HOの窓",
+      "key": "PC3_5"
+    },
+    "HO:n-ho-pc3-6:0_intro": {
+      "pageId": "n-ho-pc3-6",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC3_6"
+    },
+    "HO:n-ho-pc3-6:1_思い出したこと": {
+      "pageId": "n-ho-pc3-6",
+      "kind": "ho",
+      "heading": "思い出したこと",
+      "tab": "追加HOの窓",
+      "key": "PC3_6"
+    },
+    "HO:n-ho-pc4-2:0_intro": {
+      "pageId": "n-ho-pc4-2",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC4_2"
+    },
+    "HO:n-ho-pc4-2:1_この場面であなたがするこ": {
+      "pageId": "n-ho-pc4-2",
+      "kind": "ho",
+      "heading": "この場面であなたがすること",
+      "tab": "追加HOの窓",
+      "key": "PC4_2"
+    },
+    "HO:n-ho-pc4-2:2_これから起きること": {
+      "pageId": "n-ho-pc4-2",
+      "kind": "ho",
+      "heading": "これから起きること（あなたは知っている）",
+      "tab": "追加HOの窓",
+      "key": "PC4_2"
+    },
+    "HO:n-ho-pc4-2:3_気をつけること": {
+      "pageId": "n-ho-pc4-2",
+      "kind": "ho",
+      "heading": "気をつけること",
+      "tab": "追加HOの窓",
+      "key": "PC4_2"
+    },
+    "HO:n-ho-pc4-2:4_それでもあなたが守りたい": {
+      "pageId": "n-ho-pc4-2",
+      "kind": "ho",
+      "heading": "それでも、あなたが守りたいもの",
+      "tab": "追加HOの窓",
+      "key": "PC4_2"
+    },
+    "HO:n-ho-pc4-3:0_intro": {
+      "pageId": "n-ho-pc4-3",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC4_3"
+    },
+    "HO:n-ho-pc4-3:1_この場面であなたが決める": {
+      "pageId": "n-ho-pc4-3",
+      "kind": "ho",
+      "heading": "この場面であなたが決めること（画面で選ぶ）",
+      "tab": "追加HOの窓",
+      "key": "PC4_3"
+    },
+    "HO:n-ho-pc4-3:2_気をつけること": {
+      "pageId": "n-ho-pc4-3",
+      "kind": "ho",
+      "heading": "気をつけること",
+      "tab": "追加HOの窓",
+      "key": "PC4_3"
+    },
+    "HO:n-ho-pc4-4:0_intro": {
+      "pageId": "n-ho-pc4-4",
+      "kind": "ho",
+      "heading": "（冒頭）",
+      "tab": "追加HOの窓",
+      "key": "PC4_4"
+    },
+    "HO:n-ho-pc4-4:1_前室で見たもの": {
+      "pageId": "n-ho-pc4-4",
+      "kind": "ho",
+      "heading": "前室で見たもの",
+      "tab": "追加HOの窓",
+      "key": "PC4_4"
+    },
+    "HO:n-ho-pc4-4:2_追加された目標": {
+      "pageId": "n-ho-pc4-4",
+      "kind": "ho",
+      "heading": "追加された目標（誰にも言わない）",
+      "tab": "追加HOの窓",
+      "key": "PC4_4"
+    },
+    "CARD_DOC:n-card-skill:@rule:hideNone": {
+      "pageId": "n-card-skill",
+      "kind": "card_doc",
+      "heading": "hide"
+    },
+    "CARD_DOC:n-card-skill:@rule:lure": {
+      "pageId": "n-card-skill",
+      "kind": "card_doc",
+      "heading": "lure"
+    },
+    "CARD_DOC:n-card-skill:@rule_hideNone": {
+      "pageId": "n-card-skill",
+      "kind": "card_doc",
+      "heading": "hide",
+      "aliasOf": "CARD_DOC:n-card-skill:@rule:hideNone"
+    },
+    "CARD_DOC:n-card-skill:@rule_lure": {
+      "pageId": "n-card-skill",
+      "kind": "card_doc",
+      "heading": "lure",
+      "aliasOf": "CARD_DOC:n-card-skill:@rule:lure"
+    }
+  },
+  "unitCounts": {
+    "units": 266,
+    "noShot": 8,
+    "images": 302,
+    "expected": 270,
+    "missing": 0
+  },
+  "hoPages": [
+    {
+      "pageId": "n-ho-common",
+      "file": "00_共通HO.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "依頼の内容",
+          "heading": "依頼の内容"
+        },
+        {
+          "idx": 2,
+          "key": "生還したトマの証言",
+          "heading": "生還したトマの証言"
+        },
+        {
+          "idx": 3,
+          "key": "任務",
+          "heading": "任務"
+        },
+        {
+          "idx": 4,
+          "key": "共通認識",
+          "heading": "共通認識"
+        },
+        {
+          "idx": 5,
+          "key": "支給品HO読み込み時全員",
+          "heading": "支給品-HO読み込み時全員追加で1つ選択すること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "file": "PC1_ミレイユ_①事前HO.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "goals",
+          "heading": "あなたの目的"
+        },
+        {
+          "idx": 2,
+          "key": "knows",
+          "heading": "あなたが知っていること"
+        },
+        {
+          "idx": 3,
+          "key": "companions",
+          "heading": "仲間のこと"
+        },
+        {
+          "idx": 4,
+          "key": "skills",
+          "heading": "スキル"
+        },
+        {
+          "idx": 5,
+          "key": "speech",
+          "heading": "話し方"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc1-2",
+      "file": "PC1_ミレイユ_②追加HO_P4《再会》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "あなたが今できること",
+          "heading": "あなたが今できること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc1-3",
+      "file": "PC1_ミレイユ_③追加HO_P4《二人きりで》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "追加された目標",
+          "heading": "追加された目標"
+        },
+        {
+          "idx": 2,
+          "key": "知っておくこと",
+          "heading": "知っておくこと"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc1-4",
+      "file": "PC1_ミレイユ_④追加HO_P7《前室の図》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "前室で見たもの",
+          "heading": "前室で見たもの"
+        },
+        {
+          "idx": 2,
+          "key": "追加された目標",
+          "heading": "追加された目標"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "file": "PC2_ヴィオラ_①事前HO.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "goals",
+          "heading": "あなたの目的"
+        },
+        {
+          "idx": 2,
+          "key": "secrets",
+          "heading": "あなたの胸にしまっていること（自分から言わなくてよい）"
+        },
+        {
+          "idx": 3,
+          "key": "knows",
+          "heading": "あなたが知っていること"
+        },
+        {
+          "idx": 4,
+          "key": "companions",
+          "heading": "仲間のこと"
+        },
+        {
+          "idx": 5,
+          "key": "disgord",
+          "heading": "《Disgord》（あなたの通信機）"
+        },
+        {
+          "idx": 6,
+          "key": "skills",
+          "heading": "スキル"
+        },
+        {
+          "idx": 7,
+          "key": "speech",
+          "heading": "話し方"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc2-2",
+      "file": "PC2_ヴィオラ_②追加HO《黒い反応》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "あなたが知ったこと",
+          "heading": "あなたが知ったこと"
+        },
+        {
+          "idx": 2,
+          "key": "あなたが決めること",
+          "heading": "あなたが決めること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc2-3",
+      "file": "PC2_ヴィオラ_③追加HO_P6《今できること》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "追加された目標",
+          "heading": "追加された目標（誰にも言わない）"
+        },
+        {
+          "idx": 2,
+          "key": "新しくできること",
+          "heading": "新しくできること"
+        },
+        {
+          "idx": 3,
+          "key": "secrets",
+          "heading": "あなたの胸にしまっていること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc2-4",
+      "file": "PC2_ヴィオラ_④追加HO《書庫の続き》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "研究ノート",
+          "heading": "研究ノート（分かったこと）"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc2-5",
+      "file": "PC2_ヴィオラ_⑤追加HO_P10《リックの死因》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "追加された目標",
+          "heading": "追加された目標（誰にも言わない）"
+        },
+        {
+          "idx": 2,
+          "key": "secrets",
+          "heading": "あなたの胸にしまっていること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "file": "PC3_ミクシィ_①事前HO.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "companions",
+          "heading": "仲間のこと（全員と顔見知りなのは、あなただけ）"
+        },
+        {
+          "idx": 2,
+          "key": "goals",
+          "heading": "あなたの目的"
+        },
+        {
+          "idx": 3,
+          "key": "secrets",
+          "heading": "あなたの胸にしまっていること（言いたくない）"
+        },
+        {
+          "idx": 4,
+          "key": "knows",
+          "heading": "あなたが知っていること"
+        },
+        {
+          "idx": 5,
+          "key": "skills",
+          "heading": "スキル"
+        },
+        {
+          "idx": 6,
+          "key": "speech",
+          "heading": "話し方"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-2",
+      "file": "PC3_ミクシィ_②追加HO《名前の記憶》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "その1――ミクロソフツチ",
+          "heading": "その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき"
+        },
+        {
+          "idx": 2,
+          "key": "その2――副長の名と覚え",
+          "heading": "その2 ―― 副長の名と、覚え書きを読んだとき"
+        },
+        {
+          "idx": 3,
+          "key": "あなたが分かること",
+          "heading": "あなたが分かること"
+        },
+        {
+          "idx": 4,
+          "key": "あなたにできること",
+          "heading": "あなたにできること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-3",
+      "file": "PC3_ミクシィ_③追加HO_P7《あのあとの砦》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "追加された目標",
+          "heading": "追加された目標"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-4",
+      "file": "PC3_ミクシィ_④追加HO《柱の欠け》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "思い出したこと",
+          "heading": "思い出したこと"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-5",
+      "file": "PC3_ミクシィ_⑤追加HO《詰所の掛け板》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "思い出したこと",
+          "heading": "思い出したこと"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc3-6",
+      "file": "PC3_ミクシィ_⑥追加HO《手当て部屋》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "思い出したこと",
+          "heading": "思い出したこと"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "file": "PC4_エドガー_①事前HO.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "goals",
+          "heading": "あなたの目的（公開してよい）"
+        },
+        {
+          "idx": 2,
+          "key": "secrets",
+          "heading": "あなたの秘密目標（絶対に言わない）"
+        },
+        {
+          "idx": 3,
+          "key": "steps",
+          "heading": "あなたの手順"
+        },
+        {
+          "idx": 4,
+          "key": "hiding",
+          "heading": "隠し方の指針"
+        },
+        {
+          "idx": 5,
+          "key": "skills",
+          "heading": "スキル"
+        },
+        {
+          "idx": 6,
+          "key": "speech",
+          "heading": "話し方"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc4-2",
+      "file": "PC4_エドガー_②追加HO_P3《黒い痕》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "この場面であなたがするこ",
+          "heading": "この場面であなたがすること"
+        },
+        {
+          "idx": 2,
+          "key": "これから起きること",
+          "heading": "これから起きること（あなたは知っている）"
+        },
+        {
+          "idx": 3,
+          "key": "気をつけること",
+          "heading": "気をつけること"
+        },
+        {
+          "idx": 4,
+          "key": "それでもあなたが守りたい",
+          "heading": "それでも、あなたが守りたいもの"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc4-3",
+      "file": "PC4_エドガー_③追加HO_P9《祭壇の陰で》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "この場面であなたが決める",
+          "heading": "この場面であなたが決めること（画面で選ぶ）"
+        },
+        {
+          "idx": 2,
+          "key": "気をつけること",
+          "heading": "気をつけること"
+        }
+      ]
+    },
+    {
+      "pageId": "n-ho-pc4-4",
+      "file": "PC4_エドガー_④追加HO_P7《同じ積み方》.md",
+      "sections": [
+        {
+          "idx": 0,
+          "key": "intro",
+          "heading": ""
+        },
+        {
+          "idx": 1,
+          "key": "前室で見たもの",
+          "heading": "前室で見たもの"
+        },
+        {
+          "idx": 2,
+          "key": "追加された目標",
+          "heading": "追加された目標（誰にも言わない）"
+        }
+      ]
+    }
+  ],
+  "hoShotLog": [
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "ミレイユ・アルセア",
+      "unit": "HO:n-ho-pc1-1:0_intro",
+      "secIdx": 0,
+      "key": "intro"
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "仲間のこと",
+      "unit": "HO:n-ho-pc1-1:3_companions",
+      "secIdx": 3,
+      "key": "companions"
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "あなたの目的",
+      "unit": "HO:n-ho-pc1-1:1_goals",
+      "secIdx": 1,
+      "key": "goals"
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "知っていること",
+      "unit": "HO:n-ho-pc1-1:2_knows",
+      "secIdx": 2,
+      "key": "knows"
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "技能",
+      "unit": "HO:n-ho-pc1-1:4_skills",
+      "secIdx": 4,
+      "key": "skills"
+    },
+    {
+      "pageId": "n-ho-pc1-1",
+      "heading": "話し方",
+      "unit": "HO:n-ho-pc1-1:5_speech",
+      "secIdx": 5,
+      "key": "speech"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "ヴィオラ・クロウ",
+      "unit": "HO:n-ho-pc2-1:0_intro",
+      "secIdx": 0,
+      "key": "intro"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "仲間のこと",
+      "unit": "HO:n-ho-pc2-1:4_companions",
+      "secIdx": 4,
+      "key": "companions"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "《Disgord》（あなたの通信機）",
+      "unit": "HO:n-ho-pc2-1:5_disgord",
+      "secIdx": 5,
+      "key": "disgord"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "あなたの目的",
+      "unit": "HO:n-ho-pc2-1:1_goals",
+      "secIdx": 1,
+      "key": "goals"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "秘密",
+      "unit": "HO:n-ho-pc2-1:2_secrets",
+      "secIdx": 2,
+      "key": "secrets"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "知っていること",
+      "unit": "HO:n-ho-pc2-1:3_knows",
+      "secIdx": 3,
+      "key": "knows"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "技能",
+      "unit": "HO:n-ho-pc2-1:6_skills",
+      "secIdx": 6,
+      "key": "skills"
+    },
+    {
+      "pageId": "n-ho-pc2-1",
+      "heading": "話し方",
+      "unit": "HO:n-ho-pc2-1:7_speech",
+      "secIdx": 7,
+      "key": "speech"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "ミクシィ・グリー",
+      "unit": "HO:n-ho-pc3-1:0_intro",
+      "secIdx": 0,
+      "key": "intro"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "仲間のこと",
+      "unit": "HO:n-ho-pc3-1:1_companions",
+      "secIdx": 1,
+      "key": "companions"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "あなたの目的",
+      "unit": "HO:n-ho-pc3-1:2_goals",
+      "secIdx": 2,
+      "key": "goals"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "秘密",
+      "unit": "HO:n-ho-pc3-1:3_secrets",
+      "secIdx": 3,
+      "key": "secrets"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "知っていること",
+      "unit": "HO:n-ho-pc3-1:4_knows",
+      "secIdx": 4,
+      "key": "knows"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "技能",
+      "unit": "HO:n-ho-pc3-1:5_skills",
+      "secIdx": 5,
+      "key": "skills"
+    },
+    {
+      "pageId": "n-ho-pc3-1",
+      "heading": "話し方",
+      "unit": "HO:n-ho-pc3-1:6_speech",
+      "secIdx": 6,
+      "key": "speech"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "エドガー・アーサー・ハンザー",
+      "unit": "HO:n-ho-pc4-1:0_intro",
+      "secIdx": 0,
+      "key": "intro"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "あなたの目的",
+      "unit": "HO:n-ho-pc4-1:1_goals",
+      "secIdx": 1,
+      "key": "goals"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "秘密",
+      "unit": "HO:n-ho-pc4-1:2_secrets",
+      "secIdx": 2,
+      "key": "secrets"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "あなたの手順",
+      "unit": "HO:n-ho-pc4-1:3_steps",
+      "secIdx": 3,
+      "key": "steps"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "隠し方の指針",
+      "unit": "HO:n-ho-pc4-1:4_hiding",
+      "secIdx": 4,
+      "key": "hiding"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "技能",
+      "unit": "HO:n-ho-pc4-1:5_skills",
+      "secIdx": 5,
+      "key": "skills"
+    },
+    {
+      "pageId": "n-ho-pc4-1",
+      "heading": "話し方",
+      "unit": "HO:n-ho-pc4-1:6_speech",
+      "secIdx": 6,
+      "key": "speech"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "共通HO — ギルドからの依頼書",
+      "unit": "HO:n-ho-common:0_intro",
+      "secIdx": 0,
+      "key": "intro"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "依頼の内容",
+      "unit": "HO:n-ho-common:1_依頼の内容",
+      "secIdx": 1,
+      "key": "依頼の内容"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "生還したトマの証言",
+      "unit": "HO:n-ho-common:2_生還したトマの証言",
+      "secIdx": 2,
+      "key": "生還したトマの証言"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "任務",
+      "unit": "HO:n-ho-common:3_任務",
+      "secIdx": 3,
+      "key": "任務"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "共通認識",
+      "unit": "HO:n-ho-common:4_共通認識",
+      "secIdx": 4,
+      "key": "共通認識"
+    },
+    {
+      "pageId": "n-ho-common",
+      "heading": "支給品-HO読み込み時全員追加で1つ選択すること",
+      "unit": "HO:n-ho-common:5_支給品HO読み込み時全員",
+      "secIdx": 5,
+      "key": "支給品HO読み込み時全員"
+    },
+    {
+      "pageId": "n-ho-pc1-2",
+      "key": "PC1_2",
+      "heading": "あなたが今できること",
+      "unit": "HO:n-ho-pc1-2:1_あなたが今できること",
+      "secIdx": 1,
+      "key_": "あなたが今できること"
+    },
+    {
+      "pageId": "n-ho-pc1-3",
+      "key": "PC1_3",
+      "heading": "追加された目標",
+      "unit": "HO:n-ho-pc1-3:1_追加された目標",
+      "secIdx": 1,
+      "key_": "追加された目標"
+    },
+    {
+      "pageId": "n-ho-pc1-3",
+      "key": "PC1_3",
+      "heading": "知っておくこと",
+      "unit": "HO:n-ho-pc1-3:2_知っておくこと",
+      "secIdx": 2,
+      "key_": "知っておくこと"
+    },
+    {
+      "pageId": "n-ho-pc1-4",
+      "key": "PC1_4",
+      "heading": "前室で見たもの",
+      "unit": "HO:n-ho-pc1-4:1_前室で見たもの",
+      "secIdx": 1,
+      "key_": "前室で見たもの"
+    },
+    {
+      "pageId": "n-ho-pc1-4",
+      "key": "PC1_4",
+      "heading": "追加された目標",
+      "unit": "HO:n-ho-pc1-4:2_追加された目標",
+      "secIdx": 2,
+      "key_": "追加された目標"
+    },
+    {
+      "pageId": "n-ho-pc2-2",
+      "key": "PC2_2",
+      "heading": "あなたが知ったこと",
+      "unit": "HO:n-ho-pc2-2:1_あなたが知ったこと",
+      "secIdx": 1,
+      "key_": "あなたが知ったこと"
+    },
+    {
+      "pageId": "n-ho-pc2-2",
+      "key": "PC2_2",
+      "heading": "あなたが決めること",
+      "unit": "HO:n-ho-pc2-2:2_あなたが決めること",
+      "secIdx": 2,
+      "key_": "あなたが決めること"
+    },
+    {
+      "pageId": "n-ho-pc2-3",
+      "key": "PC2_3",
+      "heading": "追加された目標（誰にも言わない）",
+      "unit": "HO:n-ho-pc2-3:1_追加された目標",
+      "secIdx": 1,
+      "key_": "追加された目標"
+    },
+    {
+      "pageId": "n-ho-pc2-3",
+      "key": "PC2_3",
+      "heading": "新しくできること",
+      "unit": "HO:n-ho-pc2-3:2_新しくできること",
+      "secIdx": 2,
+      "key_": "新しくできること"
+    },
+    {
+      "pageId": "n-ho-pc2-3",
+      "key": "PC2_3",
+      "heading": "あなたの胸にしまっていること",
+      "unit": "HO:n-ho-pc2-3:3_secrets",
+      "secIdx": 3,
+      "key_": "secrets"
+    },
+    {
+      "pageId": "n-ho-pc2-4",
+      "key": "PC2_4",
+      "heading": "研究ノート（分かったこと）",
+      "unit": "HO:n-ho-pc2-4:1_研究ノート",
+      "secIdx": 1,
+      "key_": "研究ノート"
+    },
+    {
+      "pageId": "n-ho-pc2-5",
+      "key": "PC2_5",
+      "heading": "追加された目標（誰にも言わない）",
+      "unit": "HO:n-ho-pc2-5:1_追加された目標",
+      "secIdx": 1,
+      "key_": "追加された目標"
+    },
+    {
+      "pageId": "n-ho-pc2-5",
+      "key": "PC2_5",
+      "heading": "あなたの胸にしまっていること",
+      "unit": "HO:n-ho-pc2-5:2_secrets",
+      "secIdx": 2,
+      "key_": "secrets"
+    },
+    {
+      "pageId": "n-ho-pc3-2",
+      "key": "PC3_2_2",
+      "heading": "あなたが分かること",
+      "unit": "HO:n-ho-pc3-2:3_あなたが分かること",
+      "secIdx": 3,
+      "key_": "あなたが分かること"
+    },
+    {
+      "pageId": "n-ho-pc3-2",
+      "key": "PC3_2_2",
+      "heading": "あなたにできること",
+      "unit": "HO:n-ho-pc3-2:4_あなたにできること",
+      "secIdx": 4,
+      "key_": "あなたにできること"
+    },
+    {
+      "pageId": "n-ho-pc3-3",
+      "key": "PC3_3",
+      "heading": "追加された目標",
+      "unit": "HO:n-ho-pc3-3:1_追加された目標",
+      "secIdx": 1,
+      "key_": "追加された目標"
+    },
+    {
+      "pageId": "n-ho-pc3-4",
+      "key": "PC3_4",
+      "heading": "思い出したこと",
+      "unit": "HO:n-ho-pc3-4:1_思い出したこと",
+      "secIdx": 1,
+      "key_": "思い出したこと"
+    },
+    {
+      "pageId": "n-ho-pc3-5",
+      "key": "PC3_5",
+      "heading": "思い出したこと",
+      "unit": "HO:n-ho-pc3-5:1_思い出したこと",
+      "secIdx": 1,
+      "key_": "思い出したこと"
+    },
+    {
+      "pageId": "n-ho-pc3-6",
+      "key": "PC3_6",
+      "heading": "思い出したこと",
+      "unit": "HO:n-ho-pc3-6:1_思い出したこと",
+      "secIdx": 1,
+      "key_": "思い出したこと"
+    },
+    {
+      "pageId": "n-ho-pc4-2",
+      "key": "PC4_2",
+      "heading": "この場面であなたがすること",
+      "unit": "HO:n-ho-pc4-2:1_この場面であなたがするこ",
+      "secIdx": 1,
+      "key_": "この場面であなたがするこ"
+    },
+    {
+      "pageId": "n-ho-pc4-2",
+      "key": "PC4_2",
+      "heading": "これから起きること（あなたは知っている）",
+      "unit": "HO:n-ho-pc4-2:2_これから起きること",
+      "secIdx": 2,
+      "key_": "これから起きること"
+    },
+    {
+      "pageId": "n-ho-pc4-2",
+      "key": "PC4_2",
+      "heading": "気をつけること",
+      "unit": "HO:n-ho-pc4-2:3_気をつけること",
+      "secIdx": 3,
+      "key_": "気をつけること"
+    },
+    {
+      "pageId": "n-ho-pc4-2",
+      "key": "PC4_2",
+      "heading": "それでも、あなたが守りたいもの",
+      "unit": "HO:n-ho-pc4-2:4_それでもあなたが守りたい",
+      "secIdx": 4,
+      "key_": "それでもあなたが守りたい"
+    },
+    {
+      "pageId": "n-ho-pc4-3",
+      "key": "PC4_3",
+      "heading": "この場面であなたが決めること（画面で選ぶ）",
+      "unit": "HO:n-ho-pc4-3:1_この場面であなたが決める",
+      "secIdx": 1,
+      "key_": "この場面であなたが決める"
+    },
+    {
+      "pageId": "n-ho-pc4-3",
+      "key": "PC4_3",
+      "heading": "気をつけること",
+      "unit": "HO:n-ho-pc4-3:2_気をつけること",
+      "secIdx": 2,
+      "key_": "気をつけること"
+    },
+    {
+      "pageId": "n-ho-pc4-4",
+      "key": "PC4_4",
+      "heading": "前室で見たもの",
+      "unit": "HO:n-ho-pc4-4:1_前室で見たもの",
+      "secIdx": 1,
+      "key_": "前室で見たもの"
+    },
+    {
+      "pageId": "n-ho-pc4-4",
+      "key": "PC4_4",
+      "heading": "追加された目標（誰にも言わない）",
+      "unit": "HO:n-ho-pc4-4:2_追加された目標",
+      "secIdx": 2,
+      "key_": "追加された目標"
+    }
+  ],
   "pages": {
     "n-charsel": [
       {
@@ -218,7 +5016,13 @@
       },
       {
         "file": "media/gameview/n-rule-phase-02.webp",
-        "caption": "ゲーム中の「資料」：フェイズ進行表（プレイヤー向け）（P2 の行き先選びの間・PC1 の画面・1/1・スクロールして撮影）",
+        "caption": "ゲーム中の「資料」：フェイズ進行表（プレイヤー向け）（P2 の行き先選びの間・PC1 の画面・1/2・スクロールして撮影）",
+        "w": 1280,
+        "h": 800
+      },
+      {
+        "file": "media/gameview/n-rule-phase-03.webp",
+        "caption": "ゲーム中の「資料」：フェイズ進行表（プレイヤー向け）（P2 の行き先選びの間・PC1 の画面・2/2・スクロールして撮影）",
         "w": 1280,
         "h": 800
       }
@@ -234,13 +5038,7 @@
     "n-rule-intro": [
       {
         "file": "media/gameview/n-rule-intro-01.webp",
-        "caption": "ゲーム中の「資料」：ダンジョン・オブ・ザ・マーダー ― プレイヤーの皆さんへ（P2 の行き先選びの間・PC1 の画面・1/2・スクロールして撮影）",
-        "w": 1280,
-        "h": 800
-      },
-      {
-        "file": "media/gameview/n-rule-intro-02.webp",
-        "caption": "ゲーム中の「資料」：ダンジョン・オブ・ザ・マーダー ― プレイヤーの皆さんへ（P2 の行き先選びの間・PC1 の画面・2/2・スクロールして撮影）",
+        "caption": "ゲーム中の「資料」：ダンジョン・オブ・ザ・マーダー ― プレイヤーの皆さんへ（P2 の行き先選びの間・PC1 の画面・1/1・スクロールして撮影）",
         "w": 1280,
         "h": 800
       }
@@ -323,6 +5121,12 @@
         "caption": "追加HO の窓：【エドガー 追加HO②】《黒い痕》（PC4 エドガー・アーサー・ハンザー の画面・P4 reading R07・3/3・窓の中をスクロールして撮影）",
         "w": 1280,
         "h": 800
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO②】《黒い痕》」（PC4_2）の冒頭",
+        "w": 960,
+        "h": 433
       }
     ],
     "n-card-board": [
@@ -331,6 +5135,172 @@
         "caption": "P5 の会議：共有カードの欄で「追尾特性」を開いたところ（PC2 ヴィオラ・クロウ の画面）",
         "w": 1280,
         "h": 800
+      }
+    ],
+    "n-ho-pc1-2": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO②】《再会》」（PC1_2）の冒頭",
+        "w": 960,
+        "h": 691
+      }
+    ],
+    "n-ho-pc1-3": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO③】《二人きりで》」（PC1_3）の冒頭",
+        "w": 960,
+        "h": 433
+      }
+    ],
+    "n-ho-pc1-4": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc1-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミレイユ 追加HO④】《前室の図》」（PC1_4）の冒頭",
+        "w": 960,
+        "h": 768
+      }
+    ],
+    "n-ho-pc2-2": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-2_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO②】《黒い反応》」（PC2_2）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 341
+      }
+    ],
+    "n-ho-pc2-3": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-3_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO③】《今できること》」（PC2_3）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 385
+      }
+    ],
+    "n-ho-pc2-4": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-4_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO④】《書庫の続き》」（PC2_4）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 808
+      }
+    ],
+    "n-ho-pc2-5": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc2-5_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ヴィオラ 追加HO⑤】《リックの死因》」（PC2_5）の冒頭",
+        "w": 960,
+        "h": 396
+      }
+    ],
+    "n-ho-pc3-2": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_1__1-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その1 ―― 「ミクロソフツ・チームズ」か「ミクシィ・グリー」の名を見たとき」（PC3_2_1）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_2__2-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-2_2__2-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO②】《名前の記憶》 その2 ―― 副長の名と、覚え書きを読んだとき」（PC3_2_2）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 664
+      }
+    ],
+    "n-ho-pc3-3": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO③】《あのあとの砦》」（PC3_3）の冒頭",
+        "w": 960,
+        "h": 639
+      }
+    ],
+    "n-ho-pc3-4": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO④】《柱の欠け》」（PC3_4）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-4_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO④】《柱の欠け》」（PC3_4）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 421
+      }
+    ],
+    "n-ho-pc3-5": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-5_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑤】《詰所の掛け板》」（PC3_5）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-5_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑤】《詰所の掛け板》」（PC3_5）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 427
+      }
+    ],
+    "n-ho-pc3-6": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc3-6_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【ミクシィ 追加HO⑥】《手当て部屋》」（PC3_6）の冒頭",
+        "w": 960,
+        "h": 662
+      }
+    ],
+    "n-ho-pc4-3": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の冒頭",
+        "w": 960,
+        "h": 823
+      },
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-3_0_intro-02.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO③】《祭壇の陰で》」（PC4_3）の冒頭（つづき・2枚目）",
+        "w": 960,
+        "h": 150
+      }
+    ],
+    "n-ho-pc4-4": [
+      {
+        "file": "media/gameview/u_HO_n-ho-pc4-4_0_intro-01.webp",
+        "caption": "ゲーム画面：追加HOの窓「【エドガー 追加HO④】《同じ積み方》」（PC4_4）の冒頭",
+        "w": 960,
+        "h": 823
       }
     ]
   }

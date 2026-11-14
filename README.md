@@ -17,6 +17,20 @@
 - 種類は修正案の `character` 欄に入る（`edit` 直した文／`del` 削除／`del-sec` 節ごと削除／空 修正案）。前に「削除」「全て削除」とだけ書いた修正案も削除の印として出る。反映済みにした物は印だけになる。書き出しの Markdown には種類も出る
 - GM・アプリ向けの指示（【GM】）、表の「備考」列は折りたたみ
 
+## 3列比較（2026-11-14）
+
+カード（10ページ）と HO（20ページ）は、1項目ごとに **左＝いまの本仕様／中＝AI案／右＝実際のゲーム画面** の3列で並べる。
+
+- 単位（`unit_id`）は `C:/00_【創作】一時フォルダ/…/author_compare_20261114/work/compare_ui/extract_compare_units.py` が決める（カード1枚＝`CARD:<カードID>`、HOの1節＝`HO:<ページID>:<節>`、部屋1室＝`ROOM:<部屋ID>`、品の一覧の1節＝`ITEMSEC:<ページID>:<n>`）。全30ページ・261単位。
+- AI案は `content/_ai_proposals.json`（別保存。**原稿でもD1のメモでも端末の下書きでもない**）。`npm run sync` は `content/完成版/` だけを作り直すので、このファイルは消えない。ビルドが `data/ai-proposals.js`（`window.SITE_AI_PROPOSALS`）に写す。
+- 各単位の `source_hash`（`sha256:`＋本文の sha256）を、原稿から計算した `data-uhash` と突き合わせる。合わない案は「⚠ 原稿更新済み（旧版へのAI案）」と出して、採用も削除もしない。
+- 提案の無い単位は「AI案はまだありません（未生成）」と出す（keep のダミーや空の枠で埋めない）。
+- 右の実画面は `media/gameview/manifest.json` の `unitShots[unit_id]`。撮っていない単位は `unitNoShotReason[unit_id]` の理由を出し、他の単位の画像を流用しない。上部に「プレビュー（ゲーム f56e412 ＋ 11/14本仕様原稿・本番未デプロイ）」を必ず出す。
+- プレイヤー表示（`?view=pl`）と印刷では、AI案・実画面・集計バーを出さない（GMの言葉が混ざりうるため）。1200px以下では、列ごとではなく項目ごとに 本仕様→AI案→実画面 の順で縦に積む。
+- 「AI案を『直す』欄に写す」は、作者が押したときだけ入力欄を開く（自動保存はしない）。
+- ビルドは、原稿の行が抽出時から変わった単位に `data-ustale="1"` を付けて警告を出す（`CMP_STRICT=1 node tools/build.mjs` で、単位の付け残しがあれば失敗させられる）。
+- 確かめ：`node work/compare_ui/verify_compare_ui.mjs`（3列の順序・縦積み・PLで非表示・鉛筆の位置・全261単位）と `node work/compare_ui/verify_compare_ai.mjs`（合成の案での表示・警告・写すボタン）。どちらも作業フォルダ側に置いてある。
+
 ## 見せる範囲の印（2026-11-07）
 
 - 印は tools/build.mjs が付ける：ページごとの既定（`PAGE_VIS`・読み合わせの組・HO の本人）、【GM】の行と文の途中の【GM】、資料の頭の説明（制作）、カードは1枚ずつ（`cardVis`）。手で書くページは `<!--vis:all|条件-->`・`<!--vis:self:名前|条件-->`・`<!--vis:here|条件-->`・`<!--vis:gm-->`・`<!--vis:make-->` の行で切り替える。
@@ -46,7 +60,7 @@ npx wrangler secret put AUTHOR_EDIT_KEY                   # 編集キーを変�
 npm install          # 初回だけ（marked など）
 node tools/game-cards.mjs  # ゲームの data.js からカードの表（印に使う）
 npm run sync         # 改訂フォルダの 05_完成版 から content/完成版/ へ写す（配布版とGM版が同じ物はGM版だけ。照合は content/完成版/_配布版との照合.md）
-npm run build        # content/ → data/site-data.js
+npm run build        # content/ → data/site-data.js と data/ai-proposals.js（比較単位の data-unit / data-uhash もここで付く）
 npm run serve        # http://127.0.0.1:8765/ で確認
 ```
 

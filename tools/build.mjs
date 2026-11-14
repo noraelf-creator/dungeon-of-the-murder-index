@@ -4,6 +4,7 @@
 // - 旧版（2026-10-06）は content/旧版_20261006/ を「参照・旧版」に、前と同じページIDで載せる（共有保存の修正案がそのページに付いたまま残るように）。
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { Marked } from 'marked';
 
 const ROOT = path.resolve('.');
@@ -45,7 +46,10 @@ add('now', '資料の案内', 'n-directive', '作者指示の反映表', must(GM
 add('now', '資料の案内', 'n-match', '配布版とGM版の照合（自動）', must(NOW('_配布版との照合.md')), 'doc', '制作');
 
 // HO（GM版＝メモつき。【GM】はたたむ）
+// 2026-11-14 作者「はじめにも入れる欄が違う」：ロビーで読む順（はじめに→共通HO→各PCのHO）に合わせ、
+// 「はじめに」は HO の 共通 の先頭へ移す。ページIDは変えない（D1のメモの紐付けを壊さないため）。
 const HODIR = GM('HO原本');
+add('ho', '共通', 'n-rule-intro', 'はじめに', must(PL('00_はじめに.md')), 'doc', 'PL配布');
 add('ho', '共通', 'n-ho-common', '共通HO（ギルドの依頼書）', must(path.join(HODIR, '00_共通HO.md')), 'ho', 'PL配布');
 const hoFiles = fs.readdirSync(HODIR);
 const PCS = [['1', 'ミレイユ'], ['2', 'ヴィオラ'], ['3', 'ミクシィ'], ['4', 'エドガー']];
@@ -97,7 +101,6 @@ add('card', '品', 'n-card-items', '品の一覧（GM版）', CARD('09_品の一
 add('card', '品', 'n-card-items-pl', '品の一覧（配布版）', must(PL('カード/09_品の一覧.md')), 'card', 'PL配布');
 
 // ルール・進行
-add('rule', 'プレイヤー向け', 'n-rule-intro', 'はじめに', must(PL('00_はじめに.md')), 'doc', 'PL配布');
 add('rule', 'プレイヤー向け', 'n-rule-phase', 'フェイズ進行表', must(PL('共通/フェイズ進行表（プレイヤー向け）.md')), 'doc', 'PL配布');
 add('rule', 'プレイヤー向け', 'n-rule-ls', 'ライブセレクションの説明', must(PL('共通/ライブセレクション（プレイヤー向け説明）.md')), 'doc', 'PL配布');
 add('rule', 'プレイヤー向け', 'n-rule-skill', 'スキル一覧', must(PL('共通/スキル一覧（改定版・プレイヤー向け）.md')), 'doc', 'PL配布');
@@ -313,7 +316,9 @@ function makeMarked(ctx) {
       const ho = /^▼\s*/.test(text);
       if (ho) inner = inner.replace(/^▼\s*/, '');
       if (depth === 2 || depth === 3) ctx.toc.push({ id, text: strip(inner), level: depth });
-      return `<h${depth} id="${id}" class="${ho ? 'ho-sec' : 'h' + depth}" data-a="${id}">${inner}</h${depth}>\n`;
+      let unit = '';
+      if (ctx.u) unit = (ctx.page.kind === 'ho' || /^n-card-items/.test(ctx.page.id)) && depth <= 3 ? uOpen(ctx, text) : uClose(ctx);
+      return unit + `<h${depth} id="${id}" class="${ho ? 'ho-sec' : 'h' + depth}" data-a="${id}">${inner}</h${depth}>\n`;
     },
     paragraph({ tokens, text }) {
       const inner = this.parser.parseInline(tokens);
@@ -336,6 +341,7 @@ function makeMarked(ctx) {
 }
 function renderTable(token, ctx) {
   const P = this.parser;
+  if (ctx.page.id === 'n-card-rooms' && ctx.u) return renderRoomBlocks(token, P, ctx);
   const head = token.header.map((c) => strip(P.parseInline(c.tokens)).trim());
   const noteIdx = head.map((h, i) => (NOTE_COL.test(h) ? i : -1)).filter((i) => i >= 0);
   const keep = head.map((_, i) => i).filter((i) => !noteIdx.includes(i));
@@ -424,6 +430,7 @@ function renderMd(md, ctx, opts = {}) {
   let html = '';
   const top = !ctx.nest;
   if (top && opts.kind === 'card' && !ctx.cardFacts) ctx.cardFacts = scanCards(md);
+  if (top && ctx.u && ctx.page.kind === 'ho' && ctx.page.group !== 'ref') html += uOpen(ctx, '__intro__');
   for (const seg of splitNotes(md)) {
     if (seg.type === 'vis') {
       if (top) { const v = V(seg.k, { who: seg.k === 'self' ? seg.who : '', cond: seg.k === 'self' ? seg.cond : (seg.cond || seg.who) }); ctx.base = v; html += mark(ctx, v); }
@@ -456,7 +463,7 @@ function renderTokens(tokens, mk, ctx, opts) {
   let html = '';
   let cardOpen = false;
   const top = !ctx.nest;
-  const closeCard = () => { if (cardOpen) { html += '</div></section>\n' + mark(ctx, ctx.base || ctx.page.vis); cardOpen = false; } };
+  const closeCard = () => { if (cardOpen) { html += '</div></section>\n' + uClose(ctx) + mark(ctx, ctx.base || ctx.page.vis); cardOpen = false; } };
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i];
     if (t.type === 'space') continue;
@@ -481,14 +488,32 @@ function renderTokens(tokens, mk, ctx, opts) {
           ctx.cardVisList = ctx.cardVisList || []; ctx.cardVisList.push({ title: strip(title), ...cv });
           html += mark(ctx, cv);
         }
-        html += `<section class="cardx${tone}" id="${id}"><header class="cardx-head" data-a="${id}"><span class="cardx-title">${mk.parseInline(title)}</span>${meta ? `<span class="cardx-meta">${mk.parseInline(meta)}</span>` : ''}</header><div class="cardx-body">\n`;
+        const unitMark = (top && ctx.page.group !== 'ref') ? uOpen(ctx, m[1] + m[2]) : '';
+        html += unitMark + `<section class="cardx${tone}" id="${id}" data-card-unit="${esc(ctx.page.id)}"><header class="cardx-head" data-a="${id}"><span class="cardx-title">${mk.parseInline(title)}</span>${meta ? `<span class="cardx-meta">${mk.parseInline(meta)}</span>` : ''}</header><div class="cardx-body">\n`;
         cardOpen = true;
         continue;
       }
     }
+    if (t.type === 'paragraph' && /^\*\*Disgordの記録\*\*/.test(t.text) && ctx.u) html += uOpen(ctx, t.text);
     html += mk.parser([t]);
   }
   closeCard();
+  return html;
+}
+
+// 部屋公開文は、1室＝1単位の3列にする（表の行のままだと列を並べられない）
+function renderRoomBlocks(token, P, ctx) {
+  let html = '<div class="room-list">\n';
+  for (const row of token.rows) {
+    const cells = row.map((c) => P.parseInline(c.tokens));
+    const idText = strip(cells[0]).trim();
+    if (!/^[UL]\d+$/.test(idText)) continue;
+    const rowText = cells.map(strip).join(' ');
+    const id = ctx.aid(rowText, 'r');
+    html += uOpen(ctx, 'ROOM:' + idText) +
+      `<div class="room-row" data-a="${id}"><span class="room-id">${cells[0]}</span><span class="room-name">${cells[1] || ''}</span><span class="room-text">${cells[2] || ''}</span></div>\n`;
+  }
+  html += uClose(ctx) + '</div>\n';
   return html;
 }
 
@@ -588,6 +613,134 @@ function renderReading(md, ctx) {
 const inlineMk = new Marked({ gfm: true, breaks: true });
 const inlineMd = (s) => inlineMk.parseInline(s);
 
+
+// ---------- 比較単位（unit）: 左＝本仕様／中＝AI案／右＝実画面 の3列の単位 ----------
+// 単位と本文ハッシュは work/compare_ui/extract_compare_units.py が決める（content/_ai_proposals.json の units_meta）。
+// ここでは「どの要素がその単位か」を原稿の並び順で突き合わせ、data-unit / data-uhash を付けるだけ。
+let AI = null;
+try { AI = JSON.parse(fs.readFileSync(C('_ai_proposals.json'), 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+const UNITS_META = (AI && AI.units_meta) || {};
+const PAGE_UNITS = new Map();
+for (const [uid, m] of Object.entries(UNITS_META)) {
+  if (!PAGE_UNITS.has(m.page_id)) PAGE_UNITS.set(m.page_id, []);
+  PAGE_UNITS.get(m.page_id).push({ uid, ...m });
+}
+for (const list of PAGE_UNITS.values()) list.sort((a, b) => a.line_start - b.line_start);
+const uNorm = (s) => String(s || '').replace(/[\s\u3000*_`]/g, '');
+const STRICT_UNITS = process.env.CMP_STRICT === '1';
+const unitWarn = [];
+const staleUnits = new Set();
+const sha256 = (s) => 'sha256:' + crypto.createHash('sha256').update(s, 'utf8').digest('hex');
+
+function markStale(p, rawSrc) {
+  const list = PAGE_UNITS.get(p.id) || [];
+  if (!list.length || !rawSrc) return;
+  const lines = rawSrc.replace(/\r\n/g, '\n').split('\n');
+  for (const u of list) {
+    const part = lines.slice(u.line_start - 1, u.line_end).map((x) => x.replace(/[ \t\u3000]+$/, ''));
+    if (sha256(part.join('\n')) !== u.raw_hash) staleUnits.add(u.uid);
+  }
+}
+
+function unitApi(ctx) {
+  const list = PAGE_UNITS.get(ctx.page.id) || [];
+  const st = { list, i: 0, open: null, missing: [] };
+  ctx.u = st;
+  return st;
+}
+function uOpen(ctx, key) {
+  const st = ctx.u; if (!st) return '';
+  let pre = uClose(ctx);
+  if (st.i >= st.list.length) { st.missing.push('extra:' + String(key).slice(0, 40)); return pre; }
+  const k = uNorm(key);
+  let node = st.list[st.i];
+  if (uNorm(node.anchor) !== k) {
+    const j = st.list.findIndex((x, idx) => idx >= st.i && uNorm(x.anchor) === k);
+    if (j >= 0) { for (let n = st.i; n < j; n++) st.missing.push(st.list[n].unit_id); st.i = j; node = st.list[j]; }
+    else { st.missing.push('? ' + String(key).slice(0, 30)); return pre; }
+  }
+  st.i++;
+  st.open = node.uid;
+  return pre + '<!--U:' + node.uid + '-->';
+}
+function uClose(ctx) {
+  const st = ctx.u;
+  if (!st || !st.open) return '';
+  st.open = null;
+  return '<!--/U-->';
+}
+
+// 単位の目印を、見せる範囲の枠の中に収める。単位が枠をまたぐときは、いちばん長い枠を入れ物にする。
+function attachUnitGrids(chunks, p) {
+  const segs = [];
+  let openUid = null;
+  chunks.forEach((c, ci) => {
+    const h = c.h;
+    const re = /<!--U:([^>]+?)-->|<!--\/U-->/g;
+    let m; let cur = null;
+    if (openUid) { cur = { uid: openUid, ci, fromOpen: false, openAt: -1, from: 0, to: null, closeAt: -1 }; }
+    while ((m = re.exec(h))) {
+      if (m[0] === '<!--/U-->') {
+        if (cur) { cur.to = m.index; cur.closeAt = m.index; segs.push(cur); cur = null; openUid = null; }
+      } else {
+        if (cur) { cur.to = m.index; segs.push(cur); }
+        cur = { uid: m[1], ci, fromOpen: true, openAt: m.index, from: m.index + m[0].length, to: null, closeAt: -1 };
+        openUid = cur.uid;
+      }
+    }
+    if (cur) { cur.to = h.length; segs.push(cur); }
+  });
+  if (!segs.length) return;
+  const chars = (s) => strip(s).replace(/\s+/g, '').length;
+  const isGmChunk = (ci) => { const v = (chunks[ci] && chunks[ci].v) || {}; return v.k === 'gm' || v.k === 'make'; };
+  // 入れ物は「プレイヤーに見える枠」のうち、いちばん長いもの（GM注の枠を入れ物にしない）。
+  // 見える枠が無い単位だけ、いちばん長い枠に入れる。
+  const host = new Map();
+  const byUid = new Map();
+  segs.forEach((s, i) => {
+    const n = chars(chunks[s.ci].h.slice(s.from, s.to));
+    if (!byUid.has(s.uid)) byUid.set(s.uid, []);
+    byUid.get(s.uid).push({ i, n, pl: !isGmChunk(s.ci) });
+  });
+  for (const [uid, arr] of byUid) {
+    const pl = arr.filter((x) => x.pl && x.n > 0);
+    const pick = (pl.length ? pl : arr).reduce((a, b) => (b.n > a.n ? b : a));
+    host.set(uid, pick);
+  }
+  const openHTML = (uid) => {
+    const m = UNITS_META[uid] || {};
+    const stale = staleUnits.has(uid) ? ' data-ustale="1"' : '';
+    const prot = m.protected ? ' data-uprot="1"' : '';
+    return `<div class="cmp-grid" data-unit="${esc(uid)}" data-uhash="${esc(m.source_hash || '')}"${prot}${stale}><div class="cmp-spec">`;
+  };
+  const closeHTML = '</div><div class="cmp-ai" data-cmp="ai"></div><div class="cmp-shot" data-cmp="shot"></div></div>';
+  const byChunk = new Map();
+  segs.forEach((s, i) => {
+    if (!byChunk.has(s.ci)) byChunk.set(s.ci, []);
+    byChunk.get(s.ci).push({ ...s, isHost: host.get(s.uid).i === i });
+  });
+  for (const [ci, list] of byChunk) {
+    const h = chunks[ci].h;
+    let out = ''; let last = 0; let prefix = ''; let suffix = '';
+    for (const s of list) {
+      if (s.fromOpen) {
+        out += h.slice(last, s.openAt);
+        if (s.isHost) out += openHTML(s.uid);
+        last = s.openAt + ('<!--U:' + s.uid + '-->').length;
+      } else {
+        if (s.isHost) prefix = openHTML(s.uid);
+      }
+      if (s.closeAt >= 0) {
+        out += h.slice(last, s.closeAt);
+        if (s.isHost) out += closeHTML;
+        last = s.closeAt + '<!--/U-->'.length;
+      } else if (s.isHost) suffix = closeHTML;
+    }
+    out += h.slice(last);
+    chunks[ci].h = prefix + out + suffix;
+  }
+}
+
 // ---------- 見せる範囲の枠 ----------
 // 制作の印（【2026-11-07 …】【作者修正】【r3】【旧王国改訂 …】など）は小さな札にし、プレイヤー表示では隠す
 const MAKE_TAG = /20\d\d-\d|(?:^|[・\s])r\d|作者|修正|改訂|決定|追記|指示|新規|Claude|^T\d|整合|組み直し|旧|廃止|取り消し|仮置|確認待ち|担当/;
@@ -624,6 +777,7 @@ function wrapVis(html, p) {
     if (last && !c.v.card && !last.v.card && last.key === key) { last.h += c.h; continue; }
     chunks.push({ v: c.v, h: c.h, key });
   }
+  attachUnitGrids(chunks, p);
   const whole = chunks.length === 1;
   let out = '';
   for (const c of chunks) {
@@ -647,14 +801,17 @@ const OLD_TONE_BY_PC = { 1: 'mireille', 2: 'viola', 3: 'lucia', 4: 'gald' };
 const isNew = (p) => p.group !== 'ref';
 for (const p of P) {
   const ctx = makeCtx(p); ctx.badges = [];
+  unitApi(ctx);
   let html = '';
   if (p.kind === 'link') {
     html = '<div class="callout"><p>改稿前（Ver3.4、2026-09-28）の制作者確認盤は別画面で開きます。27部屋・77カードの原文、推理導線、旧メモが見られます。</p><p><a class="btn primary" href="https://dungeon-of-the-murder-review.pages.dev/" target="_blank" rel="noopener">旧・制作者確認盤を開く</a></p></div>';
     ctx.h1 = '旧・制作者確認盤（Ver3.4）';
   } else {
     const src = fs.readFileSync(p.file, 'utf8').replace(/\r\n/g, '\n');
+    markStale(p, src);
     if (p.kind === 'read') html = renderReading(src, ctx);
     else html = renderMd(src, ctx, { kind: p.kind });
+    html += uClose(ctx);
   }
   html = makeBadges(badgeTags(html));
   let title = ctx.h1 || p.nav;
@@ -669,6 +826,15 @@ for (const p of P) {
   }
   const W = wrapVis(html, p);
   html = W.html;
+  // 単位の付け残し・余りを数える（原稿が変わって対応がずれたら、ここで気づく）
+  const expectUnits = (PAGE_UNITS.get(p.id) || []).length;
+  const gotUnits = (html.match(/data-unit="/g) || []).length;
+  if (expectUnits || gotUnits) {
+    if (ctx.u.missing.length || expectUnits !== gotUnits) {
+      unitWarn.push(`${p.id}: 単位 ${gotUnits}/${expectUnits} 付け残し=${ctx.u.missing.slice(0, 6).join(',')}`);
+    }
+  }
+  p.unitCount = gotUnits;
   const rawSrc = p.file && fs.existsSync(p.file) ? fs.readFileSync(p.file, 'utf8') : '';
   if (isNew(p) && /2026-11-07/.test(rawSrc)) ctx.badges.push('11/7 組み直し');
   else if (isNew(p) && /2026-11-0[34]/.test(rawSrc)) ctx.badges.push('11/3〜11/4 改稿');
@@ -699,11 +865,55 @@ let gameview = null;
 try {
   const gv = JSON.parse(fs.readFileSync(path.join(ROOT, 'media', 'gameview', 'manifest.json'), 'utf8'));
   let n = 0;
-  for (const p of pages) { const list = (gv.pages || {})[p.id]; if (list && list.length) { p.shots = list.map((x) => ({ file: x.file, caption: x.caption || '', w: x.w || 0, h: x.h || 0 })); n += list.length; } }
-  gameview = { builtAt: gv.builtAt || '', gameCommit: gv.gameCommit || '', importWarnings: gv.importWarnings ?? null };
+  for (const p of pages) {
+    const list = (gv.pages || {})[p.id];
+    if (list && list.length) { p.shots = list.map((x) => ({ file: x.file, caption: x.caption || '', w: x.w || 0, h: x.h || 0 })); n += list.length; }
+    // 単位のあるページは、右半分の一括表示ではなく、単位ごとの実画面（unitShots）を使う
+    if ((PAGE_UNITS.get(p.id) || []).length) p.shots = null;
+  }
+  gameview = {
+    builtAt: gv.builtAt || '', gameCommit: gv.gameCommit || '', importWarnings: gv.importWarnings ?? null,
+    preview: gv.preview ?? null, liveDeployed: gv.liveDeployed ?? null, previewLabel: gv.previewLabel || '',
+    unitShots: gv.unitShots || {}, unitNoShotReason: gv.unitNoShotReason || {},
+  };
+  // 撮影側と節の名づけが違っても（例 HO:…:3_companions と 3_仲間のこと）、
+  // 同じページ・同じ節番号なら同じ単位として実画面を結ぶ。当てた数はログに出す（黙って混ぜない）。
+  const shotAlias = [];
+  for (const uid of Object.keys(UNITS_META)) {
+    if (!/^HO:/.test(uid)) continue;
+    const pfx = uid.replace(/_[^_:]*$/, '_');
+    if (!gameview.unitShots[uid]) {
+      const k = Object.keys(gameview.unitShots).find((x) => x.startsWith(pfx));
+      if (k) { gameview.unitShots[uid] = gameview.unitShots[k]; shotAlias.push(uid + ' ← ' + k); }
+    }
+    if (!gameview.unitNoShotReason[uid]) {
+      const k = Object.keys(gameview.unitNoShotReason).find((x) => x.startsWith(pfx));
+      if (k) gameview.unitNoShotReason[uid] = gameview.unitNoShotReason[k];
+    }
+  }
+  if (shotAlias.length) console.log('実画面の単位名の読み替え:', shotAlias.length, '件（例 ' + shotAlias[0] + '）');
   console.log('ゲームの画面:', n, '枚', Object.keys(gv.pages || {}).filter((id) => !ids.has(id)).map((id) => '（ページが無いID ' + id + '）').join(' '));
 } catch (e) { if (e.code !== 'ENOENT') throw e; }
-const data = { version: 'dom-rv2', built: new Date().toISOString(), home: 'n-now', groups: GROUPS, pages, gameview };
+const data = { version: 'dom-rv3', built: new Date().toISOString(), home: 'n-now', groups: GROUPS, pages, gameview,
+  units: { count: Object.keys(UNITS_META).length, pages: PAGE_UNITS.size, stale: [...staleUnits].length } };
+// AI案（原稿とは別保存。採用も削除もしない。ここでは読んで並べるだけ）
+const aiOut = AI ? {
+  schema: AI.schema, generated_at: AI.generated_at, generator_model: AI.generator_model,
+  proposals_status: AI.proposals_status, manuscript_snapshot_id: AI.manuscript_snapshot_id,
+  note: AI.note, targets: AI.targets, ho_scopes: AI.ho_scopes,
+  page_summaries: AI.page_summaries || {}, units_meta: AI.units_meta || {}, units: AI.units || {},
+} : null;
+fs.writeFileSync(path.join(ROOT, 'data', 'ai-proposals.js'),
+  'window.SITE_AI_PROPOSALS=' + JSON.stringify(aiOut) + ';\n');
+if (unitWarn.length) {
+  console.log('比較単位の付け残し:', unitWarn.length, 'ページ');
+  for (const w of unitWarn.slice(0, 12)) console.log('  -', w);
+}
+if (staleUnits.size) console.log('原稿が抽出時から変わった単位:', staleUnits.size, '（work/compare_ui/extract_compare_units.py を再実行してから提案を作り直す）');
+if (STRICT_UNITS && (unitWarn.length || staleUnits.size)) {
+  console.error('CMP_STRICT=1: 比較単位が全件そろっていません（上の警告）');
+  process.exit(1);
+}
 fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data', 'site-data.js'), 'window.SITE_DATA=' + JSON.stringify(data) + ';\n');
 const size = fs.statSync(path.join(ROOT, 'data', 'site-data.js')).size;

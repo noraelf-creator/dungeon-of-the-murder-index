@@ -15,6 +15,13 @@
   };
   const pages = D.pages;
   const pageById = new Map(pages.map((p) => [p.id, p]));
+  // AI案（原稿とは別保存。D1のメモにも端末の下書きにも混ぜない）
+  const AI = window.SITE_AI_PROPOSALS || null;
+  const AI_UNITS = (AI && AI.units) || {};
+  const AI_META = (AI && AI.units_meta) || {};
+  const AI_PAGE = (AI && AI.page_summaries) || {};
+  const AI_TARGETS = (AI && AI.targets) || {};
+  const GVPREV = 'プレビュー（ゲーム f56e412 ＋ 11/14本仕様原稿・本番未デプロイ）';
   const groupById = new Map(D.groups.map((g) => [g.id, g]));
   const pageIndex = new Map(pages.map((p, i) => [p.id, i]));
 
@@ -43,6 +50,7 @@
     sync: { state: 'idle', last: null, error: '' },
     tab: 'write', filter: 'open', query: '', legacyCount: 0, loaded: false,
     view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true), shots: LS.get('shots', true),
+    aiView: LS.get('aiView', true),
   };
   const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
   const now = () => Date.now();
@@ -78,6 +86,8 @@
   }
   function applyView() {
     const b = document.body;
+    b.classList.toggle('cmp-no-ai', !S.aiView);
+    b.classList.toggle('cmp-no-shot', !S.shots);
     b.classList.toggle('pl-mode', plMode());
     b.classList.toggle('hide-after', plMode() && S.hideAfter);
     for (const w of Object.keys(WHO_NAME)) b.classList.toggle('as-' + w, persona() === w);
@@ -293,6 +303,89 @@
     return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>' + esc(text.slice(i + q.length));
   }
 
+
+  // ---------- 3列比較（左＝本仕様／中＝AI案／右＝実画面） ----------
+  const ACTION = {
+    delete: ['削除提案', 'del'], shorten: ['削減案', 'short'], proofread: ['校正案', 'proof'], keep: ['現行維持', 'keep'],
+  };
+  const num = (n) => (n == null ? '—' : Number(n).toLocaleString('ja-JP'));
+  const sign = (n) => (n > 0 ? '+' : n < 0 ? '−' : '±') + Math.abs(n).toLocaleString('ja-JP');
+  const unitShotsOf = (uid) => ((D.gameview && D.gameview.unitShots) || {})[uid] || [];
+  const noShotReason = (uid) => ((D.gameview && D.gameview.unitNoShotReason) || {})[uid] || '';
+
+  function aiPanelHTML(uid, el, meta, prop) {
+    const uhash = el.dataset.uhash || '';
+    if (!prop) {
+      return `<div class="cmp-empty"><b>AI案はまだありません（未生成）</b><span>この単位の案は Hydrogen（agy gemini-4-hydrogen-high）が作ります。ここに空の案や現行の複製は置きません。</span>${meta && meta.protected ? '<span class="cmp-prot">保護された単位（削除の提案はしません）</span>' : ''}</div>`;
+    }
+    const old = prop.source_hash && uhash && prop.source_hash !== uhash;
+    const [label, cls] = ACTION[prop.action] || ['AI案', 'keep'];
+    const del = prop.action === 'delete';
+    const facts = (prop.kept_protected_facts || []).map((f) => `<li>${esc(f)}</li>`).join('');
+    return `<div class="cmp-ai-head"><span class="cmp-badge ${cls}">${esc(label)}</span>` +
+      `<span class="cmp-chars">現行 ${num(prop.source_chars)}字 → AI案 ${num(prop.proposed_chars)}字（差 ${sign(prop.delta_chars)}字）</span></div>` +
+      (old ? '<div class="cmp-warn">⚠ 原稿更新済み（旧版へのAI案）: 本文のハッシュが案の生成元と違います。採用しないでください。</div>' : '') +
+      (el.dataset.ustale === '1' ? '<div class="cmp-warn">⚠ この単位の本文は、案を作ったときの原稿から変わっています（再抽出が要ります）。</div>' : '') +
+      (del ? '<div class="cmp-del">この項目ごと削除を提案</div>' : `<div class="cmp-text">${esc(prop.proposed_text || '')}</div>`) +
+      (prop.reason ? `<div class="cmp-reason"><b>理由</b>${esc(prop.reason)}</div>` : '') +
+      (facts ? `<div class="cmp-facts"><b>保護した推理事実</b><ul>${facts}</ul></div>` : '') +
+      `<div class="cmp-actions">${del ? '' : `<button type="button" class="btn small" data-act="copyai" data-copy-unit="${esc(uid)}">AI案を「直す」欄に写す</button>`}<span class="cmp-src">${esc(prop.generator_model || '')}${AI && AI.generated_at ? '・' + esc(String(AI.generated_at).slice(0, 16).replace('T', ' ')) : ''}</span></div>`;
+  }
+
+  function shotPanelHTML(uid) {
+    const shots = unitShotsOf(uid);
+    if (shots.length) {
+      return `<div class="cmp-shot-head"><span class="cmp-prev">${esc((D.gameview && D.gameview.previewLabel) || GVPREV)}</span></div>` +
+        shots.map((x, i) => `<figure class="cmp-fig"><a href="${esc(x.file)}" target="_blank" rel="noopener"><img src="${esc(x.file)}" alt="${esc(x.caption || '')}" loading="${i < 2 ? 'eager' : 'lazy'}"${x.w ? ` width="${x.w}" height="${x.h}"` : ''}></a><figcaption>${esc(x.caption || '')}</figcaption></figure>`).join('');
+    }
+    const r = noShotReason(uid);
+    return `<div class="cmp-noshot"><b>この単位の実画面はまだありません</b><span>${esc(r || '未撮影（tools/game-shots.mjs がこの単位を撮る対象に入っていません）')}</span></div>`;
+  }
+
+  function enhanceUnits(p) {
+    const nodes = $$('#page .page-body [data-unit]');
+    if (!nodes.length) return;
+    for (const el of nodes) {
+      const uid = el.dataset.unit;
+      const meta = AI_META[uid] || null;
+      const prop = AI_UNITS[uid] || null;
+      const ai = el.querySelector(':scope > .cmp-ai') || el.querySelector('.cmp-ai');
+      const shot = el.querySelector(':scope > .cmp-shot') || el.querySelector('.cmp-shot');
+      if (ai) { ai.innerHTML = aiPanelHTML(uid, el, meta, prop); ai.dataset.state = prop ? 'has' : 'none'; ai.dataset.action = prop ? prop.action : ''; }
+      if (shot) {
+        shot.innerHTML = shotPanelHTML(uid);
+        shot.dataset.state = unitShotsOf(uid).length ? 'has' : 'reason';
+      }
+    }
+  }
+
+  function summaryHTML(p) {
+    const s = AI_PAGE[p.id];
+    const ids = [...p.html.matchAll(/data-unit="([^"]+)"/g)].map((m) => m[1]);
+    const nUnits = ids.length;
+    const shots = ids.reduce((a, uid) => a + unitShotsOf(uid).length, 0);
+    const have = ids.filter((uid) => AI_UNITS[uid]).length;
+    const parts = [];
+    parts.push(`<span class="cmp-sum-unit">単位 ${nUnits}（AI案 ${have}／実画面 ${shots}枚）</span>`);
+    if (s) {
+      parts.push(`<span>このページ ${s.scope_label}：現行 <b>${num(s.source_chars)}字</b></span>`);
+      if (s.missing_units) parts.push(`<span class="cmp-sum-miss">AI案 未生成 ${s.missing_units}単位</span>`);
+      else parts.push(`<span>AI案を全採用 <b>${num(s.proposed_chars_sum_all_units_if_all_proposed)}字</b>（差 ${sign(s.delta_chars || 0)}字）</span>`);
+    }
+    if (p.kind === 'card' && AI_TARGETS.cards_fixed_target) {
+      parts.push(`<span>全カードの固定目標 <b>${num(AI_TARGETS.cards_fixed_target)}字</b>。残り（目標までに削る字数）は、いま <b>${num(AI_TARGETS.cards_remaining_now_official)}字</b>（従来集計＝ゲームに入るカード216枚。比較単位の和とは範囲が違う）</span>`);
+      // 採用後の「残り」は従来集計では未算出（比較単位の差を足すと別スコープの数字になる）。比較単位の差だけ出す
+      if (AI_TARGETS.cards_delta_all_proposed_units != null) {
+        parts.push(`<span class="cmp-sum-scope">比較単位でのAI案全採用差 <b>${sign(AI_TARGETS.cards_delta_all_proposed_units)}字</b>（配布版と集計範囲が異なるため、従来集計での採用後残は未算出）</span>`);
+      }
+    }
+    if (AI && AI.ho_scopes && p.kind === 'ho' && s) {
+      parts.push(`<span class="cmp-sum-scope">HOの範囲：${esc(s.scope_label)}（共通HO ${num(AI.ho_scopes.common_ho)}字／初期HO ${num(AI.ho_scopes.pc_initial)}字／追加HO ${num(AI.ho_scopes.pc_extra)}字は足し合わせない）</span>`);
+    }
+    if (!have) parts.push('<span class="cmp-sum-miss">AI案は未生成です（Hydrogen の出力待ち）</span>');
+    return `<div class="cmp-summary">${parts.join('')}</div>`;
+  }
+
   // ---------- 本文（中央） ----------
   const AUD = { 'PL配布': 'pl', 'PL配布（本人のみ）': 'pl', 'PL配布（最後）': 'pl', 'GM専用': 'gm', '制作': 'make', '参照': 'ref' };
   function renderPage(p, anchor) {
@@ -304,15 +397,21 @@
     const kc = Object.entries(pv.kinds || {}).filter(([k]) => VK[k]).map(([k, n]) => `<span class="kc v-${k}">${VK[k][0]}${esc(VK[k][2])} ${n}</span>`).join('');
     for (const b of p.badges || []) chips.push(`<span class="tagchip new">${esc(b)}</span>`);
     const n = memoCountFor(p.id);
+    const unitPage = /data-unit="/.test(p.html);
+    const unitShotCount = unitPage ? Object.entries((D.gameview && D.gameview.unitShots) || {})
+      .filter(([uid]) => (AI_META[uid] || {}).page_id === p.id).reduce((a, [, v]) => a + v.length, 0) : 0;
     $('#page').innerHTML = `
       <header class="page-head">
         <div class="crumbs"><span>${esc(g.label)}</span>${p.sub ? `<span>${esc(p.sub)}</span>` : ''}<span>${esc(p.nav)}</span></div>
         <h1 class="page-title">${esc(p.title)}</h1>
         <div class="vis-legend"><span class="lg-t">印</span><span class="kc v-all">◎PL・全員が見る</span><span class="kc v-self">◆PL・本人だけ</span><span class="kc v-here">◇PL・その場にいた人だけ</span><span class="kc v-gm">■GMだけ（赤枠・たたみ）</span><span class="kc v-make">▲制作</span><a href="#/about">印の見方</a><span class="lg-n">このページの段：${kc}</span></div>
-        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : ''}</div>
+        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${unitPage ? `<button type="button" class="btn small${S.aiView ? ' on' : ''}" id="btnAi" title="中央のAI案を隠す／並べる">AI案 ${S.aiView ? 'を隠す' : 'を並べる'}</button><button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="右の実画面を隠す／並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${unitShotCount}枚）</button>` : (p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : '')}</div>
       </header>
-      ${p.shots && S.shots ? `<div class="split"><div class="page-body">${p.html}</div>${shotsHTML(p)}</div>` : `<div class="page-body">${p.html}</div>`}`;
+      ${unitPage ? `${summaryHTML(p)}<div class="page-body">${p.html}</div>` : (p.shots && S.shots ? `<div class="split"><div class="page-body">${p.html}</div>${shotsHTML(p)}</div>` : `<div class="page-body">${p.html}</div>`)}`;
     document.body.classList.toggle('has-shots', !!(p.shots && S.shots));
+    document.body.classList.toggle('cmp-on', unitPage);
+    if (unitPage) { enhanceUnits(p); }
+    if ($('#btnAi')) $('#btnAi').addEventListener('click', () => { S.aiView = !S.aiView; LS.set('aiView', S.aiView); const a = S.anchor; renderPage(p, a); });
     if ($('#btnShots')) $('#btnShots').addEventListener('click', () => { S.shots = !S.shots; LS.set('shots', S.shots); const a = S.anchor; renderPage(p, a); });
     document.title = p.nav + '｜ダンジョン・オブ・ザ・マーダー 制作INDEX';
     $('#pageMemos').addEventListener('click', () => { openPanel('page'); });
@@ -423,11 +522,11 @@
     return t;
   }
   // ---------- その場で直す ----------
-  function startFix(a) {
+  function startFix(a, initial = null) {
     const el = findAnchor(a); if (!el) return;
     cancelFix();
     const key = keyOf(S.page.id, a); const e = entry(key);
-    const start = e.kind === 'edit' && e.content ? e.content : plainOf(el);
+    const start = initial != null ? initial : e.kind === 'edit' && e.content ? e.content : plainOf(el);
     el.classList.add('is-editing');
     $$(`#page .edit-view[data-for="${CSS.escape(a)}"]`).forEach((x) => x.remove());
     const box = wrapLike(el, 'inline-edit', `<div class="ie-head">この段をその場で直す<span class="ie-hint">Ctrl+Enter で保存／Esc でやめる</span></div><textarea class="ie-text" rows="3"></textarea><div class="ie-actions"><button type="button" class="btn small primary" data-ie="save">保存</button><button type="button" class="btn small" data-ie="cancel">やめる</button>${e.kind === 'edit' ? '<button type="button" class="btn small danger" data-ie="undo">元の文に戻す</button>' : ''}<span class="ie-orig">元：${esc(excerptOf(el).slice(0, 70))}${excerptOf(el).length > 70 ? '…' : ''}</span></div>`);
@@ -489,7 +588,10 @@
     if (!el) { pen.hidden = true; const bar = $('#editBar'); if (bar) bar.hidden = true; if (hoverEl) hoverEl.classList.remove('is-hover'); hoverEl = null; return; }
     if (hoverEl && hoverEl !== el) hoverEl.classList.remove('is-hover');
     hoverEl = el; el.classList.add('is-hover');
-    const mr = main.getBoundingClientRect(); const er = el.getBoundingClientRect(); const pr = (document.body.classList.contains('has-shots') && $('#page .page-body') ? $('#page .page-body') : $('#page')).getBoundingClientRect();
+    const mr = main.getBoundingClientRect(); const er = el.getBoundingClientRect();
+    // 3列のときは、鉛筆と直す／削除のバーを左列（.cmp-spec）の右端に出す。中央・右の列には被せない
+    const spec = el.closest ? el.closest('.cmp-spec') : null;
+    const pr = (spec || (document.body.classList.contains('has-shots') && $('#page .page-body') ? $('#page .page-body') : $('#page'))).getBoundingClientRect();
     pen.style.top = (er.top - mr.top + main.scrollTop + Math.min(4, er.height / 4)) + 'px';
     pen.style.left = (Math.min(pr.right, mr.right - 10) - mr.left - 38) + 'px';
     pen.hidden = false;
@@ -562,10 +664,14 @@
   function itemHtml(e, showPage) {
     const [pid, a] = splitKey(e.key); const p = pageById.get(pid);
     const onPage = S.page && pid === S.page.id; const lost = onPage && !findAnchor(a);
+    // 反映済みで、本文が変わって旧い場所が無くなったものは「場所不明」にしない（作者の履歴を失わない）
+    const lostTag = lost ? (e.resolved
+      ? '<span class="st old" title="本仕様に反映済み。本文が変わったので旧い位置は見つかりません">本仕様へ反映済み（旧位置）</span>'
+      : '<span class="st lost" title="本文が変わったため場所が見つかりません。要確認">場所不明（要確認）</span>') : '';
     const ex = (e.title || '').split('｜').slice(1).join('｜') || (onPage ? excerptOf(findAnchor(a)) : '');
     const active = S.page && S.anchor && e.key === keyOf(S.page.id, S.anchor);
     return `<button type="button" class="memo-item${active ? ' active' : ''}" data-key="${esc(e.key)}">
-      <div class="mi-top">${stateLabel(e)}<span class="st kind k-${e.kind || 'note'}">${esc(KIND_LABEL[e.kind])}</span>${lost ? '<span class="st lost" title="本文が変わったため場所が見つかりません">場所不明</span>' : ''}${showPage && p ? `<span>${esc(p.nav)}</span>` : ''}<span style="margin-left:auto">${esc(fmtTime(e.updated))}</span></div>
+      <div class="mi-top">${stateLabel(e)}<span class="st kind k-${e.kind || 'note'}">${esc(KIND_LABEL[e.kind])}</span>${lostTag}${showPage && p ? `<span>${esc(p.nav)}</span>` : ''}<span style="margin-left:auto">${esc(fmtTime(e.updated))}</span></div>
       ${ex ? `<div class="mi-ex">${esc(ex)}</div>` : ''}
       <div class="mi-body${e.kind === 'del' || e.kind === 'del-sec' ? ' is-del' : ''}">${esc(e.content || '（空）')}</div></button>`;
   }
@@ -808,6 +914,17 @@
       if (ie) { const box = ie.closest('.inline-edit'); const a = box.dataset.for; if (ie.dataset.ie === 'save') saveFix(a, $('.ie-text', box).value); else if (ie.dataset.ie === 'cancel') cancelFix(); else undoFix(a); return; }
       const ev = e.target.closest('[data-ev]');
       if (ev) { if (ev.dataset.ev === 'fix') startFix(ev.dataset.a); else undoFix(ev.dataset.a); return; }
+      // AI案を「直す」欄に写す（作者が押したときだけ。自動保存はしない）
+      const cp = e.target.closest('[data-act="copyai"]');
+      if (cp) {
+        const u = cp.closest('.cmp-grid[data-unit]');
+        const prop = AI_UNITS[cp.dataset.copyUnit];
+        const anchorEl = u && u.querySelector('.cmp-spec [data-a]');
+        if (!prop || !anchorEl) { toast('この単位には写せる本文がありません。'); return; }
+        if (prop.action === 'delete') { toast('削除の提案は写せません。'); return; }
+        startFix(anchorEl.dataset.a, prop.proposed_text || '');
+        return;
+      }
       if (e.target.closest('a, button, summary, input, textarea, .inline-edit, .edit-view')) return;
       const el = e.target.closest('.page-body [data-a]');
       if (!el) return;

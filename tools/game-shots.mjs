@@ -95,6 +95,14 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
 const notFound = new Set();
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  /* 撮影用のローカル配信には version.json が無い（本番の版の確認用ファイル）。404 を出さないため、ここだけ返す */
+  if (p === '/version.json') {
+    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+    res.end(JSON.stringify({ local: true, preview: true, note: '撮影用のローカル配信（本番の version.json ではない）' }));
+    return;
+  }
+  /* 既定のアイコンは置いていない（404 をコンソールに出さない） */
+  if (p === '/favicon.ico') { res.writeHead(204); res.end(); return; }
   if (p.endsWith('/')) p += 'index.html';
   const f = path.join(DIST, p);
   if (!f.startsWith(DIST) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { notFound.add(p); res.writeHead(404); res.end('not found'); return; }
@@ -161,6 +169,157 @@ async function clickAct(page, sel) { await page.locator(sel).first().click(); aw
 const textOf = (page, sel) => page.evaluate(sel => { const e = document.querySelector(sel); return e ? e.innerText : ''; }, sel);
 const checks = {};
 
+/* ================= 3列比較の右列（unitShots）：全カード・HO・部屋・品の実画面 =================
+   1項目＝1つの画面（枠）を撮る。原稿をHTMLに写した物やダミーは撮らない（ゲームの描画関数がそのまま出す画面だけ）。
+   単位IDは計画 Task 3 の体系：ROOM:<id> / CARD:<cardId> / CARD_DOC:<pageId>:<slug> / ITEMSEC:<pageId>:<n> /
+   HO:<pageId>:<secIdx>_<key>（冒頭は 0_intro）。
+   画像は長辺 960px 程度・webp 品質 78（clip の scale で足す）。ページ画像（pages）は今までどおり残す。 */
+const UQ = Number(process.env.GAMESHOTS_UQ || 78);
+const LONG = Number(process.env.GAMESHOTS_LONG || 960);
+const unitShots = {}, unitNoShotReason = {}, unitMeta = {};
+const unitPages = {};        /* unit → 元のINDEXページ（pages に足すとき用） */
+let uSeq = 0;
+const slugOf = s => String(s).replace(/[^0-9A-Za-z._@-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 96);
+function addUnitFile(unit, entry, meta) {
+  (unitShots[unit] = unitShots[unit] || []).push(entry);
+  if (meta) unitMeta[unit] = Object.assign({}, meta, unitMeta[unit] || {});
+  files.push(entry.file.replace('media/gameview/', ''));
+}
+async function shotClip(page, unit, caption, box, meta, opt = {}) {
+  let cdp = cdps.get(page); if (!cdp) { cdp = await ctx.newCDPSession(page); cdps.set(page, cdp); }
+  const x = Math.max(0, Math.round(box.x)), y = Math.max(0, Math.round(box.y));
+  const w = Math.max(8, Math.min(VW - x, Math.round(box.width))), h = Math.max(8, Math.min(VH - y, Math.round(box.height)));
+  const long = Math.max(w, h);
+  const scale = Math.max(1, Math.min(2.2, LONG / long));
+  const r = await cdp.send('Page.captureScreenshot', { format: 'webp', quality: UQ, clip: { x, y, width: w, height: h, scale } });
+  uSeq++;
+  const n = (unitShots[unit] || []).length + 1;
+  const file = 'u_' + slugOf(unit) + '-' + String(n).padStart(2, '0') + '.webp';
+  fs.writeFileSync(path.join(OUTDIR, file), Buffer.from(r.data, 'base64'));
+  addUnitFile(unit, { file: 'media/gameview/' + file, caption, w: Math.round(w * scale), h: Math.round(h * scale) }, meta);
+  if (opt.alsoPage) (pages[opt.alsoPage] = pages[opt.alsoPage] || []).push({ file: 'media/gameview/' + file, caption, w: Math.round(w * scale), h: Math.round(h * scale) });
+  log('撮った（項目）' + unit + ' → ' + file);
+}
+/* 欄（スクロールする箱）の中の見出しごとに、その節だけを撮る。
+   resolve(heading, index, count) が {unit, caption, meta} を返した見出しだけ撮る（null は撮らない）。
+   節が箱より高いときは 90% ずつ送って複数枚（caption に「○枚目」を付ける）。 */
+async function sectionShots(page, sel, resolve, introTarget) {
+  const info = await page.evaluate(sel => {
+    const c = document.querySelector(sel); if (!c) return null;
+    const cr = c.getBoundingClientRect();
+    const hs = [...c.querySelectorAll('h1,h2,h3')].filter(h => h.getClientRects().length);
+    return {
+      c: { x: cr.x, y: cr.y, w: cr.width, h: cr.height, ch: c.clientHeight, sh: c.scrollHeight },
+      heads: hs.map(h => { const r = h.getBoundingClientRect(); return { tag: h.tagName, text: (h.innerText || '').trim().replace(/\s+/g, ' '), top: r.top - cr.top + c.scrollTop }; }),
+    };
+  }, sel);
+  if (!info) return 0;
+  /* 最初の見出しより前（窓の題・本文の冒頭）を1つの節として撮る */
+  if (introTarget) info.heads.unshift({ tag: 'INTRO', text: '（冒頭）', top: 0 });
+  const n = info.heads.length, limit = Math.max(0, info.c.sh - info.c.ch);
+  let made = 0;
+  for (let i = 0; i < n; i++) {
+    const hd = info.heads[i];
+    const end = i + 1 < n ? info.heads[i + 1].top : Math.max(info.c.sh, info.c.ch);
+    const tgt = resolve(hd, i, n); if (!tgt) continue;
+    let y = Math.min(Math.max(0, hd.top - 2), limit), part = 1;
+    while (true) {
+      await page.evaluate(([sel, y]) => { document.querySelector(sel).scrollTop = y; }, [sel, y]);
+      await sleep(140);
+      const top = info.c.y + Math.max(0, hd.top - y);
+      const bottom = Math.min(info.c.y + info.c.h, info.c.y + (end - y));
+      const endOnScreen = info.c.y + (end - y);   /* 節の終わり（箱で切る前）。箱より高い節は、ここが箱の下より下にある */
+      if (bottom - top >= 24) {
+        const cap = part > 1 ? tgt.caption + '（つづき・' + part + '枚目）' : tgt.caption;
+        await shotClip(page, tgt.unit, cap, { x: info.c.x + 1, y: top, width: info.c.w - 2, height: bottom - top }, tgt.meta, tgt.opt);
+        made++;
+      }
+      if (y >= limit || endOnScreen <= info.c.y + info.c.h - 2) break;
+      const next = Math.min(limit, y + Math.floor(info.c.ch * 0.9));
+      if (next === y) break;
+      y = next; part++;
+      if (part > 12) break;
+    }
+  }
+  await page.evaluate(sel => { const c = document.querySelector(sel); if (c) c.scrollTop = 0; }, sel);
+  return made;
+}
+/* ---- HO の節の並び（原稿の見出しの順。単位IDの secIdx をここで決める） ---- */
+const HO_MAP = JSON.parse(fs.readFileSync(path.join(SG, 'scripts', 'manuscript-map.json'), 'utf8'));
+const HO_KEYS = HO_MAP.hoSectionKeys || [];
+const stripHead = t => String(t).replace(/^[▼\s#>]+/, '').trim();
+function hoKeyOf(text) { const t = stripHead(text).replace(/[（(].*$/, ''); for (const k of HO_KEYS) if (new RegExp(k.match).test(t)) return k.key; return null; }
+const KEY_ALIAS = { '技能': 'skills', 'スキル': 'skills', '秘密': 'secrets', '目的': 'goals', '知っていること': 'knows', '話し方': 'speech', '仲間のこと': 'companions', 'あなたの手順': 'steps', '手順': 'steps', '隠し方の指針': 'hiding', '《Disgord》': 'disgord' };
+function normKeyOf(text) { const t = stripHead(text).replace(/[（(].*$/, '').trim(); return hoKeyOf(t) || KEY_ALIAS[t] || null; }
+/* 見出しの語（Task 3 の抽出と同じ作り：count.py の norm_key に合わせ、12字まで）。
+   例：「支給品-HO読み込み時全員追加で1つ選択すること」→「支給品HO読み込み時全員」。
+   これを揃えないと、INDEX（build.mjs）が単位IDで実画面を引けない。 */
+function hoSlug(s, limit = 12) {
+  let t = String(s == null ? '' : s);
+  t = t.replace(/^(INFO|REC)-[A-Z0-9-]+/, '');
+  t = t.replace(/[《》▼]/g, '');
+  t = t.replace(/^深度\s*\d/, '');
+  t = t.replace(/[（(][^）)]*[）)]/g, '');
+  t = t.replace(/[\s\u3000・、。,.–—:：/【】\[\]（）()「」『』!?！？-]/g, '');
+  return t.slice(0, limit) || 'sec';
+}
+const CIRC = { '①': 1, '②': 2, '③': 3, '④': 4, '⑤': 5, '⑥': 6 };
+function buildHoPages() {
+  const dir = path.join(MS, 'GM資料', 'HO原本');
+  const out = [];
+  for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort()) {
+    let pageId, pc = null, num = null;
+    if (/^00_共通HO/.test(f)) pageId = 'n-ho-common';
+    else {
+      const m = /^PC(\d)_.*?_([①②③④⑤⑥])/.exec(f); if (!m) continue;
+      pc = 'PC' + m[1]; num = CIRC[m[2]]; pageId = 'n-ho-pc' + m[1] + '-' + num;
+    }
+    const lines = fs.readFileSync(path.join(dir, f), 'utf8').split(/\r?\n/);
+    const secs = [{ idx: 0, key: 'intro', heading: '', norm: '' }];
+    let idx = 1;
+    for (const ln of lines) {
+      const m = /^(#{2,3})\s+(.+?)\s*$/.exec(ln); if (!m) continue;
+      const heading = stripHead(m[2]);
+      secs.push({ idx: idx, key: normKeyOf(heading) || hoSlug(heading, 12), heading, norm: heading.replace(/[\s・、。（）()]/g, '') });
+      idx++;
+    }
+    out.push({ pageId, pc, num, file: f, secs });
+  }
+  return out;
+}
+const HO_PAGES = buildHoPages();
+const HO_BY_PAGE = Object.fromEntries(HO_PAGES.map(p => [p.pageId, p]));
+function matchHoSection(page, headingText, isIntro) {
+  if (!page) return null;
+  if (isIntro) return page.secs[0];
+  const k = normKeyOf(headingText);
+  if (k) { const s = page.secs.find(x => x.idx > 0 && x.key === k); if (s) return s; }
+  const nrm = stripHead(headingText).replace(/[\s・、。（）()]/g, '');
+  return page.secs.find(x => x.idx > 0 && x.norm === nrm)
+    || page.secs.find(x => x.idx > 0 && x.norm && (nrm.startsWith(x.norm) || x.norm.startsWith(nrm)))
+    || null;
+}
+/* 撮った節の記録（検証スクリプトと結合スクリプトが読む） */
+const hoShotLog = [];
+const KEY_PART = { PC3_2_1: 'その1', PC3_2_2: 'その2' };   /* 1ページが2つの追加HOに分かれる物（PC3 追加HO②） */
+async function hoLobbyShots(page, pageId, sel, where) {
+  const pg = HO_BY_PAGE[pageId];
+  if (!pg) { problems.push('HOの節表が無い：' + pageId); return 0; }
+  const made = await sectionShots(page, sel, (h, i) => {
+    const sec = matchHoSection(pg, h.text, h.tag === 'H1');
+    if (!sec) { hoShotLog.push({ pageId, heading: h.text, unit: null }); return null; }
+    const unit = 'HO:' + pageId + ':' + sec.idx + '_' + sec.key;
+    hoShotLog.push({ pageId, heading: h.text, unit, secIdx: sec.idx, key: sec.key });
+    return {
+      unit,
+      caption: 'ゲーム画面：' + where + '「' + (sec.heading || '冒頭') + '」',
+      meta: { pageId, kind: 'ho', heading: sec.heading || '（冒頭）', tab: where },
+    };
+  });
+  if (!made) problems.push('HOの節が撮れない：' + pageId);
+  return made;
+}
+
 /* 4-1. 部屋を作る → キャラクター選び（4つのタブ） */
 const NAMES = {};
 const tabs = {};
@@ -201,6 +360,8 @@ for (const p of ['PC1', 'PC2', 'PC3', 'PC4']) {
   /* 2026-11-14：ゲームの最初の札の初期表示が「はじめに」になったので、個人HOを撮る前に「あなたのHO」を押す（押さないと全員「はじめに」になる） */
   await clickAct(t, '[data-act=lbDoc][data-k=ho]');
   const n = await scrollShots(t, `n-ho-${p.toLowerCase()}-1`, LBSEL, (i, n) => `最初の HO の画面：${p} ${NAMES[p]} の「あなたのHO」タブ（${i}/${n}・文書の欄を上から順にスクロールして撮影）`);
+  /* 3列比較の右列：HO①の節ごとの画面（同じ「あなたのHO」の文書を、見出しごとに撮る） */
+  await hoLobbyShots(t, `n-ho-${p.toLowerCase()}-1`, LBSEL, `${p} ${NAMES[p]} の「あなたのHO」`);
   checks['ho_' + p] = (await textOf(t, LBSEL)).slice(0, 80).replace(/\s+/g, ' ');
   if (!n) problems.push(p + ' HO が撮れない');
 }
@@ -208,6 +369,7 @@ await tabs.PC1.bringToFront();
 await clickAct(tabs.PC1, '[data-act=lbDoc][data-k=commonHO]');
 checks.lobbyCommonHO = await textOf(tabs.PC1, LBSEL);
 await scrollShots(tabs.PC1, 'n-ho-common', LBSEL, (i, n) => `最初の HO の画面：「共通HO」タブ（PC1 のタブ・${i}/${n}・スクロールして撮影）`);
+await hoLobbyShots(tabs.PC1, 'n-ho-common', LBSEL, '「共通HO」');
 await clickAct(tabs.PC1, '[data-act=lbDoc][data-k=phaseTable]');
 checks.lobbyPhase = (await textOf(tabs.PC1, LBSEL)).slice(0, 200);
 await scrollShots(tabs.PC1, 'n-rule-phase', LBSEL, (i, n) => `最初の HO の画面：「フェイズ進行表」タブ（PC1 のタブ・${i}/${n}・スクロールして撮影）`);
@@ -300,22 +462,342 @@ try {
   await stateErrors(t, 'p5share'); await t.close();
 } catch (e) { problems.push('共有カード：' + e.message.split('\n')[0]); }
 
+/* ---------- 4-6. 項目ごとの実画面（3列比較の右列：全部屋・全カード・品・全追加HO・技能の注記） ---------- */
+const PAGE_OF_ADDHO = key => {
+  const m = /^(PC\d)_(\d)/.exec(key);
+  if (!m) return null;
+  const num = key === 'PC3_2_1' || key === 'PC3_2_2' ? 2 : Number(m[2]);
+  return 'n-ho-pc' + m[1].slice(2) + '-' + num;
+};
+async function clipEl(page, sel) {
+  return await page.evaluate(sel => {
+    const el = document.querySelector(sel); if (!el) return null;
+    const r = el.getBoundingClientRect();
+    const h = Math.min(r.height, innerHeight - Math.max(0, r.y) - 4);
+    return { x: Math.max(0, r.x), y: Math.max(0, r.y), width: r.width, height: h };
+  }, sel);
+}
+
+/* 4-6-1. 部屋公開文（全28室）：探索先を選ぶ地図で、部屋パネルを1室ずつ */
+try {
+  const t = await openState('full', 'PC1');
+  const roomIds = await t.evaluate(() => Object.keys(M7Debug.state.rooms));
+  let n = 0;
+  for (const id of roomIds) {
+    await t.evaluate(id => { const u = M7Debug.ui; u.selRoom = id; u.selFloor = id[0]; M7Debug.paint(true); }, id);
+    await sleep(130);
+    const box = await clipEl(t, '.sel-info .ri-panel');
+    const desc = (await t.evaluate(() => { const d = document.querySelector('.sel-info .ri-desc'); return d ? d.innerText : ''; })).trim();
+    if (!box) { unitNoShotReason['ROOM:' + id] = '部屋パネルが出ない（状態：' + ST.info.full + '）'; continue; }
+    await shotClip(t, 'ROOM:' + id, 'ゲーム画面：探索先を選ぶ地図で「' + id + '」を選んだときの部屋パネル（公開文）', box, { pageId: 'n-card-rooms', kind: 'room', heading: id });
+    if (!desc) unitNoShotReason['ROOM:' + id] = '部屋パネルに公開文が出ない（未入室の部屋として出ている）';
+    n++;
+  }
+  log('部屋の公開文：' + n + '/' + roomIds.length);
+  await stateErrors(t, 'full/rooms'); await t.close();
+} catch (e) { problems.push('部屋の公開文：' + e.message.split('\n')[0]); }
+
+/* 4-6-2. カード（144枚）：共有できるカードは中央「# 共有カード」、本人だけのカードは手元の「情報」 */
+try {
+  const t = await openState('full', 'PC1');
+  const list = await t.evaluate(() => {
+    const D = window.M7Data || {}, M = window.M7Manuscript || { cards: {} };
+    return Object.keys(M7Debug.state.cards).map(id => {
+      const d = (D.infos || {})[id] || null, c = (M.cards || {})[id] || null;
+      return {
+        id, hasInfo: !!d, title: (d && d.title) || (c && c.title) || id, kind: (c && c.kind) || null,
+        personal: !!(d && d.personal), expertOnly: !!(d && d.expertOnly), noShare: !!(d && d.noShare),
+        viewer: (d && d.viewer) || null,
+      };
+    });
+  });
+  const ownerOf = {};
+  for (const pc of ['PC1', 'PC2', 'PC3', 'PC4']) {
+    const tab = pc === 'PC1' ? t : await openState('full', pc);
+    const mine = await tab.evaluate(pc => Object.keys(M7Debug.state.cards).filter(id => (M7Debug.state.cards[id].owners || []).includes(pc)).map(id => [id, M7Debug.state.cards[id].owner || pc]), pc);
+    for (const [id, ow] of mine) ownerOf[id] = ow;
+    if (pc !== 'PC1') await tab.close();
+  }
+  const shareOk = list.filter(x => x.hasInfo && !x.personal && !x.expertOnly && !x.noShare && !x.viewer);
+  const selfOnlyCards = list.filter(x => x.hasInfo && (x.personal || x.expertOnly || x.noShare || x.viewer));
+  /* (a) 中央「共有カード」：共有できるカードを全員公開にして、1枚ずつ本文を撮る */
+  await t.evaluate(() => { M7Debug.ui.center = 'cards'; M7Debug.ui.cardCat = 'すべて'; });
+  for (const c of shareOk) {
+    await t.evaluate(id => {
+      const s = M7Debug.state.cards[id];
+      s.status = 'SHARED'; s.sharedBy = s.owner || 'PC1'; s.sharedPhase = 3;
+      M7Debug.ui.cardSel = id; M7Debug.paint(true);
+    }, c.id);
+    await sleep(90);
+    const box = await clipEl(t, '.cv-detail');
+    if (!box) { unitNoShotReason['CARD:' + c.id] = '共有カードの本文の枠が出ない'; continue; }
+    await shotClip(t, 'CARD:' + c.id, 'ゲーム画面：共有カード「' + c.title + '」（中央の # 共有カード で開いた本文）', box, { pageId: null, kind: 'card', heading: c.title });
+  }
+  /* (b) 手元の「情報」：本人だけのカード・共有できないカード */
+  for (const pc of ['PC1', 'PC2', 'PC3', 'PC4']) {
+    const cur = pc === 'PC1' ? t : await openState('full', pc);
+    const mine = selfOnlyCards.filter(c => ownerOf[c.id] === pc || c.viewer === pc || (c.viewer && c.viewer === pc));
+    if (mine.length) {
+      await cur.evaluate(() => { M7Debug.ui.center = 'auto'; M7Debug.ui.handTab = 'info'; M7Debug.ui.fold = { 'h-own': false, 'h-priv': false, 'h-shared': false }; });
+      for (const c of mine) {
+        const ok = await cur.evaluate(id => {
+          const ui = M7Debug.ui; ui.pvOpenCard = id; ui.pvRead = ui.pvRead || {}; ui.pvRead[id] = 1;
+          ui.handTab = 'info'; ui.fold = { 'h-own': false, 'h-priv': false, 'h-shared': false };
+          M7Debug.paint(true);
+          const el = document.querySelector('.infocard[data-card="' + id + '"]');
+          if (!el) return false;
+          const cont = el.closest('[data-scroll]');
+          if (cont) cont.scrollTop = Math.max(0, el.offsetTop - cont.offsetTop - 8);
+          el.scrollIntoView({ block: 'nearest' });
+          return true;
+        }, c.id);
+        if (!ok) { unitNoShotReason['CARD:' + c.id] = '手元の「情報」に本文の枠が出ない（' + pc + ' の画面）'; continue; }
+        await sleep(90);
+        const box = await clipEl(cur, '.infocard[data-card="' + c.id + '"]');
+        if (!box) { unitNoShotReason['CARD:' + c.id] = '手元の情報カードの枠が画面に無い（' + pc + ' の画面）'; continue; }
+        await shotClip(cur, 'CARD:' + c.id, 'ゲーム画面：' + pc + ' の手元「情報」のカード「' + c.title + '」（本人だけのカード）', box, { pageId: null, kind: 'card', heading: c.title });
+      }
+    }
+    if (pc !== 'PC1') await cur.close();
+  }
+  /* (c) ゲームにカードの画面が無い物（読み合わせ・ED だけで出る枠）は理由を明記（別の画像を流用しない）
+     状態からは消える（D.infos に無いカード）ので、原稿の全カードの一覧から数える */
+  const allCards = (() => {
+    const req = createRequire(path.join(SG, 'package.json'));
+    const M = req('./src/manuscript.js');
+    return Object.entries(M.cards).map(([id, c]) => ({ id, title: c.title }));
+  })();
+  for (const c of allCards) {
+    const u = 'CARD:' + c.id;
+    if (unitShots[u] || unitNoShotReason[u]) continue;
+    unitNoShotReason[u] = 'ゲーム内に情報カードの画面が無い（「' + c.title + '」は読み合わせ・ED・GM資料の中でだけ出る。カードとして配られない）';
+  }
+  /* 07 の重複見出しと 08 の Disgord の記録は、実カードの画面を同じ単位に紐付ける（画像は同じ物を指す） */
+  const alias = [['CARD:INFO-N-STYLE@07', 'CARD:INFO-N-STYLE'], ['CARD:INFO-E-DISGORD1_2', 'CARD:INFO-E-DISGORD1']];
+  for (const [to, from] of alias) {
+    if (unitShots[from]) { unitShots[to] = unitShots[from].map(x => Object.assign({}, x, { caption: x.caption + '（同じ見出しの別ページ）' })); unitMeta[to] = Object.assign({}, unitMeta[from] || {}, { aliasOf: from }); }
+    else unitNoShotReason[to] = '実カードの画面が撮れていない（' + from + '）';
+  }
+  /* 抽出側（Task 3）の CARD_DOC の綴りは「@rule_hideNone」（コロン無し）。両方の綴りで同じ画像を引けるようにする */
+  for (const [to, from] of [['CARD_DOC:n-card-skill:@rule_hideNone', 'CARD_DOC:n-card-skill:@rule:hideNone'], ['CARD_DOC:n-card-skill:@rule_lure', 'CARD_DOC:n-card-skill:@rule:lure']]) {
+    if (unitShots[from]) { unitShots[to] = unitShots[from].map(x => Object.assign({}, x, { caption: x.caption + '（抽出側の綴りでも同じ画面）' })); unitMeta[to] = Object.assign({}, unitMeta[from] || {}, { aliasOf: from }); }
+  }
+  /* 08 の「エドガーへの手紙」は ED の読み合わせでだけ出る（ゲームにカードの画面が無い）。単位の形が CARD でも CARD_DOC でも同じ理由を出す */
+  unitNoShotReason['CARD_DOC:n-card-case:INFO-E-LETTER'] = unitNoShotReason['CARD:INFO-E-LETTER']
+    || 'ゲーム内にカードの画面が無い（EDの読み合わせでだけ出る）';
+  log('カード：共有 ' + shareOk.length + ' 枚／本人だけ ' + selfOnlyCards.length + ' 枚／画面なし ' + list.filter(x => !x.hasInfo).length + ' 枚');
+  await stateErrors(t, 'full/cards'); await t.close();
+} catch (e) { problems.push('カードの実画面：' + e.message.split('\n')[0]); }
+
+/* 4-6-3. 品の一覧（09）：所持品の画面で、種類（節）ごとにまとめて撮る */
+try {
+  const t = await openState('full', 'PC1');
+  await t.evaluate(() => { M7Debug.ui.center = 'auto'; M7Debug.ui.handTab = 'items'; M7Debug.paint(true); });
+  await sleep(200);
+  const boxes = await t.evaluate(() => {
+    const cont = document.querySelector('[data-scroll="hand-items"]'); if (!cont) return null;
+    const cr = cont.getBoundingClientRect(), st = cont.scrollTop;
+    return {
+      c: { x: cr.x, y: cr.y, w: cr.width, h: cr.height, ch: cont.clientHeight, sh: cont.scrollHeight },
+      rows: [...document.querySelectorAll('.item-card')].map(e => {
+        const r = e.getBoundingClientRect(), k = e.querySelector('.ic-kind');
+        return { kind: k ? k.innerText.trim() : '', top: r.top - cr.top + st, bottom: r.bottom - cr.top + st };
+      }),
+    };
+  });
+  const SEC = { '消耗品': 0, 'お宝': 1, 'お宝・使える': 2, '装備': 3, '道具': 4, '素材': 5 };
+  const groups = [];
+  for (const r of (boxes ? boxes.rows : [])) {
+    const sec = SEC[r.kind];
+    if (sec == null) continue;
+    const last = groups[groups.length - 1];
+    if (last && last.sec === sec) last.bottom = Math.max(last.bottom, r.bottom);
+    else groups.push({ sec, kind: r.kind, top: r.top, bottom: r.bottom });
+  }
+  const C = boxes.c, limit = Math.max(0, C.sh - C.ch);
+  for (const g of groups) {
+    const unit = 'ITEMSEC:n-card-items:' + g.sec;
+    let y = Math.min(Math.max(0, g.top - 4), limit), part = 1;
+    while (true) {
+      await t.evaluate(([y]) => { const c = document.querySelector('[data-scroll="hand-items"]'); if (c) c.scrollTop = y; }, [y]);
+      await sleep(140);
+      const top = C.y + Math.max(0, g.top - y);
+      const bottom = Math.min(C.y + C.h, C.y + (g.bottom - y));
+      const endOnScreen = C.y + (g.bottom - y);
+      if (bottom - top >= 24) {
+        const cap = 'ゲーム画面：手元「所持品」の「' + g.kind + '」（' + g.sec + '番目の節）' + (part > 1 ? '（つづき・' + part + '枚目）' : '');
+        await shotClip(t, unit, cap, { x: C.x + 1, y: top, width: C.w - 2, height: bottom - top }, { pageId: 'n-card-items', kind: 'itemsec', heading: g.kind });
+      }
+      if (y >= limit || endOnScreen <= C.y + C.h - 2) break;
+      const next = Math.min(limit, y + Math.floor(C.ch * 0.9));
+      if (next === y) break;
+      y = next; part++;
+      if (part > 10) break;
+    }
+    if (g.sec < 6) {
+      const unitPl = 'ITEMSEC:n-card-items-pl:' + g.sec;
+      unitShots[unitPl] = unitShots[unit].map(x => Object.assign({}, x, { caption: x.caption + '（配布版の同じ節）' }));
+      unitMeta[unitPl] = Object.assign({}, unitMeta[unit] || {}, { pageId: 'n-card-items-pl' });
+    }
+  }
+  unitNoShotReason['ITEMSEC:n-card-items:6'] = 'GM専用の注記（鑑定で分かることは《鑑定》の対象選択で1品ずつ出る。一覧の画面は無い）';
+  log('品の節：' + groups.map(g => g.kind + '=' + g.sec).join(' / '));
+  await stateErrors(t, 'full/items'); await t.close();
+} catch (e) { problems.push('品の一覧：' + e.message.split('\n')[0]); }
+
+/* 4-6-4. 追加HO（16キー／15ページ）：読み合わせの段で、追加HOの窓を1通ずつ開いて節ごとに撮る */
+try {
+  for (const pc of ['PC1', 'PC2', 'PC3', 'PC4']) {
+    const t = await openState('allho', pc);
+    const keys = await t.evaluate(pc => Object.keys(M7Debug.state.addHO).filter(k => M7Debug.state.addHO[k].pc === pc), pc);
+    for (const key of keys) {
+      const pageId = PAGE_OF_ADDHO(key);
+      const page = HO_BY_PAGE[pageId];
+      if (!page) { unitNoShotReason['HO:' + pageId + ':*'] = 'HOのページ表に無い：' + key; continue; }
+      await t.evaluate(key => {
+        const s = M7Debug.state;
+        for (const k of Object.keys(s.addHO)) s.addHO[k].read = (k !== key);
+        M7Debug.ui.addhoLater = {}; M7Debug.paint(true);
+      }, key);
+      await sleep(260);
+      const has = await t.locator('.modal.on.addho').count();
+      if (!has) { unitNoShotReason['HO:' + pageId + ':*'] = '追加HOの窓が開かない（' + key + '・段 ' + ST.info.allho + '）'; continue; }
+      const title = (await textOf(t, '.modal.on.addho h2')).trim();
+      const introSec = KEY_PART[key] ? (page.secs.find(s => s.heading.includes(KEY_PART[key])) || page.secs[0]) : page.secs[0];
+      const made = await sectionShots(t, '.modal.on.addho .doc.mini', (h, i) => {
+        if (h.tag === 'INTRO') return {
+          unit: 'HO:' + pageId + ':' + introSec.idx + '_' + introSec.key,
+          caption: 'ゲーム画面：追加HOの窓「' + title + '」（' + key + '）の冒頭',
+          meta: { pageId, kind: 'ho', heading: introSec.heading || '（冒頭）', tab: '追加HOの窓', key },
+          opt: { alsoPage: pageId },
+        };
+        const sec = matchHoSection(page, h.text, false);
+        if (!sec) { hoShotLog.push({ pageId, key, heading: h.text, unit: null }); return null; }
+        hoShotLog.push({ pageId, key, heading: h.text, unit: 'HO:' + pageId + ':' + sec.idx + '_' + sec.key, secIdx: sec.idx, key_: sec.key });
+        return {
+          unit: 'HO:' + pageId + ':' + sec.idx + '_' + sec.key,
+          caption: 'ゲーム画面：追加HOの窓「' + title + '」（' + key + '）の「' + sec.heading + '」',
+          meta: { pageId, kind: 'ho', heading: sec.heading, tab: '追加HOの窓', key },
+        };
+      }, true);
+      if (!made) problems.push('追加HOの節が撮れない：' + key);
+      /* 1ページが2つの追加HOに分かれる物（PC3 追加HO②）は、ページの冒頭（0_intro）が GM 注だけで画面に出ない。
+         その場合は「その1」の画面を同じ単位に紐付け、理由も残す（別の通の画像を流用しない） */
+      const uIntro = 'HO:' + pageId + ':' + introSec.idx + '_' + introSec.key;
+      const u0 = 'HO:' + pageId + ':0_intro';
+      if (introSec.idx !== 0 && unitShots[uIntro] && !unitShots[u0]) {
+        unitShots[u0] = unitShots[uIntro].map(x => Object.assign({}, x, { caption: x.caption + '（このページの冒頭は GM 注だけで、画面には出ない。' + key + ' の冒頭を同じ単位に紐付け）' }));
+        unitMeta[u0] = Object.assign({}, unitMeta[uIntro], { heading: '（冒頭・画面には出ない）', aliasOf: uIntro });
+      }
+    }
+    await stateErrors(t, 'allho/' + pc); await t.close();
+  }
+} catch (e) { problems.push('追加HOの実画面：' + e.message.split('\n')[0]); }
+
+/* 4-6-5. 07 の @rule の節（隠す・誘引）：技能の欄の、その技能の行を撮る */
+try {
+  const SPEC = [
+    { pc: 'PC4', skill: 'hide', unit: 'CARD_DOC:n-card-skill:@rule:hideNone', caption: 'ゲーム画面：エドガーの手元「技能」の《何もなかったことにする》の行（07 の「技能《隠す》」）' },
+    { pc: 'PC2', skill: 'lure', unit: 'CARD_DOC:n-card-skill:@rule:lure', caption: 'ゲーム画面：ヴィオラの手元「技能」の《誘引》の行（07 の「ヴィオラの《誘引》」）' },
+  ];
+  for (const s of SPEC) {
+    const t = await openState('full', s.pc);
+    await t.evaluate(() => { M7Debug.ui.center = 'auto'; M7Debug.ui.handTab = 'skill'; M7Debug.paint(true); });
+    await sleep(160);
+    const box = await clipEl(t, 'button.sk[data-key="' + s.skill + '"]');
+    if (!box) { unitNoShotReason[s.unit] = '技能の欄にその技能の行が出ない（' + s.pc + ' の画面）'; await t.close(); continue; }
+    await shotClip(t, s.unit, s.caption, { x: box.x, y: box.y, width: VW - box.x - 8, height: Math.max(box.height, 90) }, { pageId: 'n-card-skill', kind: 'card_doc', heading: s.skill });
+    await stateErrors(t, 'full/skill'); await t.close();
+  }
+} catch (e) { problems.push('技能の注記：' + e.message.split('\n')[0]); }
+
+/* 4-6-6. 単位IDの綴りの突き合わせ（抽出側 Task 3 の unit_id で必ず引けるようにする）
+   - CARD_DOC は抽出側が「@rule_hideNone」（コロン無し）で出すので、その綴りにも同じ画像を登録する
+   - HO は「page_id＋節番号」で同じ物を指しているか確かめ、違う綴りがあれば理由を残す（黙って欠けにしない） */
+{
+  const mirror = [['CARD_DOC:n-card-skill:@rule_hideNone', 'CARD_DOC:n-card-skill:@rule:hideNone'], ['CARD_DOC:n-card-skill:@rule_lure', 'CARD_DOC:n-card-skill:@rule:lure']];
+  const aliased = [];
+  for (const [to, from] of mirror) {
+    if (unitShots[to]) continue;
+    if (!unitShots[from]) { unitNoShotReason[to] = '実画面が撮れていない（' + from + '）'; continue; }
+    unitShots[to] = unitShots[from].map(x => Object.assign({}, x, { caption: x.caption + '（抽出側の綴りでも同じ画面）' }));
+    unitMeta[to] = Object.assign({}, unitMeta[from] || {}, { aliasOf: from });
+    aliased.push(to + ' ← ' + from);
+  }
+  if (aliased.length) log('単位名の綴り合わせ：' + aliased.join(' / '));
+}
+
 await browser.close();
 server.close();
 
 /* ---------- 5. manifest ---------- */
+/* 原稿の版（どの時点の原稿を取り込んだか。プレビューの明示に使う） */
+const crypto = await import('node:crypto');
+function dirDigest(root) {
+  const files = [];
+  (function walk(d) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (/\.(md|txt)$/i.test(e.name)) files.push(p);
+    }
+  })(root);
+  files.sort();
+  const h = crypto.createHash('sha256');
+  let latest = 0;
+  for (const f of files) { h.update(path.relative(root, f).replace(/\\/g, '/') + '\0' + fs.readFileSync(f)); try { latest = Math.max(latest, fs.statSync(f).mtimeMs); } catch (e) {} }
+  return { files: files.length, sha256: h.digest('hex'), latest };
+}
+let msDigest = { files: 0, sha256: '', latest: 0 };
+try { msDigest = dirDigest(manuscriptRoot); } catch (e) { problems.push('原稿の指紋が取れない：' + e.message.split('\n')[0]); }
+/* 原稿の日付は「いちばん新しいファイル」の日付（フォルダの更新時刻ではない） */
+const msDay = msDigest.latest ? new Date(msDigest.latest).toISOString().slice(0, 10) : '?';
+/* 期待する単位と、撮れた／撮れないの数（抜粋禁止の検査に使う） */
+const expectHo = [];
+for (const pg of HO_PAGES) for (const s of pg.secs) expectHo.push('HO:' + pg.pageId + ':' + s.idx + '_' + s.key);
+const expectCards = (() => {
+  try {
+    const req = createRequire(path.join(SG, 'package.json'));
+    const M = req('./src/manuscript.js');
+    return Object.keys(M.cards).map(id => 'CARD:' + id)
+      .concat(['CARD:INFO-N-STYLE@07', 'CARD:INFO-E-DISGORD1_2']);
+  } catch (e) { problems.push('カードの一覧が読めない：' + e.message.split('\n')[0]); return []; }
+})();
+const expectRooms = (() => { try { const req = createRequire(path.join(SG, 'package.json')); const dm = req('./src/data.js'); const D = dm.D || dm; return Object.keys(D.rooms).map(id => 'ROOM:' + id); } catch (e) { return []; } })();
+const expectItems = ['ITEMSEC:n-card-items:0', 'ITEMSEC:n-card-items:1', 'ITEMSEC:n-card-items:2', 'ITEMSEC:n-card-items:3', 'ITEMSEC:n-card-items:4', 'ITEMSEC:n-card-items:5', 'ITEMSEC:n-card-items:6',
+  'ITEMSEC:n-card-items-pl:0', 'ITEMSEC:n-card-items-pl:1', 'ITEMSEC:n-card-items-pl:2', 'ITEMSEC:n-card-items-pl:3', 'ITEMSEC:n-card-items-pl:4', 'ITEMSEC:n-card-items-pl:5'];
+/* 07 の @rule の節（抽出側の綴りと撮影側の綴りの両方）と、08 の手紙（画面が無いので理由） */
+const expectDocs = ['CARD_DOC:n-card-skill:@rule:hideNone', 'CARD_DOC:n-card-skill:@rule:lure',
+  'CARD_DOC:n-card-skill:@rule_hideNone', 'CARD_DOC:n-card-skill:@rule_lure', 'CARD_DOC:n-card-case:INFO-E-LETTER'];
+const missing = [];
+for (const u of expectHo.concat(expectCards, expectRooms, expectItems, expectDocs)) if (!unitShots[u] && !unitNoShotReason[u]) missing.push(u);
+if (missing.length) problems.push('単位の画像が無い（' + missing.length + '件）：' + missing.slice(0, 12).join(', '));
+const shotCount = Object.keys(unitShots).length, reasonCount = Object.keys(unitNoShotReason).length;
+
 const manifest = {
   builtAt: new Date().toISOString(),
   gameCommit, gameDirty: !!gameDirty,
   manuscriptRoot,
+  manuscriptSnapshot: { date: msDay, files: msDigest.files, sha256: msDigest.sha256 },
   importWarnings: importWarnings.length,
   importWarningList: importWarnings,
   viewport: { width: VW, height: VH, deviceScaleFactor: DSF },
+  /* 実画面はプレビュー（本番未デプロイ）。この版・この原稿の画面であることを必ず画面に出す */
+  preview: true,
+  liveDeployed: false,
+  previewLabel: 'プレビュー（ゲーム ' + gameCommit + ' ＋ ' + msDay + 'の本仕様原稿 ' + (msDigest.sha256 || '').slice(0, 8) + ' 取込・本番未デプロイ）',
+  unitShots,
+  unitNoShotReason,
+  unitMeta,
+  unitCounts: { units: shotCount, noShot: reasonCount, images: Object.values(unitShots).reduce((a, b) => a + b.length, 0), expected: expectHo.length + expectCards.length + expectRooms.length + expectItems.length + expectDocs.length, missing: missing.length },
+  hoPages: HO_PAGES.map(p => ({ pageId: p.pageId, file: p.file, sections: p.secs.map(s => ({ idx: s.idx, key: s.key, heading: s.heading })) })),
+  hoShotLog,
   pages,
 };
 fs.writeFileSync(path.join(OUTDIR, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
-fs.writeFileSync(path.join(BUILD, 'checks.json'), JSON.stringify({ checks, liveErrors, consoleErrors, notFound: [...notFound], problems, states: ST.info, missingStates: ST.missing }, null, 2));
+fs.writeFileSync(path.join(BUILD, 'checks.json'), JSON.stringify({ checks, liveErrors, consoleErrors, notFound: [...notFound], problems, states: ST.info, missingStates: ST.missing, unitCounts: manifest.unitCounts, missingUnits: missing }, null, 2));
 let total = 0; for (const f of files) total += fs.statSync(path.join(OUTDIR, f)).size;
 log('完了：' + files.length + '枚・' + (total / 1048576).toFixed(1) + 'MB → ' + rel(OUTDIR));
+log('項目の実画面：' + shotCount + '単位・' + manifest.unitCounts.images + '枚／画面が無い単位：' + reasonCount + '（欠け ' + missing.length + '）');
 log('ゲームの JS エラー：' + JSON.stringify(liveErrors) + ' ／ console：' + consoleErrors.length);
 if (problems.length) log('撮れなかった・気になった所：\n  - ' + problems.join('\n  - '));
