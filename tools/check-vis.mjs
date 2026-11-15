@@ -7,7 +7,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const { chromium } = require('C:/Users/81806/AppData/Local/hermes/hermes-agent/node_modules/playwright');
 
 const root = path.resolve('.');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json' };
@@ -24,14 +23,35 @@ if (!base) {
 }
 const shotDir = process.env.SHOT_DIR || path.join(root, 'tools', '_shots');
 fs.mkdirSync(shotDir, { recursive: true });
-const profile = path.join(process.env.TMPDIR || process.env.TEMP || '.', 'edge-profile-index-vis');
-const ctx = await chromium.launchPersistentContext(profile, { channel: 'msedge', headless: true, viewport: { width: 1366, height: 900 } });
+// 2026-11-16：playwright が無い端末では、repo の puppeteer-core + Edge で同じ数え方をする（70 と同じやり方）。
+let ctx;
+try {
+  const { chromium } = require('C:/Users/81806/AppData/Local/hermes/hermes-agent/node_modules/playwright');
+  const profile = path.join(process.env.TMPDIR || process.env.TEMP || '.', 'edge-profile-index-vis');
+  ctx = await chromium.launchPersistentContext(profile, { channel: 'msedge', headless: true, viewport: { width: 1366, height: 900 } });
+} catch (e) {
+  console.error('playwright が無いので puppeteer-core + Edge で数える');
+  const puppeteer = require(path.join(root, 'node_modules', 'puppeteer-core'));
+  const browser = await puppeteer.launch({ executablePath: 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: true, defaultViewport: { width: 1366, height: 900 } });
+  const p0 = await browser.newPage();
+  await p0.setRequestInterception(true);
+  // OPTIONS（プリフライト）は、本物の Worker と同じヘッダで返す（content-type を許す。ここを省くと CORS のエラーが「サイトの例外」に見える）
+  p0.on('request', (r) => {
+    if (!/workers\.dev/.test(r.url())) return r.continue();
+    if (r.method() === 'OPTIONS') return r.respond({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'Content-Type,Authorization', 'access-control-allow-methods': 'GET,POST,PUT,DELETE,OPTIONS' } });
+    return r.respond({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"memos":[]}' });
+  });
+  p0.waitForTimeout = (ms) => new Promise((res) => setTimeout(res, ms));
+  // playwright は waitForFunction(fn, arg)、puppeteer は waitForFunction(fn, options, ...args)。引数の順を合わせる
+  const wf = p0.waitForFunction.bind(p0);
+  p0.waitForFunction = (fn, arg) => wf(fn, {}, arg);
+  ctx = { pages: () => [p0], newPage: async () => p0, close: () => browser.close() };
+}
 const page = ctx.pages()[0] || await ctx.newPage();
 const errors = [];
 page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
 page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
-// 共有保存（Worker）への通信はここでは止める（外へ出さない）
-await page.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"memos":[]}' }));
+// 共有保存（Worker）への通信はここでは止める（外へ出さない）。puppeteer のときは上の setRequestInterception で止めている。
 await page.goto(base + '?view=all#/n-now', { waitUntil: 'load' });
 await page.waitForSelector('#page .page-body');
 const ids = await page.evaluate(() => window.SITE_DATA.pages.map((p) => p.id));

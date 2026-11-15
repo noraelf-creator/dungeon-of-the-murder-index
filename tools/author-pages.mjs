@@ -257,7 +257,7 @@ export function needles(text) {
 // ---------- 1b. 訂正済みページ（Markdown） ----------
 // pages: build が組み上げたページ（{id, nav, source, html}）。source は content/ からの相対
 // mapAfter: 変更後の文 → どのページのどのアンカーか。既定は pages の source 一致 + 本文検索
-export function buildFixedPage({ changes, ledger, tests, notes, d1, pages, gameCommit, generatedAt, sourceRoot }) {
+export function buildFixedPage({ changes, ledger, tests, notes, d1, pages, gameCommit, generatedAt, sourceRoot, night }) {
   const S = summarizeChanges({ changes, ledger, tests, notes, d1 });
   const ix = indexPages(pages || []);
   const root = String(sourceRoot || '');
@@ -295,9 +295,84 @@ export function buildFixedPage({ changes, ledger, tests, notes, d1, pages, gameC
     const us = units.filter((u) => u.file === f);
     byFile.push({ file: f, units: us, count: us.length, linked: us.filter((u) => u.href).length });
   }
+  // ---------- 0. 今夜（2026-11-16）の直し ----------
+  // night: tools/night-changes.mjs が作る data/n16-changes.json（控えと今の原稿の行の差分・作者の直し35件）
+  // ここでも、リンクは「反映後の文」をページ本文から探して data-a を引く（見つからなければ理由を書く）。
+  const nightFiles = [];
+  const nightMemos = [];
+  let nightUnitCount = 0;
+  if (night && Array.isArray(night.files)) {
+    for (const f of night.files) {
+      const rel = '完成版/' + String(f.file || '');
+      const base = String(f.file || '').split('/').pop();
+      let cand = ix.bySource.get(rel) || [];
+      let via = 'source';
+      if (!cand.length) { cand = ix.byBase.get(base) || []; via = 'basename'; }
+      const units = [];
+      for (const u of f.units || []) {
+        const afterText = (u.after || []).join('\n');
+        let pageId = ''; let anchor = ''; let hits = 0; let whyMissing = '';
+        if (!afterText.trim()) whyMissing = '反映後の文が無い（削除）';
+        else {
+          for (const pg of cand) {
+            const rr = ix.findIn(pg, afterText);
+            if (rr.anchor) { pageId = pg.id; anchor = rr.anchor; hits = rr.hits; break; }
+          }
+          if (!pageId) { via = ''; whyMissing = cand.length ? '反映後の文がページ本文に無い（表の組み方・改行の違い）' : 'この原稿ファイルを表示しているページが無い'; }
+        }
+        units.push({ op: u.op, lineBefore: u.lineBefore, pageId, anchor, hits, via, whyMissing,
+          href: pageId && anchor ? `#/${pageId}/${anchor}` : '',
+          before: (u.before || []).join('\n'), after: afterText });
+      }
+      nightUnitCount += units.length;
+      nightFiles.push({ file: f.file, status: f.status || 'changed', units, count: units.length, linked: units.filter((u) => u.href).length });
+    }
+    // 作者の直し35件の「この場所」：D1 の section_id は、いまのビルドの data-a と一致しない（作り方が違う）。
+    // そこで、今夜の差分の「変更前」に注の文（削除の注は見出しの文）が入っているかを手がかりに、実際のアンカーへ結ぶ。
+    // 結べないときは、ページの頭へ。勝手に別の場所へ結ばない。
+    const normKey = (s) => norm(s);
+    for (const m of night.memos || []) {
+      const pg = ix.byId.get(m.pageId);
+      const content = String(m.content || '').trim();
+      const isDel = /^(削除|全て削除|全削除)$/.test(content);
+      const raw = isDel ? String(m.title || '').split('｜').slice(1).join('｜') : content;
+      // 注の文は複数行のことが多い。1行ずつ（長い行から）当てる。1行でも見つかれば、その変更の場所へ結ぶ。
+      const keys = String(raw || '').split('\n').map(normKey).filter((k) => k.length >= 10).sort((a, b) => b.length - a.length);
+      let hit = null; let hitFile = '';
+      for (const key of keys) {
+        for (const f of nightFiles) {
+          for (const u of f.units) {
+            if (normKey(u.before).includes(key) || normKey(u.after).includes(key)) { hit = u; hitFile = f.file; break; }
+          }
+          if (hit) break;
+        }
+        if (hit) break;
+      }
+      // 差分に無いときは、いまのページ本文に注の文（1行）を探す（作者の直しが、そのまま残っている行）
+      let pageAnchor = ''; let pageHits = 0;
+      if (!(hit && hit.href) && pg) {
+        for (const key of keys) {
+          for (const line of String(raw).split('\n')) {
+            if (normKey(line) !== key) continue;
+            const rr = ix.findIn(pg, line);
+            if (rr.anchor) { pageAnchor = rr.anchor; pageHits = rr.hits; break; }
+          }
+          if (pageAnchor) break;
+        }
+      }
+      const href = hit && hit.href ? hit.href : (pageAnchor ? `#/${m.pageId}/${pageAnchor}` : (pg ? `#/${m.pageId}` : ''));
+      nightMemos.push({ ...m, isDel, href, via: hit && hit.href ? 'diff' : (pageAnchor ? 'page-text' : (hit ? 'diff-unlinked' : 'page')),
+        pageNav: pg ? pg.nav : '', pageExists: !!pg, diffFile: hitFile,
+        note: (hit && hit.href) || pageAnchor ? '' : (isDel ? '削除したので、その場所はいま空（ページの頭へ）' : 'この文は、原稿のどこにも見つからない（作者の文と、原稿に入った文が違う可能性）') });
+    }
+  }
+  const hasNight = nightUnitCount > 0 || nightMemos.length > 0;
+  const nightLinked = nightFiles.reduce((n, f) => n + f.linked, 0);
   const s = S;
   const L = [];
-  L.push(`# 訂正済みの箇所（${String(generatedAt || '').slice(0, 10)}）`, '');
+  // 日付は日本時間で出す（UTC のままだと、夜の作業が前の日付になる）
+  const jstDate = generatedAt ? new Date(generatedAt).toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }) : '';
+  L.push(`# 訂正済みの箇所（${jstDate}）`, '');
   L.push(':::note このページの読み方');
   L.push('**今回すでに直した所**の記録。本文（左の原稿のページ）とも、[疑問・矛盾・気になる所](#/n-questions)とも別のページ。');
   L.push(`- 原稿の変更：**${s.files} ファイル / ${s.units} か所**（変更前 → 変更後の全文は [2 節](#/n-fixed/full-changes)）`);
@@ -305,9 +380,48 @@ export function buildFixedPage({ changes, ledger, tests, notes, d1, pages, gameC
   L.push(`- 作者の注：確定 **${s.notes.fixed}** 件／未確定 **${s.notes.open}** 件（未確定は疑問のページ）`);
   L.push(`- 共有保存（D1）で resolved になった edit/del：**${s.d1.resolvedEditDel}** 行。**これはDBの状態で、原稿への反映とは別**（下の 4 節）`);
   L.push(`- ゲームの基準：\`${esc(gameCommit || '(未取得)')}\``);
+  if (hasNight) L.push(`- **今夜（2026-11-16）の直し**：原稿 ${nightFiles.filter((f) => f.count).length} ファイル / ${nightUnitCount} か所。作者の直し **${nightMemos.length} 件**の反映先へ飛べる（[0 節](#/n-fixed/night-16)）`);
   if (!s.declared.ok) L.push(`- ⚠ 変更データの宣言値（${s.declared.files} ファイル / ${s.declared.units} か所）と実数（${s.files} / ${s.units}）が違う。**実数を出している**`);
   L.push(':::', '');
   L.push('<!--vis:make-->', '');
+  // 0. 今夜（2026-11-16）の直し：作者の直し35件の反映先と、原稿の変更（今夜の分）
+  if (hasNight) {
+    const KINDS = { edit: '直す', del: '削除', 'del-sec': '節ごと削除' };
+    L.push('<p data-a="night-16"><b>0. 今夜（2026-11-16）の直し</b>：作者が INDEX に付けた直しの反映先と、今夜の原稿の変更。下の 2 節（11/14→11/15 の分）とは別の節。</p>', '');
+    L.push(`## 0. 今夜（2026-11-16）の直し（原稿 ${nightFiles.filter((f) => f.count).length} ファイル・${nightUnitCount} か所／作者の直し ${nightMemos.length} 件）`, '');
+    L.push(':::note この節の読み方');
+    L.push('- 上（0-1）が**作者の直し 35 件**。押すと、その文がある（あった）ページの位置へ飛ぶ。');
+    L.push('- 下（0-2）が**今夜の原稿の変更**。色々な変更をまとめて、ファイル別に「変更前 → 変更後」で出している。');
+    L.push('- 「結果」の列は、包B（原稿担当）の一覧 `B_CHANGES_20261116.md` の列をそのまま写している（こちらで判定していない）。');
+    L.push(':::');
+    L.push('');
+    // 0-1. 作者の直し35件
+    L.push(`### 0-1. 作者の直し（${nightMemos.length} 件）と反映先`, '');
+    L.push('| # | 直し | ページ | 何を | 結果（包Bの一覧から） | この場所 |', '|---|---|---|---|---|---|');
+    nightMemos.forEach((m, i) => {
+      const isDel = /^(削除|全て削除|全削除)$/.test(String(m.content || '').trim());
+      const what = oneLine(isDel ? String(m.title || '').split('｜').slice(1).join('｜') : m.content, 40);
+      const mark = m.via === 'diff' || m.via === 'page-text' ? '' : (m.note ? `（${m.note}）` : '');
+      L.push(`| ${i + 1} | <code>${esc(m.short)}</code> | ${m.pageExists ? esc(m.pageNav) : `<code>${esc(m.pageId)}</code>（今のページに無い）`} | ${esc(KINDS[m.character] || m.character || '（種類なし）')}：${esc(what)} | ${esc(m.result || '—')} | ${m.href ? `<a href="${esc(m.href)}">開く</a>${mark}` : `（ページが無い）${mark}`} |`);
+    });
+    L.push('');
+    // 0-2. 今夜の原稿の変更（ファイル別）
+    L.push(`### 0-2. 今夜の原稿の変更（${nightFiles.filter((f) => f.count).length} ファイル・${nightUnitCount} か所・リンク ${nightLinked}）`, '');
+    L.push('控え `work/backup_20261116/05_完成版_0230` と、いまの `05_完成版` の行の差分。作り直すとき：`node tools/night-changes.mjs`（原稿は読むだけ）。', '');
+    for (const f of nightFiles) {
+      if (!f.count) continue;
+      L.push(`#### ${esc(baseName(f.file))}（${f.count} か所${f.linked ? `・リンク ${f.linked}` : ''}）`, '');
+      L.push(`<details class="note meta"><summary>出典（原稿のファイル）</summary><code>${esc(f.file)}</code></details>`, '');
+      for (const u of f.units) {
+        const head = `${u.op === 'delete' ? '削除' : u.op === 'insert' ? '追加' : '置き換え'}｜${oneLine(u.after || u.before, 44)}`;
+        L.push(`<details class="fixunit"><summary>${esc(head)}</summary>`);
+        L.push(`<p><b>この場所</b>：${u.href ? `<a href="${esc(u.href)}">${esc((ix.byId.get(u.pageId) || {}).nav || u.pageId)}</a>` : esc(u.whyMissing || 'リンクなし')}${u.hits > 1 ? `（同じ文が ${u.hits} か所。最初の1つに結んだ）` : ''}</p>`);
+        L.push(`<p><b>原稿</b>：<code>${esc(f.file)}</code>（変更前の ${u.lineBefore} 行目あたり）</p>`);
+        L.push('<p>変更前</p>', pre(u.before || '(なし)'), '<p>変更後</p>', pre(u.after || '(なし)'));
+        L.push('</details>', '');
+      }
+    }
+  }
   // 1. 数（機械の集計。本文ではないので、既定で閉じた details に畳む）
   L.push('## 1. 数（生成元から集計）', '');
   L.push('数の内訳は、たたんだ「数の出どころ」に置いてある（機械の集計で、本文ではない）。', '');
@@ -360,10 +474,12 @@ export function buildFixedPage({ changes, ledger, tests, notes, d1, pages, gameC
   L.push('## 5. 元にした資料', '');
   L.push('- `69/source/changes_before_after.json`（変更前・変更後）／`69/source/source_ledger_new.json`（原稿のSHA）／`69/source/tests.json`（検証）');
   L.push('- `content/_creator_notes.json`（作者の注。正本は 69/source/CREATOR_NOTES.json）／`70/memos_before70.json`（共有保存の写し）');
+  L.push('- 今夜（11/16）の分：`data/n16-changes.json`（控えと今の原稿の差分・作者の直し35件）。作り直し：`node tools/night-changes.mjs`');
   L.push('- 数の作り直し：`node tools/build.mjs`（このページは build が生成する。手で直さない）');
   return {
     md: L.join('\n') + '\n',
-    data: { schema: SCHEMAS.fixed, generatedAt: iso(generatedAt), gameCommit: gameCommit || '', counts: s, d1: s.d1, files: byFile, units },
+    data: { schema: SCHEMAS.fixed, generatedAt: iso(generatedAt), gameCommit: gameCommit || '', counts: s, d1: s.d1, files: byFile, units,
+      night: hasNight ? { before: night.before, after: night.after, files: nightFiles, memos: nightMemos, counts: { files: nightFiles.filter((f) => f.count).length, units: nightUnitCount, linked: nightLinked, memos: nightMemos.length } } : null },
   };
 }
 
@@ -523,7 +639,7 @@ export function groupGameText(gt, { chunkSize = 150, scenes = [], labels = {}, s
   };
 }
 
-export function buildGameTextPage({ page, commit, generatedAt }) {
+export function buildGameTextPage({ page, commit, generatedAt, notice }) {
   if (!page || !Array.isArray(page.items)) throw new Error('page が無い');
   if (!commit) throw new Error('commit が無い（どの版か分からないので止める）');
   const L = [];
@@ -532,6 +648,7 @@ export function buildGameTextPage({ page, commit, generatedAt }) {
   L.push('ゲームの画面に出る文字を、コードから機械的に抜いて並べたもの。**原稿の本文ではない**（原稿は左の「HO」「読み合わせ」「カード」など）。**作者が足す文（サイトの別レイヤー）とも別**で、ここは読むだけ。');
   L.push(`- このページ：**${page.items.length} 件**${page.parts > 1 ? `（${page.part} / ${page.parts}）` : ''}／場面 \`${esc(page.scene)}\``);
   L.push(`- 出典：\`git show ${esc(commit)}:<file>\`。文字は1字も変えていない`);
+  if (notice) L.push(`- ${notice}`);
   L.push('- 先に「本文」を出す。画面の条件によって変わる組み立て（差し込みの型）は、下の「条件によって変わる表示・技術資料（参考）」にたたんである（開くと原文のまま見える）');
   L.push('- 出典の行・ID・連結式（テンプレート）は、各件の「出典」を開くと見える（本文の見える文字と分けてある）');
   L.push(':::', '');

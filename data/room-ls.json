@@ -1,0 +1,899 @@
+{
+ "generatedAt": "2026-11-15T18:41:13.874Z",
+ "source": "C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/mm7_wt_n16_rules/src/data.js",
+ "sourceSha256": "cade78d9cd035f6cafceee1790ee680e516a4ab9c8121cceb3844e65971b3c61",
+ "tuning": {
+  "dmg": {
+   "U": {
+    "ok": 1,
+    "short": 6,
+    "guardOk": 0,
+    "guardShort": 3,
+    "timeout": 5
+   },
+   "L": {
+    "ok": 2,
+    "short": 8,
+    "guardOk": 1,
+    "guardShort": 4,
+    "timeout": 6
+   }
+  },
+  "entry": {
+   "U4": {
+    "stat": "atk",
+    "need": 5
+   },
+   "U9": {
+    "stat": "int",
+    "need": 5
+   },
+   "U10": {
+    "stat": "dex",
+    "need": 5
+   },
+   "L3": {
+    "stat": "atk",
+    "need": 5
+   },
+   "L4": {
+    "stat": "int",
+    "need": 5
+   },
+   "L9": {
+    "stat": "agi",
+    "need": 4
+   },
+   "L10": {
+    "stat": "int",
+    "need": 5
+   }
+  },
+  "depth": {
+   "U9": {
+    "2": {
+     "stat": "int",
+     "need": 7
+    }
+   },
+   "U10": {
+    "2": {
+     "stat": "int",
+     "need": 7
+    }
+   },
+   "L2": {
+    "2": {
+     "stat": "dex",
+     "need": 7
+    }
+   },
+   "L4": {
+    "2": {
+     "stat": "int",
+     "need": 8
+    }
+   },
+   "L6": {
+    "2": {
+     "stat": "int",
+     "need": 7
+    }
+   },
+   "L8": {
+    "2": {
+     "stat": "atk",
+     "need": 7
+    }
+   },
+   "L10": {
+    "2": {
+     "stat": "int",
+     "need": 8
+    }
+   },
+   "L14": {
+    "2": {
+     "stat": "dex",
+     "need": 5
+    },
+    "3": {
+     "stat": "int",
+     "need": 5
+    }
+   }
+  }
+ },
+ "rooms": [
+  {
+   "id": "U1",
+   "roomName": "西警備回廊",
+   "sceneName": "落ちる格子",
+   "scene": "床板が沈む。頭上の落とし格子が落ちてくる。――閉門の音がした。",
+   "tier": "U",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "ブロックを二人で解く ―― 格子を支える",
+    "stat": "atk",
+    "need": 7,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "guardCoin"
+     ]
+    },
+    "greatAt": 10,
+    "great": {
+     "swap": [
+      "guardCoin",
+      "captainPurse"
+     ]
+    }
+   },
+   "B": {
+    "label": "ブロックされる前にすり抜ける ―― 格子の下を駆け抜ける",
+    "stat": "agi",
+    "need": 4,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "knightRing"
+     ]
+    },
+    "greatAt": 7,
+    "great": {
+     "swap": [
+      "guardCoin",
+      "captainPurse"
+     ]
+    }
+   },
+   "C": {
+    "label": "ミュートして伏せる ―― 床に伏せ、格子の落ちる筋を外す",
+    "stat": "agi",
+    "need": 5,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 5,
+    "reward": null
+   },
+   "mixiC": null
+  },
+  {
+   "id": "U2",
+   "roomName": "騎士団詰所",
+   "sceneName": "崩れる寝台の山",
+   "scene": "積み上がった寝台が崩れる。下に何か埋もれている。呼んでも、返事はない。",
+   "tier": "U",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "直接呼びに行く ―― 寝台を崩さず、二人で一つずつ外す",
+    "stat": "dex",
+    "need": 7,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "items": [
+      "silverCup"
+     ]
+    },
+    "greatAt": 10,
+    "great": {
+     "add": [
+      "buff",
+      "gildedHelm"
+     ]
+    }
+   },
+   "B": {
+    "label": "もう一度送る ―― 隙間に潜って手を伸ばす",
+    "stat": "dex",
+    "need": 5,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "items": [
+      "knightRing"
+     ]
+    },
+    "greatAt": 8,
+    "great": {
+     "add": [
+      "buff",
+      "gildedHelm"
+     ]
+    }
+   },
+   "C": {
+    "label": "既読だけつけて身を守る ―― 寝台の陰に入り、崩れから頭を守る",
+    "stat": "agi",
+    "need": 5,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 5,
+    "reward": null
+   },
+   "mixiC": "silverSpoon"
+  },
+  {
+   "id": "U5",
+   "roomName": "誓剣武器庫",
+   "sceneName": "倒れる武器架",
+   "scene": "武器架が軋み、一斉に倒れかかってくる。全員を呼ぶ声が飛んだように。",
+   "tier": "U",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "＠全員で押さえる ―― 二人で武器架を押さえる",
+    "stat": "atk",
+    "need": 7,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "items": [
+      "jeweledGuard"
+     ],
+     "merit": 1
+    },
+    "greatAt": 10,
+    "great": {
+     "swap": [
+      "jeweledGuard",
+      "ceremonialSword"
+     ]
+    }
+   },
+   "B": {
+    "label": "ピン留めした一本だけ抜く ―― 倒れる前に目当ての品だけ抜く",
+    "stat": "dex",
+    "need": 5,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "items": [
+      "jeweledGuard"
+     ]
+    },
+    "greatAt": 8,
+    "great": {
+     "swap": [
+      "jeweledGuard",
+      "ceremonialSword"
+     ]
+    }
+   },
+   "C": {
+    "label": "通知を切って盾を構える ―― 落ちた盾を拾い、倒れる刃を受け流す",
+    "stat": "atk",
+    "need": 6,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 5,
+    "reward": null
+   },
+   "mixiC": null
+  },
+  {
+   "id": "U6",
+   "roomName": "追悼礼拝堂",
+   "sceneName": "揺らぐ追悼の灯",
+   "scene": "名簿の前の灯が一斉に揺れる。消えれば、刻まれた名は読めなくなる。炎は、近づく足音にも、息にも身をよじる。",
+   "tier": "U",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": true,
+   "A": {
+    "label": "ログを二人で守る ―― 灯の揺れを読んで、二人で囲む",
+    "never": true,
+    "ok": 1,
+    "short": 6,
+    "reward": {},
+    "greatAt": null,
+    "great": null
+   },
+   "B": {
+    "label": "流れる前にスクショする ―― 光る文字を読み取る",
+    "never": true,
+    "ok": 1,
+    "short": 6,
+    "reward": {},
+    "greatAt": null,
+    "great": null
+   },
+   "C": {
+    "label": "ログを残さず壁際へ ―― 灯から離れ、壁に背をつけて息をひそめる",
+    "stat": "agi",
+    "need": 4,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 0,
+    "reward": {
+     "merit": 2,
+     "peek": true
+    }
+   },
+   "mixiC": "silverPlate"
+  },
+  {
+   "id": "U8",
+   "roomName": "双騎士碑文室",
+   "sceneName": "割れる碑文",
+   "scene": "碑文に亀裂が走る。崩れれば、裏の文字も消える。",
+   "tier": "U",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "背中合わせで支える（ピア・ツー・ピア） ―― 二人で碑を支える",
+    "stat": "atk",
+    "need": 7,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "gildedHelm"
+     ]
+    },
+    "greatAt": 10,
+    "great": {
+     "add": [
+      "potion"
+     ],
+     "merit": 1
+    }
+   },
+   "B": {
+    "label": "キックする ―― 破片を砕いて道を開く",
+    "stat": "atk",
+    "need": 5,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "knightRing"
+     ]
+    },
+    "greatAt": 8,
+    "great": {
+     "add": [
+      "potion"
+     ],
+     "merit": 1
+    }
+   },
+   "C": {
+    "label": "一歩引いて構える ―― 碑から距離を取り、落ちる破片を払う",
+    "stat": "atk",
+    "need": 6,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 5,
+    "reward": null
+   },
+   "mixiC": null
+  },
+  {
+   "id": "U9",
+   "roomName": "王立封印記録庫",
+   "sceneName": "書架の雪崩",
+   "scene": "天井まで届く書架が、押しかけの客のように倒れかかってくる。",
+   "tier": "U",
+   "entry": {
+    "stat": "int",
+    "need": 5
+   },
+   "depth": {
+    "2": {
+     "stat": "int",
+     "need": 7
+    }
+   },
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "待機室で止める ―― 書架の倒れる順を読み、順に押さえる",
+    "stat": "int",
+    "need": 9,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "rec": "REC-U9",
+     "merit": 1,
+     "items": [
+      "archiveSeal"
+     ]
+    },
+    "greatAt": 12,
+    "great": {
+     "add": [
+      "gildedTome"
+     ]
+    }
+   },
+   "B": {
+    "label": "足あとを数える ―― 崩れる前に目当ての記録だけ抜き取る",
+    "stat": "dex",
+    "need": 5,
+    "never": false,
+    "ok": 1,
+    "short": 6,
+    "reward": {
+     "rec": "REC-U9",
+     "items": [
+      "archiveSeal"
+     ]
+    },
+    "greatAt": 8,
+    "great": {
+     "add": [
+      "gildedTome"
+     ]
+    }
+   },
+   "C": {
+    "label": "足あとを残さず身をかがめる ―― 書架の隙間にかがみ、雪崩を背で受ける",
+    "stat": "dex",
+    "need": 6,
+    "guard": true,
+    "guardOk": 0,
+    "guardShort": 3,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 5,
+    "reward": null
+   },
+   "mixiC": "goldMarker"
+  },
+  {
+   "id": "L1",
+   "roomName": "殉職者墓廊",
+   "sceneName": "開く石棺",
+   "scene": "石棺の蓋が、招いてもいないのにひとりでに滑る。中から冷気。冷気は、蓋に近づく者のほうへだけ這い寄ってくる。",
+   "tier": "L",
+   "entry": null,
+   "depth": null,
+   "magic": false,
+   "waitWins": true,
+   "A": {
+    "label": "招待していません ―― 二人で蓋を押し戻す",
+    "never": true,
+    "ok": 2,
+    "short": 8,
+    "reward": {},
+    "greatAt": null,
+    "great": null
+   },
+   "B": {
+    "label": "参加の設定を切る ―― 石棺の仕掛けを止める",
+    "never": true,
+    "ok": 2,
+    "short": 8,
+    "reward": {},
+    "greatAt": null,
+    "great": null
+   },
+   "C": {
+    "label": "通知を切って柱の陰へ ―― 冷気の届かない柱の陰で、じっと身を守る",
+    "stat": "agi",
+    "need": 5,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 0,
+    "reward": {
+     "rec": "REC-L1",
+     "merit": 1,
+     "keyItem": "blackkey"
+    }
+   },
+   "mixiC": "silverRing"
+  },
+  {
+   "id": "L2",
+   "roomName": "誓剣騎士墓所",
+   "sceneName": "崩れる慰霊碑",
+   "scene": "慰霊碑の台座が割れ、碑が傾く。刻まれた名が、消えかける。",
+   "tier": "L",
+   "entry": null,
+   "depth": {
+    "2": {
+     "stat": "dex",
+     "need": 7
+    }
+   },
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "名前を残す ―― 二人で碑の裏の名を読み、書き留める",
+    "stat": "int",
+    "need": 8,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "goldMarker"
+     ]
+    },
+    "greatAt": 11,
+    "great": {
+     "keyItem": "silver"
+    }
+   },
+   "B": {
+    "label": "消える前に書き出す ―― 碑の裏の文字を写し取る",
+    "stat": "dex",
+    "need": 6,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "items": [
+      "goldMarker"
+     ]
+    },
+    "greatAt": 9,
+    "great": {
+     "keyItem": "silver"
+    }
+   },
+   "C": {
+    "label": "控えだけ取って下がる ―― 台座から離れ、落ちる破片から頭を守る",
+    "stat": "agi",
+    "need": 6,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 6,
+    "reward": null
+   },
+   "mixiC": null
+  },
+  {
+   "id": "L4",
+   "roomName": "王家秘蔵庫",
+   "sceneName": "王家の呪印",
+   "scene": "宝箱の呪印が赤く灯り、黒い霧が這い出す。封の上には、誰も読まない細かい字がびっしり。",
+   "tier": "L",
+   "entry": {
+    "stat": "int",
+    "need": 5
+   },
+   "depth": {
+    "2": {
+     "stat": "int",
+     "need": 8
+    }
+   },
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "承認しない ―― 二人で封を押さえる",
+    "stat": "atk",
+    "need": 8,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "items": [
+      "crownShard"
+     ],
+     "merit": 1
+    },
+    "greatAt": 11,
+    "great": {
+     "swap": [
+      "crownShard",
+      "royalGoblet"
+     ]
+    }
+   },
+   "B": {
+    "label": "規約を読み解く ―― 呪印を読み解いて解く",
+    "stat": "int",
+    "need": 6,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "items": [
+      "crownShard"
+     ]
+    },
+    "greatAt": 9,
+    "great": {
+     "swap": [
+      "crownShard",
+      "royalGoblet"
+     ]
+    }
+   },
+   "C": {
+    "label": "同意せずに口を覆う ―― 布で口を覆って伏せ、黒い霧を吸わない",
+    "stat": "int",
+    "need": 6,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 6,
+    "reward": null
+   },
+   "mixiC": null
+  },
+  {
+   "id": "L5",
+   "roomName": "守護観測室",
+   "sceneName": "観測盤の過負荷",
+   "scene": "観測盤が過熱し、魔力が渦を巻く。つながる数が、多すぎる。",
+   "tier": "L",
+   "entry": null,
+   "depth": null,
+   "magic": true,
+   "waitWins": false,
+   "A": {
+    "label": "二人で負荷を分ける ―― 魔力を逃がす",
+    "stat": "int",
+    "need": 8,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "allMerit": 1,
+     "items": [
+      "guardLamp"
+     ]
+    },
+    "greatAt": 11,
+    "great": {
+     "peek": true,
+     "peekNext": true,
+     "allMerit": 1,
+     "add": [
+      "ancientCore"
+     ]
+    }
+   },
+   "B": {
+    "label": "接続を絞る ―― 観測盤を止める",
+    "stat": "int",
+    "need": 6,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "guardLamp"
+     ]
+    },
+    "greatAt": 9,
+    "great": {
+     "peek": true,
+     "peekNext": true,
+     "allMerit": 1,
+     "add": [
+      "ancientCore"
+     ]
+    }
+   },
+   "C": {
+    "label": "回線を抜いて伏せる ―― 観測盤から離れ、魔力の渦の外で伏せる",
+    "stat": "agi",
+    "need": 6,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 6,
+    "reward": null
+   },
+   "mixiC": "crystalGrain"
+  },
+  {
+   "id": "L8",
+   "roomName": "隔離排水区画",
+   "sceneName": "閉じる隔離扉",
+   "scene": "隔離扉が内側へ閉じ始める。――このグループから、締め出される。",
+   "tier": "L",
+   "entry": null,
+   "depth": {
+    "2": {
+     "stat": "atk",
+     "need": 7
+    }
+   },
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "退出させない ―― 扉を押し戻す",
+    "stat": "atk",
+    "need": 10,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "rec": "REC-L8",
+     "merit": 1,
+     "items": [
+      "sunkenGold"
+     ]
+    },
+    "greatAt": 13,
+    "great": {
+     "add": [
+      "elixir"
+     ]
+    }
+   },
+   "B": {
+    "label": "管理者の権限で開ける ―― 扉の制御核を砕く",
+    "stat": "atk",
+    "need": 6,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "merit": 1,
+     "items": [
+      "sunkenGold"
+     ]
+    },
+    "greatAt": 9,
+    "great": {
+     "add": [
+      "elixir"
+     ]
+    }
+   },
+   "C": {
+    "label": "踏みとどまって構える ―― 扉の枠に身を寄せ、挟まれないよう押し返す",
+    "stat": "atk",
+    "need": 7,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 6,
+    "reward": null
+   },
+   "mixiC": "goldClasp"
+  },
+  {
+   "id": "L10",
+   "roomName": "記憶封印殿",
+   "sceneName": "精神記録の幻",
+   "scene": "床の魔導文字が光り、誰かの記憶が流れ込む。口は動いているのに、声だけが聞こえない。",
+   "tier": "L",
+   "entry": {
+    "stat": "int",
+    "need": 5
+   },
+   "depth": {
+    "2": {
+     "stat": "int",
+     "need": 8
+    }
+   },
+   "magic": false,
+   "waitWins": false,
+   "A": {
+    "label": "袖を二回引いて呼び戻し合う ―― とっさに手を取り合い、幻に呑まれない",
+    "stat": "agi",
+    "need": 7,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "merit": 2,
+     "items": [
+      "crystalGrain"
+     ]
+    },
+    "greatAt": 10,
+    "great": {
+     "allMerit": 1,
+     "resonance": true,
+     "add": [
+      "silverPendant"
+     ]
+    }
+   },
+   "B": {
+    "label": "「ミュートになってますよ」の口元を読む ―― 幻を読み解く",
+    "stat": "int",
+    "need": 6,
+    "never": false,
+    "ok": 2,
+    "short": 8,
+    "reward": {
+     "items": [
+      "silverPendant"
+     ],
+     "merit": 1
+    },
+    "greatAt": 9,
+    "great": {
+     "allMerit": 1,
+     "resonance": true,
+     "add": [
+      "silverPendant"
+     ]
+    }
+   },
+   "C": {
+    "label": "カメラを切って目を閉じる ―― 目を閉じ、幻に呑まれないよう耐える",
+    "stat": "int",
+    "need": 7,
+    "guard": true,
+    "guardOk": 1,
+    "guardShort": 4,
+    "newText": true
+   },
+   "timeout": {
+    "damage": 6,
+    "reward": null
+   },
+   "mixiC": null
+  }
+ ]
+}

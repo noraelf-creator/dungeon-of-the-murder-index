@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const { chromium } = require('C:/Users/81806/AppData/Local/hermes/hermes-agent/node_modules/playwright');
 const root = path.resolve('.');
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname); if (p.endsWith('/')) p += 'index.html';
@@ -14,10 +13,23 @@ const server = http.createServer((req, res) => {
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
 const base = `http://127.0.0.1:${server.address().port}/`;
-const profile = path.join(process.env.TMPDIR || '.', 'edge-profile-index-vis');
-const ctx = await chromium.launchPersistentContext(profile, { channel: 'msedge', headless: true, viewport: { width: 1366, height: 900 } });
+// 2026-11-16：この端末に playwright が無いときは、repo の puppeteer-core + Edge で同じ測り方をする（70 と同じやり方）。
+let ctx;
+try {
+  const { chromium } = require('C:/Users/81806/AppData/Local/hermes/hermes-agent/node_modules/playwright');
+  const profile = path.join(process.env.TMPDIR || '.', 'edge-profile-index-vis');
+  ctx = await chromium.launchPersistentContext(profile, { channel: 'msedge', headless: true, viewport: { width: 1366, height: 900 } });
+} catch (e) {
+  console.error('playwright が無いので puppeteer-core + Edge で測る');
+  const puppeteer = require(path.join(root, 'node_modules', 'puppeteer-core'));
+  const browser = await puppeteer.launch({ executablePath: 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: true, defaultViewport: { width: 1366, height: 900 } });
+  const p0 = await browser.newPage();
+  await p0.setRequestInterception(true);
+  p0.on('request', (r) => (/workers\.dev/.test(r.url()) ? r.respond({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"memos":[]}' }) : r.continue()));
+  p0.waitForTimeout = (ms) => new Promise((res) => setTimeout(res, ms));
+  ctx = { pages: () => [p0], newPage: async () => p0, close: () => browser.close() };
+}
 const page = ctx.pages()[0] || await ctx.newPage();
-await page.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"memos":[]}' }));
 const out = {};
 for (const view of ['all', 'pl']) {
   await page.goto(base + '?view=' + view + '#/n-card-upper', { waitUntil: 'load' });

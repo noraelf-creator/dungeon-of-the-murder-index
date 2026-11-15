@@ -150,6 +150,10 @@ body.nav-collapsed .edge-btn.left { display: grid; place-items: center; }
 .page hr { border: 0; border-top: 1px dashed var(--line); margin: 26px 0; }
 .page strong { color: #111827; }
 .page code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; background: #f4f1ea; border-radius: 5px; padding: 1px 5px; }
+/* 訂正済みの「変更前 → 変更後」など、class の無い pre は長い1行で横にはみ出す（2026-11-16）。
+   折り返して、ページ全体が横に広がらないようにする（コードの pre.code は今のまま）。 */
+.page pre:not(.code) { white-space: pre-wrap; overflow-wrap: anywhere; }
+
 .page pre.code { background: #1f2430; color: #e5e7eb; border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-size: 13px; line-height: 1.6; }
 .page pre.code code { background: none; color: inherit; padding: 0; }
 .page blockquote { margin: 14px 0; padding: 8px 16px; border-left: 3px solid var(--line); color: var(--ink-soft); background: #fbfaf6; border-radius: 0 8px 8px 0; }

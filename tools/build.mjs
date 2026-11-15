@@ -8,6 +8,7 @@ import crypto from 'node:crypto';
 import { Marked } from 'marked';
 // 70 作者用INDEX：訂正済み・疑問・ゲームの全文字のページを組み立てる部品（2026-11-15）
 import * as AP from './author-pages.mjs';
+import * as ROOM_LS from './room-ls.mjs';
 
 const ROOT = path.resolve('.');
 const C = (p) => path.join(ROOT, 'content', p);
@@ -35,7 +36,7 @@ const must = (f) => { if (!fs.existsSync(f)) throw new Error('ファイルが無
 
 // 今の状態
 // 2026-11-15 作者の指定：最終確認先は #/n-now。11/15 版を n-now にし、11/11 版は「変更の記録」へ履歴として残す。
-add('now', '', 'n-now', '今の状態（2026-11-15）', must(C('今の状態_20261115.md')), 'doc', '制作');
+add('now', '', 'n-now', '今の状態（2026-11-16・今夜の直しを反映）', must(C('今の状態_20261115.md')), 'doc', '制作');
 add('now', '', 'n-textcut', '文量を減らす検討（11/12・方針・削る案・ブレスト）', must(C('文量を減らす検討_20261112.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-cut', 'ブレスト：削るべき項目（全文）', must(C('ブレスト_20261111/削るべき項目.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-improve', 'ブレスト：改善案（全文）', must(C('ブレスト_20261111/改善案.md')), 'doc', '制作');
@@ -116,7 +117,28 @@ add('rule', '制作・ゲーム向け', 'n-impl', '実装反映メモ（Codex向
 
 // 部屋LS・画面の文
 add('screen', '最初の画面', 'n-charsel', 'キャラ選択画面の文（タイトル〜HO を読む画面）', must(C('キャラ選択画面の文_20261113.md')), 'doc', 'PL配布');
-add('screen', '部屋LS', 'n-room-ls', '部屋ライブセレクション一覧', must(GM('部屋ライブセレクション一覧（GM）.md')), 'doc', 'GM専用');
+// 2026-11-16 作者「部屋ライブセレクションの作者用INDEXが非常にわかりづらいのでそこは改善してください」：
+// 1部屋1枚の早見表を、ゲームの src/data.js（ROOM_TUNE・roomLS）から機械的に作る（tools/room-ls.mjs）。
+// data.js が無い（別の端末など）ときは、前回作った content/部屋LS_早見表.md をそのまま使い、そう言う（数字をでっち上げない）。
+const ROOM_LS_DATA = process.env.ROOM_LS_DATA || 'C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/mm7_wt_n16_rules/src/data.js';
+const ROOM_LS_MD = C('部屋LS_早見表.md');
+let ROOM_LS_INFO = null;
+try {
+  if (fs.existsSync(ROOM_LS_DATA)) {
+    ROOM_LS_INFO = ROOM_LS.build({ dataPath: ROOM_LS_DATA, outPath: ROOM_LS_MD });
+    console.log('部屋LS 早見表:', ROOM_LS_INFO.rooms, '部屋を data.js から作り直した（', ROOM_LS_DATA.replace(/\\/g, '/').split('/').slice(-3).join('/'), '）');
+  } else if (fs.existsSync(ROOM_LS_MD)) {
+    ROOM_LS_INFO = { rooms: (fs.readFileSync(ROOM_LS_MD, 'utf8').match(/^### [UL]\d+ /gm) || []).length, file: ROOM_LS_MD, stale: true };
+    console.warn('部屋LS 早見表: data.js が無いので、前回作った content/部屋LS_早見表.md をそのまま使う（' + ROOM_LS_DATA + '）');
+  } else {
+    throw new Error('部屋LS 早見表の元（data.js）も、前回の content/部屋LS_早見表.md も無い');
+  }
+} catch (e) {
+  console.error('部屋LS 早見表を作れない:', e.message);
+  throw e;
+}
+add('screen', '部屋LS', 'n-room-ls-map', '部屋LS 早見表（1部屋1枚・数値はゲームから自動）', must(ROOM_LS_MD), 'doc', 'GM専用');
+add('screen', '部屋LS', 'n-room-ls', '部屋ライブセレクション一覧（原文・長い）', must(GM('部屋ライブセレクション一覧（GM）.md')), 'doc', 'GM専用', { extraBadges: ['原文（長い）'] });
 add('screen', '探索', 'n-explore', '探索の調べた場所（ゲーム用）', must(GM('探索の調べた場所（ゲーム用）.md')), 'doc', 'GM専用');
 add('screen', '画面の文', 'n-huddle', '密談の画面の文（ゲーム用）', must(GM('密談の画面の文（ゲーム用）.md')), 'doc', 'GM専用');
 add('screen', '画面の文', 'n-small', '画面の小さな文（ゲーム用）', must(GM('画面の小さな文（ゲーム用）.md')), 'doc', 'GM専用');
@@ -200,7 +222,9 @@ if (GT_GROUP) {
   const dir = C('ゲーム全文字');
   fs.mkdirSync(dir, { recursive: true });
   for (const gp of GT_GROUP.pages) {
-    const r = AP.buildGameTextPage({ page: gp, commit: GTEXT_COMMIT_SHORT, generatedAt: BUILT_AT });
+    // 2026-11-16：この文字は fb478cf の記録で、そのあと作者が LS の文言などを直した。古い文言を「今の正」と読ませない。
+    const gtNotice = `**この文字は \`${GTEXT_COMMIT_SHORT}\` のゲームの記録**です。そのあと作者が P3・P6・P9 のライブセレクションの文言や部屋LSを直したので、**この中の選択肢の文が、いまの正とは違うことがあります**（いまの正：[今の状態の「場面LSの文言」](#/n-now)、[部屋LS 早見表](#/n-room-ls-map)）。原稿を取り込み直したゲームから採り直すと、ここも新しくなります。`;
+    const r = AP.buildGameTextPage({ page: gp, commit: GTEXT_COMMIT_SHORT, generatedAt: BUILT_AT, notice: gtNotice });
     const f = path.join(dir, gp.id + '.md');
     fs.writeFileSync(f, r.md);
     add('gtext', gp.label, gp.id, gp.label, f, 'doc', '制作', { gen: true, gen_kind: 'gtext', scene: gp.scene, gameCommit: GTEXT_COMMIT_SHORT });
@@ -234,7 +258,7 @@ const PAGE_VIS = {
   'n-card-items': V('gm'), 'n-card-items-pl': V('all'),
   'n-rule-intro': V('all'), 'n-rule-phase': V('all'), 'n-rule-ls': V('all'), 'n-rule-skill': V('all'), 'n-rule-p10': V('all', { cond: 'P10 で配る' }),
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
-  'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
+  'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls-map': V('gm', { cond: '部屋LSの数値の早見（ゲームの data.js から作る）' }), 'n-room-ls': V('gm', { cond: '部屋LSの原文（長い）' }), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
   'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1111': V('make', { cond: '前の版' }), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };
@@ -1091,10 +1115,12 @@ const GEN_STATS = {};
 {
   const changes = readJsonMaybe(path.join(A69, 'source', 'changes_before_after.json'));
   if (!changes) throw new Error('69 の changes_before_after.json が無い：訂正済みの箇所（n-fixed）を作れない（' + A69 + '）');
+  // 今夜（2026-11-16）の原稿の直し・作者の直し35件（tools/night-changes.mjs が作る）。無ければ節を出さない。
+  const night = readJsonMaybe(path.join(ROOT, 'data', 'n16-changes.json'));
   const fixed = AP.buildFixedPage({
     changes, ledger: readJsonMaybe(path.join(A69, 'source', 'source_ledger_new.json')),
     tests: readJsonMaybe(path.join(A69, 'source', 'tests.json')), notes: NOTEBOOK,
-    d1: readJsonMaybe(path.join(A70, 'memos_before70.json')), pages,
+    d1: readJsonMaybe(path.join(A70, 'memos_before70.json')), pages, night,
     gameCommit: GAME_COMMIT, generatedAt: BUILT_AT, sourceRoot: MANUSCRIPT,
   });
   fs.writeFileSync(C('訂正済みの箇所.md'), fixed.md);
@@ -1104,6 +1130,7 @@ const GEN_STATS = {};
     linked: fixed.data.units.filter((u) => u.href).length,
     d1Resolved: fixed.data.d1.resolvedEditDel, d1Unresolved: fixed.data.d1.unresolved,
     notes: fixed.data.counts.notes,
+    night: fixed.data.night ? fixed.data.night.counts : null,
   };
   const qsrc = readJsonMaybe(C('_author_questions.json'));
   if (!qsrc) throw new Error('content/_author_questions.json が無い：疑問・矛盾・気になる所（n-questions）を作れない');
