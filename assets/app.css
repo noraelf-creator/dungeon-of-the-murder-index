@@ -608,3 +608,105 @@ body.pl-mode .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }
   .cmp-ai, .cmp-shot, .cmp-summary { display: none !important; }
   .cmp-grid, body.cmp-no-ai .cmp-grid, body.cmp-no-shot .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }
 }
+
+/* ===== Discord風の節表示（2026-11-15 作者の指示1：丸い顔アイコン＋話者名＋本文で節を区切る） =====
+   見出し（h1〜h4）と本文の文字は変えず、表示の区切りだけを足す。
+   顔はゲームの既存の顔画像（media/faces/）。顔が分からない人と「システム」は文字の丸。
+   話者の書かれていない説明は「システム」（人物ではない案内）。新しい人物・架空の日時は出さない。 */
+:root {
+  --dc-av: 40px;
+  --dc-gap: 10px;
+  --dc-indent: calc(var(--dc-av) + var(--dc-gap));
+}
+.page [data-dc] { position: relative; }
+.page [data-dc]:not([data-dckind]) { padding-left: var(--dc-indent); }
+.page [data-dc="lead"]:not([data-dckind]) { margin-top: 1em; }
+.page [data-dc="cont"]:not([data-dckind]) { margin-top: .3em; }
+/* 丸い顔アイコン（円形・固定サイズ） */
+.dc-av {
+  position: absolute; left: 0; top: 1px; width: var(--dc-av); height: var(--dc-av);
+  border-radius: 50%; overflow: hidden; display: grid; place-items: center; flex: none;
+  background: #e9edf4; color: #fff; font-weight: 800; font-size: 15px; line-height: 1;
+  box-shadow: 0 0 0 2px #fff, 0 1px 3px rgba(20, 24, 33, .16); user-select: none;
+}
+.dc-av img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; border: 0; border-radius: 50%; }
+.dc-av.dc-txt { background: var(--sp, #5b6472); letter-spacing: 0; }
+/* 話者名（本文の上） */
+.dc-name { display: block; font-size: 12.5px; font-weight: 800; color: var(--sp, #8a5a00); line-height: 1.5; margin: 0 0 1px; letter-spacing: .02em; }
+/* 話者の色（本文の色。アイコンの文字の丸にも使う） */
+[data-sk="mireille"] { --sp: var(--mireille); }
+[data-sk="viola"] { --sp: var(--viola); }
+[data-sk="mixi"] { --sp: var(--mixi); }
+[data-sk="edgar"] { --sp: var(--edgar); }
+[data-sk="leon"] { --sp: var(--leon); }
+[data-sk="lucia"] { --sp: var(--lucia); }
+[data-sk="gald"] { --sp: var(--gald); }
+[data-sk="rick"] { --sp: var(--rick); }
+[data-sk="chaser"] { --sp: var(--chaser); }
+[data-sk="guild"] { --sp: var(--guild); }
+[data-sk="group"] { --sp: #5f6b7a; }
+[data-sk="npc"], [data-sk="narr"] { --sp: var(--npc); }
+[data-sk="sys"] { --sp: #5b6472; }
+
+/* 読み合わせの台詞：顔／名前／本文の3つを、Discordと同じ縦の並びにする */
+.page .line[data-dc] {
+  display: grid; grid-template-columns: var(--dc-av) minmax(0, 1fr);
+  column-gap: var(--dc-gap); row-gap: 1px; align-items: start;
+  padding: 5px 8px 5px 0; border-radius: 10px;
+}
+.page .line[data-dc] > .dc-av { position: static; grid-column: 1; grid-row: 1 / span 2; margin-top: 1px; }
+.page .line[data-dc] > .who {
+  grid-column: 2; grid-row: 1; justify-self: start; justify-self: start;
+  background: none; color: var(--sp, #64748b); padding: 0; border-radius: 0;
+  font-size: 12.5px; font-weight: 800; line-height: 1.5; white-space: normal;
+}
+.page .line[data-dc] > .say { grid-column: 2; grid-row: 2; font-size: 15.5px; line-height: 1.8; }
+.page .line.cond[data-dc] > .who::after {
+  content: "いれば"; font-size: 9.5px; font-weight: 700; margin-left: 5px; padding: 0 5px;
+  border-radius: 6px; background: #fff1bf; color: #7a5a00; vertical-align: 1px;
+}
+.page .line[data-dc].big > .say { font-family: var(--serif); font-size: 21px; font-weight: 700; }
+/* ト書き・注・画面の文も、同じ桁でそろえる（話者はシステム） */
+.page .stage[data-dc] { margin: 4px 0; border-left: 0; padding-left: var(--dc-indent); font-size: 14px; color: #5f6676; }
+.page .aside[data-dc] { padding-left: calc(var(--dc-indent) + 2px); }
+.page .screen[data-dc] { padding-left: calc(var(--dc-indent) + 6px); }
+.page .callout[data-dc] { padding-left: calc(var(--dc-indent) + 6px); }
+.page .cond-head[data-dc] { padding-left: var(--dc-indent); }
+/* カード1枚＝1つのまとまり。題の左に丸いアイコン（顔が分かる人は顔、それ以外はシステム） */
+.page .cardx-head { gap: 10px; }
+.page .cardx[data-dckind="card"] .cardx-head { justify-content: flex-start; }
+.page .cardx[data-dckind="card"] .cardx-meta { margin-left: auto; }
+.page .cardx-head > .dc-av { position: static; width: 26px; height: 26px; font-size: 10.5px; box-shadow: 0 0 0 1.5px #fff, 0 1px 2px rgba(20, 24, 33, .14); }
+/* ページの頭（h1）：題の上に、そのページの話者（HOは本人）の顔と名前 */
+.dc-page { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 12px; align-items: start; margin: 2px 0 8px; }
+.dc-page > .dc-av { position: static; width: 44px; height: 44px; font-size: 16px; margin-top: 2px; }
+.dc-page > .dc-page-body { min-width: 0; }
+.dc-page .dc-name { font-size: 13px; margin: 0 0 2px; }
+.dc-page .page-title { margin: 0; }
+/* 節のまとまりは、続く段ほど少し詰める（Discordの連投と同じ） */
+.page [data-dc="cont"] + [data-dc="lead"] { margin-top: 1em; }
+/* 狭い所（3列の左列）は、アイコンを小さくして本文の幅を残す */
+.cmp-spec { --dc-av: 30px; --dc-gap: 8px; }
+.cmp-spec .dc-av { font-size: 12px; }
+@media (max-width: 1200px) {
+  :root { --dc-av: 36px; }
+}
+@media (max-width: 980px) {
+  :root { --dc-av: 34px; --dc-gap: 8px; }
+  .dc-page { grid-template-columns: 38px minmax(0, 1fr); column-gap: 8px; }
+  .dc-page > .dc-av { width: 38px; height: 38px; }
+}
+@media print {
+  .dc-av { box-shadow: none; }
+  [data-dc] { break-inside: avoid; }
+}
+
+/* 本文が空のページの案内（本文と分ける。章の本文は作らない） */
+.page-empty { display: flex; flex-direction: column; gap: 6px; background: #f7f9fc; border: 1px dashed #b9c6da; border-radius: 12px; padding: 14px 16px; margin: 6px 0 18px; font-size: 13.5px; line-height: 1.75; color: #3a4252; }
+.page-empty b { font-size: 14.5px; color: var(--navy); }
+.page-empty .pe-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+/* 長い切れない語（パス・URL・英字の羅列）でページが横にはみ出さないようにする（表示だけの指定） */
+.page li, .page td, .page th, .page code, .page .screen, .page .dc-name { overflow-wrap: anywhere; }
+/* 長い制作の札（作者の指示の引用など）は折り返す（切れない1行のままだと、ページが横にはみ出す） */
+.page .badge.make { white-space: normal; overflow-wrap: anywhere; }

@@ -38,6 +38,10 @@
     clock: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
   };
   const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
+  // Discord風の丸いアイコン（ゲームの既存の顔画像。顔が分からない人とシステムは文字の丸）
+  const dcAvHTML = (d) => (d && d.face
+    ? `<span class="dc-av" aria-hidden="true"><img src="${esc(d.face)}" alt="" width="44" height="44"></span>`
+    : `<span class="dc-av dc-txt" aria-hidden="true">${esc(!d || d.spk === 'システム' ? 'DM' : String(d.spk).slice(0, 1))}</span>`);
 
   // ---------- 状態 ----------
   const S = {
@@ -99,6 +103,14 @@
       bn.hidden = !plMode();
       if (plMode()) bn.innerHTML = `<strong>プレイヤー表示中${persona() ? '（' + esc(WHO_NAME[persona()]) + 'として）' : '（4人分）'}</strong>：■GMだけ・▲制作${persona() ? '・ほかの人の◆本人だけ' : ''}${S.hideAfter ? '・推理のあと（真相・ED）' : ''}を隠しています。◇その場にいた人だけの情報は、その場にいた人だけが知ります。<button type="button" class="btn small" data-view="all">すべて表示に戻す</button>`;
     }
+  }
+  // 本文が空のページ（節をほかへ移した・原稿の更新待ちなど）は、本文と分けた案内だけを出す。
+  // 章の本文は作らない（原稿担当が反映する）。移した先は、目次と「このサイトの使い方」から辿れる。
+  function checkEmptyPage() {
+    const body = $('#page .page-body'); if (!body) return;
+    const old = $('#page .page-empty'); if (old) old.remove();
+    if (String(body.textContent || '').replace(/\s+/g, '').length > 8) return;
+    body.insertAdjacentHTML('beforebegin', `<div class="page-empty" role="note"><b>この項目の本文はいまありません</b><span>節をほかのページへ移した、または原稿の更新待ちです（本文の移動は原稿担当が反映します。ここで文章は作りません）。移した先は左の目次から探せます。分からないときは、統括（親）にこのページ名を知らせてください。</span><span class="pe-links"><button type="button" class="btn small" data-act="open-nav">目次を開く</button><a class="btn small" href="#/about">このサイトの使い方</a></span></div>`);
   }
   function checkHiddenPage() {
     const body = $('#page .page-body'); if (!body) return;
@@ -366,11 +378,30 @@
     const shots = ids.reduce((a, uid) => a + unitShotsOf(uid).length, 0);
     const have = ids.filter((uid) => AI_UNITS[uid]).length;
     const parts = [];
-    parts.push(`<span class="cmp-sum-unit">単位 ${nUnits}（AI案 ${have}／実画面 ${shots}枚）</span>`);
+    parts.push(`<span class="cmp-sum-unit">単位 ${nUnits}（実画面 ${shots}枚）</span>`);
+    // 案の3状態を別々に数える：いまの原稿に一致する案／原稿更新前の案（旧版）／未作成。旧版を「未生成」と呼ばない。
+    let cur = 0; let stale = 0; let none = 0;
+    if (s) {
+      cur = s.proposed_units || 0; stale = s.stale_units || 0; none = s.no_proposal_units || 0;
+    } else {
+      for (const uid of ids) {
+        const m = AI_META[uid];
+        if (!AI_UNITS[uid] || (m && m.proposal === 'none')) none++;
+        else if (m && m.proposal_stale) stale++;
+        else cur++;
+      }
+    }
     if (s) {
       parts.push(`<span>このページ ${s.scope_label}：現行 <b>${num(s.source_chars)}字</b></span>`);
-      if (s.missing_units) parts.push(`<span class="cmp-sum-miss">AI案 未生成 ${s.missing_units}単位</span>`);
-      else parts.push(`<span>AI案を全採用 <b>${num(s.proposed_chars_sum_all_units_if_all_proposed)}字</b>（差 ${sign(s.delta_chars || 0)}字）</span>`);
+    }
+    parts.push(`<span class="cmp-sum-ai" data-cur="${cur}" data-stale="${stale}" data-none="${none}" data-total="${nUnits}">` +
+      `AI案：現行版に一致 <b>${cur}</b>／原稿更新前の案（旧版）<b>${stale}</b>／未作成 <b>${none}</b>（計 ${nUnits}単位）</span>`);
+    if (s) {
+      if (!stale && !none && s.proposed_chars_sum_all_units_if_all_proposed != null) {
+        parts.push(`<span class="cmp-sum-adopt">AI案を全採用 <b>${num(s.proposed_chars_sum_all_units_if_all_proposed)}字</b>（差 ${sign(s.delta_chars || 0)}字）</span>`);
+      } else {
+        parts.push(`<span class="cmp-sum-scope">字数の削減効果は出しません（原稿更新前の案・未作成が ${stale + none}単位あるため、案の字数を全採用の字数として数えない。現行 ${num(s.source_chars)}字は全${nUnits}単位ぶん）</span>`);
+      }
     }
     if (p.kind === 'card' && AI_TARGETS.cards_fixed_target) {
       parts.push(`<span>全カードの固定目標 <b>${num(AI_TARGETS.cards_fixed_target)}字</b>。残り（目標までに削る字数）は、いま <b>${num(AI_TARGETS.cards_remaining_now_official)}字</b>（従来集計＝ゲームに入るカード216枚。比較単位の和とは範囲が違う）</span>`);
@@ -382,7 +413,7 @@
     if (AI && AI.ho_scopes && p.kind === 'ho' && s) {
       parts.push(`<span class="cmp-sum-scope">HOの範囲：${esc(s.scope_label)}（共通HO ${num(AI.ho_scopes.common_ho)}字／初期HO ${num(AI.ho_scopes.pc_initial)}字／追加HO ${num(AI.ho_scopes.pc_extra)}字は足し合わせない）</span>`);
     }
-    if (!have) parts.push('<span class="cmp-sum-miss">AI案は未生成です（Hydrogen の出力待ち）</span>');
+    if (!s && !have) parts.push('<span class="cmp-sum-miss">AI案はまだありません（未作成）</span>');
     return `<div class="cmp-summary">${parts.join('')}</div>`;
   }
 
@@ -397,13 +428,14 @@
     const kc = Object.entries(pv.kinds || {}).filter(([k]) => VK[k]).map(([k, n]) => `<span class="kc v-${k}">${VK[k][0]}${esc(VK[k][2])} ${n}</span>`).join('');
     for (const b of p.badges || []) chips.push(`<span class="tagchip new">${esc(b)}</span>`);
     const n = memoCountFor(p.id);
+    const dc = p.dc || { spk: 'システム', sk: 'sys', face: '' };
     const unitPage = /data-unit="/.test(p.html);
     const unitShotCount = unitPage ? Object.entries((D.gameview && D.gameview.unitShots) || {})
       .filter(([uid]) => (AI_META[uid] || {}).page_id === p.id).reduce((a, [, v]) => a + v.length, 0) : 0;
     $('#page').innerHTML = `
       <header class="page-head">
         <div class="crumbs"><span>${esc(g.label)}</span>${p.sub ? `<span>${esc(p.sub)}</span>` : ''}<span>${esc(p.nav)}</span></div>
-        <h1 class="page-title">${esc(p.title)}</h1>
+        <div class="dc-page" data-sk="${esc(dc.sk)}">${dcAvHTML(dc)}<div class="dc-page-body"><div class="dc-name">${esc(dc.spk)}</div><h1 class="page-title">${esc(p.title)}</h1></div></div>
         <div class="vis-legend"><span class="lg-t">印</span><span class="kc v-all">◎PL・全員が見る</span><span class="kc v-self">◆PL・本人だけ</span><span class="kc v-here">◇PL・その場にいた人だけ</span><span class="kc v-gm">■GMだけ（赤枠・たたみ）</span><span class="kc v-make">▲制作</span><a href="#/about">印の見方</a><span class="lg-n">このページの段：${kc}</span></div>
         <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${unitPage ? `<button type="button" class="btn small${S.aiView ? ' on' : ''}" id="btnAi" title="中央のAI案を隠す／並べる">AI案 ${S.aiView ? 'を隠す' : 'を並べる'}</button><button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="右の実画面を隠す／並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${unitShotCount}枚）</button>` : (p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : '')}</div>
       </header>
@@ -416,6 +448,7 @@
     document.title = p.nav + '｜ダンジョン・オブ・ザ・マーダー 制作INDEX';
     $('#pageMemos').addEventListener('click', () => { openPanel('page'); });
     checkHiddenPage();
+    checkEmptyPage();
     refreshMarks();
     renderGroups(); renderPagesCol();
     $('#pencil').hidden = true; if ($('#editBar')) $('#editBar').hidden = true; S.fixing = null;
@@ -464,7 +497,7 @@
   function excerptOf(el) {
     if (!el) return '';
     const clone = el.cloneNode(true);
-    $$('.note-mark, button', clone).forEach((b) => b.remove());
+    $$('.note-mark, button, .dc-av, .dc-name', clone).forEach((b) => b.remove());
     if (el.tagName === 'TR') return [...clone.children].map((c) => c.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean).join(' ／ ').slice(0, 240);
     if (el.tagName === 'DETAILS') { const s = clone.querySelector('summary'); return (s ? s.textContent : clone.textContent).replace(/\s+/g, ' ').trim().slice(0, 240); }
     return clone.textContent.replace(/\s+/g, ' ').trim().slice(0, 240);
@@ -515,7 +548,7 @@
   // 元の段の文（直すときの初めの文）。ボタン・注意点の印を除き、改行を残す
   function plainOf(el) {
     const c = el.cloneNode(true);
-    $$('.note-mark, button, .vis-label', c).forEach((b) => b.remove());
+    $$('.note-mark, button, .vis-label, .dc-av, .dc-name', c).forEach((b) => b.remove());
     if (el.tagName === 'TR') return [...c.children].map((td) => td.innerText.trim()).join(' ｜ ');
     const box = document.createElement('div'); box.style.cssText = 'position:absolute;left:-9999px;white-space:normal;width:600px'; box.appendChild(c); document.body.appendChild(box);
     const t = c.innerText.replace(/\n{3,}/g, '\n\n').trim(); box.remove();
@@ -978,6 +1011,7 @@
 
     $('#viewMode').addEventListener('change', (e) => { S.view = e.target.value; LS.set('view', S.view); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
     $('#hideAfter').addEventListener('change', (e) => { S.hideAfter = e.target.checked; LS.set('hideAfter', S.hideAfter); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
+    document.addEventListener('click', (e) => { if (e.target.closest('[data-act="open-nav"]')) { toggleNav(true); return; } });
     document.addEventListener('click', (e) => { const b = e.target.closest('[data-view]'); if (!b) return; S.view = b.dataset.view; LS.set('view', S.view); applyView(); renderGroups(); renderPagesCol(); checkHiddenPage(); });
     window.addEventListener('hashchange', route);
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.fixing) { cancelFix(); return; } if (e.key === 'Escape' && document.activeElement && document.activeElement.id !== 'memoText') { if (S.anchor) selectAnchor(null); } });

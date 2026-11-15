@@ -1,0 +1,1715 @@
+{
+ "schema": "mm7-ai-proposals-archive-v1",
+ "created_at": "2026-11-15T12:32:21+00:00",
+ "reason": "2026-11-15 の作者修正で原稿から消えた比較単位のAI案。案の値は生成時のまま（本文・source_hash・action・理由を書き換えない）。現在のページには出さない。作者が単位を戻したら、unit_id でここから戻せる。",
+ "units_at_proposal_time": 261,
+ "archived_count": 50,
+ "units": {
+  "CARD:INFO-W-U1-2": {
+   "unit_id": "CARD:INFO-W-U1-2",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "西警備用小扉",
+   "action": "delete",
+   "reason": "移動経路の補足のみで推理（筋1〜9・ラッシュ1〜5）や品入手に関与しない。小扉の存在自体は ROOM:U1 に既に記述があり重複するため削除候補（U1→U11直通や追跡者通過不可を盤面ルールとして残す場合は ROOM:U1 側へ統合）。",
+   "kept_protected_facts": [],
+   "proposed_text": "",
+   "source_hash": "sha256:0e20e3db38ea408962dfca52cb7ac35c7104fead4bcda0be10274f4d2200ffb1",
+   "source_chars": 58,
+   "proposed_chars": 0,
+   "delta_chars": -58,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U3": {
+   "unit_id": "CARD:INFO-W-U3",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "地下へ続く整備孔",
+   "action": "keep",
+   "reason": "本文がすでに58字と簡潔で、崩れた床下から地下水路へ続く整備孔の位置関係、「人間は通れるが、追跡者の巨体は通れない」制約、および獲得品（品：精密工具）が過不足なく収まっているため変更せず維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《地下へ続く整備孔》**　深度1（品：精密工具）\n> 崩れた床下に地下水路へ続く整備孔。人間は通れるが、追跡者の巨体は通れない。",
+   "source_hash": "sha256:91f0c056ea380cc0972adc8e1379f6bbf5cdd75c1abebbfc909a9ce9ec010ee6",
+   "source_chars": 58,
+   "proposed_chars": 58,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U4-2": {
+   "unit_id": "CARD:INFO-W-U4-2",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "祭壇へ届かない水",
+   "action": "keep",
+   "reason": "水事故偽装の意図的な違和感（反証根拠）を1文で示すため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《祭壇へ届かない水》**　深度1\n> 水路図では、最深部の祭壇区画へ水が入らないよう、排水路が何重にも設けられている。",
+   "source_hash": "sha256:3976d27443a2dc4b0ab2aa79b516be04f2568ba0b003b89de42ae75fd5adac8d",
+   "source_chars": 53,
+   "proposed_chars": 53,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U6": {
+   "unit_id": "CARD:INFO-W-U6",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "名簿を読む声",
+   "action": "keep",
+   "reason": "戦没者名簿の末尾に先代副長の名がある点や、団長が毎晩伝声管の前で名簿を一行ずつ読んでいた描写は、現在保護され残るCARD:INFO-J-U6や生存カードのCARD:INFO-W-U6-2・CARD:INFO-K-U5-2だけでは代替できないためkeepへ戻す。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《名簿を読む声》**　深度1\n> 戦没者名簿の最後のほうに、先代の副長の名。ワークおじさんの帳面「団長は毎晩、伝声管の前で名簿を一行ずつ読む。声に出すと名簿が少し軽くなるそうだ。毛布を一枚足しておいた」。",
+   "source_hash": "sha256:68bcfeee33a07072af4c6102d5700d47cacc608db288775557b939c96183dc57",
+   "source_chars": 96,
+   "proposed_chars": 96,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U7": {
+   "unit_id": "CARD:INFO-W-U7",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "救難所の薬品棚",
+   "action": "keep",
+   "reason": "（品：バフ薬）の入手と、救難所の在庫切れ・P10以降の《空き瓶の山》の前振りになる最小描写のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《救難所の薬品棚》**　深度1（品：バフ薬）\n> 扉の脇の古い薬棚は空っぽ。奥にバフ薬が一本転がっていた。床の隅に、使い終えた回復薬の空き瓶が山になっている。",
+   "source_hash": "sha256:3eb693f3c2d4a192439be7456239c44bebef14b42b5ef0829d0a31fc898149e8",
+   "source_chars": 73,
+   "proposed_chars": 73,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U8": {
+   "unit_id": "CARD:INFO-W-U8",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "二人の英雄",
+   "action": "keep",
+   "reason": "団長名・削られた顔と名・『背中は任せた』・袖を二回引く合図のすべてが必須手がかりで冗長さも少ないため維持する。",
+   "kept_protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 二人の英雄（団長ミクロソフツと顔・名を削られた副長の関係、袖を二回引く記述を保持）"
+   ],
+   "proposed_text": "**《二人の英雄》**　深度1（品：旧昇降機起動鍵）\n> 碑文の二人の騎士。一人は団長ミクロソフツ、もう一人は顔と名が削られている。碑文の言葉は「背中は任せた」。乱戦で団長が副長の袖を二回引くと、副長は振り向いて背中を合わせた、とある。",
+   "source_hash": "sha256:cc3494450feb383bbbab43f9ff29c881365c1c3b57737c825ffac93fa3422202",
+   "source_chars": 110,
+   "proposed_chars": 110,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 二人の英雄"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U9-3": {
+   "unit_id": "CARD:INFO-W-U9-3",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "人格侵食",
+   "action": "keep",
+   "reason": "既に短く、命令の上書き・味方攻撃・外からの書き換え可能性・解除法未確立の4条件が詰まっているため維持する。",
+   "kept_protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 人格侵食（接続による人格侵食と『施設を守れ』の命令を保持）",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 人格侵食（味方も攻撃し得る条件を保持）",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 人格侵食（命令の書き換え可能性と安全な解除法未確立を保持）",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 人格侵食（本人の人格より命令が強まる仕組みと外からの書き換えを保持）"
+   ],
+   "proposed_text": "**《人格侵食》**　深度1\n> 接続が進むと、本人の人格より「施設を守れ」の命令が強まり、味方も攻撃し得る。研究区画は、その命令を外から書き換えられる。安全な解除法は未確立。",
+   "source_hash": "sha256:a7008c201e5f111fecd1e50e05cb7cbe1ec8a98639a9885d30b754924292f766",
+   "source_chars": 80,
+   "proposed_chars": 80,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 人格侵食",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 人格侵食",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 人格侵食",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 人格侵食"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U9-2": {
+   "unit_id": "CARD:INFO-W-U9-2",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "交換される肉体",
+   "action": "shorten",
+   "reason": "同趣旨の繰り返し（「治るのではなく、作り直される」および「その間だけ」等）を整理し、再生でなく再構成である点と針が止まる条件をすべて残した。",
+   "kept_protected_facts": [
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 交換される肉体（守護核の情報と周囲の魔力で器を作り直す点、途中で一度だけ針が止まり核からの流れが途切れる記述を保持）",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 交換される肉体（『手を出すと作り直しが始まり直す。誰も手を出さなければ止まる』の条件をそのまま保持）"
+   ],
+   "proposed_text": "**《交換される肉体》**　深度2\n> 守護者に再生能力はなく、守護核の情報と周囲の魔力で器を一から作り直している。欄外に観測係の走り書き。「作り直しの途中で一度だけ針が止まり、核からの流れが途切れるらしい。手を出すと作り直しが始まり直す。誰も手を出さなければ止まる」。",
+   "source_hash": "sha256:50b41a9a3c8650af05c9dd82772657d55ec06bb795ea67bdc0063a5b7011b0f8",
+   "source_chars": 169,
+   "proposed_chars": 127,
+   "delta_chars": -42,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 交換される肉体",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 交換される肉体"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-U11": {
+   "unit_id": "CARD:INFO-W-U11",
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "title": "内部封鎖",
+   "action": "delete",
+   "reason": "U11に隔壁が並んで施設を分断できる構造である点は ROOM:U11《中央封鎖路》に、内側から外へ出さない封鎖向きの構造である点は ROOM:L8《隔離排水区画》にそれぞれ残存しており、本カードは protected 非該当の世界観補足にとどまるため削除。",
+   "kept_protected_facts": [],
+   "proposed_text": "",
+   "source_hash": "sha256:a306e923518fb1d590a56d05c230a78d9b8cb301989ed020f17505fd50376565",
+   "source_chars": 69,
+   "proposed_chars": 0,
+   "delta_chars": -69,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L0": {
+   "unit_id": "CARD:INFO-W-L0",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "祭壇前の装置",
+   "action": "delete",
+   "reason": "魔導管が最深部の祭壇前へ集まる記述は ROOM:L0・ROOM:L11 および攻略カード《外部からの魔力供給》(CARD:INFO-A-SUPPLY)と重複し、現行の手がかりマップ上も同枠が《守る者と作る者》へ整理されている世界観補足カードのため削除。",
+   "kept_protected_facts": [],
+   "proposed_text": "",
+   "source_hash": "sha256:7d0abb4cce2c6bb52d03fa87bcb4655448059cceb8f2a9707de86ef95fa9d6bd",
+   "source_chars": 84,
+   "proposed_chars": 0,
+   "delta_chars": -84,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L3": {
+   "unit_id": "CARD:INFO-W-L3",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "封印損傷痕",
+   "action": "keep",
+   "reason": "封印事故偽装への反証と工作素材（焼損封印片）の入手元を示す最小文のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《封印損傷痕》**　深度2（品：焼損封印片）\n> 封印剣の損傷は、魔力経路だけが線状に焼け焦げる。火傷や攻撃魔法の痕とは違う。",
+   "source_hash": "sha256:08740d7b3aaa25731a18dfd4d34e57a0b9f8b18a5bd823af0fe317d5d43af320",
+   "source_chars": 57,
+   "proposed_chars": 57,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-N-USED": {
+   "unit_id": "CARD:INFO-N-USED",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "一度だけ使われた剣",
+   "action": "keep",
+   "reason": "使用回数・使用者・対象のすべてが箇条書きに近い最小限の記述で完成しているため維持。",
+   "kept_protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 一度だけ使われた剣 — 「実戦での使用は一回。使用者：注文した本人。対象：使用者本人」を本文に保持。"
+   ],
+   "proposed_text": "**《一度だけ使われた剣》**　深度3\n> 封印剣の使用記録。実戦での使用は一回。使用者：注文した本人。対象：使用者本人。",
+   "source_hash": "sha256:62097dc45244126fffe44d23e87944196ba224e9ff7e2b12b555805e782fb9df",
+   "source_chars": 53,
+   "proposed_chars": 53,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 一度だけ使われた剣"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L5-2": {
+   "unit_id": "CARD:INFO-W-L5-2",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "殺害者の波形",
+   "action": "shorten",
+   "reason": "「被験者の命脈を断ったのは、その剣だ」と「リックの魔法剣は、被験者の命脈を断った剣そのものだ」の重複を1文に統合し、波形の一致と流派だけでは説明できない根拠を残した。",
+   "kept_protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 殺害者の波形 — 被験者が接続前に測った自分の剣がエコー家伝来の剣と一致する事実を本文に保持。",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 殺害者の波形 — 「自身を殺した者の魔力波形」が被験者自身の剣の波形と重なる事実を本文に保持。",
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 殺害者の波形 — 「エコー家伝来のリックの魔法剣」が命脈を断った剣そのものである事実を本文に保持。",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 殺害者の波形 — 自身を殺した剣が被験者自身の剣である事実を本文に保持。"
+   ],
+   "proposed_text": "**《殺害者の波形》**　深度2\n> 観測記録「最優先対象：自身を殺した者の魔力波形」。この波形は被験者が接続前に測った自分の剣と重なり、さらにエコー家伝来のリックの魔法剣とぴたりと一致する。流派が同じだけではここまで重ならないため、リックの剣こそ被験者の命脈を断った剣そのものだ。",
+   "source_hash": "sha256:b8bb0e55dd88a77b14dc10d0587050e1e6f591fd7ffd18269a8138208b3cc542",
+   "source_chars": 183,
+   "proposed_chars": 133,
+   "delta_chars": -50,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 殺害者の波形",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 殺害者の波形",
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 殺害者の波形",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 殺害者の波形"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-WOUND": {
+   "unit_id": "CARD:INFO-E-WOUND",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "本物の追跡者傷",
+   "action": "keep",
+   "reason": "「追跡者に殺された」誤読を否定する（筋5）最小文（35字）のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《本物の追跡者傷》**　深度2\n> 追跡者に襲われた人間には、強い打撃、深い裂傷、黒い魔力焼けが残る。",
+   "source_hash": "sha256:d5de74560792588651384f3ca7b761523e82d792d2d5e2844e95157274a3fb47",
+   "source_chars": 45,
+   "proposed_chars": 45,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-MAGIC": {
+   "unit_id": "CARD:INFO-E-MAGIC",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "追跡者の攻撃魔力",
+   "action": "keep",
+   "reason": "《内側からの魔力汚染》と対比して追跡者犯行説を否定する（筋5）短い記述（39字）のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《追跡者の攻撃魔力》**　深度2\n> 追跡者の攻撃魔力は外側から作用し、傷口のまわりに黒い反応を強く残す。",
+   "source_hash": "sha256:a2ef8719fa68f2fa83d78e80597f0371116b1a22ea0bdb3e729dedca28f39d52",
+   "source_chars": 47,
+   "proposed_chars": 47,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-A-SUPPLY": {
+   "unit_id": "CARD:INFO-A-SUPPLY",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "外部からの魔力供給",
+   "action": "keep",
+   "reason": "最終戦の「支え」（失敗被害1回無効）効果とラッシュ2外れ③の反証根拠を担う必須カードのため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《外部からの魔力供給》**　深度1\n> 再構築の魔力は、ダンジョン各所の魔力経路から吸い上げられている。外からの流れも断つ必要がある。\n> 【共有効果】最終戦：核へ吸い上げられる流れを、接続の側へ回せる。失敗した回の被害を1回防ぐ。",
+   "source_hash": "sha256:1b338126a3a315f811b0e6fce4222f52a4d5ad18dc6e1a33a8ec3ae77ea007cf",
+   "source_chars": 107,
+   "proposed_chars": 107,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L6-3": {
+   "unit_id": "CARD:INFO-W-L6-3",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "接続対象の拡張",
+   "action": "keep",
+   "reason": "適合者への接続と施設外搬出の警告が2文で完結しており、削る余地がないため維持。",
+   "kept_protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 接続対象の拡張 — 「相性の良い波形を持つ人間にも接続できる」を本文に保持。",
+    "Q8（リックを殺した動機は、何だったのか）の核心: 接続対象の拡張 — 「適合者を施設外へ出すな。経路が外へ伸びる」を本文に保持。"
+   ],
+   "proposed_text": "**《接続対象の拡張》**　深度2\n> 守護核は、相性の良い波形を持つ人間にも接続できる。警告「適合者を施設外へ出すな。経路が外へ伸びる」。",
+   "source_hash": "sha256:79291619e11790f6271f439664ded8712a38f0e1a23912e9e9a51caa408d6c7a",
+   "source_chars": 62,
+   "proposed_chars": 62,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 接続対象の拡張",
+    "Q8（リックを殺した動機は、何だったのか）の核心: 接続対象の拡張"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L7": {
+   "unit_id": "CARD:INFO-W-L7",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "地下水流",
+   "action": "keep",
+   "reason": "宝品（魔力真珠 80G）とP6のB組自動入手カードを兼ねる最小文（37字）のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《地下水流》**　深度1（品：魔力真珠）\n> 水量には周期がある。水路脇に人ひとり通れる整備路。追跡者の巨体は通れない。",
+   "source_hash": "sha256:cf83a7b3d55b28df88f753cad36ad73ac8e3524a4d5088f03a8ebac2bbdc2961",
+   "source_chars": 54,
+   "proposed_chars": 54,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L8-2": {
+   "unit_id": "CARD:INFO-W-L8-2",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "祭壇水位記録",
+   "action": "keep",
+   "reason": "水死・溺死偽装を否定する最短の物的根拠（29字）のため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《祭壇水位記録》**　深度1\n> 過去最大の排水事故でも、水位は祭壇区画に届いていない。",
+   "source_hash": "sha256:51af350420ac69e8919441208370604f4459ae82c775b64be845106f216ad919",
+   "source_chars": 38,
+   "proposed_chars": 38,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-K-KUROZU": {
+   "unit_id": "CARD:INFO-K-KUROZU",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "クロヅクメーの記録",
+   "action": "shorten",
+   "reason": "全員共有可能な形で「魔力を持たない」「魔力薬が近くにあると影写しの写りも乱れる」理由（エドガーの通話乱れの根拠）を残しつつ、冒頭と引用を簡潔化した。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《クロヅクメーの記録》**　深度1\n> ズゥームの診療簿。「灰嶺から引き取った黒肌のまま生き延びた者たち。魔力を持たず、魔力薬を飲むと吐き戻す。薬箱が同室にあるだけで具合が悪くなり、影写しの写りも乱れる。診るときは薬を廊下に置くこと」。表紙に追記の呼び名「クロヅクメー」。",
+   "source_hash": "sha256:e6ed553bac4e4638e3adfca153c4c1c0f42c33732d5dd00f585b5529928eec59",
+   "source_chars": 173,
+   "proposed_chars": 130,
+   "delta_chars": -43,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L9": {
+   "unit_id": "CARD:INFO-W-L9",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "終わらない捜索",
+   "action": "keep",
+   "reason": "現行ユニットだけでは L9 深度1における「数百年分の行動記録（起動・探索・戦闘・肉体の喪失・再構築）」と「『対象確認』の記録は一度もない」旨の事実関係が揃わない（ROOM:L9 は移動記録の存在のみ、CARD:INFO-W-L5-2 は最優先対象の波形、CARD:INFO-W-U9-2 は肉体交換、CARD:INFO-W-L10・CARD:INFO-W-L10-2・HO:n-ho-common:2_生還したトマの証言 は各原理と症状の記述にとどまる）。89字と簡潔なため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**《終わらない捜索》**　深度1\n> 数百年分の行動記録。起動、探索、戦闘、肉体の喪失、再構築。目的は一度も変わっていない。最優先の探索対象は「自身の殺害者」。「対象確認」の記録は一度もない。",
+   "source_hash": "sha256:cc244c84890821c83f136abd8a340f0f3b4c99d5338767996a9e56cb70314111",
+   "source_chars": 89,
+   "proposed_chars": 89,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L10": {
+   "unit_id": "CARD:INFO-W-L10",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "最後の精神記録",
+   "action": "keep",
+   "reason": "被験者欄の表記・終端未完了・本人の最期の記憶断片がいずれも推理の要であり、すでに最小限のため維持。",
+   "kept_protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 最後の精神記録 — 「終端：未完了」「俺を殺したのは、誰だ」を本文に保持。",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 最後の精神記録 — 「終端：未完了」と最期の疑問を本文に保持。",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 最後の精神記録 — 「呼ばれた。返事をした。剣」と殺害者未認識を本文に保持。"
+   ],
+   "proposed_text": "**《最後の精神記録》**　深度1（品：古代防護石）\n> 精神記録「被験者欄：ミクロソフツ・チームズ／終端：未完了」。断片「呼ばれた。返事をした。剣。――誰だ？　俺を殺したのは、誰だ」。",
+   "source_hash": "sha256:fe67bf0fa4df44f9911eb1c1fbaeaaabf4f9a6e90be413b76acde96a542e1844",
+   "source_chars": 84,
+   "proposed_chars": 84,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 最後の精神記録",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 最後の精神記録",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 最後の精神記録"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-A-PATH": {
+   "unit_id": "CARD:INFO-A-PATH",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "再生経路制御",
+   "action": "keep",
+   "reason": "前半が「その瞬間なら経路だけを断てる」というQ3の核心であり、後半の共有効果と機能が異なるため両方維持。",
+   "kept_protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 再生経路制御 — 「再生魔力の流れが一瞬だけ安定する。その瞬間なら、経路だけを断てる」を本文に保持。",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生経路制御 — 「【共有効果】最終戦：経路が安定する一瞬を読める」等を本文に保持。"
+   ],
+   "proposed_text": "**《再生経路制御》**　深度2\n> 再構築の途中、再生魔力の流れが一瞬だけ安定する。その瞬間なら、経路だけを断てる。\n> 【共有効果】最終戦：経路が安定する一瞬を読める。接続が揺らいでも戻せる。失敗した回の被害を1回防ぐ。",
+   "source_hash": "sha256:b921bfca4765c7b03b2f1d4bb763a8628dd1629cbc34f6c8693d2272d54336be",
+   "source_chars": 101,
+   "proposed_chars": 101,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 再生経路制御",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生経路制御"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-N-MARK": {
+   "unit_id": "CARD:INFO-N-MARK",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "一瞬見えたもの",
+   "action": "keep",
+   "reason": "PCごとに1行のみ個別表示される設計であり、各自の口調と視点差異（首元の光／魔力重なり／影／首筋の線）を損なわないため維持。",
+   "kept_protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 一瞬見えたもの — 各PCが目撃したリックの首元・魔力・影・首筋の線の異変を本文に保持。"
+   ],
+   "proposed_text": "**《一瞬見えたもの》**（本人にだけ。見えたものは人によって違う）\n- ミレイユ：> リックさんの首元が、一瞬、光ったように見えた。……気のせい、でしょうか。\n- ヴィオラ：> リックの魔力が、追跡者の魔力と、一瞬だけ重なった。……今のは、何かしら。\n- ミクシィ：> リック坊の足元の影が、ほんの一瞬、黒く揺れた。\n- エドガー：> あいつの首筋の線が、光った。隙間ごしに見たときより、太い。",
+   "source_hash": "sha256:fa7d3f9905de03bda6d0d53ff2e9f8bc26340eb7aa5684eee6376e939c88c6bf",
+   "source_chars": 178,
+   "proposed_chars": 178,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 一瞬見えたもの"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-W-L12": {
+   "unit_id": "CARD:INFO-W-L12",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "自分に向けた跡",
+   "action": "keep",
+   "reason": "剣痕の向き（手元から胸の側）と二人の位置関係が最小限の文章で描かれており、削る余地がないため維持。",
+   "kept_protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 自分に向けた跡 — 「手元から胸の側へ向いている」剣痕と正面のもう一人分の跡を本文に保持。",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 自分に向けた跡 — 中央の者が自らへ刃を向けた跡と正面の跡を本文に保持。"
+   ],
+   "proposed_text": "**《自分に向けた跡》**\n> 祭壇の床に、古い剣痕が一本。祭壇の中央に膝をついた者の、手元から胸の側へ向いている。正面の床に、もう一人分の膝の跡。",
+   "source_hash": "sha256:fe095e0b1c382cf08c6c5529c2e7a5a04fd2fde073619d4bd9d9a6b0185a4189",
+   "source_chars": 67,
+   "proposed_chars": 67,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 自分に向けた跡",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 自分に向けた跡"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-K-L12-2": {
+   "unit_id": "CARD:INFO-K-L12-2",
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "title": "封印剣の注文札",
+   "action": "keep",
+   "reason": "刻みと注文札の内容・依頼者名が削られている事実がすべて必要情報であり、すでに簡潔なため維持。",
+   "kept_protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 封印剣の注文札 — 「握りは依頼者の手に合わせる」注文札が祭壇下にある事実を本文に保持。",
+    "Q10（追跡者の体の、どこを断てば組み直りが止まるのか）の核心: 封印剣の注文札 — 「肉体を斬るな、命脈を断て」を本文に保持。",
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 封印剣の注文札 — 「肉体を斬るな、命脈を断て」を本文に保持。",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 封印剣の注文札 — 依頼者の手に合わせた封印剣の注文札を本文に保持。"
+   ],
+   "proposed_text": "**《封印剣の注文札》**\n> 祭壇の石に刻み「肉体を斬るな、命脈を断て」。その下の隙間に、工房の注文札が一枚。「封印剣一振。握りは依頼者の手に合わせる。鞘は封じたままで」。依頼者の名は削られている。",
+   "source_hash": "sha256:8dd5cb7dc025e87eca4cc12f883f80319704583d9c1092e4918c180c3456d8dc",
+   "source_chars": 93,
+   "proposed_chars": 93,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 封印剣の注文札",
+    "Q10（追跡者の体の、どこを断てば組み直りが止まるのか）の核心: 封印剣の注文札",
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 封印剣の注文札",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 封印剣の注文札"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:REC-U2": {
+   "unit_id": "CARD:REC-U2",
+   "page_id": "n-card-rec",
+   "kind": "card",
+   "title": "済の欄",
+   "action": "shorten",
+   "reason": "「の欄は」「の行だけ」「欄外に」などの重複表現を圧縮し、見出し・夜の凸待ち番・蓋・KS＝既読スルー・三日後・地下の用と空白の済欄をすべて残した。",
+   "kept_protected_facts": [
+    "最終戦ラッシュ5の根拠（判定なし・共有可）: 済の欄（『蓋』『KS（既読、スルー）』『返事は三日後』『副長：地下の用』で済の欄が空いたままの事実を保持）"
+   ],
+   "proposed_text": "**REC-U2【物語】《済の欄》**　騎士団詰所\n> ワークおじさんの当番表「働くを、もっと楽しく」。副長は毎晩「夜の凸待ち番」、朝の点呼は空欄で横に「蓋」。「副長あて」は済欄に「KS（既読、スルー）」「返事は三日後」。最下行だけ「副長：地下の用」で、済の欄は空いたまま。",
+   "source_hash": "sha256:7cdfe126b1e2e8041765bd306e8ea698695b14c78e80080242e721b24dfc6d9a",
+   "source_chars": 175,
+   "proposed_chars": 129,
+   "delta_chars": -46,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ5の根拠（判定なし・共有可）: 済の欄"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:REC-U8": {
+   "unit_id": "CARD:REC-U8",
+   "page_id": "n-card-rec",
+   "kind": "card",
+   "title": "外套",
+   "action": "keep",
+   "reason": "物語記録片の短い会話劇であり、外套を預けた経緯・『背中は任せた／任された』の呼応・返しそびれたままの結末が最終戦ラッシュ4に直結するため維持する。",
+   "kept_protected_facts": [
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 外套（団長が副長に外套をかけた逸話、『背中は任せた／任された』、返しそびれたままの記述を保持）"
+   ],
+   "proposed_text": "**REC-U8【物語】《外套》**　双騎士碑文室\n> ワークおじさんの帳面。「夜、机でうたた寝の副長に、団長が自分の外套をかけた。副長『いらない』。団長『夜は冷える。持っていけ』」「団長が砦を出る朝。団長『留守を頼む。背中は任せた』。副長『……背中は、任された』。外套は、返しそびれたまま」。",
+   "source_hash": "sha256:2592ff675d94994370f118a7ae35650998e929385a3bb89d50ee34169d39d13c",
+   "source_chars": 139,
+   "proposed_chars": 139,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 外套"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-P3-B": {
+   "unit_id": "CARD:INFO-P3-B",
+   "page_id": "n-card-split",
+   "kind": "card",
+   "title": "再生中の呟き",
+   "action": "keep",
+   "reason": "呼びかけに繋がる追跡者の二つの呟きのみで構成されており、これ以上削れないため維持。",
+   "kept_protected_facts": [
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生中の呟き — 「……背中は……任された……」「……返事を……しなければ……」を本文に保持。"
+   ],
+   "proposed_text": "**INFO-P3-B《再生中の呟き》**　B「崩落を支える」組\n> 隔壁越しに、再生中の追跡者が呟いた。「……背中は……任された……」「……返事を……しなければ……」。",
+   "source_hash": "sha256:f55283c429b551df598abb0c09b9228a4ac863bcb98611d7fe6f97013c809d8a",
+   "source_chars": 77,
+   "proposed_chars": 77,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生中の呟き"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-P3-C": {
+   "unit_id": "CARD:INFO-P3-C",
+   "page_id": "n-card-split",
+   "kind": "card",
+   "title": "リックの第一声",
+   "action": "keep",
+   "reason": "P3「様子を見る」組の固有報酬であり、追跡者がリックの剣に反応した事実（筋4）と扉が内側から閉ざされている事実を含むため維持。",
+   "kept_protected_facts": [],
+   "proposed_text": "**INFO-P3-C《リックの第一声》**　「様子を見る」組\n> 亀裂越しのリック「あの黒いのは俺の剣を見て『お前か』と言った。sus だろ、あれ」。救難所の扉は内側から閂がかけてある。",
+   "source_hash": "sha256:5f2eeac8d2c6f560864f1aebd72652ae8ede1411699e774296f80678f9ee8d37",
+   "source_chars": 85,
+   "proposed_chars": 85,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-P9-B3": {
+   "unit_id": "CARD:INFO-P9-B3",
+   "page_id": "n-card-split",
+   "kind": "card",
+   "title": "祭壇の床の回路",
+   "action": "shorten",
+   "reason": "「崩れた石のあいだから見えた」「乱れは少しずつ収まり」などの重複表現を圧縮し、回路の繋がりと石が当たった際の乱れ・触れずに待つと拍がそろう挙動をすべて残した。",
+   "kept_protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 祭壇の床の回路 — 追跡者へ伸びる線と光の拍・触れずに待つと拍がそろう性質を本文に保持。",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 祭壇の床の回路 — 触れずにいると拍がそろう法則を本文に保持。"
+   ],
+   "proposed_text": "**INFO-P9-B3《祭壇の床の回路》**　様子を見た組にヴィオラがいたとき（ヴィオラだけ）\n> 祭壇の床一面が回路だった。線は中央に集まり、最も太い一本が広間の追跡者へ伸びている。線の中の光には拍があり、崩れた石が当たると乱れてしばらく戻らないが、触れずにいると少しずつ拍がそろっていく。",
+   "source_hash": "sha256:5973e116117762b8b94c66f300d9aaf9181dcc5bccc16d595dda0aea8e2df0a4",
+   "source_chars": 181,
+   "proposed_chars": 139,
+   "delta_chars": -42,
+   "protected": true,
+   "protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 祭壇の床の回路",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 祭壇の床の回路"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-BODY3": {
+   "unit_id": "CARD:INFO-E-BODY3",
+   "page_id": "n-card-case",
+   "kind": "card",
+   "title": "専門判定",
+   "action": "keep",
+   "reason": "職業別の獲得カード分岐・非専門PCの失敗文言・技能取得時の深度進行特例というルール仕様のみで構成されており、改変不可のため維持。",
+   "kept_protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定 — 聖女《魔力の暴走の跡》・魔女《内側からの魔力汚染》の分岐条件と深度進行ルールを本文に保持。"
+   ],
+   "proposed_text": "**深度3（専門判定）**\n> 聖女なら《魔力の暴走の跡》、魔女なら《内側からの魔力汚染》を得る（技能・専有カード参照）。\n> それ以外のPCが調べた場合：「専門家の判定が要る。深度は進まない」。\n> 深度2のあとに聖女の診断・魔女の解析（技能）で専門判定のカードを得た場合も、遺体の深度は3へ進む（調査の手番を使わなくてよい）。",
+   "source_hash": "sha256:a626d13366115d956a45941b7b1eef3d638eb18f09f1c22f4133c410a5b875d0",
+   "source_chars": 152,
+   "proposed_chars": 152,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-TIMING": {
+   "unit_id": "CARD:INFO-E-TIMING",
+   "page_id": "n-card-case",
+   "kind": "card",
+   "title": "投与時期推定",
+   "action": "keep",
+   "reason": "投与時期の限定条件が1文で完結しており削減不要のため維持。",
+   "kept_protected_facts": [
+    "Q6（リックは、いつ・どこで・何を口にしたのか）の核心: 投与時期推定 — 「原因の物質を取り込んだのは、守護者門の前で悪寒が出るより前」を本文に保持。"
+   ],
+   "proposed_text": "**深度4《投与時期推定》**\n> 経路の崩れる速さから逆算すると、原因の物質を取り込んだのは、守護者門の前で悪寒が出るより前。",
+   "source_hash": "sha256:8c5e1ae1e93f2f838649f9b123cb324661983e019acb8b5d1690c881eaa3d63c",
+   "source_chars": 57,
+   "proposed_chars": 57,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q6（リックは、いつ・どこで・何を口にしたのか）の核心: 投与時期推定"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-BODY5": {
+   "unit_id": "CARD:INFO-E-BODY5",
+   "page_id": "n-card-case",
+   "kind": "card",
+   "title": "専門判定",
+   "action": "keep",
+   "reason": "獲得分岐と失敗文言のルール記述のみで構成されているため維持。",
+   "kept_protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定 — 聖女が《死因の診断》を得る深度5判定条件を本文に保持。"
+   ],
+   "proposed_text": "**深度5（専門判定）**\n> 聖女なら《死因の診断》を得る（技能・専有カード参照）。\n> それ以外のPCが調べた場合：「専門家の判定が要る。深度は進まない」。",
+   "source_hash": "sha256:8ba25ffd399efdeeadebb33a4ad615a788b959128107cffe3a2ad91c706b4f62",
+   "source_chars": 70,
+   "proposed_chars": 70,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "CARD:INFO-E-SOURCE": {
+   "unit_id": "CARD:INFO-E-SOURCE",
+   "page_id": "n-card-case",
+   "kind": "card",
+   "title": "工作素材の出所",
+   "action": "keep",
+   "reason": "1文＋対象プレースホルダのみで最小限のため維持。",
+   "kept_protected_facts": [
+    "Q7（リックにそれを渡したのは、誰か）の核心: 工作素材の出所 — 「ダンジョンの限られた区画にしかないものがある。対象：〇〇」を本文に保持。"
+   ],
+   "proposed_text": "**深度7《工作素材の出所》**\n> 現場の物質の中に、ダンジョンの限られた区画にしかないものがある。対象：〇〇。",
+   "source_hash": "sha256:39dd9d37239c45f64a0a45770c18411a1587668ffabd82d6e72bdc67e8efb963",
+   "source_chars": 50,
+   "proposed_chars": 50,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "Q7（リックにそれを渡したのは、誰か）の核心: 工作素材の出所"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc1-3:1_追加された目標": {
+   "unit_id": "HO:n-ho-pc1-3:1_追加された目標",
+   "page_id": "n-ho-pc1-3",
+   "kind": "ho",
+   "title": "追加された目標",
+   "action": "keep",
+   "reason": "達成条件とUI表示のタイミング、プレイヤーの取り得る行動が分かりやすく書かれているため維持する。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ 追加された目標\n- **リックと二人きりになって、お礼を言う**：リックの同行主になり、ほかのPCが誰もいない部屋を、リックと二人で探索する。その探索の帰還フェイズに、あなたの画面に「お礼を言う」が出る。言えば達成。\n- そのために、探索の行き先を、ほかの人と重ならないように選ぶ。",
+   "source_hash": "sha256:2a3d6016a16acebfb65d64b935a3baa3e7659154ac465997f86c376e6f0add43",
+   "source_chars": 132,
+   "proposed_chars": 132,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc1-3:2_知っておくこと": {
+   "unit_id": "HO:n-ho-pc1-3:2_知っておくこと",
+   "page_id": "n-ho-pc1-3",
+   "kind": "ho",
+   "title": "知っておくこと",
+   "action": "keep",
+   "reason": "同行主の判定手順とエドガーへのお礼に関する補足が正確に書かれており、変更不要のため維持する。",
+   "kept_protected_facts": [
+    "HOの知っておくこと（目標・秘密・条件は削らない）：同行主の決定条件（エドガー以外の3人が《Disgord》で1d100、最小値、行動不能者は振らず、行き先選択前に振る）とエドガーへのお礼の扱いを原文のまま保持"
+   ],
+   "proposed_text": "### ▼ 知っておくこと\n- 同行主は、選ぶフェイズのたびに、エドガー以外の3人が《Disgord》で1d100のダイスを振り、いちばん小さい数を出した人に決まる（行動できない人は振らない。ダイスは、行き先を選ぶ前に振る）。\n- エドガーさんへのお礼は、これとは別。いつ、どう言うかはあなた次第。",
+   "source_hash": "sha256:a34b8e22115c559e104825aa340575031cd3d06713db5675971b403ed79d57fb",
+   "source_chars": 138,
+   "proposed_chars": 138,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOの知っておくこと（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc1-4:1_前室で見たもの": {
+   "unit_id": "HO:n-ho-pc1-4:1_前室で見たもの",
+   "page_id": "n-ho-pc1-4",
+   "kind": "ho",
+   "title": "前室で見たもの",
+   "action": "keep",
+   "reason": "観察内容と方角の手がかりが簡潔にまとまっており、過不足がないため維持する。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ 前室で見たもの\n- 壁の古い図：人の首の横から襟の中へ引いた線に「接続の位置」。司祭様が読んでいたズゥームの本の頁と、同じ図。\n- 図の下に「経過の記録は再生実験室へ」。矢印は、前室から観測区画の方を指している（再生実験室は、その先らしい）。",
+   "source_hash": "sha256:991bc8345f6688ebac5d7e2d4ac9bfa7ee78330183cf965284d65dfa91ec9b14",
+   "source_chars": 116,
+   "proposed_chars": 116,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc2-1:2_secrets": {
+   "unit_id": "HO:n-ho-pc2-1:2_secrets",
+   "page_id": "n-ho-pc2-1",
+   "kind": "ho",
+   "title": "あなたの胸にしまっていること（自分から言わなくてよい）",
+   "action": "keep",
+   "reason": "秘密の心理描写が過不足なく端的に書かれており、強度を変えずそのまま維持する。",
+   "kept_protected_facts": [
+    "HOのあなたの胸にしまっていること（自分から言わなくてよい）（目標・秘密・条件は削らない）：「核に触れた人間がいるなら、生きたまま調べてみたい――その考えが、一瞬頭をよぎること。」を原文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたの胸にしまっていること（自分から言わなくてよい）\n- 核に触れた人間がいるなら、生きたまま調べてみたい――その考えが、一瞬頭をよぎること。",
+   "source_hash": "sha256:aeb487c43ae305c202cb821de8db62a246ad0adf45649891dba91f5def837d07",
+   "source_chars": 70,
+   "proposed_chars": 70,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（自分から言わなくてよい）（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc2-2:1_あなたが知ったこと": {
+   "unit_id": "HO:n-ho-pc2-2:1_あなたが知ったこと",
+   "page_id": "n-ho-pc2-2",
+   "kind": "ho",
+   "title": "あなたが知ったこと",
+   "action": "keep",
+   "reason": "判明した事実と報告書の知見が簡潔かつ正確にまとまっているため維持する。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ あなたが知ったこと\n- リックは守護核に接続されつつある（ごく弱い反応）。\n- 灰嶺報告によれば、接続者を外へ運べば災厄が広がる。生かしたまま切り離す方法は、まだ見つかっていない。",
+   "source_hash": "sha256:4c3ae5a70169c602376bb3dba78704c2023e2a289cada51424594bdce432a549",
+   "source_chars": 85,
+   "proposed_chars": 85,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc2-2:2_あなたが決めること": {
+   "unit_id": "HO:n-ho-pc2-2:2_あなたが決めること",
+   "page_id": "n-ho-pc2-2",
+   "kind": "ho",
+   "title": "あなたが決めること",
+   "action": "keep",
+   "reason": "プレイヤーに委ねられた判断軸が2点明確に示されており、修正不要のため維持する。",
+   "kept_protected_facts": [
+    "HOのあなたが決めること（目標・秘密・条件は削らない）：事実の開示判断とリックを外へ連れ出すかの選択を原文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたが決めること\n- この事実を、いつ、誰に話すか。話さないか。\n- リックを外へ連れ出すべきか。研究者として、仲間として。",
+   "source_hash": "sha256:c3e006553e24695514c1462c22c6645e0e3300ac4adc1ae0d060f08b8dd07b9d",
+   "source_chars": 58,
+   "proposed_chars": 58,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたが決めること（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc2-3:3_secrets": {
+   "unit_id": "HO:n-ho-pc2-3:3_secrets",
+   "page_id": "n-ho-pc2-3",
+   "kind": "ho",
+   "title": "あなたの胸にしまっていること",
+   "action": "keep",
+   "reason": "3点の秘密事項が簡潔に列挙されており、表現の過不足がないため維持する。",
+   "kept_protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）：P7ダイス操作の意図、リックの体の黒化、追跡者を介した魔導院の結論遂行の3点を原文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたの胸にしまっていること\n- P7のダイスで、出目を寄せるつもりでいること。\n- リックの体が黒くなりはじめていること。\n- 魔導院の結論を、追跡者の手を借りて、自分で果たそうとしていること。",
+   "source_hash": "sha256:c7666a44e2e7a3c087ac4f4066fac63a8808b33446329cf5778179ece886c5fb",
+   "source_chars": 90,
+   "proposed_chars": 90,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc2-5:2_secrets": {
+   "unit_id": "HO:n-ho-pc2-5:2_secrets",
+   "page_id": "n-ho-pc2-5",
+   "kind": "ho",
+   "title": "あなたの胸にしまっていること",
+   "action": "keep",
+   "reason": "秘密事項が2点端的に整理されており、強度や範囲を変えずに保つ必要があるため維持する。",
+   "kept_protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）：自分が殺したかもしれないという認識と《誘引》使用の事実（個人記録のみ）を原文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたの胸にしまっていること\n- リックを殺したのは、自分かもしれないと思っていること。\n- 《誘引》を使ったこと（あなたの個人の記録にだけ残っている）。",
+   "source_hash": "sha256:17a09e7f7660246612725dddd1e2474d4536596a633fc543c33cb904581bf9bd",
+   "source_chars": 72,
+   "proposed_chars": 72,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc3-1:3_secrets": {
+   "unit_id": "HO:n-ho-pc3-1:3_secrets",
+   "page_id": "n-ho-pc3-1",
+   "kind": "ho",
+   "title": "あなたの胸にしまっていること（言いたくない）",
+   "action": "keep",
+   "reason": "保護対象の秘密節であり、2点とも簡潔で過不足がないため現行を維持した。",
+   "kept_protected_facts": [
+    "HOのあなたの胸にしまっていること（言いたくない）（目標・秘密・条件は削らない）：約四百年前に北の砦へ潜入し捕まったこと、従騎士の子に縄を切られて逃げたことをすべて現行本文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたの胸にしまっていること（言いたくない）\n- 約四百年前、北の砦に潜り込み、宝物庫の奥の扉を開けようとして、一度捕まったこと（名前は今と同じ）。\n- その夜、小さな従騎士の子に縄を切って逃がしてもらったこと。「迷い込んだだけ」という言い訳を、その子は信じていた。",
+   "source_hash": "sha256:fa35069bc0b27d140b5cdaeca5a3c2c089ea8ba981d093af8e682048887458a4",
+   "source_chars": 128,
+   "proposed_chars": 128,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（言いたくない）（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc3-2:4_あなたにできること": {
+   "unit_id": "HO:n-ho-pc3-2:4_あなたにできること",
+   "page_id": "n-ho-pc3-2",
+   "kind": "ho",
+   "title": "あなたにできること",
+   "action": "keep",
+   "reason": "プレイヤーの判断指針と最後の頁の示唆が簡潔で明瞭なため現行を維持した。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ あなたにできること\n- この記憶を、仲間に話すかどうか。宝物庫の件と、昔の名前は言わなくていい。\n- 副長の名と覚え書きを読めたのは、あなただけだ。仲間に教えるかどうかも、あなたが決める。\n- （《副長の覚え書き》を読んだら）最後の頁の言葉を、覚えておくこと。いつか、あの子に読んで聞かせる時が来るかもしれない。",
+   "source_hash": "sha256:4006477c13b247b8ae8963728197540693e92c70b39831f98dbc4f0e0c7ff758",
+   "source_chars": 148,
+   "proposed_chars": 148,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc3-6:1_思い出したこと": {
+   "unit_id": "HO:n-ho-pc3-6:1_思い出したこと",
+   "page_id": "n-ho-pc3-6",
+   "kind": "ho",
+   "title": "思い出したこと",
+   "action": "keep",
+   "reason": "救難所＝手当て部屋の記憶、ライーン、ワークおじさんの要点が過不足なくまとまっているため現行を維持した。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ 思い出したこと\n- 救難所は、昔の砦の手当て部屋。ミクロ坊は鍋を焦がして火傷するたびにここへ来た（鍋当番は禁止された）。\n- ライーンも、二人の手合わせを真似て待つようになった（先に飛び込んでは、ここで包帯を巻かれていた）。\n- 台所のワークおじさん：味見で「いいね！」。口ぐせは「書いておけば、落ちない」。砦の出来事は、全部おじさんの帳面に残っている。\n- 思い出したことは、あなただけのもの（話すのは自由）。",
+   "source_hash": "sha256:8275eef74216443f423dd834e628fce6c707ecf7de007bc3981386e75810ef8d",
+   "source_chars": 195,
+   "proposed_chars": 195,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc4-1:2_secrets": {
+   "unit_id": "HO:n-ho-pc4-1:2_secrets",
+   "page_id": "n-ho-pc4-1",
+   "kind": "ho",
+   "title": "あなたの秘密目標（絶対に言わない）",
+   "action": "keep",
+   "reason": "保護対象の秘密目標節であり、全条件・証拠の強さや大成功条件の数値が正確に記述されているため現行を維持した。",
+   "kept_protected_facts": [
+    "HOのあなたの秘密目標（絶対に言わない）（目標・秘密・条件は削らない）：リックを生きて外へ出さないこと、他3人と自身の生還条件、立件回避（証拠の強さ2以下・報告1件以下かつ証拠0〜1で大成功）をすべて現行本文のまま保持"
+   ],
+   "proposed_text": "### ▼ あなたの秘密目標（絶対に言わない）\n- リックを**生きてダンジョンの外へ出さない**。\n- 他の3人を生還させる。自分も可能なら生還する。\n- リックの死があなたの仕業だと**立件されない**（証拠の強さ2以下）。最終戦の前に、仲間はそれぞれ結論を出し、それがそのままギルドへの報告になる（中身の公開は、生きて帰ってから）。犯人として報告されるたびに、功績が下がる。報告が1件以下で、証拠0〜1なら大成功。",
+   "source_hash": "sha256:7fc2733685a69120fdb684e43a8d6e8e5a35b01ff8525a8fb5a9ab55da2cdeb1",
+   "source_chars": 188,
+   "proposed_chars": 188,
+   "delta_chars": 0,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの秘密目標（絶対に言わない）（目標・秘密・条件は削らない）"
+   ],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc4-2:4_それでもあなたが守りたい": {
+   "unit_id": "HO:n-ho-pc4-2:4_それでもあなたが守りたい",
+   "page_id": "n-ho-pc4-2",
+   "kind": "ho",
+   "title": "それでも、あなたが守りたいもの",
+   "action": "keep",
+   "reason": "エドガーの動機の核が1行で鋭く表現されており、手を加える必要がないため現行を維持した。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ それでも、あなたが守りたいもの\n- 外にいる、何百、何千の人間。",
+   "source_hash": "sha256:c8ffa9ea9382eda6474fcd4f960e88eafe0e3dfe9c153812e88146d5779a34d1",
+   "source_chars": 30,
+   "proposed_chars": 30,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc4-3:2_気をつけること": {
+   "unit_id": "HO:n-ho-pc4-3:2_気をつけること",
+   "page_id": "n-ho-pc4-3",
+   "kind": "ho",
+   "title": "気をつけること",
+   "action": "keep",
+   "reason": "動かせない証拠、「自首する」選択肢など終盤の制約と自由度が過不足なく書かれているため現行を維持した。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ 気をつけること\n- あなたが様子を見たことは、組分けで全員に見える。\n- リックの手元の瓶と紙、遺体は動かせない。\n- リックの最期の言葉は、あなたしか知らない。話すかどうかは、あなたが決める。\n- 議論で、もう隠しきれないと思ったら：最終戦の前の結論で、あなたの画面にだけ「**自首する**」が出る。選ぶかどうかは、あなたが決める。",
+   "source_hash": "sha256:b607d6db2731eda231e853c5ae350e9329a1ae03dfe72f955dd2265d9978ffa2",
+   "source_chars": 152,
+   "proposed_chars": 152,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  },
+  "HO:n-ho-pc4-4:1_前室で見たもの": {
+   "unit_id": "HO:n-ho-pc4-4:1_前室で見たもの",
+   "page_id": "n-ho-pc4-4",
+   "kind": "ho",
+   "title": "前室で見たもの",
+   "action": "keep",
+   "reason": "発見事実の2点が簡潔かつ正確に要約されているため現行を維持した。",
+   "kept_protected_facts": [],
+   "proposed_text": "### ▼ 前室で見たもの\n- 前室の奥の壁に、通路を塞いだ石積み。灰嶺の坑道の奥で、鉱夫たちが崩した石積みと同じ積み方（平たい石を互い違いに積み、継ぎ目に黒い泥）。\n- 石の刻み「封鎖。運び込む者は、隔離排水区画を通すこと」。矢印は水路の方を指している（隔離排水区画は、水路の先らしい）。",
+   "source_hash": "sha256:833aa3149f9ca9b9f204baef0ad67a8c4243f6ed90eae729cf5ee2e107718f31",
+   "source_chars": 134,
+   "proposed_chars": 134,
+   "delta_chars": 0,
+   "protected": false,
+   "protected_facts": [],
+   "generator_model": "gemini-4-hydrogen-high"
+  }
+ },
+ "units_meta": {
+  "CARD:INFO-W-U1-2": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《西警備用小扉》**　深度1",
+   "title": "西警備用小扉",
+   "source_hash": "sha256:0e20e3db38ea408962dfca52cb7ac35c7104fead4bcda0be10274f4d2200ffb1",
+   "source_chars": 58,
+   "raw_hash": "sha256:c880f1903ef91431a870afa75e5a44f01ea242dca53d864e6a48106d9bdeee20",
+   "line_start": 21,
+   "line_end": 23,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-U3": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《地下へ続く整備孔》**　深度1（品：精密工具）",
+   "title": "地下へ続く整備孔",
+   "source_hash": "sha256:91f0c056ea380cc0972adc8e1379f6bbf5cdd75c1abebbfc909a9ce9ec010ee6",
+   "source_chars": 58,
+   "raw_hash": "sha256:91f0c056ea380cc0972adc8e1379f6bbf5cdd75c1abebbfc909a9ce9ec010ee6",
+   "line_start": 45,
+   "line_end": 46,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-U4-2": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《祭壇へ届かない水》**　深度1",
+   "title": "祭壇へ届かない水",
+   "source_hash": "sha256:3976d27443a2dc4b0ab2aa79b516be04f2568ba0b003b89de42ae75fd5adac8d",
+   "source_chars": 53,
+   "raw_hash": "sha256:b40f4cda33e13b1decb73698608024ed19724614a04dab256aab5f9c717ef7d6",
+   "line_start": 57,
+   "line_end": 60,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-U6": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《名簿を読む声》**　深度1",
+   "title": "名簿を読む声",
+   "source_hash": "sha256:68bcfeee33a07072af4c6102d5700d47cacc608db288775557b939c96183dc57",
+   "source_chars": 96,
+   "raw_hash": "sha256:d13050559f1a4201391d15c09dcc8517a77ee92be497c643d54cc1a59709f699",
+   "line_start": 80,
+   "line_end": 82,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-U7": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《救難所の薬品棚》**　深度1（品：バフ薬）",
+   "title": "救難所の薬品棚",
+   "source_hash": "sha256:3eb693f3c2d4a192439be7456239c44bebef14b42b5ef0829d0a31fc898149e8",
+   "source_chars": 73,
+   "raw_hash": "sha256:26ed4f6eb8e5a929241b2a4fd9d93e9cc73895f71f50c23807f67602bf846a90",
+   "line_start": 94,
+   "line_end": 96,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-U8": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《二人の英雄》**　深度1（品：旧昇降機起動鍵）",
+   "title": "二人の英雄",
+   "source_hash": "sha256:cc3494450feb383bbbab43f9ff29c881365c1c3b57737c825ffac93fa3422202",
+   "source_chars": 110,
+   "raw_hash": "sha256:e6ec93f3b3605beb8fcac65908dad81c3c757a321b774365d41f6506a29c48f9",
+   "line_start": 107,
+   "line_end": 110,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 二人の英雄"
+   ]
+  },
+  "CARD:INFO-W-U9-3": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《人格侵食》**　深度1",
+   "title": "人格侵食",
+   "source_hash": "sha256:a7008c201e5f111fecd1e50e05cb7cbe1ec8a98639a9885d30b754924292f766",
+   "source_chars": 80,
+   "raw_hash": "sha256:da41b5a605e2bb49c0c2449a9d834390b1aad7529a03eece1e606fdd21afce10",
+   "line_start": 118,
+   "line_end": 120,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 人格侵食",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 人格侵食",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 人格侵食",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 人格侵食"
+   ]
+  },
+  "CARD:INFO-W-U9-2": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《交換される肉体》**　深度2",
+   "title": "交換される肉体",
+   "source_hash": "sha256:50b41a9a3c8650af05c9dd82772657d55ec06bb795ea67bdc0063a5b7011b0f8",
+   "source_chars": 169,
+   "raw_hash": "sha256:4ce63a936a861259f09f621cb9c4172c4cf8f5d1c866e6b3f29426e45dc549eb",
+   "line_start": 122,
+   "line_end": 125,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 交換される肉体",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 交換される肉体"
+   ]
+  },
+  "CARD:INFO-W-U11": {
+   "page_id": "n-card-upper",
+   "kind": "card",
+   "anchor": "**《内部封鎖》**",
+   "title": "内部封鎖",
+   "source_hash": "sha256:a306e923518fb1d590a56d05c230a78d9b8cb301989ed020f17505fd50376565",
+   "source_chars": 69,
+   "raw_hash": "sha256:fa4fdd7ef701cf8f14effe7879c2c8e91c0a48815247c87025c702aff8fe18c5",
+   "line_start": 152,
+   "line_end": 154,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L0": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《祭壇前の装置》**",
+   "title": "祭壇前の装置",
+   "source_hash": "sha256:7d0abb4cce2c6bb52d03fa87bcb4655448059cceb8f2a9707de86ef95fa9d6bd",
+   "source_chars": 84,
+   "raw_hash": "sha256:ec553315c3ed511e0b6c0ecba75aa05c5ccac4fe703b2737ff693f5d9aac31c3",
+   "line_start": 11,
+   "line_end": 13,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L3": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《封印損傷痕》**　深度2（品：焼損封印片）",
+   "title": "封印損傷痕",
+   "source_hash": "sha256:08740d7b3aaa25731a18dfd4d34e57a0b9f8b18a5bd823af0fe317d5d43af320",
+   "source_chars": 57,
+   "raw_hash": "sha256:08740d7b3aaa25731a18dfd4d34e57a0b9f8b18a5bd823af0fe317d5d43af320",
+   "line_start": 72,
+   "line_end": 73,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-N-USED": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《一度だけ使われた剣》**　深度3",
+   "title": "一度だけ使われた剣",
+   "source_hash": "sha256:62097dc45244126fffe44d23e87944196ba224e9ff7e2b12b555805e782fb9df",
+   "source_chars": 53,
+   "raw_hash": "sha256:8a8ced02f3a8f61faa001ec5bd875304589d5b275961288cfde9c505517bc541",
+   "line_start": 75,
+   "line_end": 78,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 一度だけ使われた剣"
+   ]
+  },
+  "CARD:INFO-W-L5-2": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《殺害者の波形》**　深度2",
+   "title": "殺害者の波形",
+   "source_hash": "sha256:b8bb0e55dd88a77b14dc10d0587050e1e6f591fd7ffd18269a8138208b3cc542",
+   "source_chars": 183,
+   "raw_hash": "sha256:830487bb7a44c85ca6daff79cfd57f925dd1035f1ec73c2988b10c3a1cf9251d",
+   "line_start": 115,
+   "line_end": 119,
+   "protected": true,
+   "protected_facts": [
+    "Q1（400年前の追跡者は、誰だったのか）の核心: 殺害者の波形",
+    "Q2（追跡者を死なせたのは、誰か）の核心: 殺害者の波形",
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 殺害者の波形",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 殺害者の波形"
+   ]
+  },
+  "CARD:INFO-E-WOUND": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《本物の追跡者傷》**　深度2",
+   "title": "本物の追跡者傷",
+   "source_hash": "sha256:d5de74560792588651384f3ca7b761523e82d792d2d5e2844e95157274a3fb47",
+   "source_chars": 45,
+   "raw_hash": "sha256:d5de74560792588651384f3ca7b761523e82d792d2d5e2844e95157274a3fb47",
+   "line_start": 121,
+   "line_end": 122,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-E-MAGIC": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《追跡者の攻撃魔力》**　深度2",
+   "title": "追跡者の攻撃魔力",
+   "source_hash": "sha256:a2ef8719fa68f2fa83d78e80597f0371116b1a22ea0bdb3e729dedca28f39d52",
+   "source_chars": 47,
+   "raw_hash": "sha256:bbaa5f6a7bb60f3a75ce1d4e9d4119e24fe36e6fab14d2ebf235ecdf09ddb9ce",
+   "line_start": 124,
+   "line_end": 126,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-A-SUPPLY": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《外部からの魔力供給》**　深度1",
+   "title": "外部からの魔力供給",
+   "source_hash": "sha256:1b338126a3a315f811b0e6fce4222f52a4d5ad18dc6e1a33a8ec3ae77ea007cf",
+   "source_chars": 107,
+   "raw_hash": "sha256:b4241f243e69887d1da2d081eee5badc36955d7ecd0be9db884e56a37f92a138",
+   "line_start": 138,
+   "line_end": 141,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L6-3": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《接続対象の拡張》**　深度2",
+   "title": "接続対象の拡張",
+   "source_hash": "sha256:79291619e11790f6271f439664ded8712a38f0e1a23912e9e9a51caa408d6c7a",
+   "source_chars": 62,
+   "raw_hash": "sha256:79291619e11790f6271f439664ded8712a38f0e1a23912e9e9a51caa408d6c7a",
+   "line_start": 147,
+   "line_end": 148,
+   "protected": true,
+   "protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 接続対象の拡張",
+    "Q8（リックを殺した動機は、何だったのか）の核心: 接続対象の拡張"
+   ]
+  },
+  "CARD:INFO-W-L7": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《地下水流》**　深度1（品：魔力真珠）",
+   "title": "地下水流",
+   "source_hash": "sha256:cf83a7b3d55b28df88f753cad36ad73ac8e3524a4d5088f03a8ebac2bbdc2961",
+   "source_chars": 54,
+   "raw_hash": "sha256:cf83a7b3d55b28df88f753cad36ad73ac8e3524a4d5088f03a8ebac2bbdc2961",
+   "line_start": 161,
+   "line_end": 162,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L8-2": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《祭壇水位記録》**　深度1",
+   "title": "祭壇水位記録",
+   "source_hash": "sha256:51af350420ac69e8919441208370604f4459ae82c775b64be845106f216ad919",
+   "source_chars": 38,
+   "raw_hash": "sha256:988a18e6caf25aa8814955985c7dc3c04e513682f2d200b3ce00681e5f4780d5",
+   "line_start": 173,
+   "line_end": 175,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-K-KUROZU": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《クロヅクメーの記録》**　深度1",
+   "title": "クロヅクメーの記録",
+   "source_hash": "sha256:e6ed553bac4e4638e3adfca153c4c1c0f42c33732d5dd00f585b5529928eec59",
+   "source_chars": 173,
+   "raw_hash": "sha256:2e1b5a49280860293cf1d899ff3d4417543c980cf7e1de5af9ff14a36eb779b6",
+   "line_start": 177,
+   "line_end": 180,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L9": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《終わらない捜索》**　深度1",
+   "title": "終わらない捜索",
+   "source_hash": "sha256:cc244c84890821c83f136abd8a340f0f3b4c99d5338767996a9e56cb70314111",
+   "source_chars": 89,
+   "raw_hash": "sha256:50df8662c5cb2cb0849b24cb6629565cddd7c2b42861da9605eb9595fb0ec555",
+   "line_start": 193,
+   "line_end": 195,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-W-L10": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《最後の精神記録》**　深度1（品：古代防護石）",
+   "title": "最後の精神記録",
+   "source_hash": "sha256:fe67bf0fa4df44f9911eb1c1fbaeaaabf4f9a6e90be413b76acde96a542e1844",
+   "source_chars": 84,
+   "raw_hash": "sha256:67a15332b296b2e6660a34273b17f04981e2f5a1a42502e23a61d559767e3112",
+   "line_start": 199,
+   "line_end": 201,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 最後の精神記録",
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 最後の精神記録",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 最後の精神記録"
+   ]
+  },
+  "CARD:INFO-A-PATH": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《再生経路制御》**　深度2",
+   "title": "再生経路制御",
+   "source_hash": "sha256:b921bfca4765c7b03b2f1d4bb763a8628dd1629cbc34f6c8693d2272d54336be",
+   "source_chars": 101,
+   "raw_hash": "sha256:3297d52acfd301e45547ebf4cfb4f07d05bbe2d2b86c8297bd1c447509a63397",
+   "line_start": 212,
+   "line_end": 215,
+   "protected": true,
+   "protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 再生経路制御",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生経路制御"
+   ]
+  },
+  "CARD:INFO-N-MARK": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《一瞬見えたもの》**（本人にだけ。見えたものは人によって違う）",
+   "title": "一瞬見えたもの",
+   "source_hash": "sha256:fa7d3f9905de03bda6d0d53ff2e9f8bc26340eb7aa5684eee6376e939c88c6bf",
+   "source_chars": 178,
+   "raw_hash": "sha256:4dea2b7accb236f951b2804a278af64b183d070482669b53b35c8ee7535897ee",
+   "line_start": 230,
+   "line_end": 235,
+   "protected": true,
+   "protected_facts": [
+    "Q4（リックの剣と血筋は、この遺跡の何とつながっているのか）の核心: 一瞬見えたもの"
+   ]
+  },
+  "CARD:INFO-W-L12": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《自分に向けた跡》**",
+   "title": "自分に向けた跡",
+   "source_hash": "sha256:fe095e0b1c382cf08c6c5529c2e7a5a04fd2fde073619d4bd9d9a6b0185a4189",
+   "source_chars": 67,
+   "raw_hash": "sha256:71537f2819cc8e74b19c77171994959f3f0407387e55d6c7d77f5aed320457d8",
+   "line_start": 239,
+   "line_end": 241,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 自分に向けた跡",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 自分に向けた跡"
+   ]
+  },
+  "CARD:INFO-K-L12-2": {
+   "page_id": "n-card-lower",
+   "kind": "card",
+   "anchor": "**《封印剣の注文札》**",
+   "title": "封印剣の注文札",
+   "source_hash": "sha256:8dd5cb7dc025e87eca4cc12f883f80319704583d9c1092e4918c180c3456d8dc",
+   "source_chars": 93,
+   "raw_hash": "sha256:2f01e8902b6a64164fdf32fec2eb06b83ff2d10ef976f9ab0d78ece2bc9820c3",
+   "line_start": 243,
+   "line_end": 245,
+   "protected": true,
+   "protected_facts": [
+    "Q2（追跡者を死なせたのは、誰か）の核心: 封印剣の注文札",
+    "Q10（追跡者の体の、どこを断てば組み直りが止まるのか）の核心: 封印剣の注文札",
+    "最終戦ラッシュ2の根拠（判定なし・共有可）: 封印剣の注文札",
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 封印剣の注文札"
+   ]
+  },
+  "CARD:REC-U2": {
+   "page_id": "n-card-rec",
+   "kind": "card",
+   "anchor": "**REC-U2【物語】《済の欄》**　騎士団詰所",
+   "title": "済の欄",
+   "source_hash": "sha256:7cdfe126b1e2e8041765bd306e8ea698695b14c78e80080242e721b24dfc6d9a",
+   "source_chars": 175,
+   "raw_hash": "sha256:7169782af8a414a2ed5e34320cd1318e57ad62126fc70d3cfb350e7d458c9dce",
+   "line_start": 10,
+   "line_end": 12,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ5の根拠（判定なし・共有可）: 済の欄"
+   ]
+  },
+  "CARD:REC-U8": {
+   "page_id": "n-card-rec",
+   "kind": "card",
+   "anchor": "**REC-U8【物語】《外套》**　双騎士碑文室",
+   "title": "外套",
+   "source_hash": "sha256:2592ff675d94994370f118a7ae35650998e929385a3bb89d50ee34169d39d13c",
+   "source_chars": 139,
+   "raw_hash": "sha256:67c5ff253cd3b8cb81fa9edd2d8a84c0af3af6bf9e2b8df4026795f007062ff9",
+   "line_start": 14,
+   "line_end": 16,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ4の根拠（判定なし・共有可）: 外套"
+   ]
+  },
+  "CARD:INFO-P3-B": {
+   "page_id": "n-card-split",
+   "kind": "card",
+   "anchor": "**INFO-P3-B《再生中の呟き》**　B「崩落を支える」組",
+   "title": "再生中の呟き",
+   "source_hash": "sha256:f55283c429b551df598abb0c09b9228a4ac863bcb98611d7fe6f97013c809d8a",
+   "source_chars": 77,
+   "raw_hash": "sha256:e6c41a60dfd10ac2694ead702d4c678b12da1974790550dac4a06bb343feeb77",
+   "line_start": 22,
+   "line_end": 24,
+   "protected": true,
+   "protected_facts": [
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 再生中の呟き"
+   ]
+  },
+  "CARD:INFO-P3-C": {
+   "page_id": "n-card-split",
+   "kind": "card",
+   "anchor": "**INFO-P3-C《リックの第一声》**　「様子を見る」組",
+   "title": "リックの第一声",
+   "source_hash": "sha256:5f2eeac8d2c6f560864f1aebd72652ae8ede1411699e774296f80678f9ee8d37",
+   "source_chars": 85,
+   "raw_hash": "sha256:b8a927d9b82511bbc14f21f801758439c02d2328d5889231411161f8a8205c20",
+   "line_start": 26,
+   "line_end": 28,
+   "protected": false,
+   "protected_facts": []
+  },
+  "CARD:INFO-P9-B3": {
+   "page_id": "n-card-split",
+   "kind": "card",
+   "anchor": "**INFO-P9-B3《祭壇の床の回路》**　様子を見た組にヴィオラがいたとき（ヴィオラだけ）",
+   "title": "祭壇の床の回路",
+   "source_hash": "sha256:5973e116117762b8b94c66f300d9aaf9181dcc5bccc16d595dda0aea8e2df0a4",
+   "source_chars": 181,
+   "raw_hash": "sha256:5f44789a95cf96e069411bc47e3f3ace2b395f6ca0ae7ab614c5d0616e71dcac",
+   "line_start": 115,
+   "line_end": 117,
+   "protected": true,
+   "protected_facts": [
+    "Q3（追跡者は、なぜ倒しても起き上がるのか。どうすれば終わるのか）の核心: 祭壇の床の回路",
+    "最終戦ラッシュ3の根拠（判定なし・共有可）: 祭壇の床の回路"
+   ]
+  },
+  "CARD:INFO-E-BODY3": {
+   "page_id": "n-card-case",
+   "kind": "card",
+   "anchor": "**深度3（専門判定）**",
+   "title": "専門判定",
+   "source_hash": "sha256:a626d13366115d956a45941b7b1eef3d638eb18f09f1c22f4133c410a5b875d0",
+   "source_chars": 152,
+   "raw_hash": "sha256:cf32b2d79c78cf279aff64cb5a2d3bdccc34aadc81569622a7968c2ec01f09df",
+   "line_start": 33,
+   "line_end": 36,
+   "protected": true,
+   "protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定"
+   ]
+  },
+  "CARD:INFO-E-TIMING": {
+   "page_id": "n-card-case",
+   "kind": "card",
+   "anchor": "**深度4《投与時期推定》**",
+   "title": "投与時期推定",
+   "source_hash": "sha256:8c5e1ae1e93f2f838649f9b123cb324661983e019acb8b5d1690c881eaa3d63c",
+   "source_chars": 57,
+   "raw_hash": "sha256:8c5e1ae1e93f2f838649f9b123cb324661983e019acb8b5d1690c881eaa3d63c",
+   "line_start": 38,
+   "line_end": 39,
+   "protected": true,
+   "protected_facts": [
+    "Q6（リックは、いつ・どこで・何を口にしたのか）の核心: 投与時期推定"
+   ]
+  },
+  "CARD:INFO-E-BODY5": {
+   "page_id": "n-card-case",
+   "kind": "card",
+   "anchor": "**深度5（専門判定）**",
+   "title": "専門判定",
+   "source_hash": "sha256:8ba25ffd399efdeeadebb33a4ad615a788b959128107cffe3a2ad91c706b4f62",
+   "source_chars": 70,
+   "raw_hash": "sha256:fa5fb0f6be3946d25b2e95eb88b52d631d1ec3f9a12fbeafa4c36c9d026c1d18",
+   "line_start": 41,
+   "line_end": 44,
+   "protected": true,
+   "protected_facts": [
+    "Q5（リックの体に何が起きて死んだのか）の核心: 専門判定"
+   ]
+  },
+  "CARD:INFO-E-SOURCE": {
+   "page_id": "n-card-case",
+   "kind": "card",
+   "anchor": "**深度7《工作素材の出所》**",
+   "title": "工作素材の出所",
+   "source_hash": "sha256:39dd9d37239c45f64a0a45770c18411a1587668ffabd82d6e72bdc67e8efb963",
+   "source_chars": 50,
+   "raw_hash": "sha256:40effe362c19fe2df5b4f8ec7208dac263ee0a49fc3b38f55b43719d26d72bfe",
+   "line_start": 104,
+   "line_end": 106,
+   "protected": true,
+   "protected_facts": [
+    "Q7（リックにそれを渡したのは、誰か）の核心: 工作素材の出所"
+   ]
+  },
+  "HO:n-ho-pc1-3:1_追加された目標": {
+   "page_id": "n-ho-pc1-3",
+   "kind": "ho",
+   "anchor": "▼ 追加された目標",
+   "title": "追加された目標",
+   "source_hash": "sha256:2a3d6016a16acebfb65d64b935a3baa3e7659154ac465997f86c376e6f0add43",
+   "source_chars": 132,
+   "raw_hash": "sha256:3f6f9e0a394465bba9adccc07709b4f97cca5819426fd87b92621315af5d6004",
+   "line_start": 20,
+   "line_end": 23,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc1-3:2_知っておくこと": {
+   "page_id": "n-ho-pc1-3",
+   "kind": "ho",
+   "anchor": "▼ 知っておくこと",
+   "title": "知っておくこと",
+   "source_hash": "sha256:a34b8e22115c559e104825aa340575031cd3d06713db5675971b403ed79d57fb",
+   "source_chars": 138,
+   "raw_hash": "sha256:5aad90e2dcb4e542302515e36fe687b29c0d605875edebd889fb5f47cd81bf8a",
+   "line_start": 24,
+   "line_end": 27,
+   "protected": true,
+   "protected_facts": [
+    "HOの知っておくこと（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc1-4:1_前室で見たもの": {
+   "page_id": "n-ho-pc1-4",
+   "kind": "ho",
+   "anchor": "▼ 前室で見たもの",
+   "title": "前室で見たもの",
+   "source_hash": "sha256:991bc8345f6688ebac5d7e2d4ac9bfa7ee78330183cf965284d65dfa91ec9b14",
+   "source_chars": 116,
+   "raw_hash": "sha256:1cafe21ae64221dd91deee7b303315361ce1c09b55dfdbc0361dec99cd058b7e",
+   "line_start": 29,
+   "line_end": 32,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc2-1:2_secrets": {
+   "page_id": "n-ho-pc2-1",
+   "kind": "ho",
+   "anchor": "▼ あなたの胸にしまっていること（自分から言わなくてよい）",
+   "title": "あなたの胸にしまっていること（自分から言わなくてよい）",
+   "source_hash": "sha256:aeb487c43ae305c202cb821de8db62a246ad0adf45649891dba91f5def837d07",
+   "source_chars": 70,
+   "raw_hash": "sha256:e4815df5e3fd29ad32aa73772f9a11e20fb55a8d97e555be5eacb0f24191d23d",
+   "line_start": 80,
+   "line_end": 82,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（自分から言わなくてよい）（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc2-2:1_あなたが知ったこと": {
+   "page_id": "n-ho-pc2-2",
+   "kind": "ho",
+   "anchor": "▼ あなたが知ったこと",
+   "title": "あなたが知ったこと",
+   "source_hash": "sha256:4c3ae5a70169c602376bb3dba78704c2023e2a289cada51424594bdce432a549",
+   "source_chars": 85,
+   "raw_hash": "sha256:9efc18aad143a7459306ad57578cc98fa17f359d6397118c2577ba080101353c",
+   "line_start": 26,
+   "line_end": 29,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc2-2:2_あなたが決めること": {
+   "page_id": "n-ho-pc2-2",
+   "kind": "ho",
+   "anchor": "▼ あなたが決めること",
+   "title": "あなたが決めること",
+   "source_hash": "sha256:c3e006553e24695514c1462c22c6645e0e3300ac4adc1ae0d060f08b8dd07b9d",
+   "source_chars": 58,
+   "raw_hash": "sha256:b7ce1d66bb9e20b93e3b55aaf1284730302e1e01c2aaac56ae9311c9be00a6cb",
+   "line_start": 30,
+   "line_end": 33,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたが決めること（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc2-3:3_secrets": {
+   "page_id": "n-ho-pc2-3",
+   "kind": "ho",
+   "anchor": "▼ あなたの胸にしまっていること",
+   "title": "あなたの胸にしまっていること",
+   "source_hash": "sha256:c7666a44e2e7a3c087ac4f4066fac63a8808b33446329cf5778179ece886c5fb",
+   "source_chars": 90,
+   "raw_hash": "sha256:1ae5f26b46d713bc88d554b6776246bf2ae9a85b86675adc1fe670c3d88634a7",
+   "line_start": 64,
+   "line_end": 68,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc2-5:2_secrets": {
+   "page_id": "n-ho-pc2-5",
+   "kind": "ho",
+   "anchor": "▼ あなたの胸にしまっていること",
+   "title": "あなたの胸にしまっていること",
+   "source_hash": "sha256:17a09e7f7660246612725dddd1e2474d4536596a633fc543c33cb904581bf9bd",
+   "source_chars": 72,
+   "raw_hash": "sha256:650dfc8a74bc881fe56345922887f229456814a9ea5f1d361b6b75e81949946d",
+   "line_start": 24,
+   "line_end": 27,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc3-1:3_secrets": {
+   "page_id": "n-ho-pc3-1",
+   "kind": "ho",
+   "anchor": "▼ あなたの胸にしまっていること（言いたくない）",
+   "title": "あなたの胸にしまっていること（言いたくない）",
+   "source_hash": "sha256:fa35069bc0b27d140b5cdaeca5a3c2c089ea8ba981d093af8e682048887458a4",
+   "source_chars": 128,
+   "raw_hash": "sha256:13cd758840f00b620ee911513b0a3405e1969f5c91fe6071b1006a25f59d966b",
+   "line_start": 71,
+   "line_end": 74,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの胸にしまっていること（言いたくない）（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc3-2:4_あなたにできること": {
+   "page_id": "n-ho-pc3-2",
+   "kind": "ho",
+   "anchor": "▼ あなたにできること",
+   "title": "あなたにできること",
+   "source_hash": "sha256:4006477c13b247b8ae8963728197540693e92c70b39831f98dbc4f0e0c7ff758",
+   "source_chars": 148,
+   "raw_hash": "sha256:21320c6a020666aa66b9f5823d1cbb7173e7857651338a9b893d42918386dda8",
+   "line_start": 72,
+   "line_end": 76,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc3-6:1_思い出したこと": {
+   "page_id": "n-ho-pc3-6",
+   "kind": "ho",
+   "anchor": "▼ 思い出したこと",
+   "title": "思い出したこと",
+   "source_hash": "sha256:8275eef74216443f423dd834e628fce6c707ecf7de007bc3981386e75810ef8d",
+   "source_chars": 195,
+   "raw_hash": "sha256:62be5e0485b19f340a2ac123b0c2df38f491f87625c090bb5eaa9d3dff35eaf4",
+   "line_start": 23,
+   "line_end": 28,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc4-1:2_secrets": {
+   "page_id": "n-ho-pc4-1",
+   "kind": "ho",
+   "anchor": "▼ あなたの秘密目標（絶対に言わない）",
+   "title": "あなたの秘密目標（絶対に言わない）",
+   "source_hash": "sha256:7fc2733685a69120fdb684e43a8d6e8e5a35b01ff8525a8fb5a9ab55da2cdeb1",
+   "source_chars": 188,
+   "raw_hash": "sha256:8276d99e155b3f06266af0340a3a1ea39b87cba557932403fafd3e0a3bb85cf9",
+   "line_start": 120,
+   "line_end": 124,
+   "protected": true,
+   "protected_facts": [
+    "HOのあなたの秘密目標（絶対に言わない）（目標・秘密・条件は削らない）"
+   ]
+  },
+  "HO:n-ho-pc4-2:4_それでもあなたが守りたい": {
+   "page_id": "n-ho-pc4-2",
+   "kind": "ho",
+   "anchor": "▼ それでも、あなたが守りたいもの",
+   "title": "それでも、あなたが守りたいもの",
+   "source_hash": "sha256:c8ffa9ea9382eda6474fcd4f960e88eafe0e3dfe9c153812e88146d5779a34d1",
+   "source_chars": 30,
+   "raw_hash": "sha256:53c48d92c51d49d5640f8cbf5bee2dc2ab390c6eaa37ff6a9a14f161972d3f5a",
+   "line_start": 47,
+   "line_end": 49,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc4-3:2_気をつけること": {
+   "page_id": "n-ho-pc4-3",
+   "kind": "ho",
+   "anchor": "▼ 気をつけること",
+   "title": "気をつけること",
+   "source_hash": "sha256:b607d6db2731eda231e853c5ae350e9329a1ae03dfe72f955dd2265d9978ffa2",
+   "source_chars": 152,
+   "raw_hash": "sha256:4ceb5eba6ebe7e82a41c79a18f7b991befc1e73b35ccddc54cddcf118ec8d985",
+   "line_start": 51,
+   "line_end": 56,
+   "protected": false,
+   "protected_facts": []
+  },
+  "HO:n-ho-pc4-4:1_前室で見たもの": {
+   "page_id": "n-ho-pc4-4",
+   "kind": "ho",
+   "anchor": "▼ 前室で見たもの",
+   "title": "前室で見たもの",
+   "source_hash": "sha256:833aa3149f9ca9b9f204baef0ad67a8c4243f6ed90eae729cf5ee2e107718f31",
+   "source_chars": 134,
+   "raw_hash": "sha256:7d0f539824522ed8c15e4301caf5c91aea5ea5174fb3964a9bc0e1fb2bfed209",
+   "line_start": 37,
+   "line_end": 40,
+   "protected": false,
+   "protected_facts": []
+  }
+ }
+}

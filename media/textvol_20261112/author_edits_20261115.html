@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>マダミス7 修正と不整合の確認（2026-11-15）</title>
+<style>
+:root{--ho:#2f6fb3;--read:#2b8a5b;--card:#c0632a;--rules:#6a4fa3;--extra:#6b7280;--body:#0f172a;
+--bg:#f7f8fa;--line:#e3e6ea;--ink:#1f2328;--need:#c0392b;--done:#1f7a3d;--amber:#b7791f}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+header{background:#101828;color:#fff;padding:24px 30px}
+header h1{margin:0 0 8px;font-size:22px}
+header p{margin:2px 0;font-size:13px;color:#c8d0da}
+.wrap{display:grid;grid-template-columns:250px 1fr;align-items:start}
+nav{position:sticky;top:0;height:100vh;overflow:auto;background:#fff;border-right:1px solid var(--line);padding:16px 12px}
+nav .grp{font-size:11px;letter-spacing:.08em;color:#8a929c;margin:14px 0 4px}
+nav a{display:block;padding:5px 8px;border-radius:6px;text-decoration:none;color:#28303a;font-size:13px;border-left:3px solid transparent}
+nav a:hover{background:#eef1f5}
+nav a.s1{border-left-color:var(--done)} nav a.s2{border-left-color:var(--amber)} nav a.s3{border-left-color:var(--need)}
+nav a.s4{border-left-color:var(--ho)} nav a.s5{border-left-color:var(--card)} nav a.s6{border-left-color:var(--rules)}
+nav a.s7{border-left-color:var(--extra)} nav a.s8{border-left-color:var(--body)}
+main{padding:24px 32px 90px;max-width:1180px}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 20px}
+h2{margin:0 0 12px;font-size:18px;padding-left:12px;border-left:6px solid #999}
+#s1 h2{border-color:var(--done)} #s2 h2{border-color:var(--amber)} #s3 h2{border-color:var(--need)}
+#s4 h2{border-color:var(--ho)} #s5 h2{border-color:var(--card)} #s6 h2{border-color:var(--rules)}
+#s7 h2{border-color:var(--extra)} #s8 h2{border-color:var(--body)}
+h3{font-size:15px;margin:18px 0 8px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f1f3f6;font-size:12px;font-weight:600;color:#3c4551}
+td.k{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+small{color:#6b7280;font-size:11px}
+.up{color:var(--need)} .down{color:var(--done)} .flat{color:#6b7280}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:8px 0 4px}
+.card{border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:#fcfcfd}
+.card .t{font-size:12px;color:#5b636e} .card .v{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
+.card.warn{border-color:#f0c6c1;background:#fdf5f4} .card.good{border-color:#c3e2cd;background:#f4fbf6}
+ul{margin:6px 0 6px 20px;padding:0} li{margin:3px 0;font-size:13px}
+.note{background:#f7f9fb;border:1px solid var(--line);border-left:4px solid #8a929c;border-radius:6px;padding:10px 12px;font-size:12.5px;color:#3c4551}
+.warnbox{background:#fdf6ec;border:1px solid #f0dfc0;border-left:4px solid var(--amber);border-radius:6px;padding:10px 12px;font-size:13px}
+.ngbox{background:#fdf3f2;border:1px solid #f0c6c1;border-left:4px solid var(--need);border-radius:6px;padding:10px 12px;font-size:13px}
+.okbox{background:#f4fbf6;border:1px solid #c3e2cd;border-left:4px solid var(--done);border-radius:6px;padding:10px 12px;font-size:13px}
+code{background:#f1f3f6;padding:1px 5px;border-radius:4px;font-size:12px}
+details{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:6px 0;background:#fcfcfd}
+summary{cursor:pointer;font-size:13px;font-weight:600;color:#2f3a46}
+details pre{white-space:pre-wrap;font-family:inherit;font-size:12.5px;color:#333c46;margin:8px 0 2px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px}
+.q{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:0 0 14px;background:#fcfcfd}
+.q .qh{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin-bottom:6px}
+.q .no{background:#101828;color:#fff;border-radius:6px;padding:2px 9px;font-size:12px;font-weight:700}
+.q .ttl{font-size:15px;font-weight:700}
+.q .st{font-size:12px;border-radius:20px;padding:2px 10px;border:1px solid var(--line);background:#fff}
+.q .st.wait{color:var(--need);border-color:#f0c6c1;background:#fdf3f2}
+.q .st.done{color:var(--done);border-color:#c3e2cd;background:#f4fbf6}
+.q .row{margin:6px 0;font-size:13px}
+.q .lab{font-size:11px;letter-spacing:.06em;color:#8a929c}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}}
+</style></head><body>
+<header>
+<h1>修正と不整合の確認（2026-11-15）</h1>
+<p>マダミス7『ダンジョン・オブ・ザ・マーダー』／作者の指示 287件を原稿へ入れたあとの確認です。数字は 2026-11-15 21:56 の数え直し（原稿をそのまま数えたもの）から作っています。</p>
+<p>この用紙は「何が入ったか」「何が足りないか」「決めていただきたいこと」の3つだけを見るためのものです。原稿・データベース・ゲーム本体は、この用紙を作るために変えていません。</p>
+</header><div class="wrap"><nav>
+<div class="grp">結論</div>
+<a class="s1" href="#s1">1. 入ったもの</a>
+<a class="s2" href="#s2">2. 足りないもの・未確定</a>
+<a class="s3" href="#s3">3. 決めていただきたいこと（7件）</a>
+<div class="grp">数字</div>
+<a class="s4" href="#s4">4. いまの文量</a>
+<a class="s5" href="#s5">5. 前回からの差</a>
+<a class="s6" href="#s6">6. カードの目録（216→181）</a>
+<div class="grp">前提</div>
+<a class="s7" href="#s7">7. 数え方</a>
+<a class="s8" href="#s8">8. 変えていないこと</a>
+</nav><main>
+<section id="s0">
+<h2>この1枚の結論</h2>
+<div class="cards">
+<div class="card good"><div class="t">入れた指示</div><div class="v">229件</div><small>全 287件のうち。ほかに「同じ指示が重複」25件・「親の指示の内側」9件</small></div>
+<div class="card"><div class="t">決めていただきたいこと</div><div class="v">7件</div><small>3章。どれも本文を止めてはいません</small></div>
+<div class="card"><div class="t">PC1人が読む量（本体）</div><div class="v">22,585字</div><small>共通HO＋自分のHO＋全カード。前回 28,046字</small></div>
+<div class="card"><div class="t">1時間あたり（本体）</div><div class="v">5,646字</div><small>22,585字 ÷ 240分 × 60</small></div>
+<div class="card"><div class="t">カード</div><div class="v">16,330字</div><small>181枚。目標 9,956字まで残り 6,374字</small></div>
+</div>
+<div class="okbox">原稿の字数は、前回（11/15 00:45 の数え直し）から <b>本体 −5,461字</b>、<b>カード −3,581字・−35枚</b>。増減の内訳は5章にファイル別で出し、範囲ごとに足し引きが合うことを機械で照合しました（合わない 0件）。</div>
+</section>
+<section id="s1"><h2>1. 今回入ったもの</h2>
+<p class="note">作者の指示 287件は、すべて次のどれかに入っています。IDは 287件すべて一意（重複なし）。原稿のファイルは控えと比べて 63件が変わりました。控え 139件の内容は変わっていません（照合して不一致 0件）。</p>
+<table><tr><th>入れたもの</th><th>どこに</th><th>状態</th></tr>
+<tr><td>残っていた指示 22件の判断</td><td>GM原本とプレイヤー配布の両方</td><td>入れた 19件／後続の指示で置き換え済み 2件／保留 1件</td></tr>
+<tr><td>A5「黒い殻の巨体」</td><td>R01 の現在の場面 1箇所（GM/PL）</td><td>入れました。過去の「黒い獣」や未遭遇PCのHOは触っていません</td></tr>
+<tr><td>A4《攻撃優先順位》の①〜③</td><td>GM原稿 4箇所（07のGM注・真相・手がかりマップ・追跡者の位置の仕様案）</td><td>カード本文と一致させました</td></tr>
+<tr><td>閾値メモ 4件</td><td>GM注だけ（<code>【GM】作者閾値指定：…</code>）</td><td>プレイヤー配布に出ている数 0件。<b>ゲーム側は未実装</b></td></tr>
+<tr><td>自由記述の移管 4件</td><td>PC1③→④のお礼、06のお礼の統合、08遺体の深度3削除</td><td>移管 3件・部分 1件（発動条件だけ未決定）</td></tr>
+<tr><td>同じ範囲の重複指示 25件</td><td>本文</td><td>作者の文が1回だけ出ることを確認（段落の重複 0件）</td></tr>
+<tr><td>口頭の言い換え 8件</td><td>—</td><td>表示が壊れる2件だけ採用。意味の変わる6件は<b>作者の候補として保留</b></td></tr>
+</table>
+<p><small>指示の状態の内訳：入れた 229／作者の文と同じで変更不要 17／重複 25／親の指示の内側 9／移管 3／部分 1／置き換え済み 2／保留 1。</small></p>
+</section>
+<section id="s2"><h2>2. 足りないもの・まだ確定していないもの</h2>
+<div class="warnbox"><b>ゲーム（本番）には、まだ入っていません。</b> 原稿の文だけを直した段階です。配布版に閾値の指示は出ていません（0件）が、ゲーム側の判定（data.js）は未実装のままです。</div>
+<table><tr><th>項目</th><th>いまの状態</th><th>次の一手</th></tr>
+<tr><td>PC1④「再生実験室を奥まで調べる」</td><td>指示が途中切れ（保留 1件）</td><td>3章 Q1</td></tr>
+<tr><td>《死因の診断》の発動条件</td><td>深度3・5を削ったため条件が空。GM注に「未決定」とだけ記録</td><td>3章 Q3</td></tr>
+<tr><td>ゲーム側の数値・スキル・目的</td><td>PC2の目的／PC3の大成功 1200G（1150Gから変更）／PC3のスキル／PC4のスキルが原稿と不一致</td><td>次工程で写し直し（3章 Q6）</td></tr>
+<tr><td>08 の閾値 4件</td><td>GM注に保存。ゲームの判定は未実装</td><td>Q6</td></tr>
+<tr><td>謎・目標の仕分け（目標と謎のページ）</td><td>カードを 35枚削ったぶん追随していない（仕分け側 18,147字／カード全体 16,330字・差 −1,817字）</td><td>仕分けの作り直し（次工程）</td></tr>
+<tr><td>カードの一覧（手がかりだけの写し）</td><td>121枚・13,575字のまま。うち 29枚は今回の指示で消えたカード</td><td>一覧の作り直し（次工程）</td></tr>
+<tr><td>口頭の言い換え 6件</td><td>作者の候補として保留（意味が変わるため無断で直していません）</td><td>採用するかどうかのご指示</td></tr>
+<tr><td>語彙・番号の不整合</td><td>02《夜の縄》と07《鈴の夜》の言い回し／現場の深度5・7が欠番</td><td>Q3・Q6</td></tr>
+</table>
+</section>
+<section id="s3"><h2>3. 決めていただきたいこと（7件）</h2>
+<p class="note">質問の文面は、お渡しした一覧のままです（言い換えていません）。「いまの状態」と「おすすめ」だけ、こちらの判断として足しました。根拠の原文は、いまの原稿からそのまま引いています（折りたたみの中）。</p>
+<div class="q">
+<div class="qh"><span class="no">Q1</span><span class="ttl">PC1_④の目標が途中で切れています</span><span class="st wait">判断待ち</span><span class="st">手がかり 1f44807c／b094656f</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>PC1_④の「### ▼ 追加された目標」編集（1f44807c）が「- **再生実験室を奥まで調べる**：」で途中切れしています。(1) コロン以降の本文、(2) 既存の「聖女の診断でリックを、違うフェイズで2回以上診る（功績+1）」および「再生実験室（功績+2）」の目標・功績点を残すか削除するか、(3) PC1_③から移管する「リックと二人きりになって、お礼を言う」は P7配布後に達成する想定か（P5〜P6二人きりお礼を許容し続けるか）をご教示ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>ご指示が「- **再生実験室を奥まで調べる**：」で途中切れのため、この指示は入れていません（いまの原稿には、以前からある文がそのまま残っています）。一方、PC1_③ の「お礼を言う」はご指示どおり PC1_④ へ移しました（③からは消えています）。</div>
+<div class="row"><span class="lab">おすすめ</span><br>(1) コロン以降の本文をいただく（行ごと消すなら「削除」とご指示ください）。(2) 功績の2件（診断2回で＋1／再生実験室で＋2）は残すことをおすすめします（他のPCの功績点と釣り合っています）。(3) P5〜P6 の二人きりも達成扱いにする（P7配布後に必ず二人きりになれる保証がないため）。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>PC1_④ 追加された目標</summary><pre>### ▼ 追加された目標
+- **再生実験室を奥まで調べる**（達成で功績+2）：あなた自身が再生実験室の探索に加わり、部屋をいちばん奥まで調べる（ほかの人が先に奥まで調べていても、あなたがその部屋に入れば達成）。図の矢印の先の「経過の記録」は、そこにあるはず。灰嶺の夜のことと、ズゥームの研究のことが、もっと分かるかもしれない。
+- **聖女の診断でリックを、違うフェイズで2回以上診る**（達成で功績+1）：下層（P7〜P9）で、聖女の診断をリックに使う。同じフェイズに何度診ても1回。診るたびに、分かることが変わるかもしれない。記録を読んでから診れば、記録に書かれたことと、リックさんの体を見比べられる。
+- どちらも、達成すると、その場で功績が入る（再生実験室は+2、診断は+1）。
+- **リックと二人きりになって、お礼を言う**：リックの同行主になり、ほかのPCが誰もいない部屋を、リックと二人で探索する。その探索の帰還フェイズに、あなたの画面に「お礼を言う」が出る。言えば達成。
+- そのために、探索の行き先を、ほかの人と重ならないように選ぶ。</pre></details>
+<details><summary>PC1_③ 追加された目標</summary><pre>（いまの原稿にこの節はありません。移管・削除で無くなったためです）</pre></details>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：edit（状態：hold）
+対象：GM資料/HO原本/PC1_ミレイユ_④追加HO_P7《前室の図》.md
+手がかりの行：追加された目標
+
+―――
+
+指示の種類：free（状態：transferred）
+対象：GM資料/HO原本/PC1_ミレイユ_③追加HO_P4《二人きりで》.md
+手がかりの行：リックと二人きりになって、お礼を言う：リックの同行主になり、ほかのPCが誰もいない部屋を、リックと二人で探索する。その探索の帰還フェイズに、あなたの画面に「お礼を言う」が出る。言えば達成。
+作者の言葉：
+追加HO④に入れてください</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q2</span><span class="ttl">《救出後の摂取》の題名と中身</span><span class="st wait">判断待ち</span><span class="st">手がかり 782e7582</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>深度4《救出後の摂取》の新本文が「握りつぶされた最後の頁『お前だったんだな。GG EZ　町を頼む』」（手紙系内容）へ置き換わっています。カード題名《救出後の摂取》・【GM】INFO-E-NOOTHER 注記・下部の所持品深度4《リックのメモ》（L149-152）との役割重複/名称変更が必要かご確認ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>新しい本文（握りつぶされた最後の頁）を入れました。カードの題名《救出後の摂取》と中身（手紙）のずれは、まだ整理していません。</div>
+<div class="row"><span class="lab">おすすめ</span><br>題名を《握りつぶされた最後の頁》へ変えることをおすすめします。摂取の説明は深度3《症状メモ》と所持品の《リックのメモ》に残っているので、この1枚は「最後の頁」だけを持つカードにすると重複が消えます。INFO-E-NOOTHER の注記は履歴として残します。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>08 深度4《救出後の摂取》（いまの本文）</summary><pre>**深度4《救出後の摂取》**
+&gt; 握りつぶされた最後の頁
+&gt; 「お前だったんだな。
+&gt; GG EZ　町を頼む」</pre></details>
+<details><summary>08 所持品 深度4《リックのメモ》（役割が重なる相手）</summary><pre>## 所持品
+
+**深度1《リックの携行品》**
+&gt; 装備、剣の整備用品、保存食。手元の一本と同じ、先遣隊の古い空き瓶が数本。
+毒物や呪物、魔力薬の類はない。
+リックの魔法剣も鞘ごと荷物のそばにある。
+
+**深度2《未送信の手紙》**
+&gt; 未送信の手紙
+「灰嶺の災厄は、俺たちが連れ帰った男から始まった。
+魔導院は俺たちに、こう言った。
+『黒い姿になりかけたら、なる前に殺すしかないと言った』」
+
+**深度3《症状メモ》**
+&gt; リックのメモ
+「入口のあの黒いの、誰かに似てるって言ったら怒るな、たぶんXD」
+「魔力、もう空。Sadge」
+「隙間から薬をもらった。一本で魔力が全部戻った。OPすぎ lol」
+「門の前、少し寒い」
+「寒気が抜けない。首に違和感を感じ続けている」
+「堪らなく街へ生きて帰りたい…。ユーリの気持ちが良く分かった。だけどきっともう…」
+&gt; 最後の行だけ字が乱れている。次の頁が一枚、破り取られている。
+&gt; （前半三行は救難所、後半三行はP6〜P8の記述。最後の行は日付なし）
+
+
+**深度4《救出後の摂取》**
+&gt; 握りつぶされた最後の頁
+&gt; 「お前だったんだな。
+&gt; GG EZ　町を頼む」</pre></details>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度4《救出後の摂取》
+いまの原稿が置き換えた文（変更前）：
+**深度4《救出後の摂取》**
+&gt; 救出のあと、リックが自分で口にした薬は記録にも所持品にもない。救難所の壁の隙間ごしに受け取って、その場で飲んだ魔力薬の一本が、症状より前の唯一の摂取物。
+&gt; 【GM】INFO-E-NOOTHER（r2：「救出時に」を「救難所で」に）。筋6（B2）。r4：いつもP3（中央封鎖路の崩落のとき）の隙間の一本。
+入れた文（変更後）：
+**深度4《救出後の摂取》**
+&gt;握りつぶされた最後の頁
+「お前だったんだな。
+GG EZ　町を頼む」
+
+この情報の閾値を器用8以上に
+&gt; 【GM】INFO-E-NOOTHER（r2：「救出時に」を「救難所で」に）。筋6（B2）。r4：いつもP3（中央封鎖路の崩落のとき）の隙間の一本。</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q3</span><span class="ttl">《死因の診断》の発動条件と深度の欠番</span><span class="st wait">判断待ち</span><span class="st">手がかり f4553119／3d1a5631</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>(1) 08『遺体』深度3・深度5削除後、07《死因の診断》の発動条件は「《魔力の暴走の跡》（元・深度3相当）取得後に再度診断したとき」でよいか（1回の診断で両方出るか2段階か）。(2) 08『現場』は現在 深度1〜4 と 深度6《乱れの形》のみ残り、深度5・深度7が欠番となっていますが、このまま欠番運用とするか再調整するかご確認ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>遺体の深度3・深度5 を削除済み（いまは深度1・2のみ）。《死因の診断》の発動条件は、GM注に「未決定」とだけ書いてあります（暫定のルールは書いていません）。</div>
+<div class="row"><span class="lab">おすすめ</span><br>(1) 1回の診断で《魔力の暴走の跡》と《死因の診断》の両方が出る（2段階にしない）のが読みやすいと思います。(2) 現場の深度5・7 は欠番のままで構いません（深度6《乱れの形》が実質5枚目）。番号を詰めるなら、現場の深度を全部1つずつ繰り上げる一回だけの作業になります。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>07《死因の診断》（発動条件の行）</summary><pre>**《死因の診断》**　P10以降、遺体の深度5をミレイユが調べたとき（または遺体の深度4のあとに診断したとき）。共有できない
+&gt; 死因は、魔力薬の原液を飲んだこと。原液は、飲んでから数日かけて、魔力の通り道を内側から焼き切る。飲んだのは、症状が出るより前。</pre></details>
+<details><summary>08 遺体（いまの見出しと本文）</summary><pre>## 遺体
+
+**深度1《致命傷が見当たらない》**
+&gt; 遺体に死に直結する外傷はない。大量出血、圧死、溺死の所見もない。
+
+**深度2《体内性の異常》**
+&gt; 体内に異常な魔力反応が残る。外傷からではなく、体の内側から魔力経路が崩れている。</pre></details>
+<details><summary>08 現場（欠番の確認用）</summary><pre>## 現場
+
+**深度1《祭壇周辺》**
+&gt; 遺体のまわりに、激しい戦闘で壊れた跡は少ない。
+遺体は祭壇から少し離れて横向き。引きずった跡も、大量の血痕もない。
+追跡者が動いていれば周りはもっと崩れているはずだ。
+
+**深度2《手元の瓶の中》**
+&gt; 手元の瓶の内側は乾ききって、底に埃がたまっている。
+何日も前に空になった瓶だ。薬の残りも魔力の反応もない。
+何故わざわざ最後に手にもっていた…？
+
+**深度3《事故痕の違和感》**
+&gt; 事故を思わせる痕跡はあるが、遺体の状態と一致しない。
+
+**深度4《現場と探索履歴の不整合》**
+&gt; 救出前、リック達先遣隊の所持品は尽きていた。
+もし何か摂取したとしたら、最初に会った者が渡したはずだろう。</pre></details>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：free（状態：partial）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度5（専門判定）
+作者の言葉：
+同様にスキル使用での情報へ移管
+
+―――
+
+指示の種類：free（状態：transferred）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：聖女なら《魔力の暴走の跡》、魔女なら《内側からの魔力汚染》を得る（技能・専有カード参照）。⏎
+作者の言葉：
+これは聖女の診断の情報に移管
+
+魔女の解析も同様
+
+深度3の項目自体削除</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q4</span><span class="ttl">リックのMP「9」と「最大20」</span><span class="st wait">判断待ち</span><span class="st">手がかり e361d6d2</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>e361d6d2 の新本文に「リックのMPは通常最大値が9だが超過している、原液のせいだ。」とありますが、同ファイル GM L5 に「C1：リックの最大MPは20（数字はHOに書かない）」、PC4_① L155 に「通常の最大値より大きく回復する」とあります。「9」は意図的な新設定か、誤記（「通常値・回復前の値」または「最大値20」など）かご確認ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>新しい本文（MPが9を超えている）を入れました。同じファイルのGM注には「リックの最大MPは20」が残っています。</div>
+<div class="row"><span class="lab">おすすめ</span><br>本文を「リックのMPは通常9だが、原液のせいで最大20まで押し上げられている」に直すと、両方の記述が両立します（誤記なら「20」へ）。ゲーム側の数値は触っていません。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>PC4_② 気をつけること（いまの本文）</summary><pre>### ▼ 気をつけること
+- リックのMPは通常最大値が9だが超過している、原液のせいだ。
+- 全員の所持品は公開されている。俺の魔力薬が無くなっている。
+- ライブセレクション時
+なぜ様子を見たのかと聞かれたら：「様子を見るも選択肢なのか、試してみた」と言えばいい。</pre></details>
+<details><summary>同じファイルのGM注（最大MPの行）</summary><pre>&gt; 配布：P3の分断のあと、「様子を見る」の組の隙間の場面で、エドガーにだけ。読み合わせ《様子を見る・隙間》（R06）でリックが「外から壊してくれ」と言い、エドガーに声をかけたあと（お前一人だけのときは、《一人だけの組》でリックと話したあと）。
+&gt; 【GM】2026-11-01 作者の指示（追記6。§11-1）：支給台帳の写しは無いので、「あとで調べられると分かる」の一行を所持品欄の話に直した。
+&gt; 【GM】2026-11-01 追記6-1（作者の答え。`25_fix_20261101/SPEC_20261101_add1.md`）：P3のLSでエドガーは「様子を見る」に固定（旧「抜け道（C）に固定」）。様子を見た組が先に救難所の壁の隙間へ着く。下の「P3の抜け道にいたのが誰か」を「P3で様子を見たのが誰か」に直し、聞かれたときのメタの言い訳（「様子を見るも選択肢なのか試した」）を足した。→ C1：リックの最大MPは20（数字はHOに書かない）。
+&gt; 【GM】r4 2026-10-21（`13_kyuoukoku/r4/DESIGN_R4.md` §2・§8-1 Q1）：渡すのはP3に一本化した（P4の「最初に入る・魔力薬を使う」は廃止）。エドガーは隙間ごしに首の線を見てから渡す。リックはその場で飲む（ボタンなし・確定）。旧ファイル名の「P4」は「P3」にした。
+&gt; 【GM】2026-11-03 T1（`work_claude_opus_20261015/42_playtest_20261103/決定事項_20261103夜.md`）：N5・#8 同じ線：ユーリのときに黒くなっていった順（首→肩→腕）を一行足した（HO①と同じ事実）。</pre></details>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：edit（状態：applied）
+対象：GM資料/HO原本/PC4_エドガー_②追加HO_P3《黒い痕》.md
+手がかりの行：気をつけること</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q5</span><span class="ttl">《攻撃優先順位》の②の言い方と《誘引》</span><span class="st wait">判断待ち</span><span class="st">手がかり A4</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>(1) 03_調査カード_下層.md L92「②魔法的な力で能力を向上させたもの」はプレイヤーが『詠唱者』と誤読しないよう「能力を向上させられたもの（バフを受けた者）」等へ微修正してよいか。(2) 07_技能・専有カード.md の《誘引》セクションは《魔力強化》ベースへ統合・廃止するか。(3) ヴィオラがP7等で自分自身へ能力強化を使った場合に②対象となるかをご確認ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>カード《攻撃優先順位》は①〜③のまま（②は「魔法的な力で能力を向上させたもの」）。GM原稿4箇所を①〜③に合わせました。</div>
+<div class="row"><span class="lab">おすすめ</span><br>(1) ②を「能力を向上させられたもの（バフを受けた者。詠唱者ではない）」に直すことをおすすめします（プレイヤーが詠唱者と読むのを防げます）。(2)《誘引》は《魔力強化》に統合して1枚に。(3) ヴィオラが自分に使った場合も②に当たります（「向上させられた者」が本人になるため）。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>03《攻撃優先順位》（いまの本文）</summary><pre>**《攻撃優先順位》**　深度1
+&gt; 追跡者の攻撃優先順位
+①自分に致命傷を与えた者、またはその武器の所持者(守護者は記憶を蓄積し、危険度判定を行う)
+②魔法的な力で能力を向上させたもの
+③大きな音を立てたもの
+&gt; 【共有効果】最終戦：誰が注意を引くかを操れる。前に立つ者が受け止め、失敗した回の被害を1回防ぐ。</pre></details>
+<details><summary>07《誘引》（統合する相手）</summary><pre>## ヴィオラの《誘引》（ヴィオラだけ・追加HO③のあと）【2026-11-01】
+
+**《誘引》**　MP3。P7から、選ぶフェイズに使える（ヴィオラだけ）
+&gt; リックに印をかける。リックの行動は物音が大きくなり（+5）、追跡者が寄ってきやすい。追跡者と出会えば、リックが真っ先に狙われ、最初の一撃を受けるはず…
+&gt; 印は、使ったフェイズの探索のあいだだけ（攻撃魔法の魔力を、リックにまとわせる）。最初の一撃は HP−3。同じ部屋の仲間も、遭遇のクイズに答える。どこからでも使える（リックと同じ部屋でなくてよい）。
+&gt; 使ったことは、あなたの個人の記録にだけ残る。ただし MP−3 は普通に記録に残る（全員が見られる記録に「ヴィオラ：MP−3」。技能の名は出ない）。</pre></details>
+<details><summary>判断の整理（こちらの下書き・原文）</summary><pre>### 7.2 A4：《攻撃優先順位》と魔力強化バフ対象者の整合
+- 正本仕様（[03_調査カード_下層.md L89-93](file:///C:/00_%E3%80%90%E5%89%B5%E4%BD%9C%E3%80%91%E4%B8%80%E6%99%82%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/_%E3%83%9E%E3%83%80%E3%83%9F%E3%82%B9%E6%94%B9%E8%A8%82_20261004/%E3%83%80%E3%83%B3%E3%82%B8%E3%83%A7%E3%83%B3%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%B6%E3%83%BB%E3%83%9E%E3%83%BC%E3%83%80%E3%83%BC/05_%E5%AE%8C%E6%88%90%E7%89%88/GM%E8%B3%87%E6%96%99/%E3%82%AB%E3%83%BC%E3%83%89%E5%8E%9F%E6%9C%AC%EF%BC%88GM%E3%83%A1%E3%83%A2%E3%81%A4%E3%81%8D%EF%BC%89/03_%E8%AA%BF%E6%9F%BB%E3%82%AB%E3%83%BC%E3%83%89_%E4%B8%8B%E5%B1%A4.md#L89-L93) および `PC2_ヴィオラ_③` L50）：
+  `①致命傷を与えた者（またはその武器の所持者）` → `②魔法的な力で能力を向上させたもの（＝被バフ者、詠唱者ではない）` → `③大きな音を立てたもの`
+- 旧4段階表記（①致命傷の剣 ②引きつける ③いま追っている一人 ④攻撃魔法を使った人）が残る以下4箇所のみ、上記①〜③＋被バフ者注記へ最小整合する：
+  1. `07_技能・専有カード.md` GM L143（`【GM】追跡者の決まり` 注記）
+  2. `GM資料/正本/真相.md` GM L365（優先順位行のみ）
+  3. `GM資料/正本/手がかりマップ.md` L176（`INFO-A-PRIORITY` 要約行のみ）
+  4. `GM資料/追跡者の位置の仕様案（制作者向け）.md` L44-52（2. 最初の一撃対象）
+- `GM資料/ライブセレクション一覧と結果表（GM）.md` L257 は共有効果テキストのみで旧4段階表記を含まないため **変更不要**。
+
+---</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q6</span><span class="ttl">ゲーム側に写すべき差分（6項目）</span><span class="st wait">判断待ち</span><span class="st">手がかり 次工程の確認</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>別フェーズでのコード/ルール同期用確認：(a) PC2目的変更（魔導核持ち帰り・個数表記削除）、(b) PC3大成功閾値 1150G→1200G、(c) PC3スキル変更（斥候削除・鑑定MP0・看破・限定解除2倍）、(d) P5お礼とP6〜P9お礼統合時のゲーム分岐、(e) 08カード閾値4件（器用6/器用8/頭脳5/頭脳7）のゲーム判定実装、(f) 02《夜の縄》（牢屋表現）と07《鈴の夜》・02 GM注（椅子/二重結び）の語彙整合、について次工程の実装要否をご確認ください。</div>
+<div class="row"><span class="lab">6項目の内訳</span></div>
+<table><tr><th>項目</th><th>原稿の状態</th><th>ゲーム側</th></tr>
+<tr><td>(a) PC2の目的</td><td>2項目へ（研究及び魔道具／討伐・魔導核持ち帰り）</td><td>未反映</td></tr>
+<tr><td>(b) PC3の大成功</td><td>1200G以上（旧1150G）</td><td>未反映</td></tr>
+<tr><td>(c) PC3のスキル</td><td>斥候を削除・鑑定MP0・人を見る目→看破・限定解除は能力値2倍</td><td>未反映</td></tr>
+<tr><td>(d) P5〜P9のお礼の統合</td><td>1本に統合済み（Q7）</td><td>分岐の実装有無</td></tr>
+<tr><td>(e) 08の閾値 4件</td><td>GM注に保存（配布版に出ていない）</td><td>未実装</td></tr>
+<tr><td>(f) 語彙の整合</td><td>02《夜の縄》と07《鈴の夜》（椅子／二重結び）</td><td>—</td></tr>
+</table>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：edit（状態：applied）
+対象：GM資料/HO原本/PC2_ヴィオラ_①事前HO.md
+手がかりの行：あなたの目的
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/HO原本/PC3_ミクシィ_①事前HO.md
+手がかりの行：あなたの目的
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/HO原本/PC3_ミクシィ_①事前HO.md
+手がかりの行：精密解除（MP1）：罠・鍵の器用の判定+2（このフェイズ）。
+
+―――
+
+指示の種類：free（状態：transferred）
+対象：GM資料/カード原本（GMメモつき）/06_分断LS・同行イベントのカード.md
+手がかりの行：リック「あの夜の……。悪い、正直あんまり覚えてないんだ。あの夜は、ずっと走ってたから。……生きててくれて、よかった」⏎
+作者の言葉：
+P6-9と統合する
+
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/02_調査カード_上層.md
+手がかりの行：ワークおじさんの帳面。「宝物庫の扉の鈴が鳴った。客、椅子に縄で。客『迷い込んだだけよ』」「朝、縄は切れて椅子は空。柱に客の字で『㌧クスw』」「副長『次は二重に結ぶ』」。⏎
+いまの原稿が置き換えた文（変更前）：
+**《夜の縄》**　深度1
+&gt; ワークおじさんの帳面。「宝物庫の扉の鈴が鳴った。客、椅子に縄で。客『迷い込んだだけよ』」「朝、縄は切れて椅子は空。柱に客の字で『㌧クスw』」「副長『次は二重に結ぶ』」。
+&gt; 【GM】INFO-K-U1-2。T2 2026-11-03：約90字に短くした（団長が黙って見ていた・ライーンの「…はい」は外した。ミクシィだけの《鈴の夜》に残る）。共有可。「客」は若い頃のミクシィ。「二重に結ばなかった」が下層《会議録》《副長の覚え書き》の副長の自責につながる。『㌧クスw』は逃げる客の書き置き（古いネットミーム。ミームを使うのはミクシィだけ）。
+&gt; 【GM】ミクシィが調べたときは、同時にミクシィにだけ INFO-M-U1-2《鈴の夜》（カード07。共有不可）。《㌧クスの意味》はミクシィの追加HOへ移した（T1）。
+入れた文（変更後）：
+ワークおじさんの帳面
+「宝物庫に忍び込もうとした客を捕まえた」
+「朝、縄は切れて牢屋は空。柱に客の字で『㌧クスw』」
+&gt; 【GM】INFO-K-U1-2。T2 2026-11-03：約90字に短くした（団長が黙って見ていた・ライーンの「…はい」は外した。ミクシィだけの《鈴の夜》に残る）。共有可。「客」は若い頃のミクシィ。「二重に結ばなかった」が下層《会議録》《副長の覚え書き》の副長の自責につながる。『㌧クスw』は逃げる客の書き置き（古いネットミーム。ミームを使うのはミクシィだけ）。
+&gt; 【GM】ミクシィが調べたときは、同時にミクシィにだけ INFO-M-U1-2《鈴の夜》（カード07。共有不可）。《㌧クスの意味》はミクシィの追加HOへ移した（T1）。
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度4《救出後の摂取》
+いまの原稿が置き換えた文（変更前）：
+**深度4《救出後の摂取》**
+&gt; 救出のあと、リックが自分で口にした薬は記録にも所持品にもない。救難所の壁の隙間ごしに受け取って、その場で飲んだ魔力薬の一本が、症状より前の唯一の摂取物。
+&gt; 【GM】INFO-E-NOOTHER（r2：「救出時に」を「救難所で」に）。筋6（B2）。r4：いつもP3（中央封鎖路の崩落のとき）の隙間の一本。
+入れた文（変更後）：
+**深度4《救出後の摂取》**
+&gt;握りつぶされた最後の頁
+「お前だったんだな。
+GG EZ　町を頼む」
+
+この情報の閾値を器用8以上に
+&gt; 【GM】INFO-E-NOOTHER（r2：「救出時に」を「救難所で」に）。筋6（B2）。r4：いつもP3（中央封鎖路の崩落のとき）の隙間の一本。
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度3《症状メモ》
+いまの原稿が置き換えた文（変更前）：
+**深度3《症状メモ》**
+&gt; リックのメモ。「入口のあの黒いの、腕の色が誰かに似てる。言ったら怒るな、たぶん」「魔力、もう空。Sadge」「隙間から薬をもらった。籠手のでかい指で、瓶をつまんでよこした。一本で魔力が全部戻った。OPすぎ lol」「門の前、少し寒い」「寒気が抜けない。体の奥だけ、ときどき熱い」「指先が震える。剣に魔力を通すと、止まらなくなりそうになる」。
+&gt; 最後の行だけ、字が乱れている。「このままじゃ、町へは帰れない」。
+&gt; その次の頁が一枚、破り取られている。
+&gt; （はじめの三行は救難所にいたころ、あとの三行はP6・P7・P8の記述。最後の行には日付がない）
+&gt; 【GM】T2 2026-11-03（作者の決定 N7・#9）：①二行目に「籠手のでかい指で、瓶をつまんでよこした」を足した（エドガーの特徴。名は書かない。4人の中で籠手は一人だけ。R06 の渡す場面に「籠手のまま」をそろえるのは T3）。②一行目に「入口のあの黒いの、腕の色が誰かに似てる。言ったら怒るな、たぶん」を足した（エドガーが黒い人間だという伏線。名は書かない。リックの口調は案。作者の確認待ち）。
+&gt; 【GM】INFO-E-SYMPTOMS（r2で書き直し。r3：はじめの二行にリックの海外ゲーマースラング「Sadge」「OPすぎ lol」を足した。症状が進んだあとの行には足していない）。筋5（第二段階）・6・8。B1。破られた頁＝《置き手紙めいた一行》の紙（最後に書いた行の次の頁）。症状はP6から日を追って出ていた＝P9に急に決めた死ではない。旧「破れ目の位置」「字に乱れがない」の読みは廃止。r2c（作者決定 D-20261019-014）：はじめの二行（「魔力、もう空」→救出のあと「誰かが薬をくれた。一本で魔力が全部戻った」）を足した。筋7（C-G。旧INFO-P4-WORDの系統を移した。仮）。普通の魔力薬はMP+4（品の一覧）なので、ふつうの薬ではない。誰がくれたかは書いていない（r4：二行目を「隙間から薬をもらった」に。P3の組分け〈エドガーは必ずC組【2026-11-01：今は様子を見た組】〉・C組の同行者の証言・《所持品の見比べ》とつなぐのはプレイヤー。「回復薬」とは書かない）。エドガーがP9で一人なら手帳ごと抜き取れる（そのときも「誰が毒を渡したか」の道は3つ残る：手がかりマップ5-3）。
+入れた文（変更後）：
+**深度3《症状メモ》**
+&gt; リックのメモ
+「入口のあの黒いの、誰かに似てるって言ったら怒るな、たぶんXD」
+「魔力、もう空。Sadge」
+「隙間から薬をもらった。一本で魔力が全部戻った。OPすぎ lol」
+「門の前、少し寒い」
+「寒気が抜けない。首に違和感を感じ続けている」
+「堪らなく街へ生きて帰りたい…。ユーリの気持ちが良く分かった。だけどきっともう…」
+&gt; 最後の行だけ字が乱れている。次の頁が一枚、破り取られている。
+&gt; （前半三行は救難所、後半三行はP6〜P8の記述。最後の行は日付なし）
+
+
+この情報の閾値を器用6以上に
+&gt; 【GM】T2 2026-11-03（作者の決定 N7・#9）：①二行目に「籠手のでかい指で、瓶をつまんでよこした」を足した（エドガーの特徴。名は書かない。4人の中で籠手は一人だけ。R06 の渡す場面に「籠手のまま」をそろえるのは T3）。②一行目に「入口のあの黒いの、腕の色が誰かに似てる。言ったら怒るな、たぶん」を足した（エドガーが黒い人間だという伏線。名は書かない。リックの口調は案。作者の確認待ち）。
+&gt; 【GM】INFO-E-SYMPTOMS（r2で書き直し。r3：はじめの二行にリックの海外ゲーマースラング「Sadge」「OPすぎ lol」を足した。症状が進んだあとの行には足していない）。筋5（第二段階）・6・8。B1。破られた頁＝《置き手紙めいた一行》の紙（最後に書いた行の次の頁）。症状はP6から日を追って出ていた＝P9に急に決めた死ではない。旧「破れ目の位置」「字に乱れがない」の読みは廃止。r2c（作者決定 D-20261019-014）：はじめの二行（「魔力、もう空」→救出のあと「誰かが薬をくれた。一本で魔力が全部戻った」）を足した。筋7（C-G。旧INFO-P4-WORDの系統を移した。仮）。普通の魔力薬はMP+4（品の一覧）なので、ふつうの薬ではない。誰がくれたかは書いていない（r4：二行目を「隙間から薬をもらった」に。P3の組分け〈エドガーは必ずC組【2026-11-01：今は様子を見た組】〉・C組の同行者の証言・《所持品の見比べ》とつなぐのはプレイヤー。「回復薬」とは書かない）。エドガーがP9で一人なら手帳ごと抜き取れる（そのときも「誰が毒を渡したか」の道は3つ残る：手がかりマップ5-3）。
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度3《事故痕の違和感》
+いまの原稿が置き換えた文（変更前）：
+**深度3《事故痕の違和感》**
+&gt; 事故を思わせる痕跡はあるが、遺体の状態と一致しない。
+&gt; 【GM】エドガーが素材を置いた場合は、続けて「追加分析：一部の痕跡は、別の場所から持ち込まれた可能性がある。」
+入れた文（変更後）：
+**深度3《事故痕の違和感》**
+&gt; 事故を思わせる痕跡はあるが、遺体の状態と一致しない。
+
+この情報の閾値を頭脳５以上に
+&gt; 【GM】エドガーが素材を置いた場合は、続けて「追加分析：一部の痕跡は、別の場所から持ち込まれた可能性がある。」
+
+―――
+
+指示の種類：edit（状態：applied）
+対象：GM資料/カード原本（GMメモつき）/08_事件調査カード（P10・P11）.md
+手がかりの行：深度4《現場と探索履歴の不整合》
+いまの原稿が置き換えた文（変更前）：
+**深度4《現場と探索履歴の不整合》**
+&gt; 【GM】エドガーが素材を置いた場合のみこのカード。置かなかった場合は「人為的な痕跡は確認されなかった」と表示し、カードは出ない。
+&gt; 現場の物質の産地は、そこを実際に探索した者しか持ち出せない区画だった。
+入れた文（変更後）：
+**深度4《現場と探索履歴の不整合》**
+&gt; 救出前、リック達先遣隊の所持品は尽きていた。
+もし何か摂取したとしたら、最初に会った者が渡したはずだろう。
+
+
+この情報の閾値を頭脳７以上に
+&gt; 【GM】エドガーが素材を置いた場合のみこのカード。置かなかった場合は「人為的な痕跡は確認されなかった」と表示し、カードは出ない。</pre></details>
+</div>
+<div class="q">
+<div class="qh"><span class="no">Q7</span><span class="ttl">06 のお礼をP5でも長い返しにするか</span><span class="st wait">判断待ち</span><span class="st">手がかり d48843f1</span></div>
+<div class="row"><span class="lab">ご確認いただきたいこと（原文）</span><br>06の「同行中 ミレイユのお礼」を作者の指示どおり P5〜P9 の1本に統合しました。統合前の「P5で言ったとき」（リックがまだ気づいていない回）の短い返しは GM注に控えとして残しています。P5でも統合後の長い返し（エドガーの家の話・『俺に何かあったら、エドガーを頼む』）を使ってよいか、P5だけ短い返しに戻すかをご教示ください。</div>
+<div class="row"><span class="lab">いまの状態</span><br>06 の「同行中 ミレイユのお礼」を P5〜P9 の1本に統合しました。P5 で言ったときの短い返しは GM注に控えとして残しています。</div>
+<div class="row"><span class="lab">おすすめ</span><br>P5 は短い返しのまま、P6〜P9 で長い返しにすることをおすすめします（P5 では互いに核心へ触れていないため）。分岐は1行で足ります。</div>
+<div class="row"><span class="lab">根拠の原文（いまの原稿）</span></div>
+<details><summary>06 同行中 ミレイユのお礼（いまの本文・GM側）</summary><pre>## 同行中　ミレイユのお礼【作者決定 2026-10-17／2026-11-01 二人きりのときだけに】
+
+- 出る時【2026-11-01 作者の修正事項 → D7】：ミレイユがリックの同行主で、ほかのPCが同じ部屋にいなかった探索（二人きり）の、**帰還フェイズ**。ミレイユの画面にだけ。旧「P5〜P8、同じ場所にいるときの作戦会議」は廃止（作者「ミレイユは２人きりの時しかお礼は言えない」）。
+- 選択肢：「お礼を言う：今、言う／まだ言わない」。言ったら以後は出ない。言ったかどうかと、言ったフェイズを記録してエンディングに渡す。言えば、追加HO③《二人きりで》の目標を達成。
+- 言ったとき、ミレイユとリックの二人だけの短い場面を出す（ミレイユの台詞は本人が言う）。
+
+**P5〜P9で言ったとき**（リックは気づき始めている）
+&gt; リック「……そうか。あの夜の」
+&gt; （リックは少し黙った）
+&gt; リック「……ありがとな」
+&gt; リック「ngl、それ、エドガーにも言ってやってくれ。あいつ、礼を言われると固まるけど」
+&gt; リック「あいつの家さ、村じゃ昔から爪はじきだったんだ。じいさんの代も、その前も。物がなくなると、まずあいつの家が疑われる」
+&gt; リック「あいつの家の者は、冬でも日に焼けたみたいな色をしててさ。それだけで、話す前から決めつけられる」
+&gt; リック「あいつの家だけじゃない。昔からそういう扱いをされてる家が、あちこちにあるらしい。わけは誰もはっきり言わない。あいつは何も盗ってないのにな」
+&gt; リック「だからあいつ、自分のことは話さない。俺も、あいつの口から聞いたのはそれくらいだ」
+&gt; （リックは首の後ろに手をやって、すぐに下ろした）
+&gt; リック「……俺に何かあったら、エドガーを頼む。idk、なんとなく言っときたくなった」
+&gt; リック「今の、あいつには内緒な。thx」
+
+&gt; 【GM】2026-11-15 統合（作者指示 d48843f1「P6-9と統合する」）：旧「P5で言ったとき」の返し（控え）は下の二行。統合後は、P5〜P9 のどれで言ってもこの節の返しを使う。
+&gt; リック「あの夜の……。悪い、正直あんまり覚えてないんだ。あの夜は、ずっと走ってたから。……生きててくれて、よかった」
+&gt; リック「np。帰ったら、うまい飯でもおごってくれ」
+
+- 【r2】ミレイユは十二年前に二人に助けられたことを強く覚えているが、リックとエドガーはあまり覚えていない（大勢を救った中の一人）。リックの返事もその程度にとどめる。</pre></details>
+<details><summary>作者の指示の原文（そのまま）</summary><pre>指示の種類：free（状態：transferred）
+対象：GM資料/カード原本（GMメモつき）/06_分断LS・同行イベントのカード.md
+手がかりの行：リック「あの夜の……。悪い、正直あんまり覚えてないんだ。あの夜は、ずっと走ってたから。……生きててくれて、よかった」⏎
+作者の言葉：
+P6-9と統合する
+</pre></details>
+</div>
+</section>
+<section id="s4"><h2>4. いまの文量</h2>
+<p class="note">字数は空白・記号を除いた数。PC1人あたり。想定プレイ時間は 240分（4時間）。読み合わせの分岐（同じ回に1つだけ起きる選択）は<b>1回分の平均</b>で数えています。</p>
+<div class="cards">
+<div class="card"><div class="t">共通HO</div><div class="v">512字</div><small>全PCが読む</small></div>
+<div class="card"><div class="t">カード 全部</div><div class="v">16,330字</div><small>181枚（最後に全部見る前提の上限）</small></div>
+<div class="card"><div class="t">読み合わせ 本編</div><div class="v">19,387字</div><small>1回分（ED以外）</small></div>
+<div class="card"><div class="t">読み合わせ ED</div><div class="v">10,146字</div><small>真相・ED・後日談・1回分</small></div>
+<div class="card"><div class="t">ルールの文</div><div class="v">2,691字</div><small>はじめに・進行表・スキル一覧・P10のルール</small></div>
+<div class="card"><div class="t">画面だけの文</div><div class="v">18,702字</div><small>紙の版に無いがプレイヤーが読むもの</small></div>
+</div>
+<h3>PC別（HOは「共通HOを含む／含まない」を分けて書きます）</h3>
+<table><tr><th>PC</th><th>自分のHO①<br><small>共通HOを含まない</small></th><th>初期HO<br><small>＝共通HO＋HO①</small></th><th>追加HO<br><small>共通HOを含まない</small></th><th>本体<br><small>共通HO＋自HO＋全カード</small></th><th>全部<br><small>＋読み合わせ・ルール・画面</small></th><th>1時間<br><small>本体÷時間</small></th></tr>
+<tr><td>PC1</td><td class="k">2,723</td><td class="k">3,235</td><td class="k">1,534</td><td class="k">21,099</td><td class="k">72,025</td><td class="k">5,275</td></tr>
+<tr><td>PC2</td><td class="k">2,637</td><td class="k">3,149</td><td class="k">2,752</td><td class="k">22,231</td><td class="k">73,157</td><td class="k">5,558</td></tr>
+<tr><td>PC3</td><td class="k">2,907</td><td class="k">3,419</td><td class="k">4,226</td><td class="k">23,975</td><td class="k">74,901</td><td class="k">5,994</td></tr>
+<tr><td>PC4</td><td class="k">4,341</td><td class="k">4,853</td><td class="k">1,853</td><td class="k">23,036</td><td class="k">73,962</td><td class="k">5,759</td></tr>
+<tr><td><b>平均</b></td><td class="k">—</td><td class="k">3,664</td><td class="k">2,591</td><td class="k"><b>22,585</b></td><td class="k"><b>73,511</b></td><td class="k"><b>5,646</b></td></tr>
+</table>
+<p><small>本体は 21,099〜23,975字（PCによる差）。1時間あたりは本体 ÷ 4時間。全部は1時間あたり 18,378字。</small></p>
+<h3>読む時間にすると</h3>
+<table><tr><th>読み方</th><th>本体を読む時間</th><th>プレイ時間に占める割合</th></tr>
+<tr><td>速い（600字/分）</td><td class="k">38分</td><td class="k">16%</td></tr>
+<tr><td>ふつう（500字/分）</td><td class="k">45分</td><td class="k">19%</td></tr>
+<tr><td>ゆっくり（400字/分）</td><td class="k">56分</td><td class="k">23%</td></tr>
+</table>
+<p><small>「読む時間」は黙読の時間で、議論・調査・読み合わせの時間は含みません。読み合わせ（本編）は 19,387字を300字/分で読むと約65分、EDは 10,146字で約34分です（声に出して読む速さの目安）。</small></p>
+</section>
+<section id="s5"><h2>5. 前回（11/15 00:45）からの差</h2>
+<p class="note">変更前の控え（05_完成版）と今の原稿を、同じ数え方で数え直した差です。範囲ごとに「ファイル別の差の合計」と「数え直しの結果の差」が一致するかを照合しました。</p>
+<table><tr><th>範囲</th><th>前回</th><th>今回</th><th>差</th><th>照合</th></tr>
+<tr><td>共通HO</td><td class="k">512</td><td class="k">512</td><td class="k flat">±0</td><td class="k">✓</td></tr>
+<tr><td>PC1 のHO①（初期・共通HOを除く）</td><td class="k">2,694</td><td class="k">2,723</td><td class="k up">＋29</td><td class="k">✓</td></tr>
+<tr><td>PC1 の追加HO（合計）</td><td class="k">2,023</td><td class="k">1,534</td><td class="k down">−489</td><td class="k">✓</td></tr>
+<tr><td>PC2 のHO①（初期・共通HOを除く）</td><td class="k">4,034</td><td class="k">2,637</td><td class="k down">−1,397</td><td class="k">✓</td></tr>
+<tr><td>PC2 の追加HO（合計）</td><td class="k">3,980</td><td class="k">2,752</td><td class="k down">−1,228</td><td class="k">✓</td></tr>
+<tr><td>PC3 のHO①（初期・共通HOを除く）</td><td class="k">3,684</td><td class="k">2,907</td><td class="k down">−777</td><td class="k">✓</td></tr>
+<tr><td>PC3 の追加HO（合計）</td><td class="k">5,750</td><td class="k">4,226</td><td class="k down">−1,524</td><td class="k">✓</td></tr>
+<tr><td>PC4 のHO①（初期・共通HOを除く）</td><td class="k">5,127</td><td class="k">4,341</td><td class="k down">−786</td><td class="k">✓</td></tr>
+<tr><td>PC4 の追加HO（合計）</td><td class="k">3,201</td><td class="k">1,853</td><td class="k down">−1,348</td><td class="k">✓</td></tr>
+<tr><td>カード 全部</td><td class="k">19,911</td><td class="k">16,330</td><td class="k down">−3,581</td><td class="k">✓</td></tr>
+<tr><td>読み合わせ 本編（1回分）</td><td class="k">19,385</td><td class="k">19,387</td><td class="k up">＋2</td><td class="k">✓</td></tr>
+<tr><td>読み合わせ ED（1回分）</td><td class="k">10,146</td><td class="k">10,146</td><td class="k flat">±0</td><td class="k">✓</td></tr>
+<tr><td>ルールの文</td><td class="k">2,640</td><td class="k">2,691</td><td class="k up">＋51</td><td class="k">✓</td></tr>
+<tr><td>画面だけの文</td><td class="k">18,702</td><td class="k">18,702</td><td class="k flat">±0</td><td class="k">✓</td></tr>
+</table>
+<div class="okbox">足し引きの照合：範囲 14件のうち、合わない 0件。カードは −3,581字・−35枚（216→181枚）。</div>
+<h3>変わったファイル（30件・差の大きい順）</h3>
+<p><small>数えたファイル 74件のうち、変わったのは 30件。残り 44件は前回と同じ字数です。</small></p>
+<table><tr><th>ファイル</th><th>範囲</th><th>前回</th><th>今回</th><th>差</th></tr>
+<tr><td>プレイヤー配布/カード/03_調査カード_下層.md</td><td>カード</td><td class="k">4,939</td><td class="k">3,504</td><td class="k down">−1,435</td></tr>
+<tr><td>プレイヤー配布/HO/PC2_ヴィオラ/PC2_ヴィオラ_①事前HO.md</td><td>PCのHO</td><td class="k">4,034</td><td class="k">2,637</td><td class="k down">−1,397</td></tr>
+<tr><td>プレイヤー配布/カード/02_調査カード_上層.md</td><td>カード</td><td class="k">3,037</td><td class="k">2,029</td><td class="k down">−1,008</td></tr>
+<tr><td>プレイヤー配布/HO/PC4_エドガー/PC4_エドガー_①事前HO.md</td><td>PCのHO</td><td class="k">5,127</td><td class="k">4,341</td><td class="k down">−786</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_①事前HO.md</td><td>PCのHO</td><td class="k">3,684</td><td class="k">2,907</td><td class="k down">−777</td></tr>
+<tr><td>プレイヤー配布/HO/PC4_エドガー/PC4_エドガー_②追加HO_P3《黒い痕》.md</td><td>PCのHO</td><td class="k">1,261</td><td class="k">612</td><td class="k down">−649</td></tr>
+<tr><td>プレイヤー配布/HO/PC2_ヴィオラ/PC2_ヴィオラ_③追加HO_P6《今できること》.md</td><td>PCのHO</td><td class="k">1,529</td><td class="k">903</td><td class="k down">−626</td></tr>
+<tr><td>プレイヤー配布/カード/08_事件調査カード（P10・P11）.md</td><td>カード</td><td class="k">1,883</td><td class="k">1,321</td><td class="k down">−562</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_②追加HO《名前の記憶》.md</td><td>PCのHO</td><td class="k">1,493</td><td class="k">1,073</td><td class="k down">−420</td></tr>
+<tr><td>プレイヤー配布/HO/PC4_エドガー/PC4_エドガー_④追加HO_P7《同じ積み方》.md</td><td>PCのHO</td><td class="k">1,018</td><td class="k">611</td><td class="k down">−407</td></tr>
+<tr><td>プレイヤー配布/00_はじめに.md</td><td>ルールの文</td><td class="k">204</td><td class="k">606</td><td class="k up">＋402</td></tr>
+<tr><td>プレイヤー配布/共通/フェイズ進行表（プレイヤー向け）.md</td><td>ルールの文</td><td class="k">446</td><td class="k">44</td><td class="k down">−402</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_⑤追加HO《詰所の掛け板》.md</td><td>PCのHO</td><td class="k">1,529</td><td class="k">1,165</td><td class="k down">−364</td></tr>
+<tr><td>プレイヤー配布/HO/PC1_ミレイユ/PC1_ミレイユ_③追加HO_P4《二人きりで》.md</td><td>PCのHO</td><td class="k">580</td><td class="k">234</td><td class="k down">−346</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_④追加HO《柱の欠け》.md</td><td>PCのHO</td><td class="k">1,416</td><td class="k">1,076</td><td class="k down">−340</td></tr>
+<tr><td>プレイヤー配布/カード/06_分断LS・同行イベントのカード.md</td><td>カード</td><td class="k">2,353</td><td class="k">2,020</td><td class="k down">−333</td></tr>
+<tr><td>プレイヤー配布/HO/PC2_ヴィオラ/PC2_ヴィオラ_②追加HO《黒い反応》.md</td><td>PCのHO</td><td class="k">475</td><td class="k">178</td><td class="k down">−297</td></tr>
+<tr><td>プレイヤー配布/HO/PC4_エドガー/PC4_エドガー_③追加HO_P9《祭壇の陰で》.md</td><td>PCのHO</td><td class="k">922</td><td class="k">630</td><td class="k down">−292</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_⑥追加HO《手当て部屋》.md</td><td>PCのHO</td><td class="k">805</td><td class="k">521</td><td class="k down">−284</td></tr>
+<tr><td>プレイヤー配布/HO/PC1_ミレイユ/PC1_ミレイユ_②追加HO_P4《再会》.md</td><td>PCのHO</td><td class="k">510</td><td class="k">328</td><td class="k down">−182</td></tr>
+<tr><td>プレイヤー配布/HO/PC2_ヴィオラ/PC2_ヴィオラ_④追加HO《書庫の続き》.md</td><td>PCのHO</td><td class="k">1,480</td><td class="k">1,315</td><td class="k down">−165</td></tr>
+<tr><td>プレイヤー配布/カード/05_記録片カード（部屋LSの報酬）.md</td><td>カード</td><td class="k">843</td><td class="k">688</td><td class="k down">−155</td></tr>
+<tr><td>プレイヤー配布/HO/PC2_ヴィオラ/PC2_ヴィオラ_⑤追加HO_P10《リックの死因》.md</td><td>PCのHO</td><td class="k">496</td><td class="k">356</td><td class="k down">−140</td></tr>
+<tr><td>プレイヤー配布/HO/PC3_ミクシィ/PC3_ミクシィ_③追加HO_P7《あのあとの砦》.md</td><td>PCのHO</td><td class="k">507</td><td class="k">391</td><td class="k down">−116</td></tr>
+<tr><td>プレイヤー配布/P10で配る/新しいルール_リック・チームズの死.md</td><td>ルールの文</td><td class="k">432</td><td class="k">483</td><td class="k up">＋51</td></tr>
+<tr><td>プレイヤー配布/カード/04_秘密区画カード.md</td><td>カード</td><td class="k">361</td><td class="k">317</td><td class="k down">−44</td></tr>
+<tr><td>プレイヤー配布/カード/07_技能・専有カード.md</td><td>カード</td><td class="k">4,151</td><td class="k">4,107</td><td class="k down">−44</td></tr>
+<tr><td>プレイヤー配布/HO/PC1_ミレイユ/PC1_ミレイユ_④追加HO_P7《前室の図》.md</td><td>PCのHO</td><td class="k">933</td><td class="k">972</td><td class="k up">＋39</td></tr>
+<tr><td>プレイヤー配布/HO/PC1_ミレイユ/PC1_ミレイユ_①事前HO.md</td><td>PCのHO</td><td class="k">2,694</td><td class="k">2,723</td><td class="k up">＋29</td></tr>
+<tr><td>プレイヤー配布/読み合わせ/R01_P1_入口大広間_頭上の襲撃.md</td><td>読み合わせ</td><td class="k">436</td><td class="k">438</td><td class="k up">＋2</td></tr>
+</table>
+</section>
+<section id="s6"><h2>6. カードの目録（216→181）</h2>
+<p class="note">カードの枚数は、仕分け表（数えるための一覧）の単位です。ファイルごとに数え方が違い（部屋の数・品の数・カードの題名の数）、今回の増減は<b>原稿から消えたカードの題名の数</b>をそのファイルの枚数に当てました。消えた題名 35件は、すべて作者の削除・置き換えの指示に由来します（下の表で1件ずつ照合）。</p>
+<table><tr><th>ファイル</th><th>単位（前回）</th><th>単位（今回）</th><th>差</th><th>題名の数（前回→今回）</th></tr>
+<tr><td>01_部屋公開文.md</td><td class="k">28</td><td class="k">28</td><td class="k flat">±0</td><td class="k">0→0</td></tr>
+<tr><td>02_調査カード_上層.md</td><td class="k">28</td><td class="k">19</td><td class="k flat">＋9</td><td class="k">28→19</td></tr>
+<tr><td>03_調査カード_下層.md</td><td class="k">46</td><td class="k">29</td><td class="k flat">＋17</td><td class="k">43→26</td></tr>
+<tr><td>04_秘密区画カード.md</td><td class="k">2</td><td class="k">2</td><td class="k flat">±0</td><td class="k">2→2</td></tr>
+<tr><td>05_記録片カード（部屋LSの報酬）.md</td><td class="k">5</td><td class="k">3</td><td class="k flat">＋2</td><td class="k">5→3</td></tr>
+<tr><td>06_分断LS・同行イベントのカード.md</td><td class="k">21</td><td class="k">18</td><td class="k flat">＋3</td><td class="k">21→18</td></tr>
+<tr><td>07_技能・専有カード.md</td><td class="k">23</td><td class="k">23</td><td class="k flat">±0</td><td class="k">24→24</td></tr>
+<tr><td>08_事件調査カード（P10・P11）.md</td><td class="k">20</td><td class="k">16</td><td class="k flat">＋4</td><td class="k">17→13</td></tr>
+<tr><td>09_品の一覧.md</td><td class="k">43</td><td class="k">43</td><td class="k flat">±0</td><td class="k">0→0</td></tr>
+<tr><td><b>合計</b></td><td class="k"><b>216</b></td><td class="k"><b>181</b></td><td class="k down"><b>−35</b></td><td class="k">—</td></tr>
+</table>
+<h3>消えたカード（35件）と、その指示</h3>
+<table><tr><th>ファイル</th><th>カード</th><th>消えた理由（指示の種類）</th></tr>
+<tr><td>02_調査カード_上層.md</td><td>西警備用小扉</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>地下へ続く整備孔</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>祭壇へ届かない水</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>名簿を読む声</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>救難所の薬品棚</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>二人の英雄</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>人格侵食</td><td>本文の置き換えの指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>交換される肉体</td><td>削除の指示</td></tr>
+<tr><td>02_調査カード_上層.md</td><td>内部封鎖</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>祭壇前の装置</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>封印損傷痕</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>一度だけ使われた剣</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>殺害者の波形</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>本物の追跡者傷</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>追跡者の攻撃魔力</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>外部からの魔力供給</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>接続対象の拡張</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>地下水流</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>祭壇水位記録</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>クロヅクメーの記録</td><td>本文の置き換えの指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>終わらない捜索</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>最後の精神記録</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>再生経路制御</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>一瞬見えたもの</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>自分に向けた跡</td><td>削除の指示</td></tr>
+<tr><td>03_調査カード_下層.md</td><td>封印剣の注文札</td><td>削除の指示</td></tr>
+<tr><td>05_記録片カード（部屋LSの報酬）.md</td><td>REC-U2</td><td>削除の指示</td></tr>
+<tr><td>05_記録片カード（部屋LSの報酬）.md</td><td>REC-U8</td><td>本文の置き換えの指示</td></tr>
+<tr><td>06_分断LS・同行イベントのカード.md</td><td>再生中の呟き</td><td>削除の指示・本文の置き換えの指示</td></tr>
+<tr><td>06_分断LS・同行イベントのカード.md</td><td>リックの第一声</td><td>削除の指示</td></tr>
+<tr><td>06_分断LS・同行イベントのカード.md</td><td>祭壇の床の回路</td><td>削除の指示</td></tr>
+<tr><td>08_事件調査カード（P10・P11）.md</td><td>深度3（専門判定）</td><td>自由記述の指示</td></tr>
+<tr><td>08_事件調査カード（P10・P11）.md</td><td>投与時期推定</td><td>削除の指示</td></tr>
+<tr><td>08_事件調査カード（P10・P11）.md</td><td>深度5（専門判定）</td><td>自由記述の指示</td></tr>
+<tr><td>08_事件調査カード（P10・P11）.md</td><td>工作素材の出所</td><td>削除の指示</td></tr>
+</table>
+<div class="warnbox">カードの一覧（手がかりだけの写し 121枚・13,575字）は 11/10 のままで、消えた 29枚が残っています。次の数え直しの前に作り直しが要ります。</div>
+</section>
+<section id="s7"><h2>7. 数え方（同じ物差しで数えるための決まり）</h2>
+<table><tr><th>項目</th><th>決まり</th></tr>
+<tr><td>字数</td><td>本文の文字数。空白・改行・記法（見出しの<code>#</code>、強調の<code>**</code>、箇条書きの記号、表の罫線）を外して数える。画像と注記（<code>&lt;!-- --&gt;</code>）は数えない</td></tr>
+<tr><td>文数</td><td>。！？と行末で区切った数（見出し・箇条書きの1行も1文）</td></tr>
+<tr><td>本体</td><td>共通HO＋自分のHO＋全カード。PCが全部のカードを見た場合の上限</td></tr>
+<tr><td>全部</td><td>本体＋読み合わせ＋ルールの文＋画面だけの文</td></tr>
+<tr><td>GMだけのもの</td><td>GM用詳細・進行表・解答は本体に入れない（別に数える）</td></tr>
+<tr><td>1時間あたり</td><td>本体 ÷ 想定プレイ時間（時間） 。今回は ÷ 4時間</td></tr>
+<tr><td>分岐</td><td>1回のプレイで1つしか起きない分岐（分断の組・ED・成功失敗）は平均＝1回分で数える。最大も別に記録</td></tr>
+<tr><td>読み合わせ</td><td>本編（ED以外）とEDを分ける。EDは真相解説・エンディング・後日談</td></tr>
+<tr><td>PC別HOの見方</td><td>「HO①」は共通HOを含まない。「初期HO」は共通HOを含む。混ぜて足さない（表に両方書いてある）</td></tr>
+<tr><td>固定目標</td><td>2026-11-10 の作者決定（カード1/2・読み合わせ1/3・ED1/2）を、決定した時点の値に掛けた数。原稿を削っても目標は動かない</td></tr>
+</table>
+<p><small>目標：カード 9,956字（残り 6,374）／読み合わせ本編 7,652字（残り 11,735）／ED 5,056字（残り 5,090）。残りは「今の値 − 目標」の整数差です。</small></p>
+</section>
+<section id="s8"><h2>8. 変えていないこと</h2>
+<ul>
+<li>原稿（05_完成版）は、この用紙を作るために触っていません。読んで数えただけです。</li>
+<li>DB・ゲーム本体（src/）・画面のコードは触っていません。閾値4件も<b>GM注に保存しただけ</b>で、本番には入っていません。</li>
+<li>AIの案（削る案・改善案・新しいシステム案）は<b>1つも採用していません</b>。採用した場合は、目標の算出（範囲）を作り直す必要があります。</li>
+<li>INDEX（制作メモのサイト）は、この用紙と数字のページだけを差し替えています。</li>
+</ul>
+<p class="note">元にした数字：<code>results/mm7.json</code>（数え直し）・<code>results/_delta_author_edits.json</code>（前回との差）・<code>results/_recount_20261114.json</code>（目標）・<code>results/_time.json</code>・<code>results/_mm7_phase_calc.json</code>・<code>structure/mm7.json</code>（謎の仕分け）・<code>source/final_verify.json</code>・<code>source/final_ledger.json</code>。作った日：2026-11-15 21:56。</p>
+</section>
+</main></div></body></html>

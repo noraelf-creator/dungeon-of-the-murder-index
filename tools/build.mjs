@@ -285,6 +285,41 @@ const SPEAKERS = {
   'リュシア': 'lucia', 'ガルド': 'gald', 'レオン': 'leon',
 };
 const NOTE_COL = /^(情報の限界|注意点|注意|備考)$/;
+
+// ---------- Discord風の節表示（2026-11-15 作者の指示1：丸い顔アイコン＋話者名＋本文で節を区切る） ----------
+// 話者は、原稿に書かれている人だけを使う（読み合わせの話者、「名前：」で始まる行）。
+// 話者の書かれていない説明・ルール・ト書きは「システム」（人物ではない案内）にする。
+// 新しい人物・架空の発言・架空の日時は作らない。アイコンはゲームの既存の顔画像（media/faces/）、
+// 無い人とシステムは文字の丸にする（絵を勝手に描かない）。
+const DC_SYS = 'システム';
+const DC_FACE = { mireille: 'mireille.webp', viola: 'viola.webp', mixi: 'mixi.webp', edgar: 'edgar.webp', leon: 'leon.webp' };
+const DC_SK = {
+  'ミレイユ': 'mireille', 'ヴィオラ': 'viola', 'ミクシィ': 'mixi', 'エドガー': 'edgar', 'レオン': 'leon',
+  'リュシア': 'lucia', 'ガルド': 'gald', 'リック': 'rick', 'リック・チームズ': 'rick', '追跡者': 'chaser',
+  'ギルド長': 'guild', 'ギルドの使い': 'guild', '声': 'npc', '町の声': 'npc', '全員': 'group', '組の誰か': 'group',
+};
+// 「ヴィオラ：…」のように、本文の頭に話者が書かれている行（画面の案内など）
+const DC_INLINE = new RegExp('^(' + Object.keys(DC_SK).sort((a, b) => b.length - a.length).join('|') + ')[：:]');
+const dcSk = (name) => (name === DC_SYS ? 'sys' : DC_SK[name] || 'sys');
+function dcAvHTML(name) {
+  const k = dcSk(name); const f = name === DC_SYS ? '' : DC_FACE[k];
+  if (f) return `<span class="dc-av" aria-hidden="true"><img src="media/faces/${f}" alt="" width="40" height="40" loading="lazy"></span>`;
+  return `<span class="dc-av dc-txt" aria-hidden="true">${esc(name === DC_SYS ? 'DM' : name.slice(0, 1))}</span>`;
+}
+const DC_NONE = { attrs: '', head: '', lead: false };
+const dcOn = (ctx) => !ctx.nest && !ctx.noDc;
+// まとまりの先頭（見出しの直後・枠の変わり目）だけ顔と名前を出し、続く段は本文だけを同じ桁にそろえる
+function dcBlock(ctx, { spk, inline = false } = {}) {
+  const name = spk || DC_SYS;
+  const lead = !!ctx.dcLead || ctx.dcWho !== name;   // 話者が変わる所も、まとまりの先頭
+  ctx.dcLead = false; ctx.dcWho = name;
+  const attrs = ` data-dc="${lead ? 'lead' : 'cont'}" data-spk="${esc(name)}" data-sk="${dcSk(name)}"` + (lead && inline ? ' data-dcname="off"' : '');
+  const head = lead ? dcAvHTML(name) + (inline ? '' : `<span class="dc-name">${esc(name)}</span>`) : '';
+  return { attrs, head, lead };
+}
+// 節の変わり目（見出し・区切り・枠の切れ目）では、次の段をまとまりの先頭にする
+const dcNew = (ctx) => { ctx.dcLead = true; };
+
 function badgeTags(html) {
   return html
     .replace(/【作者修正([^】]*)】/g, (_, t) => `<span class="badge order" title="${esc(t.replace(/^[：:]/, ''))}">作者修正${t ? '：' + esc(t.replace(/^[：:]/, '')) : ''}</span>`)
@@ -303,7 +338,7 @@ function makeCtx(page) {
     const n = (used.get(base) || 0) + 1; used.set(base, n);
     return n === 1 ? base : base + '-' + n;
   };
-  return { page, aid, toc };
+  return { page, aid, toc, dcLead: true, dcWho: '', noDc: 0 };
 }
 
 // ---------- Markdownの描画 ----------
@@ -318,24 +353,36 @@ function makeMarked(ctx) {
       if (depth === 2 || depth === 3) ctx.toc.push({ id, text: strip(inner), level: depth });
       let unit = '';
       if (ctx.u) unit = (ctx.page.kind === 'ho' || /^n-card-items/.test(ctx.page.id)) && depth <= 3 ? uOpen(ctx, text) : uClose(ctx);
+      dcNew(ctx);   // 見出しのあとは、新しいまとまり（顔と名前を出す）
       return unit + `<h${depth} id="${id}" class="${ho ? 'ho-sec' : 'h' + depth}" data-a="${id}">${inner}</h${depth}>\n`;
     },
     paragraph({ tokens, text }) {
       const inner = this.parser.parseInline(tokens);
-      return `<p data-a="${ctx.aid(text)}">${inner}</p>\n`;
+      const im = dcOn(ctx) ? DC_INLINE.exec(strip(text || '')) : null;
+      const d = dcOn(ctx) ? dcBlock(ctx, im ? { spk: im[1], inline: true } : {}) : DC_NONE;
+      return `<p data-a="${ctx.aid(text)}"${d.attrs}>${d.head}${inner}</p>\n`;
     },
     listitem(item) {
+      const d = dcOn(ctx) ? dcBlock(ctx) : DC_NONE;
+      ctx.noDc = (ctx.noDc || 0) + 1;   // 入れ子の箇条の中は、まとまりを作らない
       const inner = this.parser.parse(item.tokens, !!item.loose);
-      return `<li data-a="${ctx.aid(item.text)}">${inner}</li>\n`;
+      ctx.noDc--;
+      return `<li data-a="${ctx.aid(item.text)}"${d.attrs}>${d.head}${inner}</li>\n`;
     },
     blockquote({ tokens, text }) {
+      ctx.noDc = (ctx.noDc || 0) + 1;
       const inner = this.parser.parse(tokens).replace(/ data-a="[^"]*"/g, '');
+      ctx.noDc--;
       const tag = /^「/.test(text.trim()) ? ' class="tagline"' : '';
-      return `<blockquote${tag} data-a="${ctx.aid(text)}">${inner}</blockquote>\n`;
+      const d = dcOn(ctx) && !tag ? dcBlock(ctx) : DC_NONE;
+      return `<blockquote${tag} data-a="${ctx.aid(text)}"${d.attrs}>${d.head}${inner}</blockquote>\n`;
     },
     table(token) { return renderTable.call(this, token, ctx); },
-    hr() { return '<hr>\n'; },
-    code({ text }) { return `<div class="screen" data-a="${ctx.aid(text)}">${esc(text).replace(/\n/g, '<br>')}</div>\n`; },
+    hr() { dcNew(ctx); return '<hr>\n'; },
+    code({ text }) {
+      const d = dcOn(ctx) ? dcBlock(ctx) : DC_NONE;
+      return `<div class="screen" data-a="${ctx.aid(text)}"${d.attrs}>${d.head}${esc(text).replace(/\n/g, '<br>')}</div>\n`;
+    },
   } });
   return m;
 }
@@ -346,7 +393,8 @@ function renderTable(token, ctx) {
   const noteIdx = head.map((h, i) => (NOTE_COL.test(h) ? i : -1)).filter((i) => i >= 0);
   const keep = head.map((_, i) => i).filter((i) => !noteIdx.includes(i));
   const notes = [];
-  let html = '<div class="table-wrap"><table>\n<thead><tr>';
+  // 表は横に広く使いたいので、Discord風のまとまりの箱には入れない（見出しの話者名が、その節の名前になる）
+  let html = `<div class="table-wrap"><table>\n<thead><tr>`;
   for (const i of keep) html += `<th>${P.parseInline(token.header[i].tokens)}</th>`;
   html += '</tr></thead>\n<tbody>\n';
   for (const row of token.rows) {
@@ -433,7 +481,7 @@ function renderMd(md, ctx, opts = {}) {
   if (top && ctx.u && ctx.page.kind === 'ho' && ctx.page.group !== 'ref') html += uOpen(ctx, '__intro__');
   for (const seg of splitNotes(md)) {
     if (seg.type === 'vis') {
-      if (top) { const v = V(seg.k, { who: seg.k === 'self' ? seg.who : '', cond: seg.k === 'self' ? seg.cond : (seg.cond || seg.who) }); ctx.base = v; html += mark(ctx, v); }
+      if (top) { const v = V(seg.k, { who: seg.k === 'self' ? seg.who : '', cond: seg.k === 'self' ? seg.cond : (seg.cond || seg.who) }); ctx.base = v; html += mark(ctx, v); ctx.dcLead = true; }
       continue;
     }
     if (seg.type === 'note') {
@@ -443,6 +491,7 @@ function renderMd(md, ctx, opts = {}) {
       const nk = noteKind(seg.title);
       const nv = nk === 'gm' ? V('gm') : nk === 'meta' ? V('make') : null;
       const box = `<details class="note ${nk}" data-a="${ctx.aid('note' + seg.title + seg.body.join(''))}"><summary>${noteChip(seg.title)}</summary><div class="note-body">${inner}</div></details>\n`;
+      ctx.dcLead = true;   // 注のあとは、新しいまとまり
       if (top && nv) html += mark(ctx, nv) + box + mark(ctx, ctx.base || ctx.page.vis);
       else html += box;
       continue;
@@ -463,7 +512,7 @@ function renderTokens(tokens, mk, ctx, opts) {
   let html = '';
   let cardOpen = false;
   const top = !ctx.nest;
-  const closeCard = () => { if (cardOpen) { html += '</div></section>\n' + uClose(ctx) + mark(ctx, ctx.base || ctx.page.vis); cardOpen = false; } };
+  const closeCard = () => { if (cardOpen) { ctx.noDc--; html += '</div></section>\n' + uClose(ctx) + mark(ctx, ctx.base || ctx.page.vis); cardOpen = false; ctx.dcLead = true; } };
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i];
     if (t.type === 'space') continue;
@@ -489,8 +538,9 @@ function renderTokens(tokens, mk, ctx, opts) {
           html += mark(ctx, cv);
         }
         const unitMark = (top && ctx.page.group !== 'ref') ? uOpen(ctx, m[1] + m[2]) : '';
-        html += unitMark + `<section class="cardx${tone}" id="${id}" data-card-unit="${esc(ctx.page.id)}"><header class="cardx-head" data-a="${id}"><span class="cardx-title">${mk.parseInline(title)}</span>${meta ? `<span class="cardx-meta">${mk.parseInline(meta)}</span>` : ''}</header><div class="cardx-body">\n`;
-        cardOpen = true;
+        // カード1枚＝1つのまとまり。見出しの左に丸いアイコン（顔が分かる人は顔、それ以外はシステム）を置く
+        html += unitMark + `<section class="cardx${tone}" id="${id}" data-card-unit="${esc(ctx.page.id)}" data-dc="lead" data-dckind="card"><header class="cardx-head" data-a="${id}">${dcAvHTML(DC_SYS)}<span class="cardx-title">${mk.parseInline(title)}</span>${meta ? `<span class="cardx-meta">${mk.parseInline(meta)}</span>` : ''}</header><div class="cardx-body">\n`;
+        cardOpen = true; ctx.noDc = (ctx.noDc || 0) + 1;
         continue;
       }
     }
@@ -534,12 +584,21 @@ function renderReading(md, ctx) {
     ctx.nest = (ctx.nest || 0) + 1;
     const cHtml = plain.length ? renderMd(plain.join('\n\n'), ctx) : '';
     ctx.nest--;
-    if (plain.length) html += mark(ctx, V('gm', { cond: '読み方の注（配役・場面・目的）' })) + `<div class="callout" data-a="${ctx.aid(plain.join(''))}">${cHtml}</div>\n` + mark(ctx, ctx.page.vis);
+    if (plain.length) {
+      const calD = dcOn(ctx) ? (dcNew(ctx), dcBlock(ctx)) : DC_NONE;
+      html += mark(ctx, V('gm', { cond: '読み方の注（配役・場面・目的）' })) + `<div class="callout" data-a="${ctx.aid(plain.join(''))}"${calD.attrs}>${calD.head}${cHtml}</div>\n` + mark(ctx, ctx.page.vis);
+    }
     if (gm.length) html += renderMd(gm.join('\n'), ctx);
   }
   let aside = []; let pending = null; let fence = null; let gmBuf = []; let det = 0;
   const flushAside = () => {
-    if (aside.length) { const text = aside.join('\n').trim(); aside = []; ctx.nest = (ctx.nest || 0) + 1; if (text) html += `<div class="aside">${renderMd(text, ctx)}</div>\n`; ctx.nest--; }
+    if (aside.length) {
+      const text = aside.join('\n').trim(); aside = [];
+      ctx.nest = (ctx.nest || 0) + 1;
+      if (text) { const ad = dcBlock(ctx); html += `<div class="aside"${ad.attrs}>${ad.head}${renderMd(text, ctx)}</div>\n`; }
+      ctx.nest--;
+      ctx.dcLead = true;
+    }
   };
   const flushGm = () => { if (gmBuf.length) { if (det > 0) ctx.nest = (ctx.nest || 0) + 1; html += renderMd(gmBuf.join('\n'), ctx); if (det > 0) ctx.nest--; gmBuf = []; } };
   const flushAll = () => { flushGm(); flushAside(); };
@@ -548,12 +607,14 @@ function renderReading(md, ctx) {
     if (wm) { who = wm[1]; mod = (mod ? mod + '・' : '') + wm[2]; }
     const key = speakerKey(who);
     ctx.speakers = ctx.speakers || {}; ctx.speakers[who] = (ctx.speakers[who] || 0) + 1;
-    html += `<div class="line sp-${key}${cls}" data-a="${ctx.aid(who + say)}"><span class="who">${esc(who)}${mod ? `<small>${esc(mod)}</small>` : ''}</span><span class="say">「${inlineMd(say)}」${extra ? `<small class="cond-note">${esc(extra)}</small>` : ''}</span></div>\n`;
+    // 台詞は、原稿に書かれている話者をそのまま使う（名乗りは .who に本文として出ているので、顔だけを足す）
+    const d = dcOn(ctx) ? dcBlock(ctx, { spk: who, inline: true }) : DC_NONE;
+    html += `<div class="line sp-${key}${cls}" data-a="${ctx.aid(who + say)}"${d.attrs}>${d.head}<span class="who">${esc(who)}${mod ? `<small>${esc(mod)}</small>` : ''}</span><span class="say">「${inlineMd(say)}」${extra ? `<small class="cond-note">${esc(extra)}</small>` : ''}</span></div>\n`;
   };
   for (; i < lines.length; i++) {
     const raw = inlineGm(lines[i]); const s = raw.trim();
     if (fence) {
-      if (/^```/.test(s)) { html += `<div class="screen" data-a="${ctx.aid(fence.join(''))}">${fence.map((x) => inlineMd(x)).join('<br>')}</div>\n`; fence = null; }
+      if (/^```/.test(s)) { const fd = dcOn(ctx) ? (dcNew(ctx), dcBlock(ctx)) : DC_NONE; html += `<div class="screen" data-a="${ctx.aid(fence.join(''))}"${fd.attrs}>${fd.head}${fence.map((x) => inlineMd(x)).join('<br>')}</div>\n`; fence = null; }
       else fence.push(raw);
       continue;
     }
@@ -571,28 +632,31 @@ function renderReading(md, ctx) {
     if ((m = s.match(/^(#{1,4})\s+(.*)$/))) {
       flushAll(); pending = null;
       const level = Math.min(m[1].length, 3); const text = m[2];
-      if (level === 1) { html += `<div class="line big sp-chaser" data-a="${ctx.aid(text)}"><span class="who"></span><span class="say">${inlineMd(text)}</span></div>\n`; continue; }
+      if (level === 1) { dcNew(ctx); html += `<div class="line big sp-chaser" data-a="${ctx.aid(text)}"><span class="who"></span><span class="say">${inlineMd(text)}</span></div>\n`; continue; }
       const id = ctx.aid(text, 'h'); ctx.toc.push({ id, text: strip(inlineMd(text)), level });
+      dcNew(ctx);
       html += `<h${level} id="${id}" class="h${level} read-sec" data-a="${id}">${inlineMd(text)}</h${level}>\n`;
       continue;
     }
-    if (/^■/.test(s)) { flushAll(); pending = null; const id = ctx.aid(s, 'h'); ctx.toc.push({ id, text: s.replace(/^■\s*/, ''), level: 3 }); html += `<div class="scene" id="${id}" data-a="${id}">${esc(s.replace(/^■\s*/, ''))}</div>\n`; continue; }
+    if (/^■/.test(s)) { flushAll(); pending = null; const id = ctx.aid(s, 'h'); ctx.toc.push({ id, text: s.replace(/^■\s*/, ''), level: 3 }); dcNew(ctx); html += `<div class="scene" id="${id}" data-a="${id}">${esc(s.replace(/^■\s*/, ''))}</div>\n`; continue; }
     if (/^（[\s\S]*）$/.test(s)) {
       flushAll();
       const gmStage = det === 0 && /^（\s*→|^（GM|→\s*R\d\d|【GM】/.test(s);
-      const st = `<div class="stage" data-a="${ctx.aid(s)}">${inlineMd(s)}</div>\n`;
+      const sd = dcOn(ctx) ? (dcNew(ctx), dcBlock(ctx)) : DC_NONE;
+      const st = `<div class="stage" data-a="${ctx.aid(s)}"${sd.attrs}>${sd.head}${inlineMd(s)}</div>\n`;
       html += gmStage ? mark(ctx, V('gm', { cond: '進行の注（次に読むもの）' })) + st + mark(ctx, ctx.page.vis) : st;
       continue;
     }
-    if (/^\*\*【(画面|カード|公開ログ|画面の助け舟)/.test(s)) { flushAll(); pending = null; html += `<div class="screen" data-a="${ctx.aid(s)}">${inlineMd(s)}</div>\n`; continue; }
+    if (/^\*\*【(画面|カード|公開ログ|画面の助け舟)/.test(s)) { flushAll(); pending = null; const cd = dcOn(ctx) ? (dcNew(ctx), dcBlock(ctx)) : DC_NONE; html += `<div class="screen" data-a="${ctx.aid(s)}"${cd.attrs}>${cd.head}${inlineMd(s)}</div>\n`; continue; }
     if ((m = s.match(/^\*\*([^*]{1,60})\*\*$/))) {
       flushAll();
       const label = m[1];
       const sp = label.match(/^([^（\s]{1,10})(（[^）]{1,16}）)?$/);
       if (sp && SPEAKERS[sp[1]]) { pending = { who: sp[1], mod: sp[2] ? sp[2].slice(1, -1) : '', sticky: true }; continue; }
-      if (/^組の誰か/.test(label)) { pending = { who: '組の誰か', mod: label.replace(/^組の誰かが読む/, '').replace(/^[（(]|[）)]$/g, ''), sticky: true }; html += `<div class="cond-head" data-a="${ctx.aid(label)}">${inlineMd(label)}</div>\n`; continue; }
+      if (/^組の誰か/.test(label)) { pending = { who: '組の誰か', mod: label.replace(/^組の誰かが読む/, '').replace(/^[（(]|[）)]$/g, ''), sticky: true }; const gd = dcOn(ctx) ? dcBlock(ctx, { spk: '組の誰か', inline: true }) : DC_NONE; html += `<div class="cond-head" data-a="${ctx.aid(label)}"${gd.attrs}>${gd.head}${inlineMd(label)}</div>\n`; continue; }
       pending = null;
-      html += `<div class="cond-head" data-a="${ctx.aid(label)}">${inlineMd(label)}</div>\n`;
+      const cd2 = dcOn(ctx) ? dcBlock(ctx) : DC_NONE;
+      html += `<div class="cond-head" data-a="${ctx.aid(label)}"${cd2.attrs}>${cd2.head}${inlineMd(label)}</div>\n`;
       continue;
     }
     // 「- 名前「…」」は、その場にいる人だけが読む台詞（いれば）
@@ -799,6 +863,16 @@ const speakerAll = {};
 const TONE_BY_PC = { 1: 'mireille', 2: 'viola', 3: 'mixi', 4: 'edgar' };
 const OLD_TONE_BY_PC = { 1: 'mireille', 2: 'viola', 3: 'lucia', 4: 'gald' };
 const isNew = (p) => p.group !== 'ref';
+// ページの頭（h1）に出す話者。HOは、そのPCのHOなので、PCの顔と名前を出す（本文の話者は システム のまま）。
+// それ以外の説明・ルールのページは「システム」（人物ではない案内）。新しい人物は作らない。
+const DC_PC_BY_N = { 1: 'ミレイユ', 2: 'ヴィオラ', 3: 'ミクシィ', 4: 'エドガー' };
+function pageDc(p) {
+  const m = p.id.match(/^n-ho-pc(\d)/);
+  const name = m ? DC_PC_BY_N[m[1]] : '';
+  if (!name) return { spk: DC_SYS, sk: 'sys', face: '' };
+  const k = dcSk(name);
+  return { spk: name, sk: k, face: DC_FACE[k] ? 'media/faces/' + DC_FACE[k] : '' };
+}
 for (const p of P) {
   const ctx = makeCtx(p); ctx.badges = [];
   unitApi(ctx);
@@ -841,7 +915,9 @@ for (const p of P) {
   if (!isNew(p) && /【作者修正/.test(rawSrc)) ctx.badges.push('作者修正（10/07）');
   for (const b of p.extraBadges || []) ctx.badges.push(b);
   if (ctx.speakers && isNew(p)) for (const [w, n] of Object.entries(ctx.speakers)) speakerAll[w] = (speakerAll[w] || 0) + n;
-  const flat = (h) => strip(h).replace(/\s+/g, ' ').trim();
+  const flat = (h) => strip(String(h)
+    .replace(/<span class="dc-av[^"]*"[^>]*>(?:<img[^>]*>|[^<]*)<\/span>/g, '')
+    .replace(/<span class="dc-name[^"]*"[^>]*>[^<]*<\/span>/g, '')).replace(/\s+/g, ' ').trim();
   const text = flat(W.chunks.map((c) => c.h).join(' '));
   // プレイヤー表示のときの検索用：PL の段だけの文（推理のあと・本人だけは分ける）
   const tp = flat(W.chunks.filter((c) => (c.v.k === 'all' || c.v.k === 'here') && c.v.when !== 'after').map((c) => c.h).join(' '));
@@ -855,7 +931,7 @@ for (const p of P) {
   visStats.push({ id: p.id, nav: p.nav, group: p.group, chunks: W.chunks.length, kinds, cards: ctx.cardVisList || [] });
   const rel = p.file ? path.relative(path.join(ROOT, 'content'), p.file).replace(/\\/g, '/') : '';
   const vis = { k: p.vis.k, who: WHO_KEY[p.vis.who] || '', whoName: p.vis.who, cond: p.vis.cond, when: p.vis.when, kinds, selfWho, plOpen, plAfter };
-  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, vis, title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, tp, ta, tw, cards: ctx.cards || 0 });
+  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, vis, dc: pageDc(p), title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, tp, ta, tw, cards: ctx.cards || 0 });
 }
 const ids = new Set();
 for (const p of pages) { if (ids.has(p.id)) throw new Error('ページIDの重複: ' + p.id); ids.add(p.id); }
@@ -909,9 +985,11 @@ if (unitWarn.length) {
   console.log('比較単位の付け残し:', unitWarn.length, 'ページ');
   for (const w of unitWarn.slice(0, 12)) console.log('  -', w);
 }
-if (staleUnits.size) console.log('原稿が抽出時から変わった単位:', staleUnits.size, '（work/compare_ui/extract_compare_units.py を再実行してから提案を作り直す）');
-if (STRICT_UNITS && (unitWarn.length || staleUnits.size)) {
-  console.error('CMP_STRICT=1: 比較単位が全件そろっていません（上の警告）');
+if (staleUnits.size) console.log('原稿が抽出時から変わった単位:', staleUnits.size, '（案は旧版として保管し、書き換えも採用もしない。作り直すときは work/compare_ui/extract_compare_units.py から）');
+// 切り分け：「原稿が変わって案が旧版になった」単位は、意図した旧版なので失敗にしない（CMP_STRICT_STALE=1 で失敗にできる）。
+// 単位の付け残し・余り（原稿から単位を拾えない＝構造の異常）は、今までどおり失敗にする。
+if (STRICT_UNITS && (unitWarn.length || (staleUnits.size && process.env.CMP_STRICT_STALE === '1'))) {
+  console.error('CMP_STRICT=1: 比較単位がそろっていません（欠落・余り ' + unitWarn.length + 'ページ／旧版の単位 ' + staleUnits.size + '件）');
   process.exit(1);
 }
 fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
