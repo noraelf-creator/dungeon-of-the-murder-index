@@ -1,0 +1,105 @@
+{
+ "generated": "2026-11-15T16:47:12.269Z",
+ "source": "_creator_notes.json",
+ "total": 10,
+ "placed": 10,
+ "missed": 0,
+ "counts": {
+  "total": 10,
+  "open": 2,
+  "fixed": 8
+ },
+ "notes": [
+  {
+   "id": "q1-pc1-lab",
+   "page_id": "n-ho-pc1-4",
+   "section": "Q1 PC1④ 追加された目標",
+   "state": "fixed",
+   "state_label": "確定（作者の指定どおり）",
+   "anchor": "h1xtecl5",
+   "placed": true
+  },
+  {
+   "id": "q5-yuuin",
+   "page_id": "n-card-skill",
+   "section": "Q5 《誘引》の《魔力強化》統合（2026-11-15 確定）",
+   "state": "fixed",
+   "state_label": "確定（注意書き）",
+   "anchor": "h1szh5k7",
+   "placed": true
+  },
+  {
+   "id": "q5-a4-aim",
+   "page_id": "n-card-skill",
+   "section": "Q5 A4 狙いの人（作者確認中・据え置き）",
+   "state": "open",
+   "state_label": "未確定（作者の返答待ち）",
+   "anchor": "arofl0t",
+   "placed": true
+  },
+  {
+   "id": "oral-4-raii",
+   "page_id": "n-ho-pc4-1",
+   "section": "口頭4 来意→らしい（PC4①）",
+   "state": "fixed",
+   "state_label": "確定（誤変換として採用）",
+   "anchor": "a1jo4rqp",
+   "placed": true
+  },
+  {
+   "id": "oral-6-or",
+   "page_id": "n-ho-pc4-2",
+   "section": "口頭6 回復薬or魔力薬（PC4②）",
+   "state": "fixed",
+   "state_label": "確定（誤記として採用）",
+   "anchor": "a1rr16yt",
+   "placed": true
+  },
+  {
+   "id": "q1-orei-goal",
+   "page_id": "n-ho-pc1-4",
+   "section": "Q1 お礼の目標の達成時期",
+   "state": "fixed",
+   "state_label": "確定（P5〜P6 も達成扱い）",
+   "anchor": "aaaw03y",
+   "placed": true
+  },
+  {
+   "id": "q6-hitomiru",
+   "page_id": "n-rule-skill",
+   "section": "Q6 看破の扱い（旧・人を見る目）",
+   "state": "fixed",
+   "state_label": "確定（k3 のまま。一覧に載せない）",
+   "anchor": "h12x4ek5",
+   "placed": true
+  },
+  {
+   "id": "q6-ippon",
+   "page_id": "n-rule-skill",
+   "section": "Q6 スキル一覧の《一人働き》",
+   "state": "open",
+   "state_label": "未確定（作者の返答待ち）",
+   "anchor": "r10rrnnj",
+   "placed": true
+  },
+  {
+   "id": "q3-genba-depth",
+   "page_id": "n-card-case",
+   "section": "Q3 現場の深度5・7（欠番）",
+   "state": "fixed",
+   "state_label": "確定（欠番のまま運用）",
+   "anchor": "h9b7dt2",
+   "placed": true
+  },
+  {
+   "id": "q4-mp9",
+   "page_id": "n-ho-pc4-2",
+   "section": "Q4 リックのMP「通常9」",
+   "state": "fixed",
+   "state_label": "確定（両立文）",
+   "anchor": "a10hxs7v",
+   "placed": true
+  }
+ ],
+ "miss": []
+}

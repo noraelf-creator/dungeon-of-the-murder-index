@@ -1,8 +1,11 @@
 {
  "source": "mm7_game_v4 src/data.js",
+ "root": "C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/mm7_game_v4",
+ "rootSource": "default",
+ "rootLabel": "既定 mm7_game_v4（作者69のworktreeではない。worktree を読むときは MM7_GAME / GAMESHOTS_GAME で指定する）",
  "branch": "fix-20261101",
- "commit": "e8a0fc8",
- "made": "2026-11-11T06:05:32.730Z",
+ "commit": "f56e412",
+ "made": "2026-11-15T14:23:27.473Z",
  "pcName": {
   "PC1": "ミレイユ",
   "PC2": "ヴィオラ",

@@ -1711,5 +1711,49 @@
    "protected": false,
    "protected_facts": []
   }
- }
+ },
+ "note": "原稿から消えた単位のAI案を、値そのままで保管する（今のページには出さない）。",
+ "runs": [
+  {
+   "at": "2026-11-15 evening",
+   "moved": 4,
+   "ids": [
+    "CARD:INFO-E-CAUSE",
+    "CARD:INFO-E-DIAGNOSIS",
+    "CARD:INFO-E-NOOTHER",
+    "CARD_DOC:n-card-skill:@rule_lure"
+   ],
+   "why": "作者決定 Q1〜Q7・口頭6件の後置き反映で、原稿から消えた／名前が変わった単位"
+  },
+  {
+   "at": "2026-11-15 evening",
+   "moved": 0,
+   "ids": [],
+   "why": "作者決定 Q1〜Q7・口頭6件の後置き反映で、原稿から消えた／名前が変わった単位"
+  },
+  {
+   "at": "2026-11-15 evening",
+   "moved": 0,
+   "ids": [],
+   "why": "作者決定 Q1〜Q7・口頭6件の後置き反映で、原稿から消えた／名前が変わった単位"
+  },
+  {
+   "at": "2026-11-15 night",
+   "moved": 0,
+   "restored": 4,
+   "ids": [
+    "CARD:INFO-E-DIAGNOSIS",
+    "CARD:INFO-E-CAUSE",
+    "CARD:INFO-E-NOOTHER",
+    "CARD_DOC:n-card-skill:@rule_lure"
+   ],
+   "why": "同定ミス（見出しの配布条件文の変化・作者決定の改名）で控えへ移していた4件を、元の単位IDへ原値のまま戻した。上の moved=4 はそのときの履歴として残す。前回までに本当に消えた50件はそのまま。"
+  },
+  {
+   "at": "2026-11-15 evening",
+   "moved": 0,
+   "ids": [],
+   "why": "作者決定 Q1〜Q7・口頭6件の後置き反映で、原稿から消えた単位"
+  }
+ ]
 }

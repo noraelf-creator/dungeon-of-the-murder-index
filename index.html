@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>ダンジョン・オブ・ザ・マーダー｜制作INDEX</title>
-<link rel="stylesheet" href="assets/app.css?v=20261115a">
+<link rel="stylesheet" href="assets/app.css?v=20261115e">
 </head>
 <body>
 <header class="topbar">
@@ -15,7 +15,7 @@
   </button>
   <a class="brand" href="#/about">
     <span class="brand-mark">DM</span>
-    <span class="brand-text"><span class="brand-title">ダンジョン・オブ・ザ・マーダー</span><span class="brand-sub">制作INDEX・11/7</span></span>
+    <span class="brand-text"><span class="brand-title">ダンジョン・オブ・ザ・マーダー</span><span class="brand-sub">作者用INDEX・更新版</span></span>
   </a>
   <label class="top-search">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
@@ -44,7 +44,7 @@
     <div id="navGroups" class="nav-groups"></div>
     <div class="col-resizer" data-resize="groups" title="ドラッグで幅を変更"></div>
     <div class="nav-pages">
-      <div class="nav-pages-head"><span id="navGroupLabel"></span><button id="navClose" class="mini-btn" type="button" title="目次をたたむ">‹</button></div>
+      <div class="nav-pages-head"><span id="navGroupLabel"></span><button id="navAddPage" class="mini-btn" type="button" title="作者のページを足す">＋</button><button id="navClose" class="mini-btn" type="button" title="目次をたたむ">‹</button></div>
       <div id="navPages" class="nav-pages-body"></div>
     </div>
   </aside>
@@ -55,7 +55,7 @@
     <div id="legacyBanner" class="legacy-banner" hidden></div>
     <div id="modeBanner" class="mode-banner" hidden></div>
     <article id="page" class="page"></article>
-    <div id="editBar" class="edit-bar" hidden><button type="button" data-bar="fix" title="この段をその場で書き直す（段をダブルクリックでも）">直す</button><button type="button" data-bar="del" title="この段に削除の印を付ける">削除</button></div>
+    <div id="editBar" class="edit-bar" hidden><button type="button" data-bar="add" title="この段の後ろに作者の追記を足す">＋足す</button><button type="button" data-bar="fix" title="この段をその場で書き直す（段をダブルクリックでも）">直す</button><button type="button" data-bar="del" title="この段に削除の印を付ける">削除</button></div>
     <button id="pencil" class="pencil" type="button" title="この箇所の修正案を書く" hidden>✎</button>
   </main>
 
@@ -69,6 +69,7 @@
         <div class="tabs" role="tablist">
           <button class="tab" data-tab="write" type="button">書く</button>
           <button class="tab" data-tab="page" type="button">このページ</button>
+          <button class="tab" data-tab="added" type="button">作者が足した文</button>
           <button class="tab" data-tab="all" type="button">すべて</button>
         </div>
         <button id="panelClose" class="mini-btn" type="button" title="たたむ">›</button>
@@ -90,9 +91,31 @@
   </form>
 </dialog>
 
-<script src="data/config.js?v=20261115a"></script>
-<script src="data/site-data.js?v=20261115a"></script>
-<script src="data/ai-proposals.js?v=20261115a"></script>
-<script src="assets/app.js?v=20261115b"></script>
+<dialog id="addDialog" class="dialog add-dialog">
+  <form method="dialog" id="addForm">
+    <h2 id="addTitle">作者の追記を足す</h2>
+    <div class="add-grid">
+      <label>種類 <select id="addType"><option value="para">段落</option><option value="section">節（見出し＋本文）</option><option value="page">新しいページ</option></select></label>
+      <label>置く場所 <select id="addPos"><option value="after">選んだ段の後ろ</option><option value="top">ページの先頭</option><option value="end">ページの末尾</option><option value="chain">この追記の後ろ</option></select></label>
+      <label>見せる範囲 <select id="addVis"><option value="make">▲制作（PL・本人には出さない）</option><option value="gm">■GMだけ</option><option value="pl">◎PLにも見せる</option></select></label>
+    </div>
+    <label class="field-label" for="addHeading">見出し（節・ページのとき。変えても場所とURLは変わりません）</label>
+    <input id="addHeading" type="text" maxlength="600" autocomplete="off">
+    <label class="field-label" for="addBody">本文（プレーンテキスト。改行はそのまま出ます）</label>
+    <textarea id="addBody" class="memo-input" rows="12"></textarea>
+    <div id="addInfo" class="save-state" role="status"></div>
+    <div class="dialog-actions">
+      <button type="button" class="btn primary" data-add="save">保存</button>
+      <button type="button" class="btn" data-add="cancel">やめる</button>
+      <button type="button" class="btn danger" data-add="purge" hidden>完全に消す</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="data/config.js?v=20261115c"></script>
+<script src="data/site-data.js?v=20261115c"></script>
+<script src="data/ai-proposals.js?v=20261115c"></script>
+<script src="assets/author-layer.js?v=20261115e"></script>
+<script src="assets/app.js?v=20261116g"></script>
 </body>
 </html>

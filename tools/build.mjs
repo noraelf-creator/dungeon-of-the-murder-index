@@ -6,6 +6,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { Marked } from 'marked';
+// 70 作者用INDEX：訂正済み・疑問・ゲームの全文字のページを組み立てる部品（2026-11-15）
+import * as AP from './author-pages.mjs';
 
 const ROOT = path.resolve('.');
 const C = (p) => path.join(ROOT, 'content', p);
@@ -24,6 +26,7 @@ const GROUPS = [
   { id: 'screen', label: '部屋LS・画面の文', icon: 'flag' },
   { id: 'canon', label: '真相・正本（GM専用）', icon: 'key' },
   { id: 'log', label: '変更の記録', icon: 'clock' },
+  { id: 'gtext', label: 'ゲームの全文字', icon: 'flag' },
   { id: 'ref', label: '参照・旧版（10/06）', icon: 'books' },
 ];
 const P = [];
@@ -31,7 +34,8 @@ const add = (group, sub, id, nav, file, kind = 'doc', audience = '', extra = {})
 const must = (f) => { if (!fs.existsSync(f)) throw new Error('ファイルが無い: ' + f); return f; };
 
 // 今の状態
-add('now', '', 'n-now', '今の状態（2026-11-11）', must(C('今の状態_20261111.md')), 'doc', '制作');
+// 2026-11-15 作者の指定：最終確認先は #/n-now。11/15 版を n-now にし、11/11 版は「変更の記録」へ履歴として残す。
+add('now', '', 'n-now', '今の状態（2026-11-15）', must(C('今の状態_20261115.md')), 'doc', '制作');
 add('now', '', 'n-textcut', '文量を減らす検討（11/12・方針・削る案・ブレスト）', must(C('文量を減らす検討_20261112.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-cut', 'ブレスト：削るべき項目（全文）', must(C('ブレスト_20261111/削るべき項目.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-improve', 'ブレスト：改善案（全文）', must(C('ブレスト_20261111/改善案.md')), 'doc', '制作');
@@ -128,6 +132,7 @@ add('canon', '', 'n-canon-clues', '手がかりマップ', must(GM('正本/手�
 
 // 変更の記録
 add('log', '', 'n-changelog', 'CHANGELOG（今の原稿）', must(NOW('CHANGELOG.md')), 'doc', '制作');
+add('log', '前の「今の状態」', 'n-now-1111', '今の状態（2026-11-11・前の版）', must(C('今の状態_20261111.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1107', '今の状態（2026-11-07・前の版）', must(C('今の状態_20261107.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1104', '今の状態（2026-11-04・前の版）', must(C('今の状態_20261104.md')), 'doc', '制作');
 
@@ -166,7 +171,47 @@ add('ref', '旧版 10/06 チェック・仮想プレイ', 'check-integrity', '�
 add('ref', '旧版 10/06 チェック・仮想プレイ', 'check-inventory', '棚卸し（INVENTORY）', OLD('00_INVENTORY.md'), 'doc', '参照');
 const PLAY = (f) => OLD('04_仮想プレイ/' + f);
 for (const [id, nav, f] of [['play1-log', '第1回 ログ', '第1回_標準プレイ_ログ.md'], ['play1-rev', '第1回 振り返り', '第1回_振り返り.md'], ['play2-log', '第2回 ログ', '第2回_難しめプレイ_ログ.md'], ['play2-rev', '第2回 振り返り', '第2回_振り返り.md'], ['play3-log', '第3回 ログ', '第3回_初心者卓_ログ.md'], ['play3-rev', '第3回 振り返り', '第3回_振り返り.md'], ['play4', '第4回 修正後の再プレイ', '第4回_修正後の再プレイ.md'], ['play5-log', '第5回 ログ', '第5回_作者修正後の通しプレイ_ログ.md'], ['play5-rev', '第5回 振り返り', '第5回_振り返り.md']]) add('ref', '旧版 10/06 チェック・仮想プレイ', id, nav, PLAY(f), 'doc', '参照');
-for (const p of P) if (p.file) must(p.file);
+// ---------- 70 作者用INDEX：訂正済み・疑問・ゲームの全文字（2026-11-15 作者の指示） ----------
+// 作者「訂正した箇所と現在疑問点及び矛盾や気になるところはそれとは別に追記して」「ヴィオラの説明や最初の
+// キャラ選択画面、はじめにやゲーム開始画面の文字なども全ての文字データも搭載して」。
+// 本文（原稿のページ）には混ぜず、別のページにする。中身は tools/author-pages.mjs が作り、ここは登録と書き出しだけ。
+const BUILT_AT = new Date().toISOString();
+const GAME_COMMIT = process.env.GAME_COMMIT || 'fb478cf';
+const MANUSCRIPT = process.env.MANUSCRIPT_ROOT || 'C:/00_【創作】一時フォルダ/_マダミス改訂_20261004/ダンジョン・オブ・ザ・マーダー/05_完成版';
+const A69 = process.env.AUTHOR_PAGES_69 || 'C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/work_claude_opus_20261015/69_author_decisions_20261115';
+const A70 = process.env.AUTHOR_PAGES_70 || 'C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/work_claude_opus_20261015/70_author_index_editor_20261115';
+const readJsonMaybe = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return null; throw e; } };
+// ゲームの全文字（T3 が data/game-text.json を作る）。無いまま空のページを作らず、ここで止める。
+const GAMETEXT = (() => {
+  if (!fs.existsSync(path.join(ROOT, 'data', 'game-text.json'))) {
+    if (process.env.AUTHOR_PAGES_SKIP_GTEXT === '1') return null;   // 中間確認用。親の最終 build では使わない
+    throw new Error('data/game-text.json が無い：ゲームの全文字（g-*）を作れない。先に node tools/game-text.mjs --commit ' + GAME_COMMIT + ' を実行する（T3）');
+  }
+  return AP.parseGameText(fs.readFileSync(path.join(ROOT, 'data', 'game-text.json'), 'utf8'));
+})();
+const GTEXT_COMMIT_SHORT = GAMETEXT ? (GAMETEXT.commitShort || GAMETEXT.commit.slice(0, 7)) : '';
+const GT_GROUP = GAMETEXT ? AP.groupGameText(GAMETEXT, {
+  chunkSize: Number(process.env.GTEXT_CHUNK || 200),
+  // 収録元（T3）の場面 meta をそのまま使う：ページ名（g-lines-lspre など）・題・順番を勝手に作らない
+  scenesMeta: GAMETEXT.scenes,
+  scenes: [...new Set(GAMETEXT.items.map((x) => String(x.scene || '')).filter((x) => x && x !== 'other'))],
+}) : null;
+if (GT_GROUP) {
+  const dir = C('ゲーム全文字');
+  fs.mkdirSync(dir, { recursive: true });
+  for (const gp of GT_GROUP.pages) {
+    const r = AP.buildGameTextPage({ page: gp, commit: GTEXT_COMMIT_SHORT, generatedAt: BUILT_AT });
+    const f = path.join(dir, gp.id + '.md');
+    fs.writeFileSync(f, r.md);
+    add('gtext', gp.label, gp.id, gp.label, f, 'doc', '制作', { gen: true, gen_kind: 'gtext', scene: gp.scene, gameCommit: GTEXT_COMMIT_SHORT });
+  }
+  console.log('ゲームの全文字:', GTEXT_COMMIT_SHORT, GT_GROUP.stats.total, '件 →', GT_GROUP.pages.length, 'ページ',
+    GT_GROUP.stats.metaMismatch.length ? '（場面の宣言件数と実数の違い ' + GT_GROUP.stats.metaMismatch.map((m) => m.scene + ':' + m.declared + '→' + m.actual).join(' ') + '）' : '');
+}
+// 訂正済み・疑問は、ほかのページを組み上げたあとに作る（「反映後」の実アンカーを引くため）
+add('now', '', 'n-fixed', '訂正済みの箇所', C('訂正済みの箇所.md'), 'doc', '制作', { gen: true, gen_kind: 'fixed', gen_late: true });
+add('now', '', 'n-questions', '疑問・矛盾・気になる所', C('疑問と気になる所.md'), 'doc', '制作', { gen: true, gen_kind: 'questions', gen_late: true });
+for (const p of P) if (p.file && !p.gen) must(p.file);
 
 // ---------- 見せる範囲の印（2026-11-07 作者の指示「PL達に見せる情報とそうではないものはみて分かるように」） ----------
 // k：all＝PL・全員が見る／self＝PL・本人だけ（who）／here＝PL・その場にいた人だけ（cond）／gm＝GMだけ／make＝制作
@@ -181,6 +226,8 @@ const GROUP_READ = { R04: 'P3 分断で A「地図・物資を守る」を選ん
   R24: '分断で一人だけの組になった人' };
 const PAGE_VIS = {
   'n-now': V('make'), 'n-textcut': V('make'), 'n-bs-cut': V('make'), 'n-bs-improve': V('make'), 'n-bs-system': V('make'), 'n-lspre': V('make'), 'n-newtext': V('make'), 'n-spec': V('gm'), about: V('make'), 'n-gm-about': V('gm'), 'n-dist': V('gm'), 'n-directive': V('make'), 'n-match': V('make'),
+  // 訂正済み・疑問は制作だけ（本文のページとは別。PL表示では出さない）
+  'n-fixed': V('make', { cond: '制作の記録（訂正済み）' }), 'n-questions': V('make', { cond: '制作の記録（未確定・実装差）' }),
   'n-ho-common': V('all'),
   'n-card-rooms': V('all', { cond: '部屋に入ったときに出る文' }), 'n-card-upper': V('here', { cond: 'その部屋を調べた人' }), 'n-card-lower': V('here', { cond: 'その部屋を調べた人' }), 'n-card-secret': V('here', { cond: '秘密区画を開けた人' }),
   'n-card-rec': V('here', { cond: '部屋LSで報酬を得た人' }), 'n-card-split': V('here', { cond: 'その組・同行していた人' }), 'n-card-skill': V('self', { cond: '技能を使った本人' }), 'n-card-case': V('here', { cond: 'P10〜P11 で調べた人' }),
@@ -189,13 +236,14 @@ const PAGE_VIS = {
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
   'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls': V('gm'), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
-  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
+  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1111': V('make', { cond: '前の版' }), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };
 // 資料の頭の「>」の説明（作者承認・書き方・本文はClaude案 など）は制作の注にする
 const INTRO_MAKE = new Set(['n-card-rooms', 'n-card-upper', 'n-card-lower', 'n-card-secret', 'n-card-rec', 'n-card-split', 'n-card-skill', 'n-card-case',
   'n-explore', 'n-huddle', 'n-small', 'n-guide-viola', 'n-final-calls', 'n-disgord']);
 function pageVis(p) {
   if (p.group === 'ref') return V('make', { cond: '旧版（10/06）・参照' });
+  if (p.group === 'gtext') return V('make', { cond: 'ゲームの画面に出る文（' + (p.scene || '') + '・' + (p.gameCommit || GAME_COMMIT) + '）' });
   const m = p.id.match(/^n-ho-pc(\d)/);
   if (m) return V('self', { who: PCKEY[m[1]] });
   if (p.kind === 'read') {
@@ -339,6 +387,108 @@ function makeCtx(page) {
     return n === 1 ? base : base + '-' + n;
   };
   return { page, aid, toc, dcLead: true, dcWho: '', noDc: 0 };
+}
+
+// ---------- 作者注（疑義はその場所へ）2026-11-15 ----------
+// 原稿本文には注を書かない。content/_creator_notes.json（正本は 69/source/CREATOR_NOTES.json。
+// 実ルートへの対応は 69/index/notes_overrides.json）を、ページ本文の該当する見出し・段落・行の直前に
+// 折りたたみ（details.cnote）で差し込む。PL 表示では CSS で隠し、さらに app.js が DOM から外す。
+const NOTEBOOK = (() => {
+  try { return JSON.parse(fs.readFileSync(C('_creator_notes.json'), 'utf8')); }
+  catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+})();
+const NOTE_HITS = [];          // {note_id, page_id, anchor, hits}
+const NOTE_MISS = [];          // {note_id, page_id, why}
+const VOID_TAGS = new Set(['br', 'img', 'hr', 'input', 'meta', 'link', 'source', 'wbr', 'area', 'base', 'col', 'embed', 'param', 'track']);
+const TABLE_TAGS = new Set(['tr', 'td', 'th', 'thead', 'tbody', 'tfoot', 'table']);
+const unesc = (s) => s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+function cnoteHtml(n, pageId, anchorId) {
+  const links = (n.related || []).map((x) => `<a href="${esc(x.href)}">${esc(x.label)}</a>`).join('') +
+    (anchorId ? `<a href="#/${esc(pageId)}/${esc(anchorId)}">この場所のリンク</a>` : '');
+  const rows = [['原文', n.original], ['採用文', n.adopted], ['疑義・注', n.query]]
+    .filter(([, v]) => String(v || '').trim())
+    .map(([k, v]) => `<div class="cnote-row"><span class="cnote-k">${k}</span><div class="cnote-v">${esc(String(v)).replace(/\n/g, '<br>')}</div></div>`).join('');
+  return `<details class="cnote" data-cnote="${esc(n.id)}" data-a="cnote-${esc(n.id)}" data-nstate="${esc(n.state)}" data-cpage="${esc(pageId)}">` +
+    `<summary><span class="cnote-tag">制作の注</span><span class="cnote-state s-${esc(n.state)}">${esc(n.state_label)}</span><span class="cnote-sec">${esc(n.section)}</span></summary>` +
+    `<div class="cnote-body">${rows}` +
+    (n.why ? `<div class="cnote-row"><span class="cnote-k">扱い</span><div class="cnote-v">${esc(n.why)}</div></div>` : '') +
+    `<div class="cnote-foot">${links}</div></div></details>\n`;
+}
+// 本文HTMLを「文字」と「タグ」に分け、文字ごとに一番近い data-a の要素（表の中なら表の外の入れ物）を覚える
+function scanHtml(html) {
+  const re = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][a-zA-Z0-9]*)((?:[^">]|"[^"]*")*)>/g;
+  const stack = []; const ends = new Map();
+  let text = ''; const segs = []; let last = 0; let m;
+  const push = (s, e) => {
+    if (e <= s) return;
+    const t = html.slice(s, e);
+    let a1 = null, a2 = null, a3 = null;
+    for (let i = stack.length - 1; i >= 0; i--) {
+      const el = stack[i];
+      if (el.dataA && !TABLE_TAGS.has(el.tag) && a1 === null) a1 = el;
+      if (/table-wrap/.test(el.cls) && a2 === null) a2 = el;
+      if (el.dataA && a3 === null) a3 = el;
+    }
+    segs.push({ t0: text.length, t1: text.length + t.length, a1, a2, a3 });
+    text += t;
+  };
+  while ((m = re.exec(html))) {
+    push(last, m.index);
+    last = m.index + m[0].length;
+    if (m[0].startsWith('<!--')) continue;
+    const tag = (m[2] || '').toLowerCase();
+    if (!tag) continue;
+    if (m[1] === '/') {
+      for (let i = stack.length - 1; i >= 0; i--) {
+        if (stack[i].tag === tag) { ends.set(stack[i].start, last); stack.length = i; break; }
+      }
+    } else if (!VOID_TAGS.has(tag)) {
+      const attrs = m[3] || '';
+      const da = /data-a="([^"]*)"/.exec(attrs);
+      stack.push({ tag, start: m.index, dataA: da ? da[1] : null, cls: (/class="([^"]*)"/.exec(attrs) || [])[1] || '' });
+    }
+  }
+  push(last, html.length);
+  return { text, segs, ends };
+}
+function injectNotes(html, page) {
+  if (!NOTEBOOK || !Array.isArray(NOTEBOOK.notes)) return html;
+  const mine = NOTEBOOK.notes.filter((n) => n.page_id === page.id);
+  if (!mine.length) return html;
+  const { text, segs, ends } = scanHtml(html);
+  const flat = [];               // 空白を除いた本文と、その1字ずつの元の位置
+  const raw = unesc(text);
+  const remap = [];
+  for (let i = 0; i < raw.length; i++) { if (!/\s/.test(raw[i])) { flat.push(raw[i]); remap.push(i); } }
+  const needle = flat.join('');
+  const ins = [];
+  for (const n of mine) {
+    const want = unesc(String((n.anchor && n.anchor.text) || '')).replace(/\s+/g, '');
+    if (!want) { NOTE_MISS.push({ note_id: n.id, page_id: page.id, why: 'アンカーの文が空' }); continue; }
+    let at = needle.indexOf(want); let hits = 0; const cands = [];
+    while (at >= 0) {
+      hits++;
+      const rawAt = remap[at];
+      const seg = segs.find((s) => rawAt >= s.t0 && rawAt < s.t1) || segs[segs.length - 1];
+      const el = seg.a1 || seg.a2 || seg.a3;
+      if (el) cands.push({ el, at, fallback: (seg.a3 && seg.a3.dataA) || '' });
+      at = needle.indexOf(want, at + 1);
+    }
+    if (!cands.length) { NOTE_MISS.push({ note_id: n.id, page_id: page.id, why: '本文に「' + n.anchor.text + '」が無い（または data-a の要素が無い）' }); continue; }
+    const prefer = (n.anchor && n.anchor.prefer) || '';
+    const pick = (prefer === 'heading' && cands.find((c) => /^h[1-6]$/.test(c.el.tag))) || cands[0];
+    const el = pick.el;
+    const after = n.anchor && n.anchor.mode === 'after';
+    const off = after ? (ends.get(el.start) || el.start) : el.start;
+    const anchorId = el.dataA || pick.fallback || ('cnote-' + n.id);   // 表の中などで親に data-a が無い時は、注そのものに飛ばす
+    ins.push({ off, s: cnoteHtml(n, page.id, anchorId), id: n.id });
+    NOTE_HITS.push({ note_id: n.id, page_id: page.id, anchor: anchorId, mode: after ? 'after' : 'before', hits });
+  }
+  if (!ins.length) return html;
+  ins.sort((a, b) => b.off - a.off);
+  let out = html;
+  for (const x of ins) out = out.slice(0, x.off) + x.s + out.slice(x.off);
+  return out;
 }
 
 // ---------- Markdownの描画 ----------
@@ -873,7 +1023,7 @@ function pageDc(p) {
   const k = dcSk(name);
   return { spk: name, sk: k, face: DC_FACE[k] ? 'media/faces/' + DC_FACE[k] : '' };
 }
-for (const p of P) {
+function buildPage(p) {
   const ctx = makeCtx(p); ctx.badges = [];
   unitApi(ctx);
   let html = '';
@@ -888,6 +1038,7 @@ for (const p of P) {
     html += uClose(ctx);
   }
   html = makeBadges(badgeTags(html));
+  html = injectNotes(html, p);   // 作者注（あれば）。原稿本文ではなく、この組み立てのときだけ差し込む
   let title = ctx.h1 || p.nav;
   if (p.kind === 'ho' && ctx.h1) {
     const hm = ctx.h1.match(/^【あなたは\s*(.+?)】\s*(.*)$/);
@@ -931,26 +1082,101 @@ for (const p of P) {
   visStats.push({ id: p.id, nav: p.nav, group: p.group, chunks: W.chunks.length, kinds, cards: ctx.cardVisList || [] });
   const rel = p.file ? path.relative(path.join(ROOT, 'content'), p.file).replace(/\\/g, '/') : '';
   const vis = { k: p.vis.k, who: WHO_KEY[p.vis.who] || '', whoName: p.vis.who, cond: p.vis.cond, when: p.vis.when, kinds, selfWho, plOpen, plAfter };
-  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, vis, dc: pageDc(p), title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, tp, ta, tw, cards: ctx.cards || 0 });
+  pages.push({ id: p.id, group: p.group, sub: p.sub, nav: p.nav, kind: p.kind, audience: p.audience, vis, dc: pageDc(p), title, badges: ctx.badges, source: rel, toc: ctx.toc, html, text, tp, ta, tw, cards: ctx.cards || 0, scene: p.scene || '', gen_kind: p.gen_kind || '' });
+}
+for (const p of P) if (!p.gen_late) buildPage(p);   // 訂正済み・疑問だけ、ほかのページの実アンカーが要るので後で組む
+
+// ---------- 訂正済み・疑問のページを、ほかのページの実アンカーを引いて作る ----------
+const GEN_STATS = {};
+{
+  const changes = readJsonMaybe(path.join(A69, 'source', 'changes_before_after.json'));
+  if (!changes) throw new Error('69 の changes_before_after.json が無い：訂正済みの箇所（n-fixed）を作れない（' + A69 + '）');
+  const fixed = AP.buildFixedPage({
+    changes, ledger: readJsonMaybe(path.join(A69, 'source', 'source_ledger_new.json')),
+    tests: readJsonMaybe(path.join(A69, 'source', 'tests.json')), notes: NOTEBOOK,
+    d1: readJsonMaybe(path.join(A70, 'memos_before70.json')), pages,
+    gameCommit: GAME_COMMIT, generatedAt: BUILT_AT, sourceRoot: MANUSCRIPT,
+  });
+  fs.writeFileSync(C('訂正済みの箇所.md'), fixed.md);
+  fs.writeFileSync(C('_author_fixed.json'), JSON.stringify(fixed.data, null, 1));
+  GEN_STATS.fixed = {
+    files: fixed.data.counts.files, units: fixed.data.counts.units,
+    linked: fixed.data.units.filter((u) => u.href).length,
+    d1Resolved: fixed.data.d1.resolvedEditDel, d1Unresolved: fixed.data.d1.unresolved,
+    notes: fixed.data.counts.notes,
+  };
+  const qsrc = readJsonMaybe(C('_author_questions.json'));
+  if (!qsrc) throw new Error('content/_author_questions.json が無い：疑問・矛盾・気になる所（n-questions）を作れない');
+  const q = AP.buildQuestionsPage({ questions: qsrc, generatedAt: BUILT_AT });
+  fs.writeFileSync(C('疑問と気になる所.md'), q.md);
+  fs.writeFileSync(C('_author_questions.built.json'), JSON.stringify(q.data, null, 1));
+  GEN_STATS.questions = q.data.counts;
+  for (const p of P) if (p.gen_late) buildPage(p);
+  // 並び：訂正済み・疑問は「今の状態」の先頭（n-now のすぐ次）へ。g-* は新しい大題のまま末尾。
+  const late = pages.filter((x) => x.id === 'n-fixed' || x.id === 'n-questions');
+  for (const lp of late) { const i = pages.indexOf(lp); if (i >= 0) pages.splice(i, 1); }
+  const iNow = pages.findIndex((x) => x.id === 'n-now');
+  pages.splice(iNow >= 0 ? iNow + 1 : 0, 0, ...late);
+  console.log('訂正済みの箇所:', GEN_STATS.fixed.units, 'か所（リンク', GEN_STATS.fixed.linked + '）',
+    '／疑問:', GEN_STATS.questions.items, '件（未確定', GEN_STATS.questions.undecided, '・実装差', GEN_STATS.questions.implDiff, '）');
 }
 const ids = new Set();
 for (const p of pages) { if (ids.has(p.id)) throw new Error('ページIDの重複: ' + p.id); ids.add(p.id); }
 
+// 作者注の差し込み結果（n-now の一覧が「#/ページ/アンカー」で飛べるように、実アンカーを書き出す）
+{
+  const byId = {};
+  for (const h of NOTE_HITS) byId[h.note_id] = h;
+  const all = (NOTEBOOK && NOTEBOOK.notes) || [];
+  const out = {
+    generated: new Date().toISOString(), source: '_creator_notes.json',
+    total: all.length, placed: NOTE_HITS.length, missed: NOTE_MISS.length,
+    counts: (NOTEBOOK && NOTEBOOK.counts) || null,
+    notes: all.map((n) => ({
+      id: n.id, page_id: n.page_id, section: n.section, state: n.state, state_label: n.state_label,
+      anchor: byId[n.id] ? byId[n.id].anchor : '', placed: !!byId[n.id],
+    })),
+    miss: NOTE_MISS,
+  };
+  fs.writeFileSync(path.join(ROOT, 'data', 'note-anchors.json'), JSON.stringify(out, null, 1));
+  console.log('作者注:', out.placed + '/' + out.total, 'か所に差し込み', out.missed ? '（未対応 ' + out.missed + '）' : '（未対応 0）');
+  for (const m of NOTE_MISS) console.log('  - 未対応:', m.note_id, m.page_id, m.why);
+  for (const h of NOTE_HITS) if (h.hits > 1) console.log('  - 同じ文が' + h.hits + 'か所:', h.note_id, h.page_id, h.anchor);
+}
+
 // ゲームの実際の画面（node tools/game-shots.mjs が media/gameview/ に撮る）。ページIDごとに右半分へ並べる
+// 2026-11-15：撮り直しの新しい manifest（media/gameview-next/）が届いたら、そちらを必ず優先して使う。
+// 旧 media/gameview/ は消さずに残す（落ちたときだけ使い、落ちたことを data に残す）。
 let gameview = null;
 try {
-  const gv = JSON.parse(fs.readFileSync(path.join(ROOT, 'media', 'gameview', 'manifest.json'), 'utf8'));
+  const pick = AP.pickGameviewManifest({
+    nextPath: path.join(ROOT, 'media', 'gameview-next', 'manifest.json'),
+    legacyPath: path.join(ROOT, 'media', 'gameview', 'manifest.json'),
+    requireNext: process.env.GAMEVIEW_REQUIRE_NEXT === '1',   // 親の最終確認では 1 にして、新しい実画面を必須にする
+  });
+  if (!pick.manifest) throw Object.assign(new Error('NO_MANIFEST'), { code: 'ENOENT' });
+  const gv = pick.manifest;
+  if (pick.fallback) console.log('実画面: 新しい manifest（media/gameview-next/）がまだ無いので、旧 media/gameview/ を使う（' + (gv.gameCommit || '?') + '）。撮り直し待ち');
+  else console.log('実画面: media/gameview-next/manifest.json を使う（' + (gv.gameCommit || '?') + '）');
   let n = 0;
   for (const p of pages) {
     const list = (gv.pages || {})[p.id];
     if (list && list.length) { p.shots = list.map((x) => ({ file: x.file, caption: x.caption || '', w: x.w || 0, h: x.h || 0 })); n += list.length; }
     // 単位のあるページは、右半分の一括表示ではなく、単位ごとの実画面（unitShots）を使う
     if ((PAGE_UNITS.get(p.id) || []).length) p.shots = null;
+    // ゲームの全文字のページは、その場面の画像だけを使う（別のページ・別の場面の画像で埋めない）
+    if (p.scene) {
+      const r = AP.sceneShots(gv, p.id, p.scene);
+      if (r.shots) { p.shots = r.shots; n += r.shots.length; }
+      else { p.shots = null; p.noShotReason = r.reason; }
+    }
   }
   gameview = {
     builtAt: gv.builtAt || '', gameCommit: gv.gameCommit || '', importWarnings: gv.importWarnings ?? null,
     preview: gv.preview ?? null, liveDeployed: gv.liveDeployed ?? null, previewLabel: gv.previewLabel || '',
     unitShots: gv.unitShots || {}, unitNoShotReason: gv.unitNoShotReason || {},
+    source: pick.source, path: pick.source === 'gameview-next' ? 'media/gameview-next/manifest.json' : 'media/gameview/manifest.json',
+    fallback: !!pick.fallback,
   };
   // 撮影側と節の名づけが違っても（例 HO:…:3_companions と 3_仲間のこと）、
   // 同じページ・同じ節番号なら同じ単位として実画面を結ぶ。当てた数はログに出す（黙って混ぜない）。
@@ -967,11 +1193,32 @@ try {
       if (k) gameview.unitNoShotReason[uid] = gameview.unitNoShotReason[k];
     }
   }
+  // 必須4場面（ヴィオラの説明・キャラ選択・はじめに・開始）に実画面が付いているか。
+  // 撮影待ちを許すのは、この4場面以外だけ。親の最終確認（GAMEVIEW_REQUIRE_NEXT=1）では足りなければ止める。
+  if (pick.source === 'gameview-next') {
+    const missShots = AP.missingRequiredShots(pages);
+    gameview.gtextRequiredMissing = missShots;
+    if (missShots.length) {
+      const msg = '新しい実画面 manifest に、必須4場面の画像が無い: ' + missShots.join(', ');
+      if (process.env.GAMEVIEW_REQUIRE_NEXT === '1') { console.error(msg); process.exit(1); }
+      console.warn(msg + '（撮影待ちを許すのは必須4場面以外だけ。最終確認では止まる）');
+    }
+  }
   if (shotAlias.length) console.log('実画面の単位名の読み替え:', shotAlias.length, '件（例 ' + shotAlias[0] + '）');
   console.log('ゲームの画面:', n, '枚', Object.keys(gv.pages || {}).filter((id) => !ids.has(id)).map((id) => '（ページが無いID ' + id + '）').join(' '));
 } catch (e) { if (e.code !== 'ENOENT') throw e; }
-const data = { version: 'dom-rv3', built: new Date().toISOString(), home: 'n-now', groups: GROUPS, pages, gameview,
-  units: { count: Object.keys(UNITS_META).length, pages: PAGE_UNITS.size, stale: [...staleUnits].length } };
+// ページID → 原稿ファイル（比較単位の取り直しが、ページの実ファイルを引けるように）
+fs.writeFileSync(path.join(ROOT, 'data', 'page-sources.json'), JSON.stringify(
+  Object.fromEntries(pages.filter((p) => p.source).map((p) => [p.id, p.source])), null, 1));
+const data = { version: 'dom-rv3', built: BUILT_AT, home: 'n-now', groups: GROUPS, pages, gameview,
+  units: { count: Object.keys(UNITS_META).length, pages: PAGE_UNITS.size, stale: [...staleUnits].length },
+  // 70：訂正済み・疑問・ゲームの全文字（UIはここから件数と版を出せる。ページ本文は pages[] が正本）
+  authorPages: {
+    generatedAt: BUILT_AT, gameCommit: GAME_COMMIT,
+    fixed: GEN_STATS.fixed || null,
+    questions: GEN_STATS.questions || null,
+    gtext: GT_GROUP ? { ...GT_GROUP.stats, commit: GTEXT_COMMIT_SHORT, commitFull: GAMETEXT.commit, generatedAt: GAMETEXT.generatedAt || '' } : null,
+  } };
 // AI案（原稿とは別保存。採用も削除もしない。ここでは読んで並べるだけ）
 const aiOut = AI ? {
   schema: AI.schema, generated_at: AI.generated_at, generator_model: AI.generator_model,

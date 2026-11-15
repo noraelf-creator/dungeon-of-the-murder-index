@@ -1,0 +1,187 @@
+{
+ "schema": "dom-author-questions-v1",
+ "generatedAt": "2026-11-15T16:47:11.185Z",
+ "gameCommit": "fb478cf",
+ "counts": {
+  "groups": 3,
+  "items": 7,
+  "undecided": 4,
+  "implDiff": 3,
+  "dropped": 2
+ },
+ "groups": [
+  {
+   "id": "undecided-note",
+   "label": "まだ決まっていない（原稿の注・作者の返答待ち）",
+   "kind": "undecided",
+   "items": [
+    {
+     "id": "note-q5-a4-aim",
+     "title": "Q5 A4 狙いの人（作者確認中・据え置き）",
+     "quote": "Q5で承認されたのは①②③の文言・《誘引》の《魔力強化》統合・自分のバフの3点で、「狙いの人」の位置は含まれていません。②に入れると順位が変わり難度に影響するため、決めずに残しました。今回①②③を明示しましたが、既存のタイブレーク（同順位ならHPの多い人）は壊していません。決める場合は「狙いの人を②に入れる／③に入れる／①〜③とは別に扱う」のどれかをお知らせください。",
+     "source": "content/_creator_notes.json#q5-a4-aim（state=open）",
+     "where": "n-card-skill の制作の注",
+     "href": "#/n-card-skill/cnote-q5-a4-aim",
+     "status": "未確定（作者の返答待ち）。範囲は「狙いの人」の位置だけ。①②③の文言・《誘引》の《魔力強化》統合・自分のバフは 2026-11-15 に作者が承認済み（「全部その解釈でいい」）なので、もう一度は聞かない"
+    },
+    {
+     "id": "note-q6-ippon",
+     "title": "Q6 スキル一覧の《一人働き》",
+     "quote": "ミクシィのHO①のスキル欄には《一人働き》が無く、スキル一覧とゲームにはあります。今回の承認（斥候削除・鑑定MP0・看破・限定解除2倍）に含まれないため触っていません。消すか残すかご指定ください。",
+     "source": "content/_creator_notes.json#q6-ippon（state=open）",
+     "where": "n-rule-skill の制作の注",
+     "href": "#/n-rule-skill/cnote-q6-ippon",
+     "status": "未確定（作者の返答待ち）。原稿のスキル一覧とゲームには載っていて、ミクシィのHO①のスキル欄にだけ無い、という食い違いのまま（2026-11-16 時点で原稿は変わっていない）"
+    },
+    {
+     "id": "manuscript-k3-time",
+     "title": "フェイズの目安（15分）と、P11の議論20分・P7/P10の全体共有10分",
+     "quote": "【2026-11-07 k3（作者の決定）】作者「選ぶ(3分)→探索(2分)→帰還(1分)→議論(5分) →基本全部これで15分でいいよ。p12だけ長いくらい」：各フェイズの目安を P2〜P11＝15分、P12＝50分に（合計 約4時間＝開始前15＋ギルド15＋P1 10＋P2〜P11 150＋P12 50。作者の「議論(5分)」はゲームの会議〈共有と会議、5分〉のこと）。ゲームの時計は変えていない。P11 の「議論20分」（ゲームの時計 20分）と P7・P10 の「全体共有10分」は、15分の目安と合わない（作者確認待ち）。",
+     "source": "content/完成版/GM資料/GM進行ガイド.md 22行目（【GM】注。2026-11-16 時点でこの文のまま）",
+     "where": "GM進行ガイド（ページ n-gm-guide）",
+     "href": "#/n-gm-guide",
+     "status": "未確定（2026-11-07 k3 の【GM】注の持ち越し。作者の返答は記録に無い。こちらで作った疑問ではない）"
+    }
+   ]
+  },
+  {
+   "id": "undecided-game",
+   "label": "ゲーム側の記録に「作者確認待ち」と書かれたまま（過去の記録・要再照合）",
+   "kind": "undecided",
+   "items": [
+    {
+     "id": "game-fb478cf-r07-still",
+     "title": "R07 スチル01 の合図に、同じ場面の台詞を足す",
+     "quote": "R07 のスチル01の合図に同じ場面の台詞を足す（原稿の介抱のト書きが消えたため・作者確認待ち）",
+     "source": "git log fb478cf（impl-20261115 の commit 説明。2026-11-16 に同じ文を確認）",
+     "where": "ゲーム fb478cf・R07 の画面",
+     "href": "",
+     "status": "要再照合（過去の記録）。commit の説明に「作者確認待ち」と書かれたままで、その後の作者の返答は記録に無い。ここでは新しい質問を作らず、事実の照合だけを残す（既承認として扱わない）"
+    }
+   ]
+  },
+  {
+   "id": "impl-diff",
+   "label": "原稿と掲載画像の差（撮影版 fb478cf。開発中の最新版とは別）",
+   "kind": "impl-diff",
+   "items": [
+    {
+     "id": "impl-hidden-skills-4",
+     "title": "撮影版 fb478cf では隠匿スキル4人分の画面がない（別担当の後続版では修正が入っています）",
+     "quote": "### ▼ 隠匿スキル（PC1_ミレイユ_①事前HO.md 102行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n\n### ▼ 隠匿スキル（PC2_ヴィオラ_①事前HO.md 95行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n\n### ▼ 隠匿スキル（PC3_ミクシィ_①事前HO.md 88行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n- **看破**（常時）：仲間、もしくは隠されたものを見破る。仲間が《隠す》で隠した品、何もなかったと表示された部屋はあなたの画面にだけ「（隠している）」の印つきで見える。\n\n### ▼ 隠匿スキル（PC4_エドガー_①事前HO.md 185行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。",
+     "source": "content/完成版/GM資料/HO原本/PC1_ミレイユ_①事前HO.md 102行目・PC2_ヴィオラ_①事前HO.md 95行目・PC3_ミクシィ_①事前HO.md 88行目・PC4_エドガー_①事前HO.md 185行目（原文）／ゲーム側：70/screen/report/coverage-70.json unitNoShot",
+     "where": "HO の各ページ（n-ho-pc1-1 ほか）と、その右の実画面",
+     "href": "#/n-ho-pc1-1",
+     "status": "掲載画像の撮影版 fb478cf では未表示です。別担当の後続 commit c7b71c9 の app.js には hiddenSkills の描画処理が追加されています。開発中の最新版も未実装だと断定する指摘ではありません（後続版の実機確認は、このINDEX作業では未実施）。撮影時の実報告の理由（原文）：「ゲーム（fb478cf）は原稿の「隠匿スキル」の節を画面に描かない（manuscript の ho.hiddenSkills はデータに在るが、src/app.js・engine.js・data.js に hiddenSkills の参照が無い）。原稿の節としての実画面は無い（原稿ゲーム不一致）」"
+    },
+    {
+     "id": "impl-game-manuscript-snapshot",
+     "title": "右の列の画面は「ゲーム fb478cf の実画面」で、いまの原稿の仕様そのものではない",
+     "quote": "この manifest は「ゲーム fb478cf の実画面」であって「原稿の最新仕様」ではない。原稿とゲームが違う所は §4 の理由に書いた。",
+     "source": "70/screen/report/FOR-PARENT.md §6-3／70/screen/report/coverage-70.json provenance.manuscript（「原稿（05_完成版）は取り込んでいない。fb478cf に入っている manuscript.js をそのまま描いた」・generatedAt 2026-11-15T13:30:05Z・importWarningsAtCommit 0）",
+     "where": "各ページ右の実画面（media/gameview-next/manifest.json・334枚）",
+     "href": "",
+     "status": "画面の基準はゲーム fb478cf（gameCommit fb478cf374b53f7bf54b0ae2637f5182566350fd）。ゲーム内の原稿の写しは 2026-11-15T13:30:05Z に作られたもので、原稿の取り込みはしていない。警告 0 は「取込に失敗した」ではない"
+    },
+    {
+     "id": "impl-no-screen-units",
+     "title": "原稿にあるのにゲームの画面が無い単位が 15 件ある（すべて理由つき・代用の画像なし）",
+     "quote": "CARD:INFO-J-LEON / CARD:INFO-E-NOTE / CARD:INFO-E-HANDBOTTLE / CARD:INFO-E-LETTER / CARD_DOC:n-card-case:INFO-E-LETTER（5件）：「ゲーム内に情報カードの画面が無い（読み合わせ・ED・GM資料でだけ出る。カードとして配られない）」\nITEMSEC:n-card-items:6：「GM専用の注記（《鑑定》の対象選択で1品ずつ出る。一覧の画面は無い）」\nHO:n-ho-pc4-1:3_steps：「原稿のこのページは「あなたの手順」が2節あり、4節目は【GM】の注だけ。ゲーム（fb478cf）は1つの見出しにまとめて描くため、注だけの節の実画面は無い」\nHO:n-ho-pc{1,2,3,4}-1:*_隠匿スキル（4件）：上の impl-hidden-skills-4 のとおり",
+     "source": "70/screen/report/coverage-70.json unitNoShot（15件）・unitsFix／FOR-PARENT.md §4「対応不完全（15件・すべて理由あり。別画像での代用はしていない）」",
+     "where": "各ページ右の実画面のうち、画面が無い単位（unitShots 251 単位・286 枚／unitNoShot 15 件）",
+     "href": "",
+     "status": "画面なし 15 件（理由は coverage-70.json の unitNoShot に単位ごとに書いてある）。別ページ・別場面の画像で埋めていない"
+    }
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "note-q5-a4-aim",
+   "title": "Q5 A4 狙いの人（作者確認中・据え置き）",
+   "quote": "Q5で承認されたのは①②③の文言・《誘引》の《魔力強化》統合・自分のバフの3点で、「狙いの人」の位置は含まれていません。②に入れると順位が変わり難度に影響するため、決めずに残しました。今回①②③を明示しましたが、既存のタイブレーク（同順位ならHPの多い人）は壊していません。決める場合は「狙いの人を②に入れる／③に入れる／①〜③とは別に扱う」のどれかをお知らせください。",
+   "source": "content/_creator_notes.json#q5-a4-aim（state=open）",
+   "where": "n-card-skill の制作の注",
+   "href": "#/n-card-skill/cnote-q5-a4-aim",
+   "status": "未確定（作者の返答待ち）。範囲は「狙いの人」の位置だけ。①②③の文言・《誘引》の《魔力強化》統合・自分のバフは 2026-11-15 に作者が承認済み（「全部その解釈でいい」）なので、もう一度は聞かない",
+   "group": "undecided-note",
+   "kind": "undecided"
+  },
+  {
+   "id": "note-q6-ippon",
+   "title": "Q6 スキル一覧の《一人働き》",
+   "quote": "ミクシィのHO①のスキル欄には《一人働き》が無く、スキル一覧とゲームにはあります。今回の承認（斥候削除・鑑定MP0・看破・限定解除2倍）に含まれないため触っていません。消すか残すかご指定ください。",
+   "source": "content/_creator_notes.json#q6-ippon（state=open）",
+   "where": "n-rule-skill の制作の注",
+   "href": "#/n-rule-skill/cnote-q6-ippon",
+   "status": "未確定（作者の返答待ち）。原稿のスキル一覧とゲームには載っていて、ミクシィのHO①のスキル欄にだけ無い、という食い違いのまま（2026-11-16 時点で原稿は変わっていない）",
+   "group": "undecided-note",
+   "kind": "undecided"
+  },
+  {
+   "id": "manuscript-k3-time",
+   "title": "フェイズの目安（15分）と、P11の議論20分・P7/P10の全体共有10分",
+   "quote": "【2026-11-07 k3（作者の決定）】作者「選ぶ(3分)→探索(2分)→帰還(1分)→議論(5分) →基本全部これで15分でいいよ。p12だけ長いくらい」：各フェイズの目安を P2〜P11＝15分、P12＝50分に（合計 約4時間＝開始前15＋ギルド15＋P1 10＋P2〜P11 150＋P12 50。作者の「議論(5分)」はゲームの会議〈共有と会議、5分〉のこと）。ゲームの時計は変えていない。P11 の「議論20分」（ゲームの時計 20分）と P7・P10 の「全体共有10分」は、15分の目安と合わない（作者確認待ち）。",
+   "source": "content/完成版/GM資料/GM進行ガイド.md 22行目（【GM】注。2026-11-16 時点でこの文のまま）",
+   "where": "GM進行ガイド（ページ n-gm-guide）",
+   "href": "#/n-gm-guide",
+   "status": "未確定（2026-11-07 k3 の【GM】注の持ち越し。作者の返答は記録に無い。こちらで作った疑問ではない）",
+   "group": "undecided-note",
+   "kind": "undecided"
+  },
+  {
+   "id": "game-fb478cf-r07-still",
+   "title": "R07 スチル01 の合図に、同じ場面の台詞を足す",
+   "quote": "R07 のスチル01の合図に同じ場面の台詞を足す（原稿の介抱のト書きが消えたため・作者確認待ち）",
+   "source": "git log fb478cf（impl-20261115 の commit 説明。2026-11-16 に同じ文を確認）",
+   "where": "ゲーム fb478cf・R07 の画面",
+   "href": "",
+   "status": "要再照合（過去の記録）。commit の説明に「作者確認待ち」と書かれたままで、その後の作者の返答は記録に無い。ここでは新しい質問を作らず、事実の照合だけを残す（既承認として扱わない）",
+   "group": "undecided-game",
+   "kind": "undecided"
+  },
+  {
+   "id": "impl-hidden-skills-4",
+   "title": "撮影版 fb478cf では隠匿スキル4人分の画面がない（別担当の後続版では修正が入っています）",
+   "quote": "### ▼ 隠匿スキル（PC1_ミレイユ_①事前HO.md 102行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n\n### ▼ 隠匿スキル（PC2_ヴィオラ_①事前HO.md 95行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n\n### ▼ 隠匿スキル（PC3_ミクシィ_①事前HO.md 88行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。\n- **看破**（常時）：仲間、もしくは隠されたものを見破る。仲間が《隠す》で隠した品、何もなかったと表示された部屋はあなたの画面にだけ「（隠している）」の印つきで見える。\n\n### ▼ 隠匿スキル（PC4_エドガー_①事前HO.md 185行目）\n- **隠す**（MP0）：探索で見つけた物を、隠して持つ。情報共有時に「何もなかった」と出る。あとで解除できる。特定の情報は隠せない。",
+   "source": "content/完成版/GM資料/HO原本/PC1_ミレイユ_①事前HO.md 102行目・PC2_ヴィオラ_①事前HO.md 95行目・PC3_ミクシィ_①事前HO.md 88行目・PC4_エドガー_①事前HO.md 185行目（原文）／ゲーム側：70/screen/report/coverage-70.json unitNoShot",
+   "where": "HO の各ページ（n-ho-pc1-1 ほか）と、その右の実画面",
+   "href": "#/n-ho-pc1-1",
+   "status": "掲載画像の撮影版 fb478cf では未表示です。別担当の後続 commit c7b71c9 の app.js には hiddenSkills の描画処理が追加されています。開発中の最新版も未実装だと断定する指摘ではありません（後続版の実機確認は、このINDEX作業では未実施）。撮影時の実報告の理由（原文）：「ゲーム（fb478cf）は原稿の「隠匿スキル」の節を画面に描かない（manuscript の ho.hiddenSkills はデータに在るが、src/app.js・engine.js・data.js に hiddenSkills の参照が無い）。原稿の節としての実画面は無い（原稿ゲーム不一致）」",
+   "group": "impl-diff",
+   "kind": "impl-diff"
+  },
+  {
+   "id": "impl-game-manuscript-snapshot",
+   "title": "右の列の画面は「ゲーム fb478cf の実画面」で、いまの原稿の仕様そのものではない",
+   "quote": "この manifest は「ゲーム fb478cf の実画面」であって「原稿の最新仕様」ではない。原稿とゲームが違う所は §4 の理由に書いた。",
+   "source": "70/screen/report/FOR-PARENT.md §6-3／70/screen/report/coverage-70.json provenance.manuscript（「原稿（05_完成版）は取り込んでいない。fb478cf に入っている manuscript.js をそのまま描いた」・generatedAt 2026-11-15T13:30:05Z・importWarningsAtCommit 0）",
+   "where": "各ページ右の実画面（media/gameview-next/manifest.json・334枚）",
+   "href": "",
+   "status": "画面の基準はゲーム fb478cf（gameCommit fb478cf374b53f7bf54b0ae2637f5182566350fd）。ゲーム内の原稿の写しは 2026-11-15T13:30:05Z に作られたもので、原稿の取り込みはしていない。警告 0 は「取込に失敗した」ではない",
+   "group": "impl-diff",
+   "kind": "impl-diff"
+  },
+  {
+   "id": "impl-no-screen-units",
+   "title": "原稿にあるのにゲームの画面が無い単位が 15 件ある（すべて理由つき・代用の画像なし）",
+   "quote": "CARD:INFO-J-LEON / CARD:INFO-E-NOTE / CARD:INFO-E-HANDBOTTLE / CARD:INFO-E-LETTER / CARD_DOC:n-card-case:INFO-E-LETTER（5件）：「ゲーム内に情報カードの画面が無い（読み合わせ・ED・GM資料でだけ出る。カードとして配られない）」\nITEMSEC:n-card-items:6：「GM専用の注記（《鑑定》の対象選択で1品ずつ出る。一覧の画面は無い）」\nHO:n-ho-pc4-1:3_steps：「原稿のこのページは「あなたの手順」が2節あり、4節目は【GM】の注だけ。ゲーム（fb478cf）は1つの見出しにまとめて描くため、注だけの節の実画面は無い」\nHO:n-ho-pc{1,2,3,4}-1:*_隠匿スキル（4件）：上の impl-hidden-skills-4 のとおり",
+   "source": "70/screen/report/coverage-70.json unitNoShot（15件）・unitsFix／FOR-PARENT.md §4「対応不完全（15件・すべて理由あり。別画像での代用はしていない）」",
+   "where": "各ページ右の実画面のうち、画面が無い単位（unitShots 251 単位・286 枚／unitNoShot 15 件）",
+   "href": "",
+   "status": "画面なし 15 件（理由は coverage-70.json の unitNoShot に単位ごとに書いてある）。別ページ・別場面の画像で埋めていない",
+   "group": "impl-diff",
+   "kind": "impl-diff"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "impl-gameview-stale",
+   "why": "確定・解消済み（疑問として復活させない）"
+  },
+  {
+   "id": "impl-game-text-missing",
+   "why": "確定・解消済み（疑問として復活させない）"
+  }
+ ]
+}
