@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-11-16T06:21:18.404Z",
+ "generatedAt": "2026-11-16T07:08:29.211Z",
  "source": "C:/00_【創作】一時フォルダ/100_【マダミス】ハーネス作成/mm7_wt_impl_20261115/src/data.js",
- "sourceSha256": "2964b04483fefb97e88f60483dd75b8691c18c5093f5a94025d35824be0f29c6",
+ "sourceSha256": "d04c54a95dd9c3c5aa3b80f8da4cd47f76ee7a95cc1b26c396fab232b88dfdda",
  "tuning": {
   "dmg": {
    "U": {
@@ -118,7 +118,7 @@
    "A": {
     "label": "ブロックを二人で解く ―― 格子を支える",
     "stat": "atk",
-    "need": 7,
+    "need": 6,
     "never": false,
     "ok": 1,
     "short": 6,
@@ -159,9 +159,11 @@
    },
    "C": {
     "label": "ミュートして伏せる ―― 床に伏せ、格子の落ちる筋を外す",
-    "stat": "agi",
-    "need": 5,
+    "stat": "dex",
+    "need": 3,
     "guard": true,
+    "solo": false,
+    "gets": [],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -184,8 +186,8 @@
    "waitWins": false,
    "A": {
     "label": "直接呼びに行く ―― 寝台を崩さず、二人で一つずつ外す",
-    "stat": "dex",
-    "need": 7,
+    "stat": "agi",
+    "need": 6,
     "never": false,
     "ok": 1,
     "short": 6,
@@ -224,9 +226,11 @@
    },
    "C": {
     "label": "既読だけつけて身を守る ―― 寝台の陰に入り、崩れから頭を守る",
-    "stat": "agi",
-    "need": 5,
+    "stat": "int",
+    "need": 3,
     "guard": true,
+    "solo": false,
+    "gets": [],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -250,7 +254,7 @@
    "A": {
     "label": "＠全員で押さえる ―― 二人で武器架を押さえる",
     "stat": "atk",
-    "need": 7,
+    "need": 6,
     "never": false,
     "ok": 1,
     "short": 6,
@@ -291,8 +295,10 @@
    "C": {
     "label": "通知を切って盾を構える ―― 落ちた盾を拾い、倒れる刃を受け流す",
     "stat": "atk",
-    "need": 6,
+    "need": 3,
     "guard": true,
+    "solo": false,
+    "gets": [],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -336,6 +342,8 @@
     "stat": "agi",
     "need": 4,
     "guard": true,
+    "solo": false,
+    "gets": [],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -362,7 +370,7 @@
    "A": {
     "label": "背中合わせで支える（ピア・ツー・ピア） ―― 二人で碑を支える",
     "stat": "atk",
-    "need": 7,
+    "need": 6,
     "never": false,
     "ok": 1,
     "short": 6,
@@ -382,7 +390,7 @@
    },
    "B": {
     "label": "キックする ―― 破片を砕いて道を開く",
-    "stat": "atk",
+    "stat": "agi",
     "need": 5,
     "never": false,
     "ok": 1,
@@ -403,9 +411,13 @@
    },
    "C": {
     "label": "一歩引いて構える ―― 碑から距離を取り、落ちる破片を払う",
-    "stat": "atk",
-    "need": 6,
+    "stat": "dex",
+    "need": 4,
     "guard": true,
+    "solo": false,
+    "gets": [
+     "potion"
+    ],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -478,8 +490,12 @@
    "C": {
     "label": "足あとを残さず身をかがめる ―― 書架の隙間にかがみ、雪崩を背で受ける",
     "stat": "dex",
-    "need": 6,
+    "need": 4,
     "guard": true,
+    "solo": false,
+    "gets": [
+     "oldGold"
+    ],
     "guardOk": 0,
     "guardShort": 3,
     "newText": true
@@ -523,6 +539,8 @@
     "stat": "agi",
     "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true
@@ -590,8 +608,12 @@
    "C": {
     "label": "控えだけ取って下がる ―― 台座から離れ、落ちる破片から頭を守る",
     "stat": "agi",
-    "need": 6,
+    "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [
+     "medal"
+    ],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true
@@ -663,9 +685,13 @@
    },
    "C": {
     "label": "同意せずに口を覆う ―― 布で口を覆って伏せ、黒い霧を吸わない",
-    "stat": "int",
-    "need": 6,
+    "stat": "dex",
+    "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [
+     "silverBell"
+    ],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true
@@ -711,7 +737,7 @@
    },
    "B": {
     "label": "接続を絞る ―― 観測盤を止める",
-    "stat": "int",
+    "stat": "dex",
     "need": 6,
     "never": false,
     "ok": 2,
@@ -735,8 +761,10 @@
    "C": {
     "label": "回線を抜いて伏せる ―― 観測盤から離れ、魔力の渦の外で伏せる",
     "stat": "agi",
-    "need": 6,
+    "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true
@@ -785,8 +813,8 @@
    },
    "B": {
     "label": "管理者の権限で開ける ―― 扉の制御核を砕く",
-    "stat": "atk",
-    "need": 6,
+    "stat": "int",
+    "need": 8,
     "never": false,
     "ok": 2,
     "short": 8,
@@ -805,9 +833,11 @@
    },
    "C": {
     "label": "踏みとどまって構える ―― 扉の枠に身を寄せ、挟まれないよう押し返す",
-    "stat": "atk",
-    "need": 7,
+    "stat": "agi",
+    "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true
@@ -860,7 +890,7 @@
    },
    "B": {
     "label": "「ミュートになってますよ」の口元を読む ―― 幻を読み解く",
-    "stat": "int",
+    "stat": "dex",
     "need": 6,
     "never": false,
     "ok": 2,
@@ -883,8 +913,12 @@
    "C": {
     "label": "カメラを切って目を閉じる ―― 目を閉じ、幻に呑まれないよう耐える",
     "stat": "int",
-    "need": 7,
+    "need": 5,
     "guard": true,
+    "solo": true,
+    "gets": [
+     "crystalGrain"
+    ],
     "guardOk": 1,
     "guardShort": 4,
     "newText": true

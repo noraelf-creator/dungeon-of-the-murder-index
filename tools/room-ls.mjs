@@ -98,7 +98,7 @@ function build(opts = {}) {
   L();
   L('## 部屋LSの共通の決まり');
   L();
-  L('- **退避の選択肢はありません。** C は「身を守る」。能力の合計が条件に届けば傷が小さく、届かなければ中くらい。**どちらでも得るものはありません**（ミクシィの宝だけは別）。');
+  L('- **退避の選択肢はありません。** C は「身を守る」。能力の合計が条件に届けば傷が小さく、届かなければ中くらい。基本は得るものなし（作者の直しで、届いたとき品を得る部屋あり・ミクシィの宝は別）。**下層の C は全部「1人のみ」**：2人以上が選ぶと必ず失敗（ミクシィの《限定解除》だけ例外）。');
   L('- **A・B は、届かなくても選んだ品は手に入ります。** そのかわり傷が大きく（下の表の「届かないとき」）、功績と大成功は付きません。');
   L('- **時間切れ（何も押さずに20秒）** は「身を守れない」扱いで、時間切れの傷を負います。**U6 と L1 だけは「様子を見る」が正解**で、時間切れに傷はなく、報酬が入ります。');
   L('- 能力の合計は、**同じ選択をした人の合計**（《限定解除》は2人分）。リックが同行しているときは、リックも同じ選択をして合計に加わります。頭脳の判定は、魔力で攻める人が入ると必要値が1下がります。');
@@ -156,9 +156,13 @@ function build(opts = {}) {
       L(`| **${k}** | ${esc(o.label)} | ${condShown} | ${ok} | ${ng} |`);
     }
     const c = def.C;
-    const cCond = c.guard ? `1人以上・${statName(c.stat)}の合計${c.need}以上` : 'なし';
+    // 2026-11-16 統括：作者の直し（下層の C は1人のみ＝solo、C で身を守れたときの品＝gets、U6 の A・B の一文＝failNote）も表に出す
+    const cCond = c.guard ? (c.solo ? `**1人のみ**（2人以上は必ず失敗。ミクシィの《限定解除》だけ例外）・${statName(c.stat)}の合計${c.need}以上` : `1人以上・${statName(c.stat)}の合計${c.need}以上`) : 'なし';
     const dm = (n) => (n ? `HP−${n}` : '傷なし');
-    L(`| **C** | ${esc(c.label)} ${NEW_MARK} | ${cCond} | ${dm(TD.guardOk)}・何も得ない | ${dm(TD.guardShort)}・何も得ない |`);
+    const cGets = (c.gets || []).length ? c.gets.map((x) => itemText(D, x)).join('・') + 'を得る（品は統括の仮置き・作者確認）' : '何も得ない';
+    L(`| **C** | ${esc(c.label)} ${NEW_MARK} | ${cCond} | ${dm(TD.guardOk)}・${cGets} | ${dm(TD.guardShort)}・何も得ない |`);
+    const fn = T.ls.failNote && T.ls.failNote[rid];
+    if (fn) { L(); L(`- A・B を押した人の結果に一文：「失敗時に何もせず様子を見るのも手だった」の趣旨（作者の直し）`); }
     const wait = def.reward.wait;
     const tOut = def.waitWins
       ? `傷なし・${rewardText(D, wait) || '得るものなし'}`
@@ -172,7 +176,7 @@ function build(opts = {}) {
       entry: T.entry[rid] || null, depth: T.depth[rid] || null, magic: !!def.magic, waitWins: !!def.waitWins,
       A: { label: def.A.label, stat: def.A.stat, need: def.A.need, never: !!def.A.never, ok: TD.ok, short: TD.short, reward: def.reward.A || null, greatAt: def.great && def.great.A != null ? def.great.A : null, great: def.reward.great || null },
       B: { label: def.B.label, stat: def.B.stat, need: def.B.need, never: !!def.B.never, ok: TD.ok, short: TD.short, reward: def.reward.B || null, greatAt: def.great && def.great.B != null ? def.great.B : null, great: def.reward.great || null },
-      C: { label: def.C.label, stat: def.C.stat, need: def.C.need, guard: !!def.C.guard, guardOk: TD.guardOk, guardShort: TD.guardShort, newText: true },
+      C: { label: def.C.label, stat: def.C.stat, need: def.C.need, guard: !!def.C.guard, solo: !!def.C.solo, gets: def.C.gets || [], guardOk: TD.guardOk, guardShort: TD.guardShort, newText: true },
       timeout: { damage: def.waitWins ? 0 : TD.timeout, reward: def.waitWins ? (wait || null) : null },
       mixiC: def.mixiC || null,
     });
