@@ -182,6 +182,7 @@ details.cnote[open] > summary::before { transform: translateY(-75%) rotate(45deg
 .cnote-state { font-size: 11.5px; font-weight: 700; border-radius: 6px; padding: 0 7px; line-height: 19px; }
 .cnote-state.s-fixed { background: #e6f4ec; color: #1d7a4c; }
 .cnote-state.s-open { background: #fdeaea; color: #b6404b; }
+.cnote-state.s-new { background: #fff4dd; color: #8a5a00; }
 .cnote-sec { font-size: 12px; color: var(--muted); font-weight: 500; }
 details.cnote .cnote-body { padding: 4px 14px 10px 32px; border-top: 1px dashed var(--line-soft); }
 .cnote-row { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 8px; margin: 5px 0; }

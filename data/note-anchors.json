@@ -1,13 +1,14 @@
 {
- "generated": "2026-11-15T18:41:14.717Z",
+ "generated": "2026-11-16T06:21:19.279Z",
  "source": "_creator_notes.json",
- "total": 10,
- "placed": 10,
+ "total": 13,
+ "placed": 13,
  "missed": 0,
  "counts": {
-  "total": 10,
-  "open": 2,
-  "fixed": 8
+  "total": 13,
+  "open": 1,
+  "fixed": 9,
+  "new": 3
  },
  "notes": [
   {
@@ -31,9 +32,9 @@
   {
    "id": "q5-a4-aim",
    "page_id": "n-card-skill",
-   "section": "Q5 A4 狙いの人（作者確認中・据え置き）",
-   "state": "open",
-   "state_label": "未確定（作者の返答待ち）",
+   "section": "Q5 A4 狙いの人（2026-11-16 作者回答で確定）",
+   "state": "fixed",
+   "state_label": "確定（狙いの人は③より後ろ・2026-11-16 作者回答）",
    "anchor": "arofl0t",
    "placed": true
   },
@@ -98,6 +99,33 @@
    "state": "fixed",
    "state_label": "確定（両立文）",
    "anchor": "a10hxs7v",
+   "placed": true
+  },
+  {
+   "id": "new-p3-edgar-nopick",
+   "page_id": "n-small",
+   "section": "P3 エドガーの「選べない理由」（新しく作った文・作者確認）",
+   "state": "new",
+   "state_label": "新しく作った文（作者確認）",
+   "anchor": "am7vrec",
+   "placed": true
+  },
+  {
+   "id": "new-items-11",
+   "page_id": "n-card-items",
+   "section": "ゲームに足した品11（作者確認）",
+   "state": "new",
+   "state_label": "新しく作った文（作者確認）",
+   "anchor": "a1h9jo41",
+   "placed": true
+  },
+  {
+   "id": "new-screen-k",
+   "page_id": "n-small",
+   "section": "画面の文（K が変えた・足した文。作者確認）",
+   "state": "new",
+   "state_label": "新しく作った文（作者確認）",
+   "anchor": "a1edxdws",
    "placed": true
   }
  ],

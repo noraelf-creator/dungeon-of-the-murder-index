@@ -43,6 +43,9 @@ add('now', 'ブレストエルフ（11/11）', 'n-bs-improve', 'ブレスト：�
 add('now', 'ブレストエルフ（11/11）', 'n-bs-system', 'ブレスト：新しいシステム案（全文）', must(C('ブレスト_20261111/新しいシステム案.md')), 'doc', '制作');
 add('now', '', 'n-lspre', '分断LSの前置き・スチル v44（11/11・改善案つき）', must(C('分断LSの前置き_20261111.md')), 'doc', '制作');
 add('now', '', 'n-newtext', '新しく書いた文（作者の文でないもの）', must(C('新しく書いた文_20261107.md')), 'doc', '制作');
+// 2026-11-16 作者「反映させるものは作者用INDEXに先に反映させて。私がそこでまた文章の変更などを行う」：
+// AI（A・K・C・H）が今日新しく作った文を、作者が読んで直せる場所にまとめる（原稿にまだ入っていない文を含む）。
+add('now', '', 'n-newtext-16', '新しく作った文（作者確認・11/16）', must(C('新しく作った文（作者確認）_20261116.md')), 'doc', '制作');
 add('now', '', 'n-spec', '今の仕様（ゲーム）', must(C('今の仕様（ゲーム）.md')), 'doc', 'GM専用');
 add('now', '', 'about', 'このサイトの使い方（印の見方）', must(C('サイトの使い方.md')), 'doc', '');
 add('now', '資料の案内', 'n-gm-about', 'GM資料の案内', must(GM('00_GM資料の案内.md')), 'doc', 'GM専用');
@@ -259,6 +262,7 @@ const PAGE_VIS = {
   'n-rule-intro': V('all'), 'n-rule-phase': V('all'), 'n-rule-ls': V('all'), 'n-rule-skill': V('all'), 'n-rule-p10': V('all', { cond: 'P10 で配る' }),
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
   'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls-map': V('gm', { cond: '部屋LSの数値の早見（ゲームの data.js から作る）' }), 'n-room-ls': V('gm', { cond: '部屋LSの原文（長い）' }), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
+  'n-newtext-16': V('make', { cond: 'AIが新しく作った文（作者の確認待ち。原稿にまだ入っていない文を含む）' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
   'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1111': V('make', { cond: '前の版' }), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };

@@ -4,7 +4,7 @@
  "gameCommit": "fb478cf",
  "source": "content/_creator_notes.json（open 2件）＋原稿の【GM】注＋git log fb478cf（commit 説明）＋content/完成版/GM資料/HO原本（隠匿スキル節の原文）＋70/screen/report/coverage-70.json・FOR-PARENT.md（実画面 334枚・fb478cf）",
  "rule": "引用は原文のまま。こちらで質問文・意味を作り足さない。確定・解消済みは入れない（入っても build が落とす）。",
- "revised": "2026-11-16：解消した2件（実画面の撮影待ち・ゲームの全文字の生成待ち）を state=fixed にして履歴へ。原稿とゲームの差を、実報告（coverage-70.json・FOR-PARENT.md）の引用で作り直した。原稿から新しい意味は引き出していない。",
+ "revised": "2026-11-16：Q5 A4「狙いの人」を作者回答（③より後ろ）で確定にし、疑問の一覧から外した（n-fixed の確定の注に移した）。",
  "groups": [
   {
    "id": "undecided-note",
@@ -13,12 +13,20 @@
    "items": [
     {
      "id": "note-q5-a4-aim",
-     "title": "Q5 A4 狙いの人（作者確認中・据え置き）",
+     "title": "Q5 A4 狙いの人（2026-11-16 作者回答で確定）",
      "quote": "Q5で承認されたのは①②③の文言・《誘引》の《魔力強化》統合・自分のバフの3点で、「狙いの人」の位置は含まれていません。②に入れると順位が変わり難度に影響するため、決めずに残しました。今回①②③を明示しましたが、既存のタイブレーク（同順位ならHPの多い人）は壊していません。決める場合は「狙いの人を②に入れる／③に入れる／①〜③とは別に扱う」のどれかをお知らせください。",
      "source": "content/_creator_notes.json#q5-a4-aim（state=open）",
      "where": "n-card-skill の制作の注",
      "href": "#/n-card-skill/cnote-q5-a4-aim",
-     "status": "未確定（作者の返答待ち）。範囲は「狙いの人」の位置だけ。①②③の文言・《誘引》の《魔力強化》統合・自分のバフは 2026-11-15 に作者が承認済み（「全部その解釈でいい」）なので、もう一度は聞かない"
+     "status": "回答済み（2026-11-16 02:25 作者「1 おすすめ（狙いの人は③より後ろ）」）・ゲーム反映済み（src/data.js の aimStrike:100・aimInStrike:true、commit 8bb2aa8）。同じ質問はもうしない。",
+     "state": "fixed",
+     "resolved": {
+      "answer": "狙いの人は③（大きな音）より後ろ",
+      "answeredAt": "2026-11-16 02:25",
+      "source": "work/PLAN_n16_20261116.md「作者の回答（02:25）」・work/AUTHOR_MSGS_n16_20261116.md M1",
+      "game": "src/data.js aimStrike:100／aimInStrike:true（③の big noise 300 より下）",
+      "note": "作者の注（確定）として n-fixed の3節に出す"
+     }
     },
     {
      "id": "note-q6-ippon",
