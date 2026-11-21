@@ -5,6 +5,10 @@
   const CFG = window.SITE_CONFIG || {};
   const PREFIX = 'dom-rv1:';
   const PAGE_PREFIX = CFG.pagePrefix || 'rv1-';
+  // 右に並べる「ゲームの実際の画面」を出すか（data/config.js の showGameShots。既定は出さない）。
+  // 2026-11-18 作者の指示「右に実際に画面をつける仕様は無くしてください。基本は本文が見えればいいです」
+  // に合わせ、撮影・manifest・build のデータは残したまま、表示だけを止める。true にすると元どおり右に出る。
+  const SHOTS_ON = CFG.showGameShots !== false;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -53,7 +57,7 @@
     session: null,
     sync: { state: 'idle', last: null, error: '' },
     tab: 'write', filter: 'open', query: '', legacyCount: 0, loaded: false,
-    view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true), shots: LS.get('shots', true),
+    view: LS.get('view', 'all'), hideAfter: LS.get('hideAfter', true), shots: SHOTS_ON && LS.get('shots', true),
     aiView: LS.get('aiView', true),
   };
   const isMobile = () => window.matchMedia('(max-width: 980px)').matches;
@@ -112,6 +116,7 @@
     const b = document.body;
     b.classList.toggle('cmp-no-ai', !S.aiView);
     b.classList.toggle('cmp-no-shot', !S.shots);
+    b.classList.toggle('no-gv', !S.shots);   // 右の実画面を出さない（本文を幅いっぱいに戻す）
     b.classList.toggle('pl-mode', plMode());
     b.classList.toggle('hide-after', plMode() && S.hideAfter);
     for (const w of Object.keys(WHO_NAME)) b.classList.toggle('as-' + w, persona() === w);
@@ -562,7 +567,7 @@
     const shots = ids.reduce((a, uid) => a + unitShotsOf(uid).length, 0);
     const have = ids.filter((uid) => AI_UNITS[uid]).length;
     const parts = [];
-    parts.push(`<span class="cmp-sum-unit">単位 ${nUnits}（実画面 ${shots}枚）</span>`);
+    parts.push(`<span class="cmp-sum-unit">単位 ${nUnits}${SHOTS_ON ? `（実画面 ${shots}枚）` : ''}</span>`);
     // 案の3状態を別々に数える：いまの原稿に一致する案／原稿更新前の案（旧版）／未作成。旧版を「未生成」と呼ばない。
     let cur = 0; let stale = 0; let none = 0;
     if (s) {
@@ -621,12 +626,16 @@
     const unitPage = /data-unit="/.test(p.html);
     const unitShotCount = unitPage ? Object.entries((D.gameview && D.gameview.unitShots) || {})
       .filter(([uid]) => (AI_META[uid] || {}).page_id === p.id).reduce((a, [, v]) => a + v.length, 0) : 0;
+    // 「実際の画面」の切り替えは、右の画面を出す設定のときだけ出す（止めているときは入口も出さない）
+    const shotsBtn = !SHOTS_ON ? '' : (unitPage
+      ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="右の実画面を隠す／並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${unitShotCount}枚）</button>`
+      : (p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : ''));
     $('#page').innerHTML = `
       <header class="page-head">
         <div class="crumbs"><span>${esc(g.label)}</span>${p.sub ? `<span>${esc(p.sub)}</span>` : ''}<span>${esc(p.nav)}</span></div>
         <div class="dc-page" data-sk="${esc(dc.sk)}">${dcAvHTML(dc)}<div class="dc-page-body"><div class="dc-name">${esc(dc.spk)}</div><h1 class="page-title">${esc(p.title)}</h1></div></div>
         <div class="vis-legend"><span class="lg-t">印</span><span class="kc v-all">◎PL・全員が見る</span><span class="kc v-self">◆PL・本人だけ</span><span class="kc v-here">◇PL・その場にいた人だけ</span><span class="kc v-gm">■GMだけ（赤枠・たたみ）</span><span class="kc v-make">▲制作</span><a href="#/about">印の見方</a><span class="lg-n">このページの段：${kc}</span></div>
-        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${plMode() ? '' : '<button type="button" class="btn small" id="pageAdd" title="このページの末尾に作者の追記を足す">＋このページに足す</button>'}${unitPage ? `<button type="button" class="btn small${S.aiView ? ' on' : ''}" id="btnAi" title="中央のAI案を隠す／並べる">AI案 ${S.aiView ? 'を隠す' : 'を並べる'}</button><button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="右の実画面を隠す／並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${unitShotCount}枚）</button>` : (p.shots ? `<button type="button" class="btn small${S.shots ? ' on' : ''}" id="btnShots" title="ゲームで撮った実際の画面を右半分に並べる">実際の画面 ${S.shots ? 'を隠す' : 'を並べる'}（${p.shots.length}枚）</button>` : '')}</div>
+        <div class="page-meta">${chips.join('')}${p.source ? `<span class="src" title="元ファイル">content/${esc(p.source)}</span>` : ''}<button type="button" class="btn small" id="pageMemos">このページの修正案 ${n}</button>${plMode() ? '' : '<button type="button" class="btn small" id="pageAdd" title="このページの末尾に作者の追記を足す">＋このページに足す</button>'}${unitPage ? `<button type="button" class="btn small${S.aiView ? ' on' : ''}" id="btnAi" title="AI案を隠す／並べる">AI案 ${S.aiView ? 'を隠す' : 'を並べる'}</button>${shotsBtn}` : shotsBtn}</div>
       </header>
       ${unitPage ? `${summaryHTML(p)}<div class="page-body">${p.html}</div>` : (p.shots && S.shots ? `<div class="split"><div class="page-body">${p.html}</div>${shotsHTML(p)}</div>` : `<div class="page-body">${p.html}</div>`)}`;
     document.body.classList.toggle('has-shots', !!(p.shots && S.shots));

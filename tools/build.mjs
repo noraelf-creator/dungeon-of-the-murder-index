@@ -20,6 +20,9 @@ const OLD = (p) => C(path.join('旧版_20261006', p));
 // ---------- 分類（大題）と各ページ（中題） ----------
 const GROUPS = [
   { id: 'now', label: '今の状態', icon: 'home' },
+  { id: 'c3b', label: '3章の組み直し（11/20・まずここ）', icon: 'flag' },
+  { id: 'ch', label: '章立ての大枠（11/19）', icon: 'flag' },
+  { id: 'c3', label: '3章版の中身（11/18）', icon: 'flag' },
   { id: 'ho', label: 'HO', icon: 'doc' },
   { id: 'read', label: '読み合わせ', icon: 'chat' },
   { id: 'card', label: 'カード', icon: 'cards' },
@@ -36,7 +39,7 @@ const must = (f) => { if (!fs.existsSync(f)) throw new Error('ファイルが無
 
 // 今の状態
 // 2026-11-15 作者の指定：最終確認先は #/n-now。11/15 版を n-now にし、11/11 版は「変更の記録」へ履歴として残す。
-add('now', '', 'n-now', '今の状態（2026-11-16・今夜の直しを反映）', must(C('今の状態_20261115.md')), 'doc', '制作');
+add('now', '', 'n-now', '今の状態（2026-11-21・3章版とゲームの統合）', must(C('今の状態_20261121.md')), 'doc', '制作');
 add('now', '', 'n-textcut', '文量を減らす検討（11/12・方針・削る案・ブレスト）', must(C('文量を減らす検討_20261112.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-cut', 'ブレスト：削るべき項目（全文）', must(C('ブレスト_20261111/削るべき項目.md')), 'doc', '制作');
 add('now', 'ブレストエルフ（11/11）', 'n-bs-improve', 'ブレスト：改善案（全文）', must(C('ブレスト_20261111/改善案.md')), 'doc', '制作');
@@ -52,6 +55,32 @@ add('now', '資料の案内', 'n-gm-about', 'GM資料の案内', must(GM('00_GM�
 add('now', '資料の案内', 'n-dist', '配布物の一覧と配るタイミング', must(GM('00_配布物の一覧と配るタイミング.md')), 'doc', 'GM専用');
 add('now', '資料の案内', 'n-directive', '作者指示の反映表', must(GM('00_作者指示の反映表.md')), 'doc', '制作');
 add('now', '資料の案内', 'n-match', '配布版とGM版の照合（自動）', must(NOW('_配布版との照合.md')), 'doc', '制作');
+
+// 3章版の中身（11/18）。work/content3_20261117 の md の写し（正本は work 側）。原稿にはまだ入れていない制作の読み物。
+const C3 = (p) => C(path.join('C3章', p));
+add('c3', '設計（C）', 'n-c3-read', '3章版：読み方と全体の形', must(C3('00_読み方と全体の形.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-ch1', '3章版：第1章の設計', must(C3('01_第1章.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-ch2', '3章版：第2章の設計', must(C3('02_第2章.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-ch3', '3章版：第3章の設計', must(C3('03_第3章.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-map', '3章版：マップ（28室）', must(C3('04_マップ.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-cards', '3章版：カードの配置', must(C3('05_カード.md')), 'doc', '制作');
+add('c3', '設計（C）', 'n-c3-notes', '3章版：突き合わせと提案（C8〜C11）', must(C3('06_突き合わせと提案.md')), 'doc', '制作');
+add('c3', '本文（D）', 'n-c3-text1', '3章版の本文：共通と第1章', must(C3('10_本文_共通と第1章.md')), 'doc', '制作');
+add('c3', '本文（D）', 'n-c3-text2', '3章版の本文：第2章', must(C3('11_本文_第2章.md')), 'doc', '制作');
+add('c3', '本文（D）', 'n-c3-text3', '3章版の本文：第3章とエドガー', must(C3('12_本文_第3章とエドガーの台詞.md')), 'doc', '制作');
+add('c3', '決めること', 'n-c3-open', '作者の判断待ち（45〜78）', must(C3('20_作者の判断待ち.md')), 'doc', '制作');
+add('c3', '参考', 'n-c3-style', '参考：書き方の決まり', must(C3('30_書き方の決まり.md')), 'doc', '制作');
+const CB = (p) => C(path.join('3章の組み直し', p));
+add('c3b', '説明', 'n-c3b-flow', '3章の流れと目標（まずここ）', must(CB('10_3章の流れと目標.md')), 'doc', '制作');
+add('c3b', '本文', 'n-c3b-text', '3章版の本文（HO・追加HO・場面・カード）', must(CB('11_3章版の本文.md')), 'doc', '制作');
+add('c3b', '検証', 'n-c3b-check', '3章の組み直し：検証したこと', must(CB('12_検証したこと.md')), 'doc', '制作');
+const CH = (p) => C(path.join('章立て', p));
+add('ch', '説明', 'n-ch-how', '章立て：ゲームのしくみ（まずここ）', must(CH('01_ゲームのしくみ.md')), 'doc', '制作');
+add('ch', '大枠', 'n-ch-plans', '章立て：大枠の案5つ', must(CH('02_大枠の案5つ.md')), 'doc', '制作');
+add('ch', '決めること', 'n-ch-q10', '章立て：先に決める10件（Q1〜Q10）', must(CH('03_先に決める10件.md')), 'doc', '制作');
+add('ch', '決めること', 'n-ch-more', '章立て：その後に選ぶ選択肢（Q11〜）', must(CH('04_その後に選ぶ選択肢.md')), 'doc', '制作');
+add('ch', '検証', 'n-ch-check', '章立て：検証したこと', must(CH('05_検証したこと.md')), 'doc', '制作');
+add('c3', '参考', 'n-c3-appendix', '参考：台詞の見本', must(C3('31_台詞の見本.md')), 'doc', '制作');
 
 // HO（GM版＝メモつき。【GM】はたたむ）
 // 2026-11-14 作者「はじめにも入れる欄が違う」：ロビーで読む順（はじめに→共通HO→各PCのHO）に合わせ、
@@ -157,6 +186,7 @@ add('canon', '', 'n-canon-clues', '手がかりマップ', must(GM('正本/手�
 
 // 変更の記録
 add('log', '', 'n-changelog', 'CHANGELOG（今の原稿）', must(NOW('CHANGELOG.md')), 'doc', '制作');
+add('log', '前の「今の状態」', 'n-now-1116', '今の状態（2026-11-16・前の版）', must(C('今の状態_20261115.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1111', '今の状態（2026-11-11・前の版）', must(C('今の状態_20261111.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1107', '今の状態（2026-11-07・前の版）', must(C('今の状態_20261107.md')), 'doc', '制作');
 add('log', '前の「今の状態」', 'n-now-1104', '今の状態（2026-11-04・前の版）', must(C('今の状態_20261104.md')), 'doc', '制作');
@@ -263,8 +293,25 @@ const PAGE_VIS = {
   'n-gm-guide': V('gm'), 'n-rule-ls-gm': V('gm'), 'n-rule-chaser': V('gm'), 'n-impl': V('make'),
   'n-charsel': V('all', { cond: '画面に出る文（タイトル〜HO を読む画面）' }), 'n-room-ls-map': V('gm', { cond: '部屋LSの数値の早見（ゲームの data.js から作る）' }), 'n-room-ls': V('gm', { cond: '部屋LSの原文（長い）' }), 'n-explore': V('here', { cond: '調べた人の画面（探索の結果票）' }), 'n-huddle': V('here', { cond: '分断の組（その組の密談の画面）' }), 'n-small': V('all', { cond: '画面に出る文' }),
   'n-newtext-16': V('make', { cond: 'AIが新しく作った文（作者の確認待ち。原稿にまだ入っていない文を含む）' }),
+  // 3章版の中身（11/18）。原稿にまだ入れていない設計と本文の写し（制作の読み物）
+  'n-c3-read': V('make', { cond: '3章版の設計（制作の読み物）' }), 'n-c3-ch1': V('make', { cond: '3章版の設計（制作の読み物）' }),
+  'n-c3-ch2': V('make', { cond: '3章版の設計（制作の読み物）' }), 'n-c3-ch3': V('make', { cond: '3章版の設計（制作の読み物）' }),
+  'n-c3-map': V('make', { cond: '3章版の設計（制作の読み物）' }), 'n-c3-cards': V('make', { cond: '3章版の設計（制作の読み物）' }),
+  'n-c3-notes': V('make', { cond: '3章版の設計（制作の読み物）' }),
+  'n-c3-text1': V('make', { cond: '3章版の本文（原稿にまだ入れていない下書き）' }), 'n-c3-text2': V('make', { cond: '3章版の本文（原稿にまだ入れていない下書き）' }),
+  'n-c3-text3': V('make', { cond: '3章版の本文（原稿にまだ入れていない下書き）' }),
+  'n-c3-open': V('make', { cond: '作者の判断待ち（番号45〜78）' }),
+  'n-c3b-flow': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
+  'n-c3b-text': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
+  'n-c3b-check': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
+  'n-ch-how': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
+  'n-ch-plans': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
+  'n-ch-q10': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
+  'n-ch-more': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
+  'n-ch-check': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
+  'n-c3-style': V('make', { cond: '3章版の参考（書き方の決まり）' }), 'n-c3-appendix': V('make', { cond: '3章版の参考（台詞の見本）' }),
   'n-guide-viola': V('all', { cond: '画面に出る文（最初の案内）' }), 'n-final-calls': V('all', { cond: '最終戦の画面に出る文' }), 'n-disgord': V('all', { cond: '《Disgord》の画面に出る文' }),
-  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1111': V('make', { cond: '前の版' }), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
+  'n-canon-truth': V('gm'), 'n-canon-tl': V('gm'), 'n-canon-chars': V('gm'), 'n-canon-clues': V('gm'), 'n-changelog': V('make'), 'n-now-1116': V('make', { cond: '前の版' }), 'n-now-1111': V('make', { cond: '前の版' }), 'n-now-1107': V('make', { cond: '前の版' }), 'n-now-1104': V('make', { cond: '前の版' }),
 };
 // 資料の頭の「>」の説明（作者承認・書き方・本文はClaude案 など）は制作の注にする
 const INTRO_MAKE = new Set(['n-card-rooms', 'n-card-upper', 'n-card-lower', 'n-card-secret', 'n-card-rec', 'n-card-split', 'n-card-skill', 'n-card-case',

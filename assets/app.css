@@ -803,3 +803,16 @@ dialog.add-dialog .field-label { display: block; font-size: 12.5px; font-weight:
   .cmp-shot, .ab-tools, .ab-actions { display: none !important; }
   .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }
 }
+
+/* ===== 右の実画面を出さない（2026-11-18 作者の指示「右に実際の画面をつける仕様は無くしてください。基本は本文が見えればいいです」） =====
+   data/config.js の showGameShots:false のとき body.no-gv が付く。撮影・manifest・build のデータは残したまま、右の列だけを外す。
+   showGameShots を true に戻すと、この節は効かなくなり元どおり右に出る。 */
+body.no-gv #page > .split { display: block; }          /* 本文＋右の画像の2列をやめる（本文だけ） */
+body.no-gv .gv { display: none !important; }            /* 右の実画面の列（<aside class="gv">） */
+body.no-gv .cmp-shot { display: none !important; }      /* 単位ごとの右の実画面（.cmp-shot） */
+body.no-gv .cmp-grid { grid-template-columns: minmax(0, 1fr) !important; }  /* 本文を1列に */
+/* 2列・3列のときは本文を横いっぱいに広げていた。止めたときは、読みやすい最大幅へ戻す */
+body.no-gv .page,
+body.no-gv.cmp-on .page,
+body.no-gv.has-shots .page { max-width: var(--page-w, 940px); margin-left: auto; margin-right: auto; }
+body.no-gv #btnShots { display: none !important; }      /* 切り替えの入口も出さない */
