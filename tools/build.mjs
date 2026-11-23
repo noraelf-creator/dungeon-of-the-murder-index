@@ -21,6 +21,7 @@ const OLD = (p) => C(path.join('旧版_20261006', p));
 const GROUPS = [
   { id: 'now', label: '今の状態', icon: 'home' },
   { id: 'c3b', label: '3章の組み直し（11/20・まずここ）', icon: 'flag' },
+  { id: 'c3g', label: '3章版ゲーム（いまの作業版・章ごと）', icon: 'flag' },
   { id: 'ch', label: '章立ての大枠（11/19）', icon: 'flag' },
   { id: 'c3', label: '3章版の中身（11/18）', icon: 'flag' },
   { id: 'ho', label: 'HO', icon: 'doc' },
@@ -74,6 +75,18 @@ const CB = (p) => C(path.join('3章の組み直し', p));
 add('c3b', '説明', 'n-c3b-flow', '3章の流れと目標（まずここ）', must(CB('10_3章の流れと目標.md')), 'doc', '制作');
 add('c3b', '本文', 'n-c3b-text', '3章版の本文（HO・追加HO・場面・カード）', must(CB('11_3章版の本文.md')), 'doc', '制作');
 add('c3b', '検証', 'n-c3b-check', '3章の組み直し：検証したこと', must(CB('12_検証したこと.md')), 'doc', '制作');
+// 3章版ゲーム（作業版 integ の data.js から tools/ch3-game.mjs が作る。章ごとに HO・読み合わせ・カード・地図）
+const CG = (p) => C(path.join('3章版ゲーム', p));
+add('c3g', '全体', 'n-c3g-all', '3章版ゲーム：全体（章の並び・目標・カードの枚数）', must(CG('00_全体.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-op', '3章版ゲーム：OP', must(CG('01_OP.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-ch1', '3章版ゲーム：第1章（上層）', must(CG('02_第1章.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-rest1', '3章版ゲーム：休憩1', must(CG('03_休憩1.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-ch2', '3章版ゲーム：第2章（下層）', must(CG('04_第2章.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-rest2', '3章版ゲーム：休憩2', must(CG('05_休憩2.md')), 'doc', '制作');
+add('c3g', '章', 'n-c3g-ch3', '3章版ゲーム：第3章（上下層）', must(CG('06_第3章.md')), 'doc', '制作');
+// 07 は作者の手書きの案（生成しない）。置かれているときだけ載せる
+const C3G_HIDE = CG('07_案_リックの隠れ場所.md');
+if (fs.existsSync(C3G_HIDE)) add('c3g', '案', 'n-c3g-hide', '案：リックの隠れ場所（11/23）', C3G_HIDE, 'doc', '制作');
 const CH = (p) => C(path.join('章立て', p));
 add('ch', '説明', 'n-ch-how', '章立て：ゲームのしくみ（まずここ）', must(CH('01_ゲームのしくみ.md')), 'doc', '制作');
 add('ch', '大枠', 'n-ch-plans', '章立て：大枠の案5つ', must(CH('02_大枠の案5つ.md')), 'doc', '制作');
@@ -304,6 +317,14 @@ const PAGE_VIS = {
   'n-c3b-flow': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
   'n-c3b-text': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
   'n-c3b-check': V('make', { cond: '3章の組み直し（11/20・作者が確認）' }),
+  'n-c3g-all': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-op': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-ch1': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-rest1': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-ch2': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-rest2': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-ch3': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
+  'n-c3g-hide': V('gm', { cond: '3章版ゲーム（作業版 integ・作者が確認）' }),
   'n-ch-how': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
   'n-ch-plans': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
   'n-ch-q10': V('make', { cond: '章立ての大枠（11/19・作者が選ぶ）' }),
